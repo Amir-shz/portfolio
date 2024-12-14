@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "@/styles/globals.css";
+import Header from "@/components/layouts/Header";
 
 const Vazirmatn = localFont({
   src: [
@@ -69,7 +70,10 @@ export default function RootLayout({
         className={`${Vazirmatn.variable} ${Vazirmatn.className} antialiased bg-background`}
       >
         <div className=" grid grid-cols-12 mx-[72px] gap-6">
-          <div className=" col-start-2 col-end-12">{children}</div>
+          <div className=" col-start-2 col-end-12">
+            <Header />
+            {children}
+          </div>
         </div>
       </body>
     </html>
