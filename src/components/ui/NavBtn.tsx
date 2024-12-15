@@ -9,7 +9,7 @@ function NavBtn({ href, children }: navBtnProps): React.ReactNode {
   return (
     <Link
       href={href}
-      className={`transition-all duration-200 px-6 py-3 rounded-2xl font-bold text-base ${
+      className={` hover:text-purple-500 transition-all duration-200 px-6 py-3 rounded-2xl font-bold text-base ${
         path === href ? "bg-purple-50 text-purple-500" : "text-neutral-500"
       }`}
     >

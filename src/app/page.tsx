@@ -4,14 +4,12 @@ import WorkHistory from "@/components/layouts/WorkHistory";
 
 export default function Page(): React.ReactNode {
   return (
-    <div className=" col-span-full grid grid-cols-5 grid-rows-2 gap-6  ">
-      <div className=" size-full col-span-3 row-span-2 self-center">
+    <div className="flex gap-6 max-lg:flex-col">
+      <div className=" basis-3/5">
         <AboutInHome />
       </div>
-      <div className="h-full col-start-4 col-end-6">
+      <div className="basis-2/5 flex flex-col justify-between gap-8 max-lg:flex-row max-lg:[&>div]:basis-1/2 max-lg:gap-6 ">
         <SocialSection />
-      </div>
-      <div className="h-full col-start-4 col-end-6">
         <WorkHistory />
       </div>
     </div>

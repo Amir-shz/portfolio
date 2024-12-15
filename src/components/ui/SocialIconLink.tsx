@@ -9,7 +9,7 @@ function SocialIconLink({
     <Link
       href={href}
       target="_blank"
-      className=" shadow-shadow3 bg-neutral-200 rounded-xl size-16 flex justify-center items-center"
+      className=" transition-all duration-200 hover:bg-purple-50 [&>svg]:hover:fill-purple-500 [&>svg]:fill-[#737373] shadow-shadow3 bg-neutral-200 rounded-xl size-16 flex justify-center items-center"
     >
       {children}
     </Link>

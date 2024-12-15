@@ -6,11 +6,11 @@ import SocialIconLink from "../ui/SocialIconLink";
 
 function SocialSection(): React.ReactNode {
   return (
-    <div className=" h-full rounded-3xl shadow-shadow3 bg-neutral-100">
+    <div className="rounded-3xl shadow-shadow3 bg-neutral-100">
       <h3 className=" text-neutral-700 text-h6_SB_desktop pr-4 pt-6">
         راه های ارتباطی
       </h3>
-      <div className=" flex flex-wrap gap-6 justify-center py-7 px-2">
+      <div className=" flex gap-6 justify-center py-7 px-10 max-lg:px-4">
         <SocialIconLink href="https://www.instagram.com/fatemeshafiei_/">
           <InstagramIcon />
         </SocialIconLink>

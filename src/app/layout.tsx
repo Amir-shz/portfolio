@@ -69,12 +69,10 @@ export default function RootLayout({
       <body
         className={`${Vazirmatn.variable} ${Vazirmatn.className} antialiased bg-background`}
       >
-        <div className=" grid grid-cols-12 mx-[72px] gap-6">
-          <div className=" col-start-2 col-end-12 max-xl:col-span-full">
+        <div className=" grid grid-cols-12 mx-auto max-w-[1280px] gap-6 max-xl:mx-9">
+          <div className="col-start-2 col-end-12 max-xl:col-span-full">
             <Header />
-            <main className="pt-[4.5rem] grid grid-cols-10 gap-6">
-              {children}
-            </main>
+            <main className="pt-[4.5rem]  max-lg:pt-12">{children}</main>
           </div>
         </div>
       </body>
