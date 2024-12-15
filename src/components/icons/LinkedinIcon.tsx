@@ -1,4 +1,4 @@
-function LinkedinIcon() {
+function LinkedinIcon(): React.ReactNode {
   return (
     <svg
       width="28"

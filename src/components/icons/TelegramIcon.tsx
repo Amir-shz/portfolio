@@ -1,4 +1,4 @@
-function TelegramIcon() {
+function TelegramIcon(): React.ReactNode {
   return (
     <svg
       width="31"

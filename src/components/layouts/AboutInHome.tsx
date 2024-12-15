@@ -1,7 +1,7 @@
 import Image from "next/image";
 import photo from "../../../public/fateme.jpg";
 
-function AboutInHome() {
+function AboutInHome(): React.ReactNode {
   return (
     <div
       className=" size-full rounded-3xl shadow-shadow3 bg-neutral-100 

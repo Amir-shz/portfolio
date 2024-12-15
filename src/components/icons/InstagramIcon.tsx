@@ -1,4 +1,4 @@
-function InstagramIcon() {
+function InstagramIcon(): React.ReactNode {
   return (
     <svg
       width="29"

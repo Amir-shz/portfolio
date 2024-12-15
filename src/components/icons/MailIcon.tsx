@@ -1,4 +1,4 @@
-function MailIcon() {
+function MailIcon(): React.ReactNode {
   return (
     <svg
       width="32"

@@ -1,10 +1,5 @@
+import { socialIconLinkProps } from "@/types/types";
 import Link from "next/link";
-import { ReactNode } from "react";
-
-interface socialIconLinkProps {
-  href: string;
-  children: ReactNode;
-}
 
 function SocialIconLink({
   href,

@@ -1,4 +1,4 @@
-function WorkHistory() {
+function WorkHistory(): React.ReactNode {
   return (
     <div className=" h-full rounded-3xl bg-neutral-100 shadow-shadow3 flex flex-col gap-3 p-4 pb-6">
       <div className=" flex items-center gap-3">

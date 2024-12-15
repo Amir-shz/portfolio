@@ -4,7 +4,7 @@ import MailIcon from "../icons/MailIcon";
 import TelegramIcon from "../icons/TelegramIcon";
 import SocialIconLink from "../ui/SocialIconLink";
 
-function SocialSection() {
+function SocialSection(): React.ReactNode {
   return (
     <div className=" h-full rounded-3xl shadow-shadow3 bg-neutral-100">
       <h3 className=" text-neutral-700 text-h6_SB_desktop pr-4 pt-6">
