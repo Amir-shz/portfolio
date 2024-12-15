@@ -1,6 +1,15 @@
+"use client";
+import { motion } from "motion/react";
+
 function WorkHistory(): React.ReactNode {
   return (
-    <div className="rounded-3xl bg-neutral-100 shadow-shadow3 flex flex-col gap-3 p-4 pb-6">
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: 0.35 }}
+      className="rounded-3xl bg-neutral-100 shadow-shadow3 flex flex-col gap-3 p-4 pb-6"
+    >
       <div className=" flex items-center gap-3">
         <div className=" rounded-xl bg-purple-50 text-purple-500 size-14 flex justify-center items-center">
           <p className=" text-h5_B_desktop">+5</p>
@@ -13,7 +22,7 @@ function WorkHistory(): React.ReactNode {
           آداپتیو، کلینیک روانشناسان هوشمند و …
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

@@ -1,12 +1,21 @@
+"use client";
+
 import InstagramIcon from "../icons/InstagramIcon";
 import LinkedinIcon from "../icons/LinkedinIcon";
 import MailIcon from "../icons/MailIcon";
 import TelegramIcon from "../icons/TelegramIcon";
 import SocialIconLink from "../ui/SocialIconLink";
+import { motion } from "motion/react";
 
 function SocialSection(): React.ReactNode {
   return (
-    <div className="rounded-3xl shadow-shadow3 bg-neutral-100">
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: 0.35 }}
+      className="rounded-3xl shadow-shadow3 bg-neutral-100"
+    >
       <h3 className=" text-neutral-700 text-h6_SB_desktop pr-4 pt-6">
         راه های ارتباطی
       </h3>
@@ -24,7 +33,7 @@ function SocialSection(): React.ReactNode {
           <MailIcon />
         </SocialIconLink>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
