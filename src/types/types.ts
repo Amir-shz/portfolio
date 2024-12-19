@@ -6,6 +6,7 @@ export interface navBtnProps {
 }
 
 export interface socialIconLinkProps {
+  size: "sm" | "lg";
   href: string;
   children: ReactNode;
 }

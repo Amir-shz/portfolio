@@ -11,7 +11,7 @@ function Header(): React.ReactNode {
     <motion.header
       initial={{ y: "-100%" }}
       animate={{ y: "0" }}
-      transition={{ duration: 0.25 }}
+      transition={{ duration: 0.5 }}
       className="flex justify-between items-center py-4"
     >
       <NameLink />

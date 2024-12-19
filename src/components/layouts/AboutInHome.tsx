@@ -7,10 +7,10 @@ import { motion } from "motion/react";
 function AboutInHome(): React.ReactNode {
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
+      initial={{ opacity: 0, scale: 0.7 }}
+      whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: 0.25 }}
+      transition={{ duration: 0.5, delay: 0.5 }}
       className=" size-full rounded-3xl shadow-shadow3 bg-neutral-100 
       grid grid-cols-2 py-9 pr-10 pl-8 gap-6 max-xl:p-6 max-lg:p-8 max-lg:pr-10 "
     >
