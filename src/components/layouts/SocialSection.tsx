@@ -13,7 +13,7 @@ function SocialSection(): React.ReactNode {
       initial={{ opacity: 0, scale: 0.7 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: 0.5 }}
+      transition={{ duration: 0.5 }}
       className="rounded-3xl shadow-shadow3 bg-neutral-100"
     >
       <h3 className=" text-neutral-700 text-h6_SB_desktop pr-4 pt-6">

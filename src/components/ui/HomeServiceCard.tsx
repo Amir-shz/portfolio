@@ -14,10 +14,9 @@ function HomeServiceCard({
       initial={{ opacity: 0, scale: 0.7 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: 0.5 }}
-      className="rounded-3xl bg-neutral-100 shadow-shadow3 overflow-hidden "
+      transition={{ duration: 0.5 }}
     >
-      <div className="hover:shadow-shadow1 hover:bg-neutral-200 flex gap-3 w-full transition-all duration-300">
+      <div className="shadow-shadow3 hover:shadow-shadow1 hover:bg-neutral-200 flex gap-3 w-full transition-all duration-300 rounded-3xl bg-neutral-100">
         <div className=" self-center my-8 mr-4 p-6 [&>svg]:size-10 [&>svg]:text-purple-500 bg-purple-50 rounded-xl">
           {icon}
         </div>
