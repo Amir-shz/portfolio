@@ -9,13 +9,14 @@ import { motion } from "motion/react";
 
 function SocialSectionContactUs(): React.ReactNode {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.7 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      className="rounded-3xl shadow-shadow3 bg-neutral-100"
-    >
+    // <motion.div
+    //   initial={{ opacity: 0, scale: 0.7 }}
+    //   whileInView={{ opacity: 1, scale: 1 }}
+    //   viewport={{ once: true }}
+    //   transition={{ duration: 0.5 }}
+    //   className="rounded-3xl shadow-shadow3 bg-neutral-100"
+    // >
+    <div className="rounded-3xl shadow-shadow3 bg-neutral-100 border border-neutral-300">
       <h3 className=" text-neutral-700 text-h6_SB_desktop pr-6 pt-6 pb-11">
         حساب های مجازی
       </h3>
@@ -36,7 +37,8 @@ function SocialSectionContactUs(): React.ReactNode {
           <TelegramIcon />
         </SocialIconLink>
       </div>
-    </motion.div>
+      {/* </motion.div> */}
+    </div>
   );
 }
 

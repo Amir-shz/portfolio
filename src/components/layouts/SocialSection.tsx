@@ -9,17 +9,18 @@ import { motion } from "motion/react";
 
 function SocialSection(): React.ReactNode {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.7 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      className="rounded-3xl shadow-shadow3 bg-neutral-100"
-    >
-      <h3 className=" text-neutral-700 text-h6_SB_desktop pr-4 pt-6">
+    // <motion.div
+    //   initial={{ opacity: 0, scale: 0.7 }}
+    //   whileInView={{ opacity: 1, scale: 1 }}
+    //   viewport={{ once: true }}
+    //   transition={{ duration: 0.5 }}
+    //   className="rounded-3xl shadow-shadow3 bg-neutral-100 border border-neutral-300"
+    // >
+    <div className="rounded-3xl shadow-shadow3 bg-neutral-100 border border-neutral-300">
+      <h3 className=" text-neutral-700 text-h6_SB_desktop pr-4 pt-[1.38rem]">
         راه های ارتباطی
       </h3>
-      <div className=" flex gap-6 justify-center py-7 px-10 max-lg:px-4">
+      <div className=" flex gap-6 justify-center pb-7 pt-[1.87rem] px-11">
         <SocialIconLink
           size="sm"
           href="https://www.instagram.com/fatemeshafiei_/"
@@ -39,7 +40,8 @@ function SocialSection(): React.ReactNode {
           <MailIcon />
         </SocialIconLink>
       </div>
-    </motion.div>
+      {/* </motion.div> */}
+    </div>
   );
 }
 

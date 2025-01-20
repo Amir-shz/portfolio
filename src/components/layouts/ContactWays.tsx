@@ -9,13 +9,14 @@ import PhoneIcon from "../icons/PhoneIcon";
 
 function ContactWays(): React.ReactNode {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.7 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      className="rounded-3xl shadow-shadow3 bg-neutral-100 pr-6 pt-6 pb-12"
-    >
+    // <motion.div
+    //   initial={{ opacity: 0, scale: 0.7 }}
+    //   whileInView={{ opacity: 1, scale: 1 }}
+    //   viewport={{ once: true }}
+    //   transition={{ duration: 0.5 }}
+    //   className="rounded-3xl shadow-shadow3 bg-neutral-100 pr-6 pt-6 pb-12"
+    // >
+    <div className="rounded-3xl shadow-shadow3 bg-neutral-100 border border-neutral-300 pr-6 pt-6 pb-12">
       <h3 className=" text-neutral-700 text-h6_SB_desktop pb-11">
         راه های تماس
       </h3>
@@ -24,7 +25,7 @@ function ContactWays(): React.ReactNode {
           <SocialIconLink size="lg" href="mailto:fateme.shafiei9899@gmail.com">
             <MailIcon />
           </SocialIconLink>
-          <p className=" text-neutral-600 text-h4_B_desktop">
+          <p className=" text-neutral-600 font-bold text-[1.375rem] leading-7">
             fateme.shafiei9899@gmail.com
           </p>
         </div>
@@ -34,10 +35,13 @@ function ContactWays(): React.ReactNode {
               <PhoneIcon />
             </div>
           </SocialIconLink>
-          <p className="text-neutral-600 text-h4_B_desktop">۰۹۹۳۰۲۰۰۲۴۹</p>
+          <p className="text-neutral-600 font-bold text-[1.375rem] leading-7">
+            ۰۹۹۳۰۲۰۰۲۴۹
+          </p>
         </div>
       </div>
-    </motion.div>
+      {/* </motion.div> */}
+    </div>
   );
 }
 
