@@ -5,7 +5,7 @@ import InstagramIcon from "../icons/InstagramIcon";
 import LinkedinIcon from "../icons/LinkedinIcon";
 import TelegramIcon from "../icons/TelegramIcon";
 
-import { motion } from "motion/react";
+// import { motion } from "motion/react";
 
 function SocialSectionContactUs(): React.ReactNode {
   return (

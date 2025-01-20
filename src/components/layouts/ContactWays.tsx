@@ -3,7 +3,7 @@
 import React from "react";
 import SocialIconLink from "../ui/SocialIconLink";
 
-import { motion } from "motion/react";
+// import { motion } from "motion/react";
 import MailIcon from "../icons/MailIcon";
 import PhoneIcon from "../icons/PhoneIcon";
 

@@ -2,7 +2,7 @@
 
 import { homeServiceCardProps } from "@/types/types";
 import React from "react";
-import { motion } from "motion/react";
+// import { motion } from "motion/react";
 
 function HomeServiceCard({
   title,
