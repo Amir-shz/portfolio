@@ -16,3 +16,21 @@ export interface homeServiceCardProps {
   description: string;
   icon: React.ReactNode;
 }
+
+export interface planCardProps {
+  title: string;
+  time: string;
+  price: string;
+  href: string;
+}
+
+export interface servicesForCompaniesAndPersonsProp {
+  title: string;
+  type: "person" | "company";
+  items: string[];
+}
+
+export interface educationAndResumeSectionProps {
+  type: "education" | "resume";
+  items: string[];
+}
