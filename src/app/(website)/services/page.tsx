@@ -13,8 +13,9 @@ export const metadata: Metadata = {
   title: "خدمات من",
 };
 
-function Page({ searchParams }: searchParamsProp) {
-  const { show, plan } = searchParams;
+async function Page({ searchParams }: searchParamsProp) {
+  // const { show, plan } = await getSearchParams(searchParams);
+  const { show, plan } = await searchParams;
 
   console.log(show);
   console.log(plan);
