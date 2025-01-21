@@ -36,5 +36,7 @@ export interface educationAndResumeSectionProps {
 }
 
 export interface searchParamsProp {
-  searchParams: Record<string, string> | null | undefined;
+  searchParams: {
+    [key: string]: string | undefined;
+  };
 }

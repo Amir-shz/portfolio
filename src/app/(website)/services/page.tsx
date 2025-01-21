@@ -13,8 +13,8 @@ export const metadata: Metadata = {
   title: "خدمات من",
 };
 
-async function Page({ searchParams }: searchParamsProp) {
-  const { show, plan } = await searchParams;
+function Page({ searchParams }: searchParamsProp) {
+  const { show, plan } = searchParams;
 
   console.log(show);
   console.log(plan);
