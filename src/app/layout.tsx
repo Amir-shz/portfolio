@@ -1,7 +1,5 @@
-import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "@/styles/globals.css";
-import Header from "@/components/layouts/Header";
 
 const Vazirmatn = localFont({
   src: [
@@ -54,13 +52,13 @@ const Vazirmatn = localFont({
   variable: "--vazirmatn",
 });
 
-export const metadata: Metadata = {
-  title: {
-    template: "فاطمه شفیعی | %s",
-    default: "فاطمه شفیعی | صفحه اصلی",
-  },
-  description: "",
-};
+// export const metadata: Metadata = {
+//   title: {
+//     template: "فاطمه شفیعی | %s",
+//     default: "فاطمه شفیعی | صفحه اصلی",
+//   },
+//   description: "",
+// };
 
 export default function RootLayout({
   children,
@@ -72,12 +70,7 @@ export default function RootLayout({
       <body
         className={`${Vazirmatn.variable} ${Vazirmatn.className} antialiased bg-background`}
       >
-        <div className=" grid grid-cols-12 mx-auto max-w-[1296px] gap-6 max-xl:mx-9">
-          <div className="col-start-2 col-end-12 max-xl:col-span-full">
-            <Header />
-            <main className="pt-[4.5rem] max-lg:pt-12">{children}</main>
-          </div>
-        </div>
+        {children}
       </body>
     </html>
   );

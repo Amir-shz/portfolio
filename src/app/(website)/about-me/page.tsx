@@ -1,24 +1,14 @@
 import { Metadata } from "next";
 import Image from "next/image";
-import photo from "../../../public/fateme.jpg";
+import photo from "../../../../public/fateme.jpg";
 import AboutSection from "@/components/layouts/AboutSection";
 import EducationAndResumeSection from "@/components/layouts/EducationAndResumeSection";
+import { educationItems, resumeItems } from "@/utils/utils";
 
 export const metadata: Metadata = {
   title: "درباره من",
 };
-const items = [
-  "مورد۱",
-  "مورد۲",
-  "مورد۳",
-  "مورد۴",
-  "مورد۵",
-  "مورد۶",
-  "مورد۷",
-  "مورد۸",
-  "مورد۹",
-  "مورد۱۰",
-];
+
 function Page() {
   return (
     <div className=" grid grid-cols-10 gap-6 mb-4">
@@ -34,10 +24,10 @@ function Page() {
         <AboutSection />
       </div>
       <div className=" col-span-5">
-        <EducationAndResumeSection type="education" items={items} />
+        <EducationAndResumeSection type="education" items={educationItems} />
       </div>
       <div className=" col-span-5">
-        <EducationAndResumeSection type="resume" items={items} />
+        <EducationAndResumeSection type="resume" items={resumeItems} />
       </div>
     </div>
   );

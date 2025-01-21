@@ -1,5 +1,7 @@
 import ServicesForCompaniesAndPersons from "@/components/layouts/ServicesForCompaniesAndPersons";
+import Modal from "@/components/ui/Modal";
 import PlanCard from "@/components/ui/PlanCard";
+import { searchParamsProp } from "@/types/types";
 import {
   planData,
   servicesForCompanyData,
@@ -11,7 +13,11 @@ export const metadata: Metadata = {
   title: "خدمات من",
 };
 
-function Page() {
+async function Page({ searchParams }: searchParamsProp) {
+  const { show, plan } = await searchParams;
+
+  console.log(show);
+  console.log(plan);
   return (
     <div className=" grid grid-cols-4 gap-6 mb-4">
       {planData.map((plan) => (
@@ -37,6 +43,7 @@ function Page() {
           items={servicesForPersonData.items}
         />
       </div>
+      {show === "true" && <Modal homeHref="/services" plan={plan} />}
     </div>
   );
 }

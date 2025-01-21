@@ -6,28 +6,28 @@ export const planData = [
     title: "مشاوره تلفنی / چت",
     time: "۱۵ دقیقه",
     price: "free",
-    href: "/",
+    href: "?show=true&plan=free",
   },
   {
     id: 2,
     title: "مشاوره چت",
     time: "۳۰ دقیقه",
     price: "۲۵۰",
-    href: "/",
+    href: "?show=true&plan=1",
   },
   {
     id: 3,
     title: "مشاوره تلفنی / تصویری",
     time: "۳۰ دقیقه",
     price: "۳۲۰",
-    href: "/",
+    href: "?show=true&plan=2",
   },
   {
     id: 4,
     title: "مشاوره تلفنی / تصویری",
     time: "۴۵ دقیقه",
     price: "۳۷۰",
-    href: "/",
+    href: "?show=true&plan=3",
   },
 ];
 
@@ -64,3 +64,28 @@ export const servicesForPersonData: servicesForCompaniesAndPersonsProp = {
     "انجام+تحلیل تست‌های روانشناختی",
   ],
 };
+
+export const educationItems = [
+  "مورد۱",
+  "مورد۲",
+  "مورد۳",
+  "مورد۴",
+  "مورد۵",
+  "مورد۶",
+  "مورد۷",
+  "مورد۸",
+  "مورد۹",
+  "مورد۱۰",
+];
+export const resumeItems = [
+  "مورد۱",
+  "مورد۲",
+  "مورد۳",
+  "مورد۴",
+  "مورد۵",
+  "مورد۶",
+  "مورد۷",
+  "مورد۸",
+  "مورد۹",
+  "مورد۱۰",
+];

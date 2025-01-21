@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import ContactWays from "@/components/layouts/ContactWays";
 import SocialSectionContactUs from "@/components/layouts/SocialSectionContactUs";
 import Image from "next/image";
-import vector from "../../../public/vector.svg";
+import vector from "../../../../public/vector.svg";
 
 export const metadata: Metadata = {
   title: "ارتباط با من",

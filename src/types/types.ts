@@ -34,3 +34,9 @@ export interface educationAndResumeSectionProps {
   type: "education" | "resume";
   items: string[];
 }
+
+export interface searchParamsProp {
+  searchParams: {
+    [key: string]: string | undefined;
+  };
+}
