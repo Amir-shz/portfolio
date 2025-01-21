@@ -14,11 +14,7 @@ export const metadata: Metadata = {
 };
 
 async function Page({ searchParams }: searchParamsProp) {
-  // const { show, plan } = await getSearchParams(searchParams);
   const { show, plan } = await searchParams;
-
-  console.log(show);
-  console.log(plan);
   return (
     <div className=" grid grid-cols-4 gap-6 mb-4">
       {planData.map((plan) => (
