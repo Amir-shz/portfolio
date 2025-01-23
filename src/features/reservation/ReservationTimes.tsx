@@ -5,7 +5,6 @@ function ReservationTimes({
 }: {
   hours: { hour: string; isAvailable: boolean }[] | undefined;
 }) {
-  console.log(hours);
   return (
     <div className="mt-4">
       <div className="mb-2">

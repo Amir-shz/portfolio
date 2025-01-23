@@ -120,15 +120,19 @@ export const getFourWeeksFromToday = () => {
   return fourWeeks;
 };
 
-export function getJalaliDetails(date) {
-  const numericOptions = { year: "numeric", month: "numeric", day: "numeric" };
+export function getJalaliDetails(date: Date) {
+  const numericOptions: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  };
   const jalaliDate = date.toLocaleDateString("fa-IR", numericOptions);
   const [year, month, day] = jalaliDate.split("/");
 
-  const monthNameOptions = { month: "long" };
+  const monthNameOptions: Intl.DateTimeFormatOptions = { month: "long" };
   const monthName = date.toLocaleDateString("fa-IR", monthNameOptions);
 
-  const dayNameOptions = { weekday: "long" };
+  const dayNameOptions: Intl.DateTimeFormatOptions = { weekday: "long" };
   const dayName = date.toLocaleDateString("fa-IR", dayNameOptions);
 
   return {
@@ -140,7 +144,12 @@ export function getJalaliDetails(date) {
   };
 }
 
-export function splitIntoWeeks(dates: object[]): {
+export function splitIntoWeeks(
+  dates: {
+    date: string;
+    jalali: { dayName: string; day: string; monthName: string };
+  }[]
+): {
   dates: {
     date: string;
     jalali: { dayName: string; day: string; monthName: string };

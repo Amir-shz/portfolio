@@ -11,7 +11,10 @@ function ReservationDates({
   weeks,
   reservationsData,
 }: {
-  weeks: object[];
+  weeks: {
+    date: string;
+    jalali: { dayName: string; day: string; monthName: string };
+  }[];
   reservationsData: scheduleDataType[];
 }) {
   const [page, setPage] = useState<number>(1);

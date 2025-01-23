@@ -26,7 +26,12 @@ function ReservationStepOne({ plan }: { plan: string | undefined }) {
     // console.log(reservationsData);
   }, [selectedDate]);
 
-  const fourWeekDetail = getFourWeeksFromToday();
+  const fourWeekDetail: {
+    date: string;
+    jalali: { dayName: string; day: string; monthName: string };
+  }[] = getFourWeeksFromToday();
+
+  console.log(fourWeekDetail);
 
   return (
     <>
