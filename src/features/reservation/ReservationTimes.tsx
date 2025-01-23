@@ -3,7 +3,7 @@ import TimeRadio from "@/components/ui/TimeRadio";
 function ReservationTimes({
   hours,
 }: {
-  hours: { hour: string; isAvailable: boolean }[];
+  hours: { hour: string; isAvailable: boolean }[] | undefined;
 }) {
   console.log(hours);
   return (

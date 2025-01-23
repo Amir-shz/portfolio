@@ -1,7 +1,7 @@
 import { useReservationStore } from "@/hooks/useReservationStore";
 import { useRef } from "react";
 
-function ReservationForm({ onSubmit }: { onSubmit: (e) => void }) {
+function ReservationForm({ onSubmit }: { onSubmit: (e: any) => void }) {
   const secondInputRef = useRef<HTMLInputElement>(null);
   const thirdInputRef = useRef<HTMLTextAreaElement>(null);
 
