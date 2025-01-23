@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEventHandler } from "react";
 import { create } from "zustand";
 
 type Store = {
@@ -9,11 +9,11 @@ type Store = {
   phone: string;
   description: string;
   errors: string[];
-  handleSelectedDateChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleSelectedTimeChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleFullNameChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  handlePhoneChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleDescriptionChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleSelectedDateChange: (e: ChangeEventHandler<HTMLInputElement>) => void;
+  handleSelectedTimeChange: (e: ChangeEventHandler<HTMLInputElement>) => void;
+  handleFullNameChange: (e: ChangeEventHandler<HTMLInputElement>) => void;
+  handlePhoneChange: (e: ChangeEventHandler<HTMLInputElement>) => void;
+  handleDescriptionChange: (e: ChangeEventHandler<HTMLInputElement>) => void;
   handleStep: (val: 1 | 2) => void;
   handleAddError: (err: string) => void;
   resetDateAndTimeStates: () => void;
