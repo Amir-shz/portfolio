@@ -9,8 +9,7 @@ import { phoneNumberValidator } from "@persian-tools/persian-tools";
 function Reservation({ plan }: { plan: string | undefined }) {
   const { step, phone, handleAddError, resetErrors } = useReservationStore();
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit() {
     resetErrors();
     if (!phoneNumberValidator(phone)) {
       handleAddError(
