@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { dbData } from "@/data/data";
 import { scheduleDataType } from "@/types/types";
 
-function ReservationStepOne({ plan }: { plan: string | undefined }) {
+function ReservationStepOne() {
   const { selectedDate, selectedTime, handleStep } = useReservationStore();
   const [filteredData, setFilteredData] = useState<scheduleDataType>();
   const [reservationsData, setReservationsData] = useState<scheduleDataType[]>(
@@ -33,7 +33,7 @@ function ReservationStepOne({ plan }: { plan: string | undefined }) {
 
   return (
     <>
-      <ReservationDetail plan={plan} />
+      <ReservationDetail />
       <ReservationDates
         weeks={fourWeekDetail}
         reservationsData={reservationsData}

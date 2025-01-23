@@ -5,6 +5,7 @@ import ReservationForm from "./ReservationForm";
 import ReservationStepOne from "./ReservationStepOne";
 import { useReservationStore } from "@/hooks/useReservationStore";
 import { phoneNumberValidator } from "@persian-tools/persian-tools";
+import { createReservation } from "@/lib/actions";
 
 function Reservation() {
   const {
@@ -21,7 +22,7 @@ function Reservation() {
     hide,
   } = useReservationStore();
 
-  function handleSubmit() {
+  async function handleSubmit() {
     resetErrors();
     if (!phoneNumberValidator(phone)) {
       handleAddError(
@@ -30,13 +31,14 @@ function Reservation() {
       return;
     }
 
-    // Send data to the server
-    console.log(plan);
-    console.log(fullName);
-    console.log(phone);
-    console.log(description);
-    console.log(selectedDate);
-    console.log(selectedTime);
+    await createReservation({
+      plan,
+      fullName,
+      phone,
+      description,
+      selectedDate,
+      selectedTime,
+    });
 
     hide();
     resetAll();
@@ -44,7 +46,7 @@ function Reservation() {
 
   return (
     <Modal homeHref="/services">
-      {step === 1 && <ReservationStepOne plan={plan} />}
+      {step === 1 && <ReservationStepOne />}
       {step === 2 && (
         <>
           <p className=" text-neutral-700 text-xl font-semibold leading-7 mx-44">

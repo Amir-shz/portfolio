@@ -1,9 +1,12 @@
+"use client";
+
 import { useReservationStore } from "@/hooks/useReservationStore";
-import { useRef } from "react";
+import { useRef, useTransition } from "react";
 
 function ReservationForm({ onSubmit }: { onSubmit: () => void }) {
   const secondInputRef = useRef<HTMLInputElement>(null);
   const thirdInputRef = useRef<HTMLTextAreaElement>(null);
+  const [isPending, startTransition] = useTransition();
 
   const {
     fullName,
@@ -14,6 +17,12 @@ function ReservationForm({ onSubmit }: { onSubmit: () => void }) {
     handlePhoneChange,
     handleDescriptionChange,
   } = useReservationStore();
+
+  const handleForm = () => {
+    startTransition(() => {
+      onSubmit();
+    });
+  };
 
   return (
     <div>
@@ -71,10 +80,10 @@ function ReservationForm({ onSubmit }: { onSubmit: () => void }) {
         className={` ${
           errors.length > 0 ? "mt-8" : "mt-[4.5rem]"
         }  text-neutral-50 text-base font-bold leading-[1.125rem] py-3 px-6 w-full rounded-xl bg-purple-400 hover:bg-purple-500 duration-300 disabled:bg-neutral-400`}
-        disabled={!fullName || !phone}
-        onClick={onSubmit}
+        disabled={!fullName || !phone || isPending}
+        onClick={handleForm}
       >
-        تایید
+        {isPending ? "در حال رزرو نوبت ..." : "تایید"}
       </button>
     </div>
   );
