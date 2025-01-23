@@ -21,7 +21,7 @@ export interface planCardProps {
   title: string;
   time: string;
   price: string;
-  href: string;
+  plan: string;
 }
 
 export interface servicesForCompaniesAndPersonsProp {

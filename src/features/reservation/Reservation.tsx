@@ -6,8 +6,20 @@ import ReservationStepOne from "./ReservationStepOne";
 import { useReservationStore } from "@/hooks/useReservationStore";
 import { phoneNumberValidator } from "@persian-tools/persian-tools";
 
-function Reservation({ plan }: { plan: string | undefined }) {
-  const { step, phone, handleAddError, resetErrors } = useReservationStore();
+function Reservation() {
+  const {
+    step,
+    selectedDate,
+    selectedTime,
+    phone,
+    fullName,
+    description,
+    plan,
+    handleAddError,
+    resetErrors,
+    resetAll,
+    hide,
+  } = useReservationStore();
 
   function handleSubmit() {
     resetErrors();
@@ -18,7 +30,16 @@ function Reservation({ plan }: { plan: string | undefined }) {
       return;
     }
 
-    console.log("submit");
+    // Send data to the server
+    console.log(plan);
+    console.log(fullName);
+    console.log(phone);
+    console.log(description);
+    console.log(selectedDate);
+    console.log(selectedTime);
+
+    hide();
+    resetAll();
   }
 
   return (

@@ -9,7 +9,7 @@ export const planData = [
     time: "۱۵ دقیقه",
     price: "free",
     plan: "1",
-    href: "?show=true&plan=1",
+    // href: "?show=true&plan=1",
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ export const planData = [
     time: "۳۰ دقیقه",
     price: "۲۵۰",
     plan: "2",
-    href: "?show=true&plan=2",
+    // href: "?show=true&plan=2",
   },
   {
     id: 3,
@@ -25,7 +25,7 @@ export const planData = [
     time: "۳۰ دقیقه",
     price: "۳۲۰",
     plan: "3",
-    href: "?show=true&plan=3",
+    // href: "?show=true&plan=3",
   },
   {
     id: 4,
@@ -33,7 +33,7 @@ export const planData = [
     time: "۴۵ دقیقه",
     price: "۳۷۰",
     plan: "4",
-    href: "?show=true&plan=4",
+    // href: "?show=true&plan=4",
   },
 ];
 

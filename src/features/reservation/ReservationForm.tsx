@@ -16,7 +16,7 @@ function ReservationForm({ onSubmit }: { onSubmit: () => void }) {
   } = useReservationStore();
 
   return (
-    <form>
+    <div>
       <div className="reservationForm">
         <label className=" relative w-full">
           <input
@@ -76,7 +76,7 @@ function ReservationForm({ onSubmit }: { onSubmit: () => void }) {
       >
         تایید
       </button>
-    </form>
+    </div>
   );
 }
 

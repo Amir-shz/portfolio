@@ -3,12 +3,17 @@ import { create } from "zustand";
 
 type Store = {
   step: 1 | 2;
+  showModal: boolean;
+  plan: string;
   selectedDate: string;
   selectedTime: string;
   fullName: string;
   phone: string;
   description: string;
   errors: string[];
+  show: () => void;
+  hide: () => void;
+  setPlan: (val: string) => void;
   handleSelectedDateChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleSelectedTimeChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleFullNameChange: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -23,12 +28,17 @@ type Store = {
 
 export const useReservationStore = create<Store>()((set) => ({
   step: 1,
+  showModal: false,
+  plan: "",
   selectedDate: "",
   selectedTime: "",
   fullName: "",
   phone: "",
   description: "",
   errors: [],
+  show: () => set(() => ({ showModal: true })),
+  hide: () => set(() => ({ showModal: false })),
+  setPlan: (val: string) => set(() => ({ plan: val })),
   handleSelectedDateChange: (e) =>
     set(() => ({ selectedTime: "", selectedDate: e.target.value })),
   handleSelectedTimeChange: (e) =>
@@ -49,6 +59,7 @@ export const useReservationStore = create<Store>()((set) => ({
   resetAll: () =>
     set(() => ({
       step: 1,
+      plan: "",
       selectedDate: "",
       selectedTime: "",
       fullName: "",

@@ -1,31 +1,16 @@
 import ServicesForCompaniesAndPersons from "@/components/layouts/ServicesForCompaniesAndPersons";
-import Reservation from "@/features/reservation/Reservation";
-import PlanCard from "@/components/ui/PlanCard";
-import { searchParamsProp } from "@/types/types";
-import {
-  planData,
-  servicesForCompanyData,
-  servicesForPersonData,
-} from "@/utils/utils";
+import { servicesForCompanyData, servicesForPersonData } from "@/utils/utils";
 import { Metadata } from "next";
+import PlansBox from "@/components/ui/PlansBox";
 
 export const metadata: Metadata = {
   title: "خدمات من",
 };
 
-async function Page({ searchParams }: searchParamsProp) {
-  const { show, plan } = await searchParams;
+async function Page() {
   return (
     <div className=" grid grid-cols-4 gap-6 mb-4">
-      {planData.map((plan) => (
-        <PlanCard
-          key={plan.id}
-          title={plan.title}
-          time={plan.time}
-          price={plan.price}
-          href={plan.href}
-        />
-      ))}
+      <PlansBox />
       <div className=" col-span-2">
         <ServicesForCompaniesAndPersons
           title={servicesForCompanyData.title}
@@ -40,7 +25,6 @@ async function Page({ searchParams }: searchParamsProp) {
           items={servicesForPersonData.items}
         />
       </div>
-      {show === "true" && <Reservation plan={plan} />}
     </div>
   );
 }

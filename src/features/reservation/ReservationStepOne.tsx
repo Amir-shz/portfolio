@@ -31,8 +31,6 @@ function ReservationStepOne({ plan }: { plan: string | undefined }) {
     jalali: { dayName: string; day: string; monthName: string };
   }[] = getFourWeeksFromToday();
 
-  console.log(fourWeekDetail);
-
   return (
     <>
       <ReservationDetail plan={plan} />

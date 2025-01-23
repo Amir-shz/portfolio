@@ -1,23 +1,15 @@
 "use client";
 
 import { useOutsideClick } from "@/hooks/useOutsideClick";
-import { useRouter } from "next/navigation";
 import { createPortal } from "react-dom";
 import XIcon from "../icons/XIcon";
 import { ReactNode } from "react";
 import { useReservationStore } from "@/hooks/useReservationStore";
 
-const Modal = ({
-  homeHref,
-  children,
-}: {
-  homeHref: string;
-  children: ReactNode;
-}) => {
-  const router = useRouter();
-  const { resetAll } = useReservationStore();
+const Modal = ({ children }: { homeHref: string; children: ReactNode }) => {
+  const { resetAll, hide } = useReservationStore();
   const ref = useOutsideClick(() => {
-    router.replace(homeHref);
+    hide();
     resetAll();
   });
   return createPortal(
@@ -29,7 +21,7 @@ const Modal = ({
         <button
           className=" absolute top-6 left-6"
           onClick={() => {
-            router.replace(homeHref);
+            hide();
             resetAll();
           }}
         >
