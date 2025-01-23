@@ -1,6 +1,11 @@
 import TimeRadio from "@/components/ui/TimeRadio";
 
-function ReservationTimes({ hours }) {
+function ReservationTimes({
+  hours,
+}: {
+  hours: { hour: string; isAvailable: boolean }[];
+}) {
+  console.log(hours);
   return (
     <div className="mt-4">
       <div className="mb-2">

@@ -1,6 +1,15 @@
 import { useReservationStore } from "@/hooks/useReservationStore";
 
-function DateRadio({ date, available }) {
+function DateRadio({
+  date,
+  available,
+}: {
+  date: {
+    date: string;
+    jalali: { dayName: string; day: string; monthName: string };
+  };
+  available: number;
+}) {
   const { selectedDate, handleSelectedDateChange } = useReservationStore();
 
   const jalaliDate = date.jalali;

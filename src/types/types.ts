@@ -49,7 +49,7 @@ export interface filteredWeeksType {
 
   dates: {
     date: string;
-    jalali: object;
+    jalali: { dayName: string; day: string; monthName: string };
   }[];
   page: number;
 }

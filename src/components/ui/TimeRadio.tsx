@@ -1,6 +1,6 @@
 import { useReservationStore } from "@/hooks/useReservationStore";
 
-function TimeRadio({ hour }) {
+function TimeRadio({ hour }: { hour: { hour: string; isAvailable: boolean } }) {
   const { selectedTime, handleSelectedTimeChange } = useReservationStore();
 
   return (

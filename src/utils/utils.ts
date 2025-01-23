@@ -143,7 +143,7 @@ export function getJalaliDetails(date) {
 export function splitIntoWeeks(dates: object[]): {
   dates: {
     date: string;
-    jalali: object;
+    jalali: { dayName: string; day: string; monthName: string };
   }[];
   page: number;
 }[] {
