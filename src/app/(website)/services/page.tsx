@@ -1,5 +1,5 @@
 import ServicesForCompaniesAndPersons from "@/components/layouts/ServicesForCompaniesAndPersons";
-import Modal from "@/components/ui/Modal";
+import Reservation from "@/features/reservation/Reservation";
 import PlanCard from "@/components/ui/PlanCard";
 import { searchParamsProp } from "@/types/types";
 import {
@@ -40,7 +40,7 @@ async function Page({ searchParams }: searchParamsProp) {
           items={servicesForPersonData.items}
         />
       </div>
-      {show === "true" && <Modal homeHref="/services" plan={plan} />}
+      {show === "true" && <Reservation plan={plan} />}
     </div>
   );
 }

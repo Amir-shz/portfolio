@@ -38,3 +38,18 @@ export interface educationAndResumeSectionProps {
 export interface searchParamsProp {
   searchParams: Promise<{ show: string; plan: string }>;
 }
+
+export interface scheduleDataType {
+  date: string;
+  available: number;
+  hours: { hour: string; isAvailable: boolean }[];
+}
+export interface filteredWeeksType {
+  // dates: object[];
+
+  dates: {
+    date: string;
+    jalali: object;
+  }[];
+  page: number;
+}
