@@ -37,6 +37,21 @@
   }
 }
 
+/* HTML: <div class="loader"></div> */
+.loaderSpinner {
+  width: 24px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 4px solid;
+  border-color: #333 #3330;
+  animation: l1 1s infinite;
+}
+@keyframes l1 {
+  to {
+    transform: rotate(0.5turn);
+  }
+}
+
 /* :root {
   --background: #ffffff;
   --foreground: #171717;
