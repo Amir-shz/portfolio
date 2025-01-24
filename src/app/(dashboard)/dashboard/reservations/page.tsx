@@ -13,7 +13,7 @@ async function page() {
   const reservations = await fetch(`${baseUrl}/reservation`)
     .then((data) => data.json())
     .then((data) => data.data);
-
+  console.log(reservations);
   return (
     <div>test</div>
     // <div className="w-full flex flex-col rounded-md bg-purple-50 shadow-shadow4 border border-purple-100 ">
