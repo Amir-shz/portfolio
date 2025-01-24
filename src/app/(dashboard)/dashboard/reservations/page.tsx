@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "رزروها",
 };
 
-const baseUrl = process.env.API_BASE_URL;
+const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 async function page() {
   const reservations = await fetch(`${baseUrl}/reservation`)

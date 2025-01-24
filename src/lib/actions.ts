@@ -3,7 +3,7 @@ import dbConnect from "@/lib/mongoose";
 import Reservation from "@/models/reservationModel";
 import { revalidatePath } from "next/cache";
 
-const baseUrl = process.env.API_BASE_URL;
+const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export async function createReservation(data: object) {
   console.log(data);

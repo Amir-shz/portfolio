@@ -3,7 +3,7 @@ import { digitsEnToFa } from "@persian-tools/persian-tools";
 import ReservationRowBtns from "./ReservationRowBtns";
 import { reservationType } from "@/types/types";
 
-const baseUrl = process.env.API_BASE_URL;
+const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 async function ReservationRow({
   reservation,
