@@ -1,4 +1,4 @@
-// import ReservationHeader from "@/components/dashboard/ReservationHeader";
+import ReservationHeader from "@/components/dashboard/ReservationHeader";
 // import ReservationRow from "@/components/dashboard/ReservationRow";
 // import { reservationType } from "@/types/types";
 import { Metadata } from "next";
@@ -15,13 +15,13 @@ async function page() {
     .then((data) => data.data);
   console.log(reservations);
   return (
-    <div>test</div>
-    // <div className="w-full flex flex-col rounded-md bg-purple-50 shadow-shadow4 border border-purple-100 ">
-    //   <ReservationHeader />
-    //   {reservations.map((reservation: reservationType) => (
-    //     <ReservationRow key={reservation._id} reservation={reservation} />
-    //   ))}
-    // </div>
+    // <div>test</div>
+    <div className="w-full flex flex-col rounded-md bg-purple-50 shadow-shadow4 border border-purple-100 ">
+      <ReservationHeader />
+      {/* {reservations.map((reservation: reservationType) => (
+        <ReservationRow key={reservation._id} reservation={reservation} />
+      ))} */}
+    </div>
   );
 }
 
