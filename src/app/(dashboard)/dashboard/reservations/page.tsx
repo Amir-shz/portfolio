@@ -7,12 +7,12 @@ export const metadata: Metadata = {
   title: "رزروها",
 };
 
-// const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 async function page() {
-  // const reservations = await fetch(`${baseUrl}/reservation`)
-  //   .then((data) => data.json())
-  //   .then((data) => data.data);
+  const reservations = await fetch(`${baseUrl}/reservation`)
+    .then((data) => data.json())
+    .then((data) => data.data);
 
   return (
     <div>test</div>
