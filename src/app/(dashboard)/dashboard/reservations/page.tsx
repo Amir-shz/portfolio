@@ -1,6 +1,6 @@
 import ReservationHeader from "@/components/dashboard/ReservationHeader";
 import ReservationRow from "@/components/dashboard/ReservationRow";
-// import { reservationType } from "@/types/types";
+import { reservationType } from "@/types/types";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -14,14 +14,14 @@ async function page() {
     .then((data) => data.json())
     .then((data) => data.data);
   console.log(reservations);
-  const reservation = reservations[0];
+  // const reservation = reservations[0];
   return (
     <div className="w-full flex flex-col rounded-md bg-purple-50 shadow-shadow4 border border-purple-100 ">
       <ReservationHeader />
-      <ReservationRow reservation={reservation} />
-      {/* {reservations.map((reservation: reservationType) => (
-        <ReservationRow key={reservation._id} reservation={reservation} />
-      ))} */}
+      {reservations.length > 0 &&
+        reservations.map((reservation: reservationType) => (
+          <ReservationRow key={reservation._id} reservation={reservation} />
+        ))}
     </div>
   );
 }
