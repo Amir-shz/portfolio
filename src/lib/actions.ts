@@ -34,7 +34,6 @@ export async function deleteReservation(id: string) {
 }
 
 export async function changePlanData(formData: FormData) {
-  // await delay(5000);
   const id = formData.get("id");
   const body = {
     title: formData.get("title"),
@@ -51,4 +50,8 @@ export async function changePlanData(formData: FormData) {
   });
 
   revalidatePath("/dashboard/plans");
+}
+
+export async function logOut() {
+  console.log("log out");
 }

@@ -1,3 +1,4 @@
+import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import Logo from "@/components/ui/Logo";
 import Link from "next/link";
 import {
@@ -44,7 +45,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </Link>
       </div>
       <div className=" col-span-8">
-        <header className=" bg-purple-50 h-14">هدر</header>
+        <DashboardHeader />
         <div className=" p-4">{children}</div>
       </div>
     </div>
