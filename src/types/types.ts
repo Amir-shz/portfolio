@@ -62,3 +62,14 @@ export interface plansType {
   price: string;
   plan: string;
 }
+
+export interface reservationType {
+  _id: string;
+  fullName: string;
+  phone: string;
+  selectedTime: string;
+  selectedDate: string;
+  status: "new" | "finish";
+  plan: string;
+  description: string;
+}
