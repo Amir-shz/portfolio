@@ -32,3 +32,23 @@ export async function deleteReservation(id: string) {
 
   revalidatePath("/dashboard/reservations");
 }
+
+export async function changePlanData(formData: FormData) {
+  // await delay(5000);
+  const id = formData.get("id");
+  const body = {
+    title: formData.get("title"),
+    time: formData.get("time"),
+    price: formData.get("price"),
+    plan: formData.get("plan"),
+  };
+  console.log(body);
+
+  await fetch(`${baseUrl}/plan/${id}`, {
+    method: "PATCH",
+    body: JSON.stringify(body),
+    headers: { "Content-Type": "application/json" },
+  });
+
+  revalidatePath("/dashboard/plans");
+}

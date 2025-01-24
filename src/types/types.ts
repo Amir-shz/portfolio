@@ -73,3 +73,11 @@ export interface reservationType {
   plan: string;
   description: string;
 }
+
+export interface planType {
+  _id: string;
+  title: string;
+  time: string;
+  price: string;
+  plan: string;
+}
