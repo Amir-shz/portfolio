@@ -52,14 +52,6 @@ const Vazirmatn = localFont({
   variable: "--vazirmatn",
 });
 
-// export const metadata: Metadata = {
-//   title: {
-//     template: "فاطمه شفیعی | %s",
-//     default: "فاطمه شفیعی | صفحه اصلی",
-//   },
-//   description: "",
-// };
-
 export default function RootLayout({
   children,
 }: Readonly<{
