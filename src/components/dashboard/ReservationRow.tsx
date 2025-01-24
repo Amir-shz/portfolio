@@ -3,6 +3,8 @@ import { digitsEnToFa } from "@persian-tools/persian-tools";
 import ReservationRowBtns from "./ReservationRowBtns";
 import { reservationType } from "@/types/types";
 
+const baseUrl = process.env.API_BASE_URL;
+
 async function ReservationRow({
   reservation,
 }: {
@@ -23,7 +25,7 @@ async function ReservationRow({
     plan: planName,
     time: planTime,
     price: planPrice,
-  } = await fetch(`http://localhost:3000/api/v1/plan/${plan}`)
+  } = await fetch(`${baseUrl}/plan/${plan}`)
     .then((data) => data.json())
     .then((data) => data.data);
 
