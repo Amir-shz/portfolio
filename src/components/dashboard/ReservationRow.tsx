@@ -48,11 +48,11 @@ async function ReservationRow({
       </p>
       <p className="border-r border-r-neutral-300">{planName}</p>
       <div className=" text-xs font-semibold leading-5 border-x border-x-neutral-300 flex flex-col justify-center items-center">
-        <p>{planPrice === "free" ? "رایگان" : planPrice}</p>
+        <p>{planPrice === "free" ? "رایگان" : `${planPrice} تومان`}</p>
         <p>{planTime}</p>
       </div>
       <p className=" col-span-2">{description}</p>
-      <div className=" flex items-center gap-2 justify-center">
+      <div className=" flex items-center gap-2 justify-center ">
         <ReservationRowBtns id={_id} status={status} />
       </div>
     </div>
