@@ -21,7 +21,7 @@ function ReservationDates({
   const { resetDateAndTimeStates } = useReservationStore();
 
   const filteredWeeks: filteredWeeksType = splitIntoWeeks(weeks)[page - 1];
-  const reservations = reservationsData.map((el) => el.date);
+  const reservations = reservationsData?.map((el) => el.date);
 
   return (
     <div className="mt-2">
@@ -58,9 +58,9 @@ function ReservationDates({
             key={index}
             date={el}
             available={
-              reservations.includes(el.date)
+              reservations?.includes(el.date)
                 ? new Date(el.date).getTime() > new Date().getTime()
-                  ? reservationsData.filter(
+                  ? reservationsData?.filter(
                       (element) => element.date === el.date
                     )[0].available
                   : 0
