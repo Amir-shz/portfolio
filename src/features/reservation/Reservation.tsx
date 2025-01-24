@@ -6,6 +6,7 @@ import ReservationStepOne from "./ReservationStepOne";
 import { useReservationStore } from "@/hooks/useReservationStore";
 import { phoneNumberValidator } from "@persian-tools/persian-tools";
 import { createReservation } from "@/lib/actions";
+import ReservationStepThree from "./ReservationStepThree";
 
 function Reservation() {
   const {
@@ -19,7 +20,8 @@ function Reservation() {
     handleAddError,
     resetErrors,
     resetAll,
-    hide,
+    handleStep,
+    // hide,
   } = useReservationStore();
 
   async function handleSubmit() {
@@ -40,8 +42,9 @@ function Reservation() {
       selectedTime,
     });
 
-    hide();
+    // hide();
     resetAll();
+    handleStep(3);
   }
 
   return (
@@ -55,6 +58,7 @@ function Reservation() {
           <ReservationForm onSubmit={handleSubmit} />
         </>
       )}
+      {step === 3 && <ReservationStepThree />}
     </Modal>
   );
 }

@@ -1,15 +1,40 @@
 "use server";
 import dbConnect from "@/lib/mongoose";
 import Reservation from "@/models/reservationModel";
+import Schedule from "@/models/scheduleModel";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-export async function createReservation(data: object) {
+export async function createReservation(data: {
+  plan: string;
+  fullName: string;
+  phone: string;
+  description: string;
+  selectedDate: string;
+  selectedTime: string;
+}) {
   console.log(data);
+
   await dbConnect();
+
   await Reservation.create(data);
+
+  const dateToFind = new Date(data.selectedDate);
+  const hourToFind = data.selectedTime;
+
+  await Schedule.findOneAndUpdate(
+    {
+      date: dateToFind,
+      "hours.hour": hourToFind,
+    },
+    {
+      $set: { "hours.$.isAvailable": false },
+    }
+  );
+
+  // return true;
 }
 
 export async function finishReservationStatus(id: string) {

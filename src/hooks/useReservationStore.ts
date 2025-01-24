@@ -2,7 +2,7 @@ import { ChangeEvent } from "react";
 import { create } from "zustand";
 
 type Store = {
-  step: 1 | 2;
+  step: 1 | 2 | 3;
   showModal: boolean;
   plan: string;
   planData: {
@@ -26,7 +26,7 @@ type Store = {
   handleFullNameChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handlePhoneChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleDescriptionChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
-  handleStep: (val: 1 | 2) => void;
+  handleStep: (val: 1 | 2 | 3) => void;
   handleAddError: (err: string) => void;
   resetDateAndTimeStates: () => void;
   resetAll: () => void;

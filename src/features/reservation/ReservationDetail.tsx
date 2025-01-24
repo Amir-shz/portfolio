@@ -8,7 +8,7 @@ function ReservationDetail() {
   const { plan } = useReservationStore();
   const { data: planData } = usePlans();
 
-  const [detail] = planData?.filter(
+  const detail = planData?.filter(
     (el: {
       _id: string;
       title: string;
@@ -16,7 +16,7 @@ function ReservationDetail() {
       price: string;
       plan: string;
     }) => el._id === plan
-  );
+  )[0];
 
   return (
     <div className="flex justify-center items-center">
