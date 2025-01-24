@@ -3,9 +3,11 @@
 import PlanCard from "./PlanCard";
 import Reservation from "@/features/reservation/Reservation";
 import { useReservationStore } from "@/hooks/useReservationStore";
-import { useEffect } from "react";
+import { useEffect, useTransition } from "react";
+import PlanBoxLoader from "./PlanBoxLoader";
 
 function PlansBox() {
+  const [isPending, startTransition] = useTransition();
   const { showModal, planData, setPlanData } = useReservationStore();
 
   useEffect(() => {
@@ -16,8 +18,13 @@ function PlansBox() {
 
       setPlanData(plans);
     }
-    getPlans();
+
+    startTransition(async () => {
+      await getPlans();
+    });
   }, [setPlanData]);
+
+  if (isPending) return <PlanBoxLoader />;
 
   return (
     <>
@@ -28,7 +35,6 @@ function PlansBox() {
           title={plan.title}
           time={plan.time}
           price={plan.price}
-          // plan={plan.plan}
         />
       ))}
       {showModal === true && <Reservation />}
