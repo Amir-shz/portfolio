@@ -2,6 +2,7 @@
 import dbConnect from "@/lib/mongoose";
 import Reservation from "@/models/reservationModel";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -54,4 +55,9 @@ export async function changePlanData(formData: FormData) {
 
 export async function logOut() {
   console.log("log out");
+}
+
+export async function login() {
+  console.log("log in");
+  redirect("/dashboard");
 }
