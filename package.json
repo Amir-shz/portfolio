@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@persian-tools/persian-tools": "^3.6.0",
+    "mongoose": "^8.9.5",
     "motion": "^11.14.4",
     "next": "15.1.0",
     "react": "^19.0.0",

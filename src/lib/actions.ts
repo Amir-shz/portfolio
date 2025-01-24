@@ -1,10 +1,14 @@
 "use server";
+import dbConnect from "@/lib/mongoose";
+import Reservation from "@/models/reservationModel";
 
-const delay = (ms: number): Promise<void> => {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-};
+// const delay = (ms: number): Promise<void> => {
+//   return new Promise((resolve) => setTimeout(resolve, ms));
+// };
 
 export async function createReservation(data: object) {
-  await delay(5000);
-  console.log(data);
+  // console.log(data);
+  await dbConnect();
+  await Reservation.create(data);
+  // await delay(5000);
 }

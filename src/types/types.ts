@@ -53,3 +53,11 @@ export interface filteredWeeksType {
   }[];
   page: number;
 }
+
+export interface plansType {
+  _id: string;
+  title: string;
+  time: string;
+  price: string;
+  plan: string;
+}
