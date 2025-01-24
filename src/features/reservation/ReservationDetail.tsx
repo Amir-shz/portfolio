@@ -1,12 +1,11 @@
 import ClockIcon from "@/components/icons/ClockIcon";
 import DollarIcon from "@/components/icons/DollarIcon";
 import { useReservationStore } from "@/hooks/useReservationStore";
-import { planData } from "@/utils/utils";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 
 function ReservationDetail() {
-  const { plan } = useReservationStore();
-  const [detail] = planData.filter((el) => el.plan === plan);
+  const { plan, planData } = useReservationStore();
+  const [detail] = planData.filter((el) => el._id === plan);
 
   return (
     <div className="flex justify-center items-center">

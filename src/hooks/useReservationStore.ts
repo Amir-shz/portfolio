@@ -5,6 +5,13 @@ type Store = {
   step: 1 | 2;
   showModal: boolean;
   plan: string;
+  planData: {
+    _id: string;
+    title: string;
+    time: string;
+    price: string;
+    plan: string;
+  }[];
   selectedDate: string;
   selectedTime: string;
   fullName: string;
@@ -24,12 +31,22 @@ type Store = {
   resetDateAndTimeStates: () => void;
   resetAll: () => void;
   resetErrors: () => void;
+  setPlanData: (
+    val: {
+      _id: string;
+      title: string;
+      time: string;
+      price: string;
+      plan: string;
+    }[]
+  ) => void;
 };
 
 export const useReservationStore = create<Store>()((set) => ({
   step: 1,
   showModal: false,
   plan: "",
+  planData: [],
   selectedDate: "",
   selectedTime: "",
   fullName: "",
@@ -68,4 +85,5 @@ export const useReservationStore = create<Store>()((set) => ({
       errors: [],
     })),
   resetErrors: () => set(() => ({ errors: [] })),
+  setPlanData: (val) => set(() => ({ planData: val })),
 }));

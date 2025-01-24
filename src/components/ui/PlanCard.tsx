@@ -10,7 +10,7 @@ function PlanCard({
   title,
   time,
   price = "free",
-  plan,
+  id,
 }: planCardProps): React.ReactNode {
   const { show, setPlan } = useReservationStore();
   return (
@@ -40,7 +40,7 @@ function PlanCard({
         <button
           className=" w-full rounded-xl shadow-shadow4 bg-purple-400 mb-[1.63rem] hover:bg-purple-500 hover:shadow-shadow4 transition-all duration-300"
           onClick={() => {
-            setPlan(plan);
+            setPlan(id);
             show();
           }}
         >

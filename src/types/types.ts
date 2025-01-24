@@ -18,10 +18,11 @@ export interface homeServiceCardProps {
 }
 
 export interface planCardProps {
+  id: string;
   title: string;
   time: string;
   price: string;
-  plan: string;
+  // plan: string;
 }
 
 export interface servicesForCompaniesAndPersonsProp {
