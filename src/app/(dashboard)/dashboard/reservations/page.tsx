@@ -3,6 +3,8 @@ import ReservationRow from "@/components/dashboard/ReservationRow";
 import { reservationType } from "@/types/types";
 import { Metadata } from "next";
 
+export const revalidate = 0;
+
 export const metadata: Metadata = {
   title: "رزروها",
 };
@@ -13,8 +15,7 @@ async function page() {
   const reservations = await fetch(`${baseUrl}/reservation`)
     .then((data) => data.json())
     .then((data) => data.data);
-  console.log(reservations);
-  // const reservation = reservations[0];
+
   return (
     <div className="w-full flex flex-col rounded-md bg-purple-50 shadow-shadow4 border border-purple-100 ">
       <ReservationHeader />
