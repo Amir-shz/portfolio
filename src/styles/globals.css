@@ -73,6 +73,15 @@
   scrollbar-width: none; /* Firefox */
 }
 
+.datePickerStyle input {
+  outline: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  background-color: #fafafa;
+  border: solid 1px #b78af7;
+  margin-top: 2px;
+}
+
 /* :root {
   --background: #ffffff;
   --foreground: #171717;

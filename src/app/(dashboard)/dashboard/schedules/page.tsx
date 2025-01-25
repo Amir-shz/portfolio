@@ -1,4 +1,6 @@
 import ScheduleForm from "@/components/dashboard/ScheduleForm";
+import ScheduleHeader from "@/components/dashboard/ScheduleHeader";
+import ScheduleRow from "@/components/dashboard/ScheduleRow";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -23,8 +25,17 @@ async function page() {
         </p>
         <ScheduleForm schedules={schedules} />
       </form>
-      <div className="w-full h-[calc(100vh-5.5rem)] flex flex-col rounded-md bg-purple-50 shadow-shadow4 border border-purple-100 overflow-y-scroll noScrollBar ">
-        div
+      <div className="w-full h-[calc(100vh-5.5rem)] flex flex-col gap-2 rounded-md bg-purple-50 shadow-shadow4 border border-purple-100 overflow-y-scroll noScrollBar p-4 ">
+        <ScheduleHeader />
+        {schedules.map(
+          (el: {
+            _id: string;
+            date: string;
+            hours: Array<{ hour: string; isAvailable: boolean }>;
+          }) => (
+            <ScheduleRow key={el._id} schedule={el} />
+          )
+        )}
       </div>
     </div>
   );

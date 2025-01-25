@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   await dbConnect();
-  const reservations = await Reservation.find();
+  const reservations = await Reservation.find().sort({ selectedDate: 1 });
 
   return NextResponse.json({
     status: "success",

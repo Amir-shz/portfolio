@@ -45,14 +45,11 @@ function ScheduleForm({
 
   return (
     <div className=" flex flex-col gap-4 mt-4">
-      <label className="flex flex-col gap-1">
+      <label className="flex flex-col gap-1 datePickerStyle">
         <p className=" text-sm font-semibold">تاریخ:</p>
-        <DatePicker
-          className="border border-purple-300"
-          onChange={(e) => setDate(e.value)}
-        />
+        <DatePicker onChange={(e) => setDate(e.value)} />
       </label>
-      <label className="flex  flex-col gap-1">
+      <label className="flex  flex-col gap-1 datePickerStyle">
         <p className=" text-sm font-semibold">ساعت:</p>
         <input
           type="time"
@@ -80,6 +77,7 @@ function ScheduleForm({
       >
         {isError && "زمان انتخاب شده از قبل در جدول زمان بندی موجود است"}
         {isSuccess && "زمان بندی با موفقیت اضافه شد"}
+        {!isError && !isSuccess && "for first height"}
       </span>
 
       <button

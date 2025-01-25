@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 async function getSchedules() {
-  const plans = await fetch("/api/v1/schedule")
+  const plans = await fetch("/api/v1/schedule/getFourWeeksSchedules")
     .then((data) => data.json())
     .then((data) => data.data);
 
