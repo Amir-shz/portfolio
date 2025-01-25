@@ -124,6 +124,15 @@ export async function deleteHour(id: string, hour: string) {
     { _id: id }, // بر اساس آیدی جستجو می‌کنیم
     { $pull: { hours: { hour: hour } } } // حذف ساعت خاص از آرایه
   );
+
+  const schedule = await Schedule.findById(id);
+
+  if (schedule.hours.length === 0) {
+    await Schedule.findByIdAndDelete(id);
+    revalidatePath("/dashboard/schedules");
+    redirect("/dashboard/schedules");
+  }
+
   revalidatePath("/dashboard/schedules");
 }
 
