@@ -15,7 +15,7 @@ async function page() {
     .then((data) => data.data);
 
   return (
-    <div className=" flex gap-2">
+    <div className=" flex gap-2 max-h-[calc(100vh-5.5rem)] overflow-y-scroll ">
       <form
         action=""
         className="w-full flex flex-col rounded-md bg-purple-50 shadow-shadow4 border border-purple-100 p-4 "

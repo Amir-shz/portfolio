@@ -2,6 +2,7 @@ import { getJalaliDetails } from "@/utils/utils";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 import ReservationRowBtns from "./ReservationRowBtns";
 import { reservationType } from "@/types/types";
+import Link from "next/link";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -32,7 +33,10 @@ async function ReservationRow({
   const { day, monthName, year } = getJalaliDetails(new Date(selectedDate));
 
   return (
-    <div className="  w-full grid grid-cols-12 items-center p-3 [&>p]:border-l [&>p]:border-l-neutral-300 [&>p]:flex [&>p]:justify-center  [&>p]:text-sm  [&>p]:items-center [&>p:nth-child(6)]:border-l-0   ">
+    <Link
+      href={`/dashboard/reservations/${_id}`}
+      className="hover:bg-purple-100 duration-200 rounded-md  w-full grid grid-cols-12 items-center p-3 [&>p]:border-l [&>p]:border-l-neutral-300 [&>p]:flex [&>p]:justify-center  [&>p]:text-sm  [&>p]:items-center [&>p:nth-child(6)]:border-l-0  [&>p:last-of-type]:line-clamp-3   "
+    >
       <p className=" col-span-2">{fullName}</p>
       <p className=" col-span-2">{digitsEnToFa(phone)}</p>
       <p>
@@ -55,7 +59,7 @@ async function ReservationRow({
       <div className=" flex items-center gap-2 justify-center ">
         <ReservationRowBtns id={_id} status={status} />
       </div>
-    </div>
+    </Link>
   );
 }
 

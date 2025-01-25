@@ -3,8 +3,13 @@ import ScheduleOneDelBtn from "@/components/dashboard/ScheduleOneDelBtn";
 import { deleteSchedule } from "@/lib/actions";
 import { getJalaliDetails } from "@/utils/utils";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
+import { Metadata } from "next";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+export const metadata: Metadata = {
+  title: "زمان‌بندی",
+};
 
 async function page({ params }: { params: Promise<{ scheduleId: string }> }) {
   const scheduleId = (await params).scheduleId;
@@ -20,7 +25,7 @@ async function page({ params }: { params: Promise<{ scheduleId: string }> }) {
   const formattedDate = `${day} ${monthName} ${year}`;
 
   return (
-    <div>
+    <div className="max-h-[calc(100vh-5.5rem)] overflow-y-scroll ">
       <p className=" text-center text-lg font-medium">{formattedDate}</p>
       <div className="grid grid-cols-2 gap-4 mt-4">
         {hours.map(
