@@ -1,5 +1,6 @@
 import localFont from "next/font/local";
 import "@/styles/globals.css";
+import { Viewport } from "next";
 
 const Vazirmatn = localFont({
   src: [
@@ -51,6 +52,10 @@ const Vazirmatn = localFont({
   ],
   variable: "--vazirmatn",
 });
+
+export const viewport: Viewport = {
+  themeColor: "#8133f1",
+};
 
 export default function RootLayout({
   children,
