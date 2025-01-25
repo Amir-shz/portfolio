@@ -25,7 +25,7 @@ async function page() {
         </p>
         <ScheduleForm schedules={schedules} />
       </form>
-      <div className="w-full h-[calc(100vh-5.5rem)] flex flex-col gap-2 rounded-md bg-purple-50 shadow-shadow4 border border-purple-100 overflow-y-scroll noScrollBar p-4 ">
+      <div className="w-full h-[calc(100vh-5.5rem)] flex flex-col gap-2 rounded-md bg-purple-50 shadow-shadow4 border border-purple-100 overflow-y-scroll p-4 ">
         <ScheduleHeader />
         {schedules.map(
           (el: {

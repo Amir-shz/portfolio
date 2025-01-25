@@ -10,7 +10,7 @@ import {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="grid grid-cols-10 bg-neutral-50 overflow-hidden h-dvh">
+    <div className="grid grid-cols-10 bg-neutral-50 h-dvh overflow-hidden ">
       <div className="col-span-2 flex flex-col gap-2 px-2 bg-purple-50 h-screen">
         <div className=" flex justify-center my-10">
           <Logo />
