@@ -12,7 +12,13 @@ import useSchedules from "@/hooks/useSchedules";
 // import useSchedules from "@/hooks/usePlans";
 
 function ReservationStepOne() {
-  const { selectedDate, selectedTime, handleStep } = useReservationStore();
+  const {
+    selectedDate,
+    selectedTime,
+    handleStep,
+    // handleSelectedDateChange,
+    // setInitDate,
+  } = useReservationStore();
   const { isLoading, data: schedules } = useSchedules();
   const [filteredData, setFilteredData] = useState<scheduleDataType>();
   const [reservationsData, setReservationsData] = useState<scheduleDataType[]>(
@@ -21,7 +27,16 @@ function ReservationStepOne() {
 
   // const [isPending, startTransition] = useTransition();
 
+  // useEffect(() => {
+  //   // console.log(schedules);
+  //   const initDate = schedules ? String(new Date(schedules[0].date)) : "";
+
+  //   // console.log(initDate);
+  //   setInitDate(initDate);
+  // }, [setInitDate, schedules]);
+
   useEffect(() => {
+    console.log(selectedDate);
     // async function getSchedules() {
     //   const schedules = await fetch("/api/v1/schedule")
     //     .then((data) => data.json())

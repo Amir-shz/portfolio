@@ -38,7 +38,7 @@ function ScheduleRow({
         ))}
       </div>
       <Link
-        href={`/dashboard/schedule/${_id}`}
+        href={`/dashboard/schedules/${_id}`}
         className="flex justify-center bg-warning-500 rounded-full justify-self-center p-2 hover:bg-warning-600 duration-200"
       >
         <HiOutlinePencil size={20} className=" text-neutral-50 stroke-2" />

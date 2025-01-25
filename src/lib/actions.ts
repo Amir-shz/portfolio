@@ -2,6 +2,8 @@
 import dbConnect from "@/lib/mongoose";
 import Reservation from "@/models/reservationModel";
 import Schedule from "@/models/scheduleModel";
+// import { delay } from "@/utils/utils";
+// import exp from "constants";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -114,4 +116,23 @@ export async function createSchedule(data: {
   // console.log(schedule ? "hast" : "nist");
   // Schedule.create({data.});
   revalidatePath("/dashboard/schedules");
+}
+
+export async function deleteHour(id: string, hour: string) {
+  console.log(id, hour);
+  await Schedule.updateOne(
+    { _id: id }, // بر اساس آیدی جستجو می‌کنیم
+    { $pull: { hours: { hour: hour } } } // حذف ساعت خاص از آرایه
+  );
+  revalidatePath("/dashboard/schedules");
+}
+
+export async function deleteSchedule(formData: FormData) {
+  const id = formData.get("id");
+  console.log(id);
+  await Schedule.findByIdAndDelete(id);
+
+  // await Schedule.deleteMany({});
+  revalidatePath("/dashboard/schedules");
+  redirect("/dashboard/schedules");
 }

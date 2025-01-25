@@ -54,7 +54,7 @@ const Vazirmatn = localFont({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#CEB0FA",
+  themeColor: "#B78AF7",
 };
 
 export default function RootLayout({

@@ -1,5 +1,6 @@
 import { ChangeEvent } from "react";
 import { create } from "zustand";
+// import useSchedules from "./useSchedules";
 
 type Store = {
   step: 1 | 2 | 3;
@@ -40,6 +41,8 @@ type Store = {
       plan: string;
     }[]
   ) => void;
+
+  // setInitDate: (val: string) => void;
 };
 
 export const useReservationStore = create<Store>()((set) => ({
@@ -48,6 +51,7 @@ export const useReservationStore = create<Store>()((set) => ({
   plan: "",
   planData: [],
   selectedDate: "",
+  // String(new Date().toLocaleDateString("en-Ca"))
   selectedTime: "",
   fullName: "",
   phone: "",
@@ -56,8 +60,10 @@ export const useReservationStore = create<Store>()((set) => ({
   show: () => set(() => ({ showModal: true })),
   hide: () => set(() => ({ showModal: false })),
   setPlan: (val: string) => set(() => ({ plan: val })),
-  handleSelectedDateChange: (e) =>
-    set(() => ({ selectedTime: "", selectedDate: e.target.value })),
+  handleSelectedDateChange: (e) => {
+    set({ selectedTime: "", selectedDate: e.target.value });
+    // (state) => {}
+  },
   handleSelectedTimeChange: (e) =>
     set(() => ({ selectedTime: e.target.value })),
   handleFullNameChange: (e) => set(() => ({ fullName: e.target.value })),
@@ -72,7 +78,10 @@ export const useReservationStore = create<Store>()((set) => ({
   handleStep: (val) => set(() => ({ step: val })),
   handleAddError: (err) => set((state) => ({ errors: [...state.errors, err] })),
   resetDateAndTimeStates: () =>
-    set(() => ({ selectedDate: "", selectedTime: "" })),
+    set(() => ({
+      selectedDate: "",
+      selectedTime: "",
+    })),
   resetAll: () =>
     set(() => ({
       step: 1,
@@ -86,4 +95,6 @@ export const useReservationStore = create<Store>()((set) => ({
     })),
   resetErrors: () => set(() => ({ errors: [] })),
   setPlanData: (val) => set(() => ({ planData: val })),
+
+  // setInitDate: (val: string) => set(() => ({ selectedDate: val })),
 }));
