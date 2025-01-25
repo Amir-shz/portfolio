@@ -86,3 +86,32 @@ export async function login() {
   console.log("log in");
   redirect("/dashboard");
 }
+
+export async function createSchedule(data: {
+  date: string | undefined;
+  time: string | undefined;
+}) {
+  console.log(data);
+
+  // check Date exists
+  const schedule = await Schedule.findOne({ date: data.date });
+
+  // if exist => UPDATE
+  if (schedule) {
+    await Schedule.findOneAndUpdate(
+      { date: data.date },
+      { $push: { hours: { hour: data.time } } }
+    );
+  }
+
+  // if not exist => CREATE
+  else {
+    await Schedule.create({
+      date: data.date,
+      hours: { hour: data.time },
+    });
+  }
+  // console.log(schedule ? "hast" : "nist");
+  // Schedule.create({data.});
+  revalidatePath("/dashboard/schedules");
+}

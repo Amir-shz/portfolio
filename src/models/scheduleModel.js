@@ -5,7 +5,10 @@ const scheduleSchema = new mongoose.Schema({
   hours: [
     {
       hour: String,
-      isAvailable: Boolean,
+      isAvailable: {
+        type: Boolean,
+        default: true,
+      },
       _id: false,
     },
   ],

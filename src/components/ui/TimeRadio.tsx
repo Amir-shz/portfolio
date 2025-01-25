@@ -1,4 +1,5 @@
 import { useReservationStore } from "@/hooks/useReservationStore";
+import { digitsEnToFa } from "@persian-tools/persian-tools";
 
 function TimeRadio({ hour }: { hour: { hour: string; isAvailable: boolean } }) {
   const { selectedTime, handleSelectedTimeChange } = useReservationStore();
@@ -29,7 +30,7 @@ function TimeRadio({ hour }: { hour: { hour: string; isAvailable: boolean } }) {
           ${hour.isAvailable ? " text-neutral-800" : " text-neutral-300"}
           `}
         >
-          {hour.hour}
+          {digitsEnToFa(hour.hour)}
         </p>
       </div>
     </label>
