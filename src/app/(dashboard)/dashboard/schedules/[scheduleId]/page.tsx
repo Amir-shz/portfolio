@@ -6,8 +6,8 @@ import { digitsEnToFa } from "@persian-tools/persian-tools";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-async function page({ params }: { params: { scheduleId: string } }) {
-  const scheduleId = params.scheduleId;
+async function page({ params }: { params: Promise<{ scheduleId: string }> }) {
+  const scheduleId = (await params).scheduleId;
 
   const schedule = await fetch(`${baseUrl}/schedule/${scheduleId}`)
     .then((res) => res.json())
