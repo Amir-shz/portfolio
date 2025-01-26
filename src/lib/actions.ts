@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 import { signIn, signOut } from "../auth";
 import bcrypt from "bcryptjs";
 import {
+  changePassSchema,
   FormState,
   signInSchema,
   SignupFormSchema,
@@ -263,4 +264,58 @@ export async function changeUserData(state: FormState, formData: FormData) {
   );
 
   revalidatePath("/dashboard");
+}
+
+export async function changePass(state: FormState, formData: FormData) {
+  const validatedFields = changePassSchema.safeParse({
+    password: formData.get("password"),
+    newPassword: formData.get("newPassword"),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+
+  const { password, newPassword } = validatedFields.data;
+  const email = formData.get("email");
+
+  // check old pass
+  await dbConnect();
+  const user = await User.findOne({ email }).select("+password");
+
+  console.log(user);
+
+  if (!user || !(await bcrypt.compare(password, user.password))) {
+    return { message: "رمزعبور فعلی اشتباه است" };
+  }
+
+  const hashedPassword = await bcrypt.hash(newPassword, 12);
+
+  try {
+    const user = await User.findOneAndUpdate(
+      { email },
+      {
+        password: hashedPassword,
+      }
+    );
+
+    if (!user) {
+      return {
+        message: "موقع تغییر رمز با مشکل مواجه شدیم",
+      };
+    }
+
+    // await signOut({ redirect: false });
+    // await signIn("credentials", { email, password, redirect: false });
+
+    return { status: "success", message: "رمزعبور با موفقیت تغییر کرد." };
+  } catch (err) {
+    console.log(err);
+    return {
+      status: "fail",
+      message: "An error occurred while creating your account." + `${err}`,
+    };
+  }
 }

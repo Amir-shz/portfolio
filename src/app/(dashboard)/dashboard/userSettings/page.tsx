@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import ChangePassForm from "@/components/dashboard/ChangePassForm";
 import ChangeUserDataForm from "@/components/dashboard/ChangeUserDataForm";
 import SignupForm from "@/components/dashboard/SignupForm";
 import UserDelBtn from "@/components/dashboard/UserDelBtn";
@@ -23,6 +24,8 @@ async function Page() {
     .then((data) => data.json())
     .then((data) => data.data);
 
+  // console.log(currentUser);
+
   return (
     <div className=" grid grid-cols-2 gap-4  max-h-[calc(100vh-5.5rem)] overflow-y-scroll p-4 ">
       <div className=" bg-purple-50 rounded-md shadow-shadow4 border border-purple-100 p-4">
@@ -31,10 +34,10 @@ async function Page() {
         </p>
         <SignupForm />
       </div>
-      <div className=" bg-purple-50 rounded-md shadow-shadow4 border border-purple-100 p-4 flex flex-col gap-2">
+      <div className=" bg-purple-50 rounded-md shadow-shadow4 border border-purple-100 p-4 flex flex-col   justify-between">
         <SessionProvider>
           <ChangeUserDataForm user={currentUser} />
-          {/* <ChangeUserDataForm user={currentUser} /> */}
+          <ChangePassForm email={currentUser.email} />
         </SessionProvider>
       </div>
 

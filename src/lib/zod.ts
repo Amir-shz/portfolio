@@ -42,12 +42,34 @@ export const userDataFormSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email." }).trim(),
 });
 
+// change password
+
+export const changePassSchema = z.object({
+  password: z
+    .string({ required_error: "Password is required" })
+    .min(1, "Password is required")
+    .min(8, "Password must be more than 8 characters")
+    .max(32, "Password must be less than 32 characters")
+    .regex(/[a-zA-Z]/, { message: "Contain at least one letter." })
+    .regex(/[0-9]/, { message: "Contain at least one number." })
+    .trim(),
+  newPassword: z
+    .string({ required_error: "Password is required" })
+    .min(1, "Password is required")
+    .min(8, "Password must be more than 8 characters")
+    .max(32, "Password must be less than 32 characters")
+    .regex(/[a-zA-Z]/, { message: "Contain at least one letter." })
+    .regex(/[0-9]/, { message: "Contain at least one number." })
+    .trim(),
+});
+
 export type FormState =
   | {
       errors?: {
         name?: string[];
         email?: string[];
         password?: string[];
+        newPassword?: string[];
       };
       message?: string;
     }
