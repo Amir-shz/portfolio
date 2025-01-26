@@ -1,10 +1,12 @@
 import { signInSchema } from "@/lib/zod";
-import User from "@/models/userModel";
+// import User from "@/models/userModel";
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { ZodError } from "zod";
 import bcrypt from "bcryptjs";
 import dbConnect from "@/lib/mongoose";
+
+const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -15,8 +17,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           const { email, password } = await signInSchema.parseAsync(
             credentials
           );
+
           await dbConnect();
-          const user = await User.findOne({ email }).select("+password");
+          const user = await fetch(`${baseUrl}/user/${email}`)
+            .then((data) => data.json())
+            .then((data) => data.data);
 
           const correct = await bcrypt.compare(password, user.password);
 
