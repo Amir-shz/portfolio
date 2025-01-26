@@ -1,12 +1,13 @@
 import { auth } from "@/auth";
 import { logOut } from "@/lib/actions";
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
 import {
   HiOutlineArrowLeftStartOnRectangle,
   HiOutlineHome,
   HiOutlineUser,
 } from "react-icons/hi2";
+import UserPhoto from "./UserPhoto";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -26,12 +27,13 @@ async function DashboardHeader() {
           </div>
         )}
         {user?.photo && (
-          <Image
-            alt="user profile"
-            src={`${user.photo}`}
-            width={44}
-            height={44}
-          />
+          <UserPhoto img={user.photo} />
+          // <Image
+          //   alt="user profile"
+          //   src={`${user.photo}`}
+          //   width={44}
+          //   height={44}
+          // />
         )}
         <p className="font-semibold">{user?.name}</p>
       </div>
