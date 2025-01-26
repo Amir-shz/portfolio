@@ -1,14 +1,31 @@
+// "use client";
 import { login } from "@/lib/actions";
+// import { useActionState } from "react";
 
-function page() {
+function Page() {
+  // const [state, action, pending] = useActionState(login, undefined);
+
+  // async function handleSubmit(e) {
+  //   e.preventDefault();
+  //   const x = await login();
+  // }
+
   return (
     <form
       action={login}
-      className=" w-screen h-screen flex justify-center items-center"
+      className=" flex flex-col gap-2 justify-center w-full items-center bg-black [&>label]:text-white"
     >
-      <button className=" bg-purple-400 p-12">ورود</button>
+      <label>
+        Email
+        <input name="email" type="email" />
+      </label>
+      <label>
+        Password
+        <input name="password" type="password" />
+      </label>
+      <button className=" bg-purple-50 h-10 w-20">Sign In</button>
     </form>
   );
 }
 
-export default page;
+export default Page;

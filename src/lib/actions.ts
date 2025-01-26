@@ -2,10 +2,12 @@
 import dbConnect from "@/lib/mongoose";
 import Reservation from "@/models/reservationModel";
 import Schedule from "@/models/scheduleModel";
-// import { delay } from "@/utils/utils";
-// import exp from "constants";
+import User from "@/models/userModel";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { signIn, signOut } from "../auth";
+import bcrypt from "bcryptjs";
+import { signInSchema, SignupFormSchema } from "./zod";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -80,15 +82,6 @@ export async function changePlanData(formData: FormData) {
   revalidatePath("/dashboard/plans");
 }
 
-export async function logOut() {
-  console.log("log out");
-}
-
-export async function login() {
-  console.log("log in");
-  redirect("/dashboard");
-}
-
 export async function createSchedule(data: {
   date: string | undefined;
   time: string | undefined;
@@ -113,8 +106,7 @@ export async function createSchedule(data: {
       hours: { hour: data.time },
     });
   }
-  // console.log(schedule ? "hast" : "nist");
-  // Schedule.create({data.});
+
   revalidatePath("/dashboard/schedules");
 }
 
@@ -141,7 +133,70 @@ export async function deleteSchedule(formData: FormData) {
   console.log(id);
   await Schedule.findByIdAndDelete(id);
 
-  // await Schedule.deleteMany({});
   revalidatePath("/dashboard/schedules");
   redirect("/dashboard/schedules");
+}
+
+// AUTHENTICATION
+
+export async function logOut() {
+  await signOut({ redirectTo: "/login" });
+}
+
+export async function login(formData: FormData) {
+  const validatedFields = signInSchema.safeParse({
+    email: formData.get("email"),
+    password: formData.get("password"),
+  });
+
+  if (!validatedFields.success) {
+    throw new Error("error");
+    // return {
+    //   errors: validatedFields.error.flatten().fieldErrors,
+    // };
+  }
+  const { email, password } = validatedFields.data;
+
+  await signIn("credentials", { email, password, redirect: false });
+
+  redirect("/dashboard");
+}
+
+export async function signup(formData: FormData) {
+  const validatedFields = SignupFormSchema.safeParse({
+    name: formData.get("name"),
+    email: formData.get("email"),
+    password: formData.get("password"),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+
+  const { name, email, password } = validatedFields.data;
+
+  const hashedPassword = await bcrypt.hash(password, 12);
+
+  try {
+    await dbConnect();
+    const user = await User.create({ name, email, password: hashedPassword });
+
+    if (!user) {
+      return {
+        message: "An error occurred while creating your account.",
+      };
+    }
+
+    await signIn("credentials", { email, password, redirect: false });
+
+    return { status: "success", message: "حساب کاربری با موفقیت ایجاد شد" };
+  } catch (err) {
+    console.log(err);
+    return {
+      status: "fail",
+      message: "An error occurred while creating your account." + `${err}`,
+    };
+  }
 }
