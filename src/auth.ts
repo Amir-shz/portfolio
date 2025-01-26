@@ -3,8 +3,9 @@ import { signInSchema } from "@/lib/zod";
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { ZodError } from "zod";
-import bcrypt from "bcryptjs";
-import dbConnect from "@/lib/mongoose";
+// import bcrypt from "bcryptjs";
+// import dbConnect from "@/lib/mongoose";
+// import { login } from "./utils/get";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -18,14 +19,19 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             credentials
           );
 
-          await dbConnect();
-          const user = await fetch(`${baseUrl}/user/${email}`)
+          // await dbConnect();
+
+          const user = await fetch(`${baseUrl}/auth/login`, {
+            method: "POST",
+            body: JSON.stringify({ email, password }),
+            headers: { "Content-Type": "application/json" },
+          })
             .then((data) => data.json())
             .then((data) => data.data);
 
-          const correct = await bcrypt.compare(password, user.password);
+          // const user = await login({ email, password });
 
-          if (!user || !correct) {
+          if (!user) {
             throw new Error("Invalid credentials.");
           }
           return user;
