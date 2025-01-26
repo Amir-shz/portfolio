@@ -1,8 +1,10 @@
 import { auth } from "@/auth";
+import ChangeUserDataForm from "@/components/dashboard/ChangeUserDataForm";
 import SignupForm from "@/components/dashboard/SignupForm";
 import UserDelBtn from "@/components/dashboard/UserDelBtn";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 import { Metadata } from "next";
+import { SessionProvider } from "next-auth/react";
 
 export const metadata: Metadata = {
   title: "تنظیمات کاربر",
@@ -17,17 +19,25 @@ async function Page() {
     .then((data) => data.json())
     .then((data) => data.data);
 
-  console.log(session);
+  const currentUser = await fetch(`${baseUrl}/user/${session?.user?.email}`)
+    .then((data) => data.json())
+    .then((data) => data.data);
 
   return (
-    <div className=" grid grid-cols-2 gap-4">
+    <div className=" grid grid-cols-2 gap-4  max-h-[calc(100vh-5.5rem)] overflow-y-scroll p-4 ">
       <div className=" bg-purple-50 rounded-md shadow-shadow4 border border-purple-100 p-4">
         <p className="mb-6 mt-2 text-center font-semibold text-neutral-700">
           برای ایجاد حساب جدید فرم زیر را پر کنید
         </p>
         <SignupForm />
       </div>
-      <div className=" bg-purple-50 rounded-md shadow-shadow4 border border-purple-100"></div>
+      <div className=" bg-purple-50 rounded-md shadow-shadow4 border border-purple-100 p-4 flex flex-col gap-2">
+        <SessionProvider>
+          <ChangeUserDataForm user={currentUser} />
+          {/* <ChangeUserDataForm user={currentUser} /> */}
+        </SessionProvider>
+      </div>
+
       {session?.user?.role === "OWNER" && (
         <div className=" bg-purple-50 rounded-md shadow-shadow4 border border-purple-100 col-span-2 flex flex-col gap-2 py-2">
           {users.map(

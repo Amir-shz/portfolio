@@ -25,7 +25,7 @@ async function page({ params }: { params: Promise<{ scheduleId: string }> }) {
   const formattedDate = `${day} ${monthName} ${year}`;
 
   return (
-    <div className="max-h-[calc(100vh-5.5rem)] overflow-y-scroll ">
+    <div className="max-h-[calc(100vh-5.5rem)] overflow-y-scroll p-4 ">
       <p className=" text-center text-lg font-medium">{formattedDate}</p>
       <div className="grid grid-cols-2 gap-4 mt-4">
         {hours.map(

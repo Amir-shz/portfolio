@@ -7,7 +7,12 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { signIn, signOut } from "../auth";
 import bcrypt from "bcryptjs";
-import { FormState, signInSchema, SignupFormSchema } from "./zod";
+import {
+  FormState,
+  signInSchema,
+  SignupFormSchema,
+  userDataFormSchema,
+} from "./zod";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -208,4 +213,54 @@ export async function signup(state: FormState, formData: FormData) {
       message: "An error occurred while creating your account." + `${err}`,
     };
   }
+}
+
+export async function deleteUser(id: string) {
+  const user = await User.findById(id);
+
+  if (user.role === "OWNER") {
+    return {
+      message: "you can't delete an owner user",
+    };
+  }
+  await User.findByIdAndDelete(id);
+
+  revalidatePath("/dashboard/userSettings");
+}
+
+export async function changeUserData(state: FormState, formData: FormData) {
+  const validatedFields = userDataFormSchema.safeParse({
+    name: formData.get("name"),
+    email: formData.get("email"),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+
+  const { name, email } = validatedFields.data;
+
+  const oldName = formData.get("oldName");
+  const oldEmail = formData.get("oldEmail");
+
+  if (
+    name.toLowerCase() === String(oldName)?.toLowerCase() &&
+    email.toLowerCase() === String(oldEmail)?.toLowerCase()
+  ) {
+    return { message: "اطلاعات ورودی تغییری نکرده است" };
+  }
+
+  await dbConnect();
+
+  await User.findOneAndUpdate(
+    { email: oldEmail },
+    {
+      email: email,
+      name: name,
+    }
+  );
+
+  revalidatePath("/dashboard");
 }

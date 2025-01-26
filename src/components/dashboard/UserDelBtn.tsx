@@ -1,4 +1,5 @@
 "use client";
+import { deleteUser } from "@/lib/actions";
 import { useTransition } from "react";
 import { HiOutlineTrash } from "react-icons/hi2";
 
@@ -7,8 +8,7 @@ function UserDelBtn({ id, role }: { id: string; role: "ADMIN" | "OWNER" }) {
 
   function handleDelete() {
     startTransitionDel(async () => {
-      console.log(id);
-      // await deleteReservation(id);
+      await deleteUser(id);
     });
   }
 
