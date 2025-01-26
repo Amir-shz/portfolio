@@ -1,30 +1,19 @@
-// "use client";
-import { login } from "@/lib/actions";
-// import { useActionState } from "react";
+import SigninForm from "@/components/dashboard/SigninForm";
+import Logo from "@/components/ui/Logo";
 
 function Page() {
-  // const [state, action, pending] = useActionState(login, undefined);
-
-  // async function handleSubmit(e) {
-  //   e.preventDefault();
-  //   const x = await login();
-  // }
-
   return (
-    <form
-      action={login}
-      className=" flex flex-col gap-2 justify-center w-full items-center bg-black [&>label]:text-white"
-    >
-      <label>
-        Email
-        <input name="email" type="email" />
-      </label>
-      <label>
-        Password
-        <input name="password" type="password" />
-      </label>
-      <button className=" bg-purple-50 h-10 w-20">Sign In</button>
-    </form>
+    <div className=" bg-purple-100 h-dvh w-screen">
+      <div className="flex items-center justify-center h-full w-2/5 mx-auto">
+        <div className=" w-full flex flex-col gap-10 justify-center items-center bg-neutral-100/50 p-10 rounded-lg">
+          <Logo />
+          <p className="-mb-4  font-semibold text-neutral-700">
+            ورود به حساب کاربری
+          </p>
+          <SigninForm />
+        </div>
+      </div>
+    </div>
   );
 }
 

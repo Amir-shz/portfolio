@@ -7,6 +7,12 @@
   font-size: 0.75rem;
 }
 
+.notShownLogin:not(:placeholder-shown) ~ p {
+  top: 0;
+  font-size: 0.75rem;
+  @apply text-neutral-800;
+}
+
 @layer components {
   .reservationForm {
     @apply mt-16 flex flex-col gap-8 [&_input]:border [&_input]:bg-neutral-50 [&_input]:rounded-lg [&_input]:border-neutral-400 [&_input]:py-3 [&_input]:pr-3 [&_input:focus]:border [&_input:focus]:border-purple-500 [&_input:focus]:outline-none [&_input:focus~p]:top-0 [&_input:focus~p]:text-xs;

@@ -1,11 +1,7 @@
 import { signInSchema } from "@/lib/zod";
-// import User from "@/models/userModel";
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { ZodError } from "zod";
-// import bcrypt from "bcryptjs";
-// import dbConnect from "@/lib/mongoose";
-// import { login } from "./utils/get";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -19,8 +15,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             credentials
           );
 
-          // await dbConnect();
-
           const user = await fetch(`${baseUrl}/auth/login`, {
             method: "POST",
             body: JSON.stringify({ email, password }),
@@ -28,8 +22,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           })
             .then((data) => data.json())
             .then((data) => data.data);
-
-          // const user = await login({ email, password });
 
           if (!user) {
             throw new Error("Invalid credentials.");
@@ -39,7 +31,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           if (error instanceof ZodError) {
             return null;
           }
-          return null;
+          // return null;
         }
       },
     }),
@@ -49,6 +41,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     authorized: async ({ auth }) => {
       return !!auth?.user;
     },
+    // signIn: ({ user }) => {},
   },
   session: {
     strategy: "jwt",

@@ -143,21 +143,30 @@ export async function logOut() {
   await signOut({ redirectTo: "/login" });
 }
 
-export async function login(formData: FormData) {
-  const validatedFields = signInSchema.safeParse({
-    email: formData.get("email"),
-    password: formData.get("password"),
-  });
+export async function login(state: FormState, formData: FormData) {
+  try {
+    const validatedFields = signInSchema.safeParse({
+      email: formData.get("email"),
+      password: formData.get("password"),
+    });
 
-  if (!validatedFields.success) {
-    throw new Error("error");
-    // return {
-    //   errors: validatedFields.error.flatten().fieldErrors,
-    // };
+    if (!validatedFields.success) {
+      return {
+        errors: validatedFields.error.flatten().fieldErrors,
+      };
+    }
+    const { email, password } = validatedFields.data;
+    await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
+  } catch (err) {
+    console.log(err);
+    return {
+      message: "ایمیل یا رمزعبور اشتباه است",
+    };
   }
-  const { email, password } = validatedFields.data;
-
-  await signIn("credentials", { email, password, redirect: false });
 
   redirect("/dashboard");
 }
