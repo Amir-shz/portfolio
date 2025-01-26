@@ -7,7 +7,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { signIn, signOut } from "../auth";
 import bcrypt from "bcryptjs";
-import { signInSchema, SignupFormSchema } from "./zod";
+import { FormState, signInSchema, SignupFormSchema } from "./zod";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -162,7 +162,7 @@ export async function login(formData: FormData) {
   redirect("/dashboard");
 }
 
-export async function signup(formData: FormData) {
+export async function signup(state: FormState, formData: FormData) {
   const validatedFields = SignupFormSchema.safeParse({
     name: formData.get("name"),
     email: formData.get("email"),
