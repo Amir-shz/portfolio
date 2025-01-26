@@ -5,7 +5,7 @@ import Schedule from "@/models/scheduleModel";
 import User from "@/models/userModel";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { signIn, signOut } from "../auth";
+import { auth, signIn, signOut } from "../auth";
 import bcrypt from "bcryptjs";
 import {
   changePassSchema,
@@ -318,4 +318,19 @@ export async function changePass(state: FormState, formData: FormData) {
       message: "An error occurred while creating your account." + `${err}`,
     };
   }
+}
+
+export async function changePhoto(url: string) {
+  const session = await auth();
+
+  await dbConnect();
+
+  await User.findOneAndUpdate(
+    { email: session?.user?.email },
+    {
+      photo: url,
+    }
+  );
+
+  revalidatePath("/dashboard");
 }

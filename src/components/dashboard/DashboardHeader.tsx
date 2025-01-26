@@ -1,6 +1,5 @@
 import { auth } from "@/auth";
 import { logOut } from "@/lib/actions";
-// import Image from "next/image";
 import Link from "next/link";
 import {
   HiOutlineArrowLeftStartOnRectangle,
@@ -21,20 +20,7 @@ async function DashboardHeader() {
   return (
     <header className=" bg-purple-50 h-14 flex items-center justify-between px-8">
       <div className=" flex gap-2 items-center">
-        {!user?.photo && (
-          <div className=" size-11 bg-neutral-500 rounded-full flex justify-center items-center text-neutral-50 text-xl font-medium">
-            {user?.name[0]}
-          </div>
-        )}
-        {user?.photo && (
-          <UserPhoto img={user.photo} />
-          // <Image
-          //   alt="user profile"
-          //   src={`${user.photo}`}
-          //   width={44}
-          //   height={44}
-          // />
-        )}
+        <UserPhoto img={user.photo} name={user?.name[0]} />
         <p className="font-semibold">{user?.name}</p>
       </div>
       <p className=" text-purple-700 font-semibold text-lg">
