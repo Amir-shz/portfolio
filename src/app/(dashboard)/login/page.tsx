@@ -1,5 +1,10 @@
 import SigninForm from "@/components/dashboard/SigninForm";
 import Logo from "@/components/ui/Logo";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "ورود به حساب کاربری",
+};
 
 function Page() {
   return (

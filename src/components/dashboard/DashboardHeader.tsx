@@ -1,21 +1,38 @@
+import { auth } from "@/auth";
 import { logOut } from "@/lib/actions";
+import Image from "next/image";
 import Link from "next/link";
 import {
   HiOutlineArrowLeftStartOnRectangle,
-  HiOutlineCog8Tooth,
   HiOutlineHome,
+  HiOutlineUser,
 } from "react-icons/hi2";
 
-const user = {
-  name: "امیر شریف زاده",
-  // photo: "",
-};
+const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-function DashboardHeader() {
+async function DashboardHeader() {
+  const session = await auth();
+
+  const user = await fetch(`${baseUrl}/user/${session?.user?.email}`)
+    .then((data) => data.json())
+    .then((data) => data.data);
+
   return (
     <header className=" bg-purple-50 h-14 flex items-center justify-between px-8">
       <div className=" flex gap-2 items-center">
-        <div className=" size-11 bg-neutral-500 rounded-full"></div>
+        {!user.photo && (
+          <div className=" size-11 bg-neutral-500 rounded-full flex justify-center items-center text-neutral-50 text-xl font-medium">
+            {user.name[0]}
+          </div>
+        )}
+        {user.photo && (
+          <Image
+            alt="user profile"
+            src={`${user.photo}`}
+            width={44}
+            height={44}
+          />
+        )}
         <p className="font-semibold">{user.name}</p>
       </div>
       <div className=" flex items-center gap-2">
@@ -30,7 +47,7 @@ function DashboardHeader() {
           href="/dashboard/userSettings"
           className=" flex justify-center items-center bg-purple-400 hover:bg-purple-500 duration-200 rounded-full p-2"
         >
-          <HiOutlineCog8Tooth size={24} className=" text-neutral-50" />
+          <HiOutlineUser size={24} className=" text-neutral-50" />
         </Link>
 
         <form action={logOut}>

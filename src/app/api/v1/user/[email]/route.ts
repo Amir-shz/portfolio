@@ -7,12 +7,9 @@ export async function GET(
   { params }: { params: Promise<{ email: string }> }
 ) {
   const { email } = await params;
-  // console.log(id);
-  await dbConnect();
-  const user = await User.findOne({ email }).select("+password");
 
-  // const schedule = await Schedule.findById(id);
-  // console.log(schedule);
+  await dbConnect();
+  const user = await User.findOne({ email });
 
   return NextResponse.json({
     status: "success",
