@@ -1,4 +1,5 @@
 import { signInSchema } from "@/lib/zod";
+// import { data } from "motion/react-client";
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { ZodError } from "zod";
@@ -26,6 +27,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           if (!user) {
             throw new Error("Invalid credentials.");
           }
+
           return user;
         } catch (error) {
           if (error instanceof ZodError) {
@@ -36,7 +38,19 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     }),
   ],
+
   callbacks: {
+    async session({ session }) {
+      if (session?.user) {
+        const fetchedUser = await fetch(`${baseUrl}/user/${session.user.email}`)
+          .then((data) => data.json())
+          .then((data) => data.data);
+
+        session.user.role = fetchedUser?.role;
+      }
+
+      return session;
+    },
     // for authorization in middleware
     authorized: async ({ auth }) => {
       return !!auth?.user;

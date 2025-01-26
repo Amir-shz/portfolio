@@ -20,12 +20,12 @@ async function DashboardHeader() {
   return (
     <header className=" bg-purple-50 h-14 flex items-center justify-between px-8">
       <div className=" flex gap-2 items-center">
-        {!user.photo && (
+        {!user?.photo && (
           <div className=" size-11 bg-neutral-500 rounded-full flex justify-center items-center text-neutral-50 text-xl font-medium">
-            {user.name[0]}
+            {user?.name[0]}
           </div>
         )}
-        {user.photo && (
+        {user?.photo && (
           <Image
             alt="user profile"
             src={`${user.photo}`}
@@ -33,8 +33,11 @@ async function DashboardHeader() {
             height={44}
           />
         )}
-        <p className="font-semibold">{user.name}</p>
+        <p className="font-semibold">{user?.name}</p>
       </div>
+      <p className=" text-purple-700 font-semibold text-lg">
+        {new Date().toLocaleDateString("fa-IR")}
+      </p>
       <div className=" flex items-center gap-2">
         <Link
           href="/"
