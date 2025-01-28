@@ -3,8 +3,9 @@ import dbConnect from "@/lib/mongoose";
 import Reservation from "@/models/reservationModel";
 import { NextResponse } from "next/server";
 
-export const GET = auth(async (req) => {
-  if (req.auth?.user) {
+export async function GET() {
+  const session = await auth();
+  if (session?.user) {
     await dbConnect();
     const reservations = await Reservation.find().sort({ selectedDate: 1 });
 
@@ -15,4 +16,4 @@ export const GET = auth(async (req) => {
     });
   }
   return NextResponse.json({ message: "Not authenticated" }, { status: 401 });
-});
+}
