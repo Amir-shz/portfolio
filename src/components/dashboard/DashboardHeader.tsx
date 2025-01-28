@@ -7,13 +7,18 @@ import {
   HiOutlineUser,
 } from "react-icons/hi2";
 import UserPhoto from "./UserPhoto";
+import { headers } from "next/headers";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 async function DashboardHeader() {
   const session = await auth();
 
-  const user = await fetch(`${baseUrl}/user/${session?.user?.email}`)
+  const header = await headers();
+
+  const user = await fetch(`${baseUrl}/user/${session?.user?.email}`, {
+    headers: header,
+  })
     .then((data) => data.json())
     .then((data) => data.data);
 

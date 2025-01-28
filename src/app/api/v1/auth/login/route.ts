@@ -5,6 +5,10 @@ import bcrypt from "bcryptjs";
 
 export async function POST(req: NextRequest) {
   const { email, password } = await req.json();
+
+  console.log(email);
+  console.log(password);
+
   await dbConnect();
 
   // get user

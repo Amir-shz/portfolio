@@ -14,6 +14,7 @@ import {
   SignupFormSchema,
   userDataFormSchema,
 } from "./zod";
+import { headers } from "next/headers";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -48,25 +49,34 @@ export async function createReservation(data: {
 }
 
 export async function finishReservationStatus(id: string) {
-  console.log(id);
+  const header = await headers();
+
+  const headersObj = Object.fromEntries(header.entries());
+  delete headersObj["content-length"];
+
   const body = { status: "finish" };
 
   await fetch(`${baseUrl}/reservation/${id}`, {
     method: "PATCH",
     body: JSON.stringify(body),
-    headers: { "Content-Type": "application/json" },
+
+    headers: { "Content-Type": "application/json", ...headersObj },
   });
 
   revalidatePath("/dashboard/reservations");
+  // redirect("/dashboard/reservations");
 }
 
 export async function deleteReservation(id: string) {
+  const header = await headers();
   await fetch(`${baseUrl}/reservation/${id}`, {
     method: "DELETE",
-    headers: { "Content-Type": "application/json" },
+    // headers: { "Content-Type": "application/json" },
+    headers: header,
   });
 
   revalidatePath("/dashboard/reservations");
+  // redirect("/dashboard/reservations");
 }
 
 export async function changePlanData(formData: FormData) {
@@ -174,6 +184,7 @@ export async function login(state: FormState, formData: FormData) {
     };
   }
 
+  revalidatePath("/dashboard");
   redirect("/dashboard");
 }
 
@@ -205,6 +216,8 @@ export async function signup(state: FormState, formData: FormData) {
     }
 
     await signIn("credentials", { email, password, redirect: false });
+
+    revalidatePath("/dashboard");
 
     return { status: "success", message: "حساب کاربری با موفقیت ایجاد شد" };
   } catch (err) {

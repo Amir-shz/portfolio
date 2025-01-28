@@ -2,6 +2,7 @@ import ReservationHeader from "@/components/dashboard/ReservationHeader";
 import ReservationRow from "@/components/dashboard/ReservationRow";
 import { reservationType } from "@/types/types";
 import { Metadata } from "next";
+import { headers } from "next/headers";
 
 export const revalidate = 0;
 
@@ -12,7 +13,11 @@ export const metadata: Metadata = {
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 async function page() {
-  const reservations = await fetch(`${baseUrl}/reservation`)
+  const header = await headers();
+
+  const reservations = await fetch(`${baseUrl}/reservation`, {
+    headers: header,
+  })
     .then((data) => data.json())
     .then((data) => data.data);
 

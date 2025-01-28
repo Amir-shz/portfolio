@@ -11,6 +11,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     Credentials({
       credentials: { email: {}, password: {} },
       authorize: async (credentials) => {
+        // console.log("❌");
         try {
           const { email, password } = await signInSchema.parseAsync(
             credentials
@@ -41,6 +42,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
   callbacks: {
     async session({ session }) {
+      // if (token?.accessToken) session.accessToken = token.accessToken;
+
       if (session?.user) {
         const fetchedUser = await fetch(`${baseUrl}/user/${session.user.email}`)
           .then((data) => data.json())
@@ -56,11 +59,21 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return !!auth?.user;
     },
     // signIn: ({ user }) => {},
+    // jwt({ token, trigger, session }) {
+    //   if (trigger === "update") token.name = session.user.name;
+
+    //   return token;
+    // },
+    // async session({ session, token }) {
+
+    //   return session;
+    // },
   },
   session: {
     strategy: "jwt",
     maxAge: 24 * 60 * 60, // 24h
   },
+
   jwt: {
     maxAge: 24 * 60 * 60, // 24h
   },
@@ -68,4 +81,5 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     signIn: "/login",
   },
   secret: process.env.NEXT_PUBLIC_AUTH_SECRET,
+  // experimental: { enableWebAuthn: true },
 });

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import dbConnect from "@/lib/mongoose";
 import Reservation from "@/models/reservationModel";
+import { auth } from "@/auth";
 
 export async function GET(
   req: NextRequest,
@@ -8,42 +9,58 @@ export async function GET(
 ) {
   const { id } = await params;
 
-  await dbConnect();
-  const reservation = await Reservation.findById(id);
+  const session = await auth();
 
-  return NextResponse.json({
-    status: "success",
-    data: reservation,
-  });
+  if (session?.user) {
+    await dbConnect();
+    const reservation = await Reservation.findById(id);
+
+    return NextResponse.json({
+      status: "success",
+      data: reservation,
+    });
+  }
+
+  return NextResponse.json({ message: "Not authenticated" }, { status: 401 });
 }
 
 export async function PATCH(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const { id } = await params;
-  const body = await req.json();
+  const session = await auth();
 
-  await dbConnect();
-  const reservation = await Reservation.findByIdAndUpdate(id, body);
+  if (session?.user) {
+    const { id } = await params;
+    const body = await req.json();
 
-  return NextResponse.json({
-    status: "success",
-    data: reservation,
-  });
+    await dbConnect();
+    const reservation = await Reservation.findByIdAndUpdate(id, body);
+
+    return NextResponse.json({
+      status: "success",
+      data: reservation,
+    });
+  }
+  return NextResponse.json({ message: "Not authenticated" }, { status: 401 });
 }
 
 export async function DELETE(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const { id } = await params;
+  const session = await auth();
 
-  await dbConnect();
-  await Reservation.findByIdAndDelete(id);
+  if (session?.user) {
+    const { id } = await params;
 
-  return NextResponse.json({
-    status: "success",
-    data: null,
-  });
+    await dbConnect();
+    await Reservation.findByIdAndDelete(id);
+
+    return NextResponse.json({
+      status: "success",
+      data: null,
+    });
+  }
+  return NextResponse.json({ message: "Not authenticated" }, { status: 401 });
 }

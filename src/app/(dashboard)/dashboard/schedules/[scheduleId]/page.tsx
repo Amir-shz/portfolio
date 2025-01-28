@@ -4,6 +4,7 @@ import { deleteSchedule } from "@/lib/actions";
 import { getJalaliDetails } from "@/utils/utils";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 import { Metadata } from "next";
+import { headers } from "next/headers";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -13,8 +14,11 @@ export const metadata: Metadata = {
 
 async function page({ params }: { params: Promise<{ scheduleId: string }> }) {
   const scheduleId = (await params).scheduleId;
+  const header = await headers();
 
-  const schedule = await fetch(`${baseUrl}/schedule/${scheduleId}`)
+  const schedule = await fetch(`${baseUrl}/schedule/${scheduleId}`, {
+    headers: header,
+  })
     .then((res) => res.json())
     .then((data) => data.data);
 

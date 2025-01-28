@@ -3,6 +3,7 @@ import ReservationRowBtns from "@/components/dashboard/ReservationRowBtns";
 import { getJalaliDetails } from "@/utils/utils";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 import { Metadata } from "next";
+import { headers } from "next/headers";
 
 export const metadata: Metadata = {
   title: "رزرو",
@@ -17,6 +18,8 @@ async function page({
 }) {
   const reservationId = (await params).reservationId;
 
+  const header = await headers();
+
   const {
     _id,
     selectedDate,
@@ -27,7 +30,9 @@ async function page({
     description,
     status,
     createdAt,
-  } = await fetch(`${baseUrl}/reservation/${reservationId}`)
+  } = await fetch(`${baseUrl}/reservation/${reservationId}`, {
+    headers: header,
+  })
     .then((data) => data.json())
     .then((data) => data.data);
 

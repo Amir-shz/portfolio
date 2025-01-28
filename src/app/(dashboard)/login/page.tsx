@@ -1,12 +1,18 @@
+import { auth } from "@/auth";
 import SigninForm from "@/components/dashboard/SigninForm";
 import Logo from "@/components/ui/Logo";
 import { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "ورود به حساب کاربری",
 };
 
-function Page() {
+async function Page() {
+  const session = await auth();
+
+  if (session?.user) redirect("/dashboard");
+
   return (
     <div className=" bg-purple-100 h-dvh w-screen">
       <div className="flex items-center justify-center h-full w-2/5 mx-auto">

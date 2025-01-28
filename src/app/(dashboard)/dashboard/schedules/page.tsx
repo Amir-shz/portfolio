@@ -2,6 +2,7 @@ import ScheduleForm from "@/components/dashboard/ScheduleForm";
 import ScheduleHeader from "@/components/dashboard/ScheduleHeader";
 import ScheduleRow from "@/components/dashboard/ScheduleRow";
 import { Metadata } from "next";
+import { headers } from "next/headers";
 
 export const metadata: Metadata = {
   title: "زمان بندی",
@@ -10,7 +11,8 @@ export const metadata: Metadata = {
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 async function page() {
-  const schedules = await fetch(`${baseUrl}/schedule`)
+  const header = await headers();
+  const schedules = await fetch(`${baseUrl}/schedule`, { headers: header })
     .then((data) => data.json())
     .then((data) => data.data);
 

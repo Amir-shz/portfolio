@@ -1,22 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
 import dbConnect from "@/lib/mongoose";
 import Schedule from "@/models/scheduleModel";
+import { auth } from "@/auth";
 
 export async function GET(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const { id } = await params;
-  // console.log(id);
-  await dbConnect();
+  const session = await auth();
 
-  const schedule = await Schedule.findById(id);
-  // console.log(schedule);
+  if (session?.user) {
+    const { id } = await params;
+    await dbConnect();
 
-  return NextResponse.json({
-    status: "success",
-    data: schedule,
-  });
+    const schedule = await Schedule.findById(id);
+
+    return NextResponse.json({
+      status: "success",
+      data: schedule,
+    });
+  }
+  return NextResponse.json({ message: "Not authenticated" }, { status: 401 });
 }
 // export async function PATCH(
 //   req: NextRequest,

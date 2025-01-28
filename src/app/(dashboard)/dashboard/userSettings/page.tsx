@@ -6,6 +6,7 @@ import UserDelBtn from "@/components/dashboard/UserDelBtn";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 import { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
+import { headers } from "next/headers";
 
 export const metadata: Metadata = {
   title: "تنظیمات کاربر",
@@ -15,12 +16,15 @@ const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 async function Page() {
   const session = await auth();
+  const header = await headers();
 
-  const users = await fetch(`${baseUrl}/user`)
+  const users = await fetch(`${baseUrl}/user`, { headers: header })
     .then((data) => data.json())
     .then((data) => data.data);
 
-  const currentUser = await fetch(`${baseUrl}/user/${session?.user?.email}`)
+  const currentUser = await fetch(`${baseUrl}/user/${session?.user?.email}`, {
+    headers: header,
+  })
     .then((data) => data.json())
     .then((data) => data.data);
 
