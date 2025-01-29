@@ -4,7 +4,6 @@ import Link from "next/link";
 import {
   HiOutlineCalendar,
   HiOutlineClock,
-  // HiOutlineDocumentText,
   HiOutlineHome,
 } from "react-icons/hi2";
 
@@ -29,13 +28,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <HiOutlineCalendar size={24} className=" stroke-2" />
           <p>رزرو ها</p>
         </Link>
-        {/* <Link
-          href="/dashboard/plans"
-          className=" w-full bg-purple-400 hover:bg-purple-500 duration-300 rounded-lg py-4 flex items-center gap-2 pr-8 text-neutral-50 text-lg font-semibold leading-5"
-        >
-          <HiOutlineDocumentText size={24} className=" stroke-2" />
-          <p>پلن ها</p>
-        </Link> */}
         <Link
           href="/dashboard/schedules"
           className=" w-full bg-purple-400 hover:bg-purple-500 duration-300 rounded-lg py-4 flex items-center gap-2 pr-8 text-neutral-50 text-lg font-semibold leading-5"
