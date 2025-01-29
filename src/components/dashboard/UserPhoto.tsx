@@ -5,8 +5,9 @@ import Image from "next/image";
 import { ChangeEvent, useTransition } from "react";
 import { HiOutlineCamera } from "react-icons/hi2";
 
-const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dvhzvmb8e/image/upload";
-const UPLOAD_PRESET = "fafa_portfolio";
+const CLOUDINARY_URL = process.env.NEXT_PUBLIC_CLOUDINARY_URL as string;
+
+const UPLOAD_PRESET = process.env.NEXT_PUBLIC_UPLOAD_PRESET as string;
 
 function UserPhoto({ img, name }: { img: string; name: string }) {
   const [isPending, startTransition] = useTransition();
@@ -31,13 +32,9 @@ function UserPhoto({ img, name }: { img: string; name: string }) {
         }
 
         const data = await response.json();
-        console.log("Uploaded file URL:", data.secure_url);
-        console.log(data.secure_url);
         changePhoto(data.secure_url);
-        console.log("🧡😍");
       } catch (error) {
-        console.log("❌");
-        console.error("Error uploading file:", error);
+        console.error("❌", "Error uploading file:", error);
       }
     });
   }

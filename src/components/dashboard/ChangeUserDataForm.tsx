@@ -11,7 +11,6 @@ function ChangeUserDataForm({
     name: string;
   };
 }) {
-  // const { data: session } = useSession();
   const [state, action, pending] = useActionState(changeUserData, undefined);
 
   return (

@@ -52,8 +52,6 @@ async function page({
     year: createdYear,
   } = getJalaliDetails(new Date(createdAt));
 
-  // console.log(plan);
-
   return (
     <div className=" rounded-md bg-purple-50 shadow-shadow4 p-4 max-h-[calc(100vh-5.5rem)] overflow-y-scroll ">
       <div className="grid grid-cols-4 gap-4 [&>P]:text-center">

@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import photo from "../../../public/fateme.jpg";
-// import { motion } from "motion/react";
 
 function AboutInHome(): React.ReactNode {
   return (

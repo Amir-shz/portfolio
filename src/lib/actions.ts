@@ -44,8 +44,6 @@ export async function createReservation(data: {
       $set: { "hours.$.isAvailable": false },
     }
   );
-
-  // return true;
 }
 
 export async function finishReservationStatus(id: string) {
@@ -64,19 +62,16 @@ export async function finishReservationStatus(id: string) {
   });
 
   revalidatePath("/dashboard/reservations");
-  // redirect("/dashboard/reservations");
 }
 
 export async function deleteReservation(id: string) {
   const header = await headers();
   await fetch(`${baseUrl}/reservation/${id}`, {
     method: "DELETE",
-    // headers: { "Content-Type": "application/json" },
     headers: header,
   });
 
   revalidatePath("/dashboard/reservations");
-  // redirect("/dashboard/reservations");
 }
 
 export async function changePlanData(formData: FormData) {
@@ -128,10 +123,7 @@ export async function createSchedule(data: {
 
 export async function deleteHour(id: string, hour: string) {
   console.log(id, hour);
-  await Schedule.updateOne(
-    { _id: id }, // بر اساس آیدی جستجو می‌کنیم
-    { $pull: { hours: { hour: hour } } } // حذف ساعت خاص از آرایه
-  );
+  await Schedule.updateOne({ _id: id }, { $pull: { hours: { hour: hour } } });
 
   const schedule = await Schedule.findById(id);
 
@@ -319,9 +311,6 @@ export async function changePass(state: FormState, formData: FormData) {
         message: "موقع تغییر رمز با مشکل مواجه شدیم",
       };
     }
-
-    // await signOut({ redirect: false });
-    // await signIn("credentials", { email, password, redirect: false });
 
     return { status: "success", message: "رمزعبور با موفقیت تغییر کرد." };
   } catch (err) {

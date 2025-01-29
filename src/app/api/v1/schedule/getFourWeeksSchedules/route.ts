@@ -14,14 +14,14 @@ export async function GET() {
   }).sort({ date: 1 });
 
   const formattedSchedules = schedules.map((obj) => {
-    const date = new Date(obj.date); // تبدیل به شیء Date
-    const formattedDate = date.toLocaleDateString("en-CA"); // فرمت کانادا
+    const date = new Date(obj.date);
+    const formattedDate = date.toLocaleDateString("en-CA");
     return {
       date: formattedDate,
       available: obj.available,
       _id: obj._id,
       hours: obj.hours,
-    }; // برگرداندن آبجکت با تاریخ جدید
+    };
   });
 
   return NextResponse.json({

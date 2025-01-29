@@ -15,15 +15,13 @@ const scheduleSchema = new mongoose.Schema({
 });
 
 scheduleSchema.virtual("available").get(function () {
-  // شمارش تعداد آبجکت‌هایی که isAvailable برابر true هستند
   return this.hours.filter((hour) => hour.isAvailable).length;
 });
 
-// فعال کردن virtuals در خروجی JSON و Object
 scheduleSchema.set("toJSON", {
   virtuals: true,
   transform: (doc, ret) => {
-    delete ret.id; // حذف فیلد id از خروجی
+    delete ret.id;
     return ret;
   },
 });

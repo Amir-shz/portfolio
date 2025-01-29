@@ -21,7 +21,6 @@ function Reservation() {
     resetErrors,
     resetAll,
     handleStep,
-    // hide,
   } = useReservationStore();
 
   async function handleSubmit() {
@@ -42,7 +41,6 @@ function Reservation() {
       selectedTime,
     });
 
-    // hide();
     resetAll();
     handleStep(3);
   }

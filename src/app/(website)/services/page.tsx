@@ -1,7 +1,6 @@
 import ServicesForCompaniesAndPersons from "@/components/layouts/ServicesForCompaniesAndPersons";
 import { servicesForCompanyData, servicesForPersonData } from "@/utils/utils";
 import { Metadata } from "next";
-// import PlansBox from "@/components/ui/PlansBox";
 import ReactQueryProvider from "@/components/ui/ReactQueryProvider";
 
 export const metadata: Metadata = {

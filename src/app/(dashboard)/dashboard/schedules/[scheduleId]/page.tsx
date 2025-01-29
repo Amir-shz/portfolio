@@ -22,8 +22,6 @@ async function page({ params }: { params: Promise<{ scheduleId: string }> }) {
     .then((res) => res.json())
     .then((data) => data.data);
 
-  // console.log(schedule);
-
   const { _id, date, hours } = schedule;
   const { day, monthName, year } = getJalaliDetails(new Date(date));
   const formattedDate = `${day} ${monthName} ${year}`;
