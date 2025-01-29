@@ -11,7 +11,9 @@ async function Page() {
   return (
     <div className=" grid grid-cols-4 gap-6 mb-4">
       {/* <PlansBox /> */}
-      <ReactQueryProvider />
+      <div className=" col-span-4 grid grid-cols-4 gap-3">
+        <ReactQueryProvider />
+      </div>
       <div className=" col-span-2">
         <ServicesForCompaniesAndPersons
           title={servicesForCompanyData.title}

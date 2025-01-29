@@ -1,7 +1,7 @@
 "use client";
 
 import ClockIcon from "../icons/ClockIcon";
-import DollarIcon from "../icons/DollarIcon";
+// import DollarIcon from "../icons/DollarIcon";
 import ArrowLeftIcon from "../icons/ArrowLeftIcon";
 import { planCardProps } from "@/types/types";
 import { useReservationStore } from "@/hooks/useReservationStore";
@@ -9,48 +9,60 @@ import { useReservationStore } from "@/hooks/useReservationStore";
 function PlanCard({
   title,
   time,
-  price = "free",
+  price,
+  description,
+  points,
   id,
 }: planCardProps): React.ReactNode {
   const { show, setPlan } = useReservationStore();
   return (
-    <div className=" rounded-3xl border border-neutral-300 shadow-shadow3 bg-neutral-100 hover:border-purple-200 transition-all duration-300">
-      <p className=" text-neutral-700 font-semibold leading-5 text-lg pr-6 py-6">
-        {title}
-      </p>
-      <div className=" flex gap-1 mb-3 items-center pr-6 h-7">
-        <ClockIcon />
-        <p className=" text-neutral-500 text-base font-semibold leading-4">
-          {time}
+    <div className=" rounded-3xl border border-neutral-300 shadow-shadow3 bg-neutral-100 hover:border-purple-200 transition-all duration-300 flex flex-col justify-between min-h-96 last:bg-purple-300 group">
+      <div>
+        <p className=" group-last:text-neutral-50 text-neutral-700 font-bold leading-[1.875rem] text-[1.375rem] pt-6 text-center">
+          {title}
+        </p>
+        <p className=" group-last:text-purple-100 pt-3 text-neutral-400 font-semibold leading-4 text-sm text-center">
+          {description}
         </p>
       </div>
-      <div className=" flex gap-1 mb-5 items-center pr-6 h-7">
-        <DollarIcon />
-        <p className=" text-neutral-500 text-base font-semibold leading-4">
+      <ul className=" px-[1.3rem] ">
+        {points.map((point, index) => (
+          <li
+            key={index}
+            className="group-last:text-neutral-200 text-neutral-500 text-sm font-medium leading-[1.875rem] list-inside list-disc"
+          >
+            {point}
+          </li>
+        ))}
+      </ul>
+      <div className="flex justify-center items-center flex-col gap-4">
+        <div className="flex gap-1 items-center [&>svg>path]:group-last:stroke-neutral-200">
+          <ClockIcon />
+          <p className=" group-last:text-neutral-200 text-neutral-500 text-base font-semibold leading-4">
+            {time}
+          </p>
+        </div>
+
+        <p className="group-last:text-neutral-50 text-neutral-700 text-[1.375rem] font-bold leading-[1.875rem] text-center">
           {price === "free" ? "رایگان" : price}
-          {price !== "free" && (
-            <span className=" text-neutral-400 text-xs font-semibold">
-              {" "}
-              تومان
-            </span>
-          )}
         </p>
-      </div>
-      <div className=" w-full px-6">
-        <button
-          className=" w-full rounded-xl shadow-shadow4 bg-purple-400 mb-[1.63rem] hover:bg-purple-500 hover:shadow-shadow4 transition-all duration-300"
-          onClick={() => {
-            setPlan(id);
-            show();
-          }}
-        >
-          <div className="flex gap-2 items-center justify-center py-3 px-6">
-            <p className=" text-neutral-50 font-bold text-base leading-[1.125rem]">
-              رزرو کردن
-            </p>
-            <ArrowLeftIcon />
-          </div>
-        </button>
+
+        <div className=" w-full px-6">
+          <button
+            className=" w-full rounded-xl shadow-shadow4 bg-purple-400  group-last:bg-neutral-50 mb-6 hover:bg-purple-500 hover:shadow-shadow4 transition-all duration-300"
+            onClick={() => {
+              setPlan(id);
+              show();
+            }}
+          >
+            <div className="flex gap-2 items-center justify-center py-3 px-6">
+              <p className=" group-last:text-purple-400 [&~svg>path]:group-last:stroke-purple-400 text-neutral-50 font-bold text-base leading-[1.125rem]">
+                رزرو کردن
+              </p>
+              <ArrowLeftIcon />
+            </div>
+          </button>
+        </div>
       </div>
     </div>
   );

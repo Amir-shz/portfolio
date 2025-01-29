@@ -1,5 +1,5 @@
-// import { data } from "motion/react-client";
 import ReservationRowBtns from "@/components/dashboard/ReservationRowBtns";
+import { planData } from "@/data/data";
 import { getJalaliDetails } from "@/utils/utils";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 import { Metadata } from "next";
@@ -37,13 +37,11 @@ async function page({
     .then((data) => data.data);
 
   const {
-    plan: planName,
+    description: planDescription,
     title: planTitle,
     time: planTime,
     price: planPrice,
-  } = await fetch(`${baseUrl}/plan/${planId}`)
-    .then((data) => data.json())
-    .then((data) => data.data);
+  } = planData.filter((el) => el.id === Number(planId))[0];
 
   const { day, monthName, year } = getJalaliDetails(new Date(selectedDate));
   const {
@@ -86,7 +84,7 @@ async function page({
           قیمت و طول جلسه
         </p>
         <p className="bg-purple-400 text-neutral-50 rounded-md leading-10 text-lg font-medium">
-          نام و شماره طرح
+          نام و توضیح طرح
         </p>
         {/*  */}
         <p>
@@ -105,7 +103,7 @@ async function page({
         </div>
         <div className="flex flex-col gap-1 justify-center items-center">
           <p>نام: {planTitle}</p>
-          <p>شماره: {planName}</p>
+          <p>توضیح: {planDescription}</p>
         </div>
       </div>
       <div className=" flex flex-col items-center gap-2 justify-center ">

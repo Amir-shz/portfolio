@@ -19,7 +19,7 @@ import { headers } from "next/headers";
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export async function createReservation(data: {
-  plan: string;
+  plan: number;
   fullName: string;
   phone: string;
   description: string;

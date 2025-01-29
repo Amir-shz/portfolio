@@ -2,11 +2,14 @@ import { ChangeEvent } from "react";
 import { create } from "zustand";
 
 type Store = {
-  step: 1 | 2 | 3;
   showModal: boolean;
-  plan: string;
+  show: () => void;
+  setPlan: (val: number) => void;
+
+  step: 1 | 2 | 3;
+  plan: number;
   planData: {
-    _id: string;
+    id: number;
     title: string;
     time: string;
     price: string;
@@ -18,9 +21,7 @@ type Store = {
   phone: string;
   description: string;
   errors: string[];
-  show: () => void;
   hide: () => void;
-  setPlan: (val: string) => void;
   handleSelectedDateChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleSelectedTimeChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleFullNameChange: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -33,7 +34,7 @@ type Store = {
   resetErrors: () => void;
   setPlanData: (
     val: {
-      _id: string;
+      id: number;
       title: string;
       time: string;
       price: string;
@@ -45,7 +46,7 @@ type Store = {
 export const useReservationStore = create<Store>()((set) => ({
   step: 1,
   showModal: false,
-  plan: "",
+  plan: 1,
   planData: [],
   selectedDate: "",
   selectedTime: "",
@@ -55,7 +56,7 @@ export const useReservationStore = create<Store>()((set) => ({
   errors: [],
   show: () => set(() => ({ showModal: true })),
   hide: () => set(() => ({ showModal: false })),
-  setPlan: (val: string) => set(() => ({ plan: val })),
+  setPlan: (val: number) => set(() => ({ plan: val })),
   handleSelectedDateChange: (e) => {
     set({ selectedTime: "", selectedDate: e.target.value });
   },
@@ -80,7 +81,7 @@ export const useReservationStore = create<Store>()((set) => ({
   resetAll: () =>
     set(() => ({
       step: 1,
-      plan: "",
+      plan: 1,
       selectedDate: "",
       selectedTime: "",
       fullName: "",

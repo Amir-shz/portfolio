@@ -18,8 +18,6 @@ function ReservationStepOne() {
   );
 
   useEffect(() => {
-    console.log(selectedDate);
-
     setReservationsData(() => schedules);
     setFilteredData(
       () => reservationsData?.filter((el) => el.date === selectedDate)[0]

@@ -52,7 +52,7 @@ function DateRadio({
         <p
           className={`${
             available === 0 ? "text-neutral-300" : "text-success-700"
-          }  text-[0.625rem] font-medium leading-[0.625rem]`}
+          }  text-[0.625rem] font-medium leading-[0.625rem] text-nowrap`}
         >
           {available} زمان موجود
         </p>

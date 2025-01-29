@@ -3,8 +3,7 @@ import { digitsEnToFa } from "@persian-tools/persian-tools";
 import ReservationRowBtns from "./ReservationRowBtns";
 import { reservationType } from "@/types/types";
 import Link from "next/link";
-
-const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+import { planData } from "@/data/data";
 
 async function ReservationRow({
   reservation,
@@ -22,13 +21,13 @@ async function ReservationRow({
     description,
   } = reservation;
 
+  console.log(typeof plan);
+
   const {
-    plan: planName,
+    title: planName,
     time: planTime,
     price: planPrice,
-  } = await fetch(`${baseUrl}/plan/${plan}`)
-    .then((data) => data.json())
-    .then((data) => data.data);
+  } = planData.filter((el) => el.id === Number(plan))[0];
 
   const { day, monthName, year } = getJalaliDetails(new Date(selectedDate));
 

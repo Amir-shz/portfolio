@@ -4,8 +4,7 @@ const reservationSchema = new mongoose.Schema({
   selectedDate: { type: String, required: true },
   selectedTime: { type: String, required: true },
   plan: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Plan",
+    type: Number,
     required: true,
   },
   fullName: { type: String, required: true },
