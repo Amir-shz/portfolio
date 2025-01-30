@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { Dispatch, ReactNode, SetStateAction } from "react";
 
 export interface navBtnProps {
   href: string;
@@ -25,6 +25,14 @@ export interface planCardProps {
   description: string;
   points: string[];
   // plan: string;
+}
+
+export interface faqItemProps {
+  title: string;
+  description: string;
+  openNum: number;
+  index: number;
+  setOpenNum: Dispatch<SetStateAction<number>>;
 }
 
 export interface servicesForCompaniesAndPersonsProp {

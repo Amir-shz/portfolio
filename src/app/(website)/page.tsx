@@ -2,6 +2,7 @@ import SocialSection from "@/components/layouts/SocialSection";
 import AboutInHome from "@/components/layouts/AboutInHome";
 import WorkHistory from "@/components/layouts/WorkHistory";
 import HomeServiceSection from "@/components/layouts/HomeServiceSection";
+import Faq from "@/components/ui/Faq";
 
 export default function Page(): React.ReactNode {
   return (
@@ -16,6 +17,7 @@ export default function Page(): React.ReactNode {
         </div>
       </div>
       <HomeServiceSection />
+      <Faq />
     </div>
   );
 }
