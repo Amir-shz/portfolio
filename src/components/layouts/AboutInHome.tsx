@@ -15,7 +15,7 @@ function AboutInHome(): React.ReactNode {
     // >
     <div
       className=" size-full rounded-3xl shadow-shadow3 bg-neutral-100 border border-neutral-300
-      grid grid-cols-2 py-10 pr-10 pl-8 gap-6"
+      grid grid-cols-2 py-10 pr-10 pl-8 gap-6 max-sm:py-5 max-sm:grid-cols-1 max-sm:px-12 max-sm:pt-8"
     >
       <div className="w-full rounded-3xl overflow-hidden">
         <Image
@@ -25,11 +25,11 @@ function AboutInHome(): React.ReactNode {
           quality={100}
         />
       </div>
-      <div className="">
-        <h2 className=" pb-6 text-neutral-700 text-h4_B_desktop">
+      <div>
+        <h2 className=" pb-6 text-neutral-700 text-h4_B_desktop  max-sm:text-h4_B_mobile">
           فاطمه سادات شفیعی
         </h2>
-        <p className=" text-neutral-500 text-h6_SB_desktop ">
+        <p className=" text-neutral-500 text-h6_SB_desktop max-sm:text-lg max-sm:leading-[1.3125rem] ">
           من فاطمه سادات شفیعی هستم،رتبه ۵۲ کنکور کارشناسی و رتبه ۴ کنکور
           ارشد؛فارغ‌التحصیل رشته روانشناسی در دانشگاه شهیدبهشتی تهران و دانشجوی
           رشته روانشناسی صنعتی و سازمانی در دانشگاه اصفهان.

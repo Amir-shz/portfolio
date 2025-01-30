@@ -2,7 +2,7 @@ import NavBtn from "./NavBtn";
 
 function NavList(): React.ReactNode {
   return (
-    <nav className=" flex items-center gap-10">
+    <nav className=" flex items-center gap-10 max-sm:hidden">
       <NavBtn href="/">صفحه اصلی</NavBtn>
       <NavBtn href="/about-me">درباره من</NavBtn>
       <NavBtn href="/services">خدمات</NavBtn>

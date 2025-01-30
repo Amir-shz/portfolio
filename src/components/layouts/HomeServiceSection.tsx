@@ -5,7 +5,7 @@ import HomeServiceCard from "../ui/HomeServiceCard";
 
 function HomeServiceSection() {
   return (
-    <div className="grid grid-cols-3 gap-6 w-full">
+    <div className="grid grid-cols-3 gap-6 w-full max-sm:grid-cols-2 max-sm:gap-4">
       <HomeServiceCard
         icon={<FinanceIcon />}
         title="مشاوره سازمانی"
