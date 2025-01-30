@@ -17,7 +17,7 @@ function SocialSectionContactUs(): React.ReactNode {
     //   className="rounded-3xl shadow-shadow3 bg-neutral-100"
     // >
     <div className="rounded-3xl shadow-shadow3 bg-neutral-100 border border-neutral-300">
-      <h3 className=" text-neutral-700 text-h6_SB_desktop pr-6 pt-6 pb-11">
+      <h3 className=" text-neutral-700 text-h6_SB_desktop pr-6 pt-6 pb-11 select-none">
         حساب های مجازی
       </h3>
       <div className=" flex gap-14 justify-center pb-12">

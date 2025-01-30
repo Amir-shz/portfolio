@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 function Page() {
   return (
-    <div className=" grid grid-cols-10 gap-6">
+    <div className=" grid grid-cols-10 gap-6 select-none">
       <div className=" col-span-4 rounded-3xl border border-neutral-300 shadow-shadow3 bg-neutral-100 h-72 ">
         <Image
           src={photo}

@@ -17,7 +17,7 @@ function ContactWays(): React.ReactNode {
     //   className="rounded-3xl shadow-shadow3 bg-neutral-100 pr-6 pt-6 pb-12"
     // >
     <div className="rounded-3xl shadow-shadow3 bg-neutral-100 border border-neutral-300 pr-6 pt-6 pb-12">
-      <h3 className=" text-neutral-700 text-h6_SB_desktop pb-11">
+      <h3 className=" text-neutral-700 text-h6_SB_desktop pb-11 select-none">
         راه های تماس
       </h3>
       <div className=" flex flex-col gap-8">

@@ -16,7 +16,7 @@ function FaqItem({
 
   return (
     <div
-      className=" w-full rounded-3xl border border-neutral-300 shadow-shadow3 bg-neutral-100 cursor-pointer max-sm:rounded-[1.25rem]"
+      className=" w-full rounded-3xl border border-neutral-300 shadow-shadow3 bg-neutral-100 cursor-pointer max-sm:rounded-[1.25rem] select-none"
       onClick={handleClick}
     >
       <div

@@ -15,13 +15,13 @@ function AboutInHome(): React.ReactNode {
     // >
     <div
       className=" size-full rounded-3xl shadow-shadow3 bg-neutral-100 border border-neutral-300
-      grid grid-cols-2 py-10 pr-10 pl-8 gap-6 max-sm:py-5 max-sm:grid-cols-1 max-sm:px-12 max-sm:pt-8"
+      grid grid-cols-2 py-10 pr-10 pl-8 gap-6 max-sm:py-5 max-sm:grid-cols-1 max-sm:px-12 max-sm:pt-8 select-none"
     >
-      <div className="w-full rounded-3xl overflow-hidden">
+      <div className="w-full rounded-3xl overflow-hidden max-h-[19.5rem] self-center">
         <Image
           src={photo}
           alt=""
-          className=" rounded-3xl size-full object-cover"
+          className=" rounded-3xl size-full object-fill"
           quality={100}
         />
       </div>

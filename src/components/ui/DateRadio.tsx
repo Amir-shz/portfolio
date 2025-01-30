@@ -1,4 +1,5 @@
 import { useReservationStore } from "@/hooks/useReservationStore";
+import { digitsEnToFa } from "@persian-tools/persian-tools";
 
 function DateRadio({
   date,
@@ -54,7 +55,7 @@ function DateRadio({
             available === 0 ? "text-neutral-300" : "text-success-700"
           }  text-[0.625rem] font-medium leading-[0.625rem] text-nowrap`}
         >
-          {available} زمان موجود
+          {digitsEnToFa(available)} زمان موجود
         </p>
       </div>
     </label>

@@ -10,7 +10,7 @@ function WorkHistory(): React.ReactNode {
     //   transition={{ duration: 0.5 }}
     //   className="rounded-3xl bg-neutral-100 shadow-shadow3 border border-neutral-300 flex flex-col gap-3 p-4 pb-6"
     // >
-    <div className="rounded-3xl bg-neutral-100 shadow-shadow3 border border-neutral-300 flex flex-col gap-3 p-4 pb-6 max-sm:pb-4">
+    <div className="rounded-3xl bg-neutral-100 shadow-shadow3 border border-neutral-300 flex flex-col gap-3 p-4 pb-6 max-sm:pb-4 select-none">
       <div className=" flex items-center gap-3">
         <div className=" rounded-xl bg-neutral-100 text-neutral-500 size-14 flex justify-center items-center shadow-shadow3 max-sm:size-12">
           <p className=" text-h5_B_desktop text-purple-500 max-sm:leading-[1.625rem] ">
