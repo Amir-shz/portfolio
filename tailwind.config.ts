@@ -2,7 +2,7 @@ import type { Config } from "tailwindcss";
 import colors from "tailwindcss/colors";
 
 export default {
-  darkMode: "selector",
+  darkMode: ["selector", "class"],
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -18,109 +18,393 @@ export default {
         shadow4: "0px 0px 8px 2px rgba(17,17,17,0.12)",
       },
       colors: {
-        background: "#FAFAFA",
+        background: "hsl(var(--background))",
         purple: {
-          50: "#EFE6FD",
-          100: "#CEB0FA",
-          200: "#B78AF7",
-          300: "#9654F4",
-          400: "#8133F1",
-          500: "#6200EE",
-          600: "#5900D9",
-          700: "#4600A9",
-          800: "#360083",
-          900: "#290064",
+          "50": "#EFE6FD",
+          "100": "#CEB0FA",
+          "200": "#B78AF7",
+          "300": "#9654F4",
+          "400": "#8133F1",
+          "500": "#6200EE",
+          "600": "#5900D9",
+          "700": "#4600A9",
+          "800": "#360083",
+          "900": "#290064",
         },
         error: {
-          100: "#ffe9e9",
-          500: "#ff2525",
-          700: "#e82222",
-          800: "#851a1a",
+          "100": "#ffe9e9",
+          "500": "#ff2525",
+          "700": "#e82222",
+          "800": "#851a1a",
         },
-        success: colors.green,
-        warning: colors.yellow,
+        success: "colors.green",
+        warning: "colors.yellow",
+        foreground: "hsl(var(--foreground))",
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        chart: {
+          "1": "hsl(var(--chart-1))",
+          "2": "hsl(var(--chart-2))",
+          "3": "hsl(var(--chart-3))",
+          "4": "hsl(var(--chart-4))",
+          "5": "hsl(var(--chart-5))",
+        },
       },
       fontSize: {
-        // DESKTOP
-
-        // HEADERS
-        // Semi-Bold headers (i converted px to rem)
-        h1_SB_desktop: ["2.281rem", { fontWeight: "600" }],
-        h2_SB_desktop: ["2.027rem", { fontWeight: "600" }],
-        h3_SB_desktop: ["1.802rem", { fontWeight: "600" }],
-        h4_SB_desktop: ["1.602rem", { fontWeight: "600" }],
-        h5_SB_desktop: ["1.424rem", { fontWeight: "600" }],
-        h6_SB_desktop: ["1.266rem", { fontWeight: "600" }],
-        // Bold headers (i converted px to rem)
-        h1_B_desktop: ["2.281rem", { fontWeight: "700" }],
-        h2_B_desktop: ["2.027rem", { fontWeight: "700" }],
-        h3_B_desktop: ["1.802rem", { fontWeight: "700" }],
-        h4_B_desktop: ["1.602rem", { fontWeight: "700" }],
-        h5_B_desktop: ["1.424rem", { fontWeight: "700" }],
-        h6_B_desktop: ["1.266rem", { fontWeight: "700" }],
-
-        // TEXT (PARAGRAPH)
-        // Regular paragraph (i converted px to rem)
-        p1_R_desktop: ["1.125rem", { fontWeight: "400" }],
-        p2_R_desktop: ["1.000rem", { fontWeight: "400" }],
-        p3_R_desktop: ["0.889rem", { fontWeight: "400" }],
-        p4_R_desktop: ["0.790rem", { fontWeight: "400" }],
-        // Medium paragraph (i converted px to rem)
-        p1_M_desktop: ["1.125rem", { fontWeight: "500" }],
-        p2_M_desktop: ["1.000rem", { fontWeight: "500" }],
-        p3_M_desktop: ["0.889rem", { fontWeight: "500" }],
-        p4_M_desktop: ["0.790rem", { fontWeight: "500" }],
-        // Semi-Bold paragraph (i converted px to rem)
-        p1_SB_desktop: ["1.125rem", { fontWeight: "600" }],
-        p2_SB_desktop: ["1.000rem", { fontWeight: "600" }],
-        p3_SB_desktop: ["0.889rem", { fontWeight: "600" }],
-        p4_SB_desktop: ["0.790rem", { fontWeight: "600" }],
-
-        // LABEL
-        lb1_desktop: ["0.889rem", { fontWeight: "600" }],
-        lb2_desktop: ["0.79rem", { fontWeight: "600" }],
-        lb3_desktop: ["0.625rem", { fontWeight: "500" }],
-
-        // MOBILE
-
-        // HEADERS
-        // Semi-Bold headers (i converted px to rem)
-        h1_SB_mobile: ["2.281rem", { fontWeight: "600" }],
-        h2_SB_mobile: ["2.027rem", { fontWeight: "600" }],
-        h3_SB_mobile: ["1.802rem", { fontWeight: "600" }],
-        h4_SB_mobile: ["1.602rem", { fontWeight: "600" }],
-        h5_SB_mobile: ["1.424rem", { fontWeight: "600" }],
-        h6_SB_mobile: ["1.266rem", { fontWeight: "600" }],
-        // Bold headers (i converted px to rem)
-        h1_B_mobile: ["2.281rem", { fontWeight: "700" }],
-        h2_B_mobile: ["2.027rem", { fontWeight: "700" }],
-        h3_B_mobile: ["1.802rem", { fontWeight: "700" }],
-        h4_B_mobile: ["1.602rem", { fontWeight: "700" }],
-        h5_B_mobile: ["1.424rem", { fontWeight: "700" }],
-        h6_B_mobile: ["1.266rem", { fontWeight: "700" }],
-
-        // TEXT (PARAGRAPH)
-        // Regular paragraph (i converted px to rem)
-        p1_R_mobile: ["1.125rem", { fontWeight: "400" }],
-        p2_R_mobile: ["1.000rem", { fontWeight: "400" }],
-        p3_R_mobile: ["0.889rem", { fontWeight: "400" }],
-        p4_R_mobile: ["0.790rem", { fontWeight: "400" }],
-        // Medium paragraph (i converted px to rem)
-        p1_M_mobile: ["1.125rem", { fontWeight: "500" }],
-        p2_M_mobile: ["1.000rem", { fontWeight: "500" }],
-        p3_M_mobile: ["0.889rem", { fontWeight: "500" }],
-        p4_M_mobile: ["0.790rem", { fontWeight: "500" }],
-        // Semi-Bold paragraph (i converted px to rem)
-        p1_SB_mobile: ["1.125rem", { fontWeight: "600" }],
-        p2_SB_mobile: ["1.000rem", { fontWeight: "600" }],
-        p3_SB_mobile: ["0.889rem", { fontWeight: "600" }],
-        p4_SB_mobile: ["0.790rem", { fontWeight: "600" }],
-
-        // LABEL
-        lb1_mobile: ["0.878rem", { fontWeight: "600" }],
-        lb2_mobile: ["0.772rem", { fontWeight: "600" }],
+        h1_SB_desktop: [
+          "2.281rem",
+          {
+            fontWeight: "600",
+          },
+        ],
+        h2_SB_desktop: [
+          "2.027rem",
+          {
+            fontWeight: "600",
+          },
+        ],
+        h3_SB_desktop: [
+          "1.802rem",
+          {
+            fontWeight: "600",
+          },
+        ],
+        h4_SB_desktop: [
+          "1.602rem",
+          {
+            fontWeight: "600",
+          },
+        ],
+        h5_SB_desktop: [
+          "1.424rem",
+          {
+            fontWeight: "600",
+          },
+        ],
+        h6_SB_desktop: [
+          "1.266rem",
+          {
+            fontWeight: "600",
+          },
+        ],
+        h1_B_desktop: [
+          "2.281rem",
+          {
+            fontWeight: "700",
+          },
+        ],
+        h2_B_desktop: [
+          "2.027rem",
+          {
+            fontWeight: "700",
+          },
+        ],
+        h3_B_desktop: [
+          "1.802rem",
+          {
+            fontWeight: "700",
+          },
+        ],
+        h4_B_desktop: [
+          "1.602rem",
+          {
+            fontWeight: "700",
+          },
+        ],
+        h5_B_desktop: [
+          "1.424rem",
+          {
+            fontWeight: "700",
+          },
+        ],
+        h6_B_desktop: [
+          "1.266rem",
+          {
+            fontWeight: "700",
+          },
+        ],
+        p1_R_desktop: [
+          "1.125rem",
+          {
+            fontWeight: "400",
+          },
+        ],
+        p2_R_desktop: [
+          "1.000rem",
+          {
+            fontWeight: "400",
+          },
+        ],
+        p3_R_desktop: [
+          "0.889rem",
+          {
+            fontWeight: "400",
+          },
+        ],
+        p4_R_desktop: [
+          "0.790rem",
+          {
+            fontWeight: "400",
+          },
+        ],
+        p1_M_desktop: [
+          "1.125rem",
+          {
+            fontWeight: "500",
+          },
+        ],
+        p2_M_desktop: [
+          "1.000rem",
+          {
+            fontWeight: "500",
+          },
+        ],
+        p3_M_desktop: [
+          "0.889rem",
+          {
+            fontWeight: "500",
+          },
+        ],
+        p4_M_desktop: [
+          "0.790rem",
+          {
+            fontWeight: "500",
+          },
+        ],
+        p1_SB_desktop: [
+          "1.125rem",
+          {
+            fontWeight: "600",
+          },
+        ],
+        p2_SB_desktop: [
+          "1.000rem",
+          {
+            fontWeight: "600",
+          },
+        ],
+        p3_SB_desktop: [
+          "0.889rem",
+          {
+            fontWeight: "600",
+          },
+        ],
+        p4_SB_desktop: [
+          "0.790rem",
+          {
+            fontWeight: "600",
+          },
+        ],
+        lb1_desktop: [
+          "0.889rem",
+          {
+            fontWeight: "600",
+          },
+        ],
+        lb2_desktop: [
+          "0.79rem",
+          {
+            fontWeight: "600",
+          },
+        ],
+        lb3_desktop: [
+          "0.625rem",
+          {
+            fontWeight: "500",
+          },
+        ],
+        h1_SB_mobile: [
+          "2.281rem",
+          {
+            fontWeight: "600",
+          },
+        ],
+        h2_SB_mobile: [
+          "2.027rem",
+          {
+            fontWeight: "600",
+          },
+        ],
+        h3_SB_mobile: [
+          "1.802rem",
+          {
+            fontWeight: "600",
+          },
+        ],
+        h4_SB_mobile: [
+          "1.602rem",
+          {
+            fontWeight: "600",
+          },
+        ],
+        h5_SB_mobile: [
+          "1.424rem",
+          {
+            fontWeight: "600",
+          },
+        ],
+        h6_SB_mobile: [
+          "1.266rem",
+          {
+            fontWeight: "600",
+          },
+        ],
+        h1_B_mobile: [
+          "2.281rem",
+          {
+            fontWeight: "700",
+          },
+        ],
+        h2_B_mobile: [
+          "2.027rem",
+          {
+            fontWeight: "700",
+          },
+        ],
+        h3_B_mobile: [
+          "1.802rem",
+          {
+            fontWeight: "700",
+          },
+        ],
+        h4_B_mobile: [
+          "1.602rem",
+          {
+            fontWeight: "700",
+          },
+        ],
+        h5_B_mobile: [
+          "1.424rem",
+          {
+            fontWeight: "700",
+          },
+        ],
+        h6_B_mobile: [
+          "1.266rem",
+          {
+            fontWeight: "700",
+          },
+        ],
+        p1_R_mobile: [
+          "1.125rem",
+          {
+            fontWeight: "400",
+          },
+        ],
+        p2_R_mobile: [
+          "1.000rem",
+          {
+            fontWeight: "400",
+          },
+        ],
+        p3_R_mobile: [
+          "0.889rem",
+          {
+            fontWeight: "400",
+          },
+        ],
+        p4_R_mobile: [
+          "0.790rem",
+          {
+            fontWeight: "400",
+          },
+        ],
+        p1_M_mobile: [
+          "1.125rem",
+          {
+            fontWeight: "500",
+          },
+        ],
+        p2_M_mobile: [
+          "1.000rem",
+          {
+            fontWeight: "500",
+          },
+        ],
+        p3_M_mobile: [
+          "0.889rem",
+          {
+            fontWeight: "500",
+          },
+        ],
+        p4_M_mobile: [
+          "0.790rem",
+          {
+            fontWeight: "500",
+          },
+        ],
+        p1_SB_mobile: [
+          "1.125rem",
+          {
+            fontWeight: "600",
+          },
+        ],
+        p2_SB_mobile: [
+          "1.000rem",
+          {
+            fontWeight: "600",
+          },
+        ],
+        p3_SB_mobile: [
+          "0.889rem",
+          {
+            fontWeight: "600",
+          },
+        ],
+        p4_SB_mobile: [
+          "0.790rem",
+          {
+            fontWeight: "600",
+          },
+        ],
+        lb1_mobile: [
+          "0.878rem",
+          {
+            fontWeight: "600",
+          },
+        ],
+        lb2_mobile: [
+          "0.772rem",
+          {
+            fontWeight: "600",
+          },
+        ],
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animate")],
 } satisfies Config;
