@@ -14,14 +14,15 @@ import NavBtn from "../ui/NavBtn";
 function MobileMenu() {
   return (
     <div className="sm:hidden">
-      <Drawer direction="right">
+      <Drawer direction="top">
         <DrawerTrigger>
           <MenuIcon />
         </DrawerTrigger>
         <DrawerPortal>
           <DrawerOverlay className="fixed inset-0 bg-neutral-50/15 backdrop-blur-sm">
-            <DrawerContent className=" h-dvh w-64 rounded-none [&>div:first-child]:hidden">
+            <DrawerContent className="top-0 w-full h-min mt-0 rounded-b-2xl rounded-t-none [&>div:first-child]:hidden">
               <DialogTitle></DialogTitle>
+
               <nav className=" flex flex-col gap-2 py-2 px-2">
                 <NavBtn href="/">صفحه اصلی</NavBtn>
                 <NavBtn href="/about-me">درباره من</NavBtn>
