@@ -10,11 +10,20 @@ import {
   DrawerTrigger,
 } from "../ui/drawer";
 import NavBtn from "../ui/NavBtn";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 function MobileMenu() {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
   return (
     <div className="sm:hidden">
-      <Drawer direction="top">
+      <Drawer direction="top" open={isOpen} onOpenChange={setIsOpen}>
         <DrawerTrigger>
           <MenuIcon />
         </DrawerTrigger>
