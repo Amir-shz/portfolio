@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 function Page() {
   return (
-    <div className="flex gap-14 mb-4">
+    <div className="flex gap-14">
       <div className="basis-1/2 flex flex-col justify-between gap-6">
         <SocialSectionContactUs />
         <ContactWays />

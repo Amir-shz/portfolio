@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Header from "@/components/layouts/Header";
+import Footer from "@/components/layouts/Footer";
 
 export const metadata: Metadata = {
   title: {
@@ -19,6 +20,7 @@ export default function Layout({
       <div className="col-start-2 col-end-12">
         <Header />
         <main className="pt-[4.5rem] max-lg:pt-12">{children}</main>
+        <Footer />
       </div>
     </div>
   );
