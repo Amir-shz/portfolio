@@ -26,8 +26,6 @@ export async function createReservation(data: {
   selectedDate: string;
   selectedTime: string;
 }) {
-  console.log(data);
-
   await dbConnect();
 
   await Reservation.create(data);
@@ -82,7 +80,6 @@ export async function changePlanData(formData: FormData) {
     price: formData.get("price"),
     plan: formData.get("plan"),
   };
-  console.log(body);
 
   await fetch(`${baseUrl}/plan/${id}`, {
     method: "PATCH",
@@ -97,8 +94,6 @@ export async function createSchedule(data: {
   date: string | undefined;
   time: string | undefined;
 }) {
-  console.log(data);
-
   // check Date exists
   const schedule = await Schedule.findOne({ date: data.date });
 
@@ -122,7 +117,6 @@ export async function createSchedule(data: {
 }
 
 export async function deleteHour(id: string, hour: string) {
-  console.log(id, hour);
   await Schedule.updateOne({ _id: id }, { $pull: { hours: { hour: hour } } });
 
   const schedule = await Schedule.findById(id);
@@ -138,7 +132,7 @@ export async function deleteHour(id: string, hour: string) {
 
 export async function deleteSchedule(formData: FormData) {
   const id = formData.get("id");
-  console.log(id);
+
   await Schedule.findByIdAndDelete(id);
 
   revalidatePath("/dashboard/schedules");
@@ -289,8 +283,6 @@ export async function changePass(state: FormState, formData: FormData) {
   // check old pass
   await dbConnect();
   const user = await User.findOne({ email }).select("+password");
-
-  console.log(user);
 
   if (!user || !(await bcrypt.compare(password, user.password))) {
     return { message: "رمزعبور فعلی اشتباه است" };

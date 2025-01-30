@@ -43,7 +43,7 @@ async function Page() {
         </SessionProvider>
       </div>
 
-      {session?.user?.role === "OWNER" && (
+      {currentUser.role === "OWNER" && (
         <div className=" bg-purple-50 rounded-md shadow-shadow4 border border-purple-100 col-span-2 flex flex-col gap-2 py-2">
           {users.map(
             (

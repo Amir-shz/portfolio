@@ -38,17 +38,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   ],
 
   callbacks: {
-    async session({ session }) {
-      if (session?.user) {
-        const fetchedUser = await fetch(`${baseUrl}/user/${session.user.email}`)
-          .then((data) => data.json())
-          .then((data) => data.data);
-
-        session.user.role = fetchedUser?.role;
-      }
-
-      return session;
-    },
     // for authorization in middleware
     authorized: async ({ auth }) => {
       return !!auth?.user;

@@ -3,7 +3,7 @@ import { digitsEnToFa } from "@persian-tools/persian-tools";
 import ReservationRowBtns from "./ReservationRowBtns";
 import { reservationType } from "@/types/types";
 import Link from "next/link";
-import { planData } from "@/data/data";
+import { planData } from "@/data/planData";
 
 async function ReservationRow({
   reservation,
@@ -20,8 +20,6 @@ async function ReservationRow({
     plan,
     description,
   } = reservation;
-
-  console.log(typeof plan);
 
   const {
     title: planName,

@@ -1,6 +1,6 @@
 import ClockIcon from "@/components/icons/ClockIcon";
 import DollarIcon from "@/components/icons/DollarIcon";
-import { planData } from "@/data/data";
+import { planData } from "@/data/planData";
 // import usePlans from "@/hooks/usePlans";
 import { useReservationStore } from "@/hooks/useReservationStore";
 // import { digitsEnToFa } from "@persian-tools/persian-tools";

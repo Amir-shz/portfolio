@@ -5,7 +5,7 @@ import Reservation from "@/features/reservation/Reservation";
 import { useReservationStore } from "@/hooks/useReservationStore";
 // import PlanBoxLoader from "./PlanBoxLoader";
 // import usePlans from "@/hooks/usePlans";
-import { planData } from "@/data/data";
+import { planData } from "@/data/planData";
 
 function PlansBox() {
   const { showModal } = useReservationStore();

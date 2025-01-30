@@ -1,5 +1,5 @@
 import ReservationRowBtns from "@/components/dashboard/ReservationRowBtns";
-import { planData } from "@/data/data";
+import { planData } from "@/data/planData";
 import { getJalaliDetails } from "@/utils/utils";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 import { Metadata } from "next";
