@@ -16,7 +16,7 @@ function PlanCard({
 }: planCardProps): React.ReactNode {
   const { show, setPlan } = useReservationStore();
   return (
-    <div className=" rounded-3xl border border-neutral-300 shadow-shadow3 bg-neutral-100 hover:border-purple-200 transition-all duration-300 flex flex-col justify-between min-h-96 last:bg-purple-300 group">
+    <div className=" rounded-3xl border border-neutral-300 shadow-shadow3 bg-neutral-100 hover:border-purple-200 transition-all duration-300 flex flex-col justify-between min-h-96 last:bg-purple-300 group last:border-none select-none">
       <div>
         <p className=" group-last:text-neutral-50 text-neutral-700 font-bold leading-[1.875rem] text-[1.375rem] pt-6 text-center">
           {title}

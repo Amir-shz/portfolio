@@ -41,6 +41,10 @@ type Store = {
       plan: string;
     }[]
   ) => void;
+
+  //
+
+  handleSelectedDateInit: (dateVal: string, timeVal: string) => void;
 };
 
 export const useReservationStore = create<Store>()((set) => ({
@@ -60,6 +64,15 @@ export const useReservationStore = create<Store>()((set) => ({
   handleSelectedDateChange: (e) => {
     set({ selectedTime: "", selectedDate: e.target.value });
   },
+
+  //
+
+  handleSelectedDateInit: (dateVal, timeVal) => {
+    set({ selectedTime: timeVal, selectedDate: dateVal });
+  },
+
+  //
+
   handleSelectedTimeChange: (e) =>
     set(() => ({ selectedTime: e.target.value })),
   handleFullNameChange: (e) => set(() => ({ fullName: e.target.value })),

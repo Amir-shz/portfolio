@@ -9,19 +9,21 @@ import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 
 function ReservationDates({
   weeks,
-  reservationsData,
+  schedulesData,
+  isLoading,
 }: {
   weeks: {
     date: string;
     jalali: { dayName: string; day: string; monthName: string };
   }[];
-  reservationsData: scheduleDataType[];
+  schedulesData: scheduleDataType[];
+  isLoading: boolean;
 }) {
   const [page, setPage] = useState<number>(1);
   const { resetDateAndTimeStates } = useReservationStore();
 
   const filteredWeeks: filteredWeeksType = splitIntoWeeks(weeks)[page - 1];
-  const reservations = reservationsData?.map((el) => el.date);
+  const reservations = schedulesData?.map((el) => el.date);
 
   return (
     <div className="mt-2">
@@ -52,22 +54,36 @@ function ReservationDates({
           </button>
         </div>
       </div>
-      <div className=" flex gap-4">
-        {filteredWeeks.dates.map((el, index) => (
-          <DateRadio
-            key={index}
-            date={el}
-            available={
-              reservations?.includes(el.date)
-                ? new Date(el.date).getTime() > new Date().getTime()
-                  ? reservationsData?.filter(
-                      (element) => element.date === el.date
-                    )[0].available
-                  : 0
-                : 0
-            }
-          />
-        ))}
+      <div>
+        {isLoading ? (
+          <div className="grid grid-cols-7 gap-4 [&>div]:size-full [&>div]:rounded-lg w-full h-[4.5rem] [&>div]:bg-neutral-200 [&>div]:animate-pulse">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-7 gap-4">
+            {filteredWeeks.dates.map((el, index) => (
+              <DateRadio
+                key={index}
+                date={el}
+                available={
+                  reservations?.includes(el.date)
+                    ? new Date(el.date).getTime() > new Date().getTime()
+                      ? schedulesData?.filter(
+                          (element) => element.date === el.date
+                        )[0].available
+                      : 0
+                    : 0
+                }
+              />
+            ))}{" "}
+          </div>
+        )}
       </div>
     </div>
   );
