@@ -49,9 +49,6 @@ function DashboardChart({
     (el: { selectedDate: string }) => el.selectedDate === curWeek[6]
   ).length;
 
-  console.log(curWeek);
-  console.log(reservations);
-
   const chartData = [
     { day: "جمعه", num: seventhDay },
     { day: "پنجشنبه", num: sixthtDay },
