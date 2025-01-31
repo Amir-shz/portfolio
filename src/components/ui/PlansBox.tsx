@@ -24,7 +24,6 @@ function PlansBox() {
           description: string;
           points: string[];
           price: string;
-          plan: string;
         }) => (
           <PlanCard
             key={plan.id}
