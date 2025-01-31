@@ -23,6 +23,7 @@ function AboutInHome(): React.ReactNode {
           alt=""
           className=" rounded-3xl size-full object-fill"
           quality={100}
+          placeholder="blur"
         />
       </div>
       <div>

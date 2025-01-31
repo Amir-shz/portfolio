@@ -7,6 +7,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "../ui/chart";
+import { getFourWeeksFromToday, splitIntoWeeks } from "@/utils/utils";
 
 const chartConfig = {
   num: {
@@ -19,34 +20,36 @@ function DashboardChart({
 }: {
   reservations: { selectedDate: string }[];
 }) {
-  const curWeek = getCurrentWeekDates();
+  const curWeek: string[] | undefined = splitIntoWeeks(getFourWeeksFromToday())
+    .at(0)
+    ?.dates.map((el) => el.date);
 
   const firstDay = reservations.filter(
-    (el: { selectedDate: string }) => el.selectedDate === curWeek[0]
+    (el: { selectedDate: string }) => el.selectedDate === curWeek?.at(0)
   ).length;
 
   const secondDay = reservations.filter(
-    (el: { selectedDate: string }) => el.selectedDate === curWeek[1]
+    (el: { selectedDate: string }) => el.selectedDate === curWeek?.at(1)
   ).length;
 
   const thirdDay = reservations.filter(
-    (el: { selectedDate: string }) => el.selectedDate === curWeek[2]
+    (el: { selectedDate: string }) => el.selectedDate === curWeek?.at(2)
   ).length;
 
   const fourthDay = reservations.filter(
-    (el: { selectedDate: string }) => el.selectedDate === curWeek[3]
+    (el: { selectedDate: string }) => el.selectedDate === curWeek?.at(3)
   ).length;
 
   const fifthDay = reservations.filter(
-    (el: { selectedDate: string }) => el.selectedDate === curWeek[4]
+    (el: { selectedDate: string }) => el.selectedDate === curWeek?.at(4)
   ).length;
 
   const sixthtDay = reservations.filter(
-    (el: { selectedDate: string }) => el.selectedDate === curWeek[5]
+    (el: { selectedDate: string }) => el.selectedDate === curWeek?.at(5)
   ).length;
 
   const seventhDay = reservations.filter(
-    (el: { selectedDate: string }) => el.selectedDate === curWeek[6]
+    (el: { selectedDate: string }) => el.selectedDate === curWeek?.at(6)
   ).length;
 
   const chartData = [
@@ -63,13 +66,15 @@ function DashboardChart({
       <p className=" text-center text-xl font-bold text-neutral-500 mb-2">
         رزروهای این هفته
       </p>
-      <ChartContainer config={chartConfig} className="h-56 w-full">
+      <ChartContainer config={chartConfig} className="max-h-56 w-full ">
         <AreaChart
           accessibilityLayer
           data={chartData}
+          height={224}
           margin={{
-            left: 12,
-            right: 12,
+            left: 16,
+            right: 16,
+            top: 16,
           }}
         >
           <CartesianGrid />
@@ -86,21 +91,3 @@ function DashboardChart({
 }
 
 export default DashboardChart;
-
-function getCurrentWeekDates() {
-  const today = new Date();
-  const currentDay = today.getDay(); // 0 = Sunday, 6 = Saturday
-
-  // تنظیم اولین روز هفته (از شنبه)
-  const weekStart = new Date(today);
-  weekStart.setDate(
-    today.getDate() - (currentDay === 0 ? 6 : currentDay - 1) - 2
-  );
-
-  // ایجاد آرایه شامل 7 روز هفته
-  return Array.from({ length: 7 }, (_, i) => {
-    const date = new Date(weekStart);
-    date.setDate(weekStart.getDate() + i);
-    return date.toISOString().split("T")[0]; // فرمت YYYY-MM-DD
-  });
-}

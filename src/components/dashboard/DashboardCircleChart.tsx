@@ -30,7 +30,7 @@ export default function DashboardCircleChart({
   const totalNums = chartData.reduce((acc, curr) => acc + curr.num, 0);
 
   return (
-    <div className=" col-span-3 shadow-md rounded-lg bg-violet-50 border border-violet-100 p-1">
+    <div className=" col-span-2 shadow-md rounded-lg bg-violet-50 border border-violet-100 p-1">
       <p className=" text-neutral-500 font-semibold text-xl p-2">
         وضعیت رزروهای امروز
       </p>
