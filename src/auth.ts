@@ -37,6 +37,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
 
+  trustHost: true,
+
   callbacks: {
     // for authorization in middleware
     authorized: async ({ auth }) => {
