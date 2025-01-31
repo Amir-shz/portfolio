@@ -1,5 +1,5 @@
-import DashboardChart from "@/components/dashboard/DashboardChart";
-import DashboardCircleChart from "@/components/dashboard/DashboardCircleChart";
+// import DashboardChart from "@/components/dashboard/DashboardChart";
+// import DashboardCircleChart from "@/components/dashboard/DashboardCircleChart";
 import DashboardStats from "@/components/dashboard/DashboardStats";
 import DashboardTable from "@/components/dashboard/DashboardTable";
 import { Metadata } from "next";
@@ -30,23 +30,23 @@ async function page() {
       new Date().toLocaleDateString("en-CA")
   );
 
-  const newReservationNum = todayReservations.reduce(
-    (acc: number, cur: { status: string }) =>
-      cur.status === "new" ? acc + 1 : acc,
-    0
-  );
+  // const newReservationNum = todayReservations.reduce(
+  //   (acc: number, cur: { status: string }) =>
+  //     cur.status === "new" ? acc + 1 : acc,
+  //   0
+  // );
 
-  const finishReservationNum = todayReservations.length - newReservationNum;
+  // const finishReservationNum = todayReservations.length - newReservationNum;
 
   return (
     <div className="grid grid-cols-6 gap-6 max-h-[calc(100vh-5.5rem)] overflow-y-scroll p-2 noScrollBar">
       <DashboardStats reservations={todayReservations} />
-      <DashboardCircleChart
+      {/* <DashboardCircleChart
         newNum={newReservationNum}
         finishNum={finishReservationNum}
-      />
+      /> */}
       <DashboardTable reservations={todayReservations} />
-      <DashboardChart reservations={reservations} />
+      {/* <DashboardChart reservations={reservations} /> */}
     </div>
   );
 }
