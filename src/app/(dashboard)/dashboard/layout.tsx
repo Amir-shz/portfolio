@@ -38,7 +38,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </div>
       <div className=" col-span-8">
         <DashboardHeader />
-        <div className=" p-4">{children}</div>
+        <div className=" bg-purple-50">
+          <div className=" bg-neutral-50 p-4 rounded-tr-xl">{children}</div>
+        </div>
       </div>
     </div>
   );

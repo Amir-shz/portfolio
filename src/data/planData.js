@@ -10,7 +10,7 @@ export const planData = [
     ],
     time: "۱۵ تا ۳۰ دقیقه",
     price: "free",
-    plan: "1",
+    // plan: "1",
   },
   {
     id: 2,
@@ -24,7 +24,7 @@ export const planData = [
     ],
     time: "۳۰ دقیقه",
     price: "۲۷۰ تومان",
-    plan: "2",
+    // plan: "2",
   },
   {
     id: 3,
@@ -38,7 +38,7 @@ export const planData = [
     ],
     time: "۴۵ دقیقه",
     price: "۳۵۰ تومان",
-    plan: "3",
+    // plan: "3",
   },
   {
     id: 4,
@@ -52,6 +52,6 @@ export const planData = [
     ],
     time: "زمان انتخابی",
     price: "منعطف",
-    plan: "4",
+    // plan: "4",
   },
 ];
