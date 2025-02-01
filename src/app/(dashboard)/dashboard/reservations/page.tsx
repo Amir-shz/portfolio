@@ -22,12 +22,14 @@ async function page() {
     .then((data) => data.data);
 
   return (
-    <div className="w-full max-h-[calc(100vh-5.5rem)] overflow-y-scroll flex flex-col rounded-md bg-purple-50 shadow-shadow4 border border-purple-100 ">
-      <ReservationHeader />
-      {reservations.length > 0 &&
-        reservations.map((reservation: reservationType) => (
-          <ReservationRow key={reservation._id} reservation={reservation} />
-        ))}
+    <div className="max-h-dvh overflow-hidden p-2 max-sm:p-3 ">
+      <div className=" bg-purple-50 shadow-shadow4 border border-purple-100 w-full rounded-md px-2 overflow-y-scroll max-h-[calc(100dvh-100px)] hide-scrollbar">
+        <ReservationHeader />
+        {reservations.length > 0 &&
+          reservations.map((reservation: reservationType) => (
+            <ReservationRow key={reservation._id} reservation={reservation} />
+          ))}
+      </div>
     </div>
   );
 }

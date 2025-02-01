@@ -30,7 +30,7 @@ async function ReservationRow({
   const { day, monthName, year } = getJalaliDetails(new Date(selectedDate));
 
   return (
-    <div className="flex w-full ">
+    <div className="flex w-full max-sm:w-[1024px]">
       <Link
         href={`/dashboard/reservations/${_id}`}
         className=" hover:bg-purple-100 duration-200 rounded-md w-full grid grid-cols-11 items-center p-3 [&>p]:border-l [&>p]:border-l-neutral-300 [&>p]:flex [&>p]:justify-center  [&>p]:text-sm  [&>p]:items-center [&>p:nth-child(6)]:border-l-0  [&>p:last-of-type]:line-clamp-3  basis-[90%] "
@@ -50,7 +50,7 @@ async function ReservationRow({
         </p>
         <p className="border-r border-r-neutral-300">{planName}</p>
         <div className=" text-xs font-semibold leading-5 border-x border-x-neutral-300 flex flex-col justify-center items-center">
-          <p>{planPrice === "free" ? "رایگان" : `${planPrice} تومان`}</p>
+          <p>{planPrice === "free" ? "رایگان" : `${planPrice}`}</p>
           <p>{planTime}</p>
         </div>
         <p className=" col-span-2 px-2">{description}</p>

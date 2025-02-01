@@ -29,7 +29,7 @@ async function Page() {
     .then((data) => data.data);
 
   return (
-    <div className=" grid grid-cols-2 gap-4  max-h-[calc(100vh-5.5rem)] overflow-y-scroll p-4 max-sm:noScrollBar max-sm:max-h-dvh  hide-scrollbar">
+    <div className=" grid grid-cols-2 gap-4  max-h-[calc(100vh-5.5rem)] overflow-y-scroll p-4 max-sm:noScrollBar max-sm:max-h-dvh  hide-scrollbar max-sm:[&>div:last-child]:mb-14">
       <div className=" bg-purple-50 rounded-md shadow-shadow4 border border-purple-100 p-4 max-sm:col-span-2">
         <p className="mb-6 mt-2 text-center font-semibold text-neutral-700">
           برای ایجاد حساب جدید فرم زیر را پر کنید
@@ -44,7 +44,7 @@ async function Page() {
       </div>
 
       {currentUser.role === "OWNER" && (
-        <div className=" bg-purple-50 rounded-md shadow-shadow4 border border-purple-100 col-span-2  py-2 max-sm:col-span-2 max-sm:overflow-x-scroll max-sm:mb-14 hide-scrollbar">
+        <div className=" bg-purple-50 rounded-md shadow-shadow4 border border-purple-100 col-span-2  py-2 max-sm:col-span-2 max-sm:overflow-x-scroll hide-scrollbar">
           <div className="max-sm:w-max flex flex-col gap-2">
             {users.map(
               (

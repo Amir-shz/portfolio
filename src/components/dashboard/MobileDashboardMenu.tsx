@@ -22,6 +22,7 @@ import {
   HiOutlineUser,
 } from "react-icons/hi2";
 import { logOut } from "@/lib/actions";
+import Logo from "../ui/Logo";
 
 function MobileDashboardMenu() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -43,6 +44,9 @@ function MobileDashboardMenu() {
               <DialogTitle></DialogTitle>
               <div className="flex flex-col justify-between h-full">
                 <nav className=" flex flex-col gap-2 py-2 px-2">
+                  <div className=" w-full flex justify-center py-4">
+                    <Logo />
+                  </div>
                   <Link
                     href="/dashboard"
                     className=" w-full bg-purple-400 hover:bg-purple-500 duration-300 rounded-lg py-3 flex items-center gap-2 pr-4 text-neutral-50 text-base font-semibold leading-5"
@@ -73,7 +77,7 @@ function MobileDashboardMenu() {
                     <p>تنظیمات حساب کاربری</p>
                   </Link>
                 </nav>
-                <div className=" py-2 px-2 flex flex-col gap-2">
+                <div className=" py-2 px-2 flex flex-col gap-2 mb-4">
                   <Link
                     href="/"
                     className=" w-full bg-purple-400 hover:bg-purple-500 duration-300 rounded-lg py-3 flex items-center gap-2 pr-4 text-neutral-50 text-base font-semibold leading-5"
