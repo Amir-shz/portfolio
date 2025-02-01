@@ -29,6 +29,7 @@ function UserPhoto({ img, name }: { img: string; name: string }) {
         Key: file.name,
         Body: file,
         ContentType: "image/jpeg",
+        ACL: "public-read",
       };
 
       try {
@@ -50,6 +51,7 @@ function UserPhoto({ img, name }: { img: string; name: string }) {
           width={256}
           height={256}
           quality={100}
+          unoptimized
           className="rounded-full object-cover size-12 aspect-square max-sm:size-14"
         />
       ) : (
