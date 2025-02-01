@@ -1,13 +1,15 @@
 "use client";
 
 import { changePhoto } from "@/lib/actions";
+import { S3 } from "aws-sdk";
 import Image from "next/image";
 import { ChangeEvent, useTransition } from "react";
 import { HiOutlineCamera } from "react-icons/hi2";
 
-const CLOUDINARY_URL = process.env.NEXT_PUBLIC_CLOUDINARY_URL as string;
-
-const UPLOAD_PRESET = process.env.NEXT_PUBLIC_UPLOAD_PRESET as string;
+const accessKeyId = process.env.NEXT_PUBLIC_LIARA_ACCESS_KEY as string;
+const secretAccessKey = process.env.NEXT_PUBLIC_LIARA_SECRET_KEY as string;
+const endpoint = process.env.NEXT_PUBLIC_LIARA_ENDPOINT as string;
+const bucket = process.env.NEXT_PUBLIC_LIARA_BUCKET_NAME as string;
 
 function UserPhoto({ img, name }: { img: string; name: string }) {
   const [isPending, startTransition] = useTransition();
@@ -16,23 +18,23 @@ function UserPhoto({ img, name }: { img: string; name: string }) {
     startTransition(async () => {
       const file = e.target.files?.[0] as File;
 
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("upload_preset", UPLOAD_PRESET);
-      formData.append("quality", "100");
+      const s3 = new S3({
+        accessKeyId,
+        secretAccessKey,
+        endpoint,
+      });
+
+      const params = {
+        Bucket: bucket,
+        Key: file.name,
+        Body: file,
+        ContentType: "image/jpeg",
+      };
 
       try {
-        const response = await fetch(CLOUDINARY_URL, {
-          method: "POST",
-          body: formData,
-        });
+        const response = await s3.upload(params).promise();
 
-        if (!response.ok) {
-          throw new Error("Upload failed");
-        }
-
-        const data = await response.json();
-        changePhoto(data.secure_url);
+        changePhoto(response.Location);
       } catch (error) {
         console.error("❌", "Error uploading file:", error);
       }
@@ -45,8 +47,9 @@ function UserPhoto({ img, name }: { img: string; name: string }) {
         <Image
           src={img}
           alt="user photo"
-          width={48}
-          height={48}
+          width={256}
+          height={256}
+          quality={100}
           className="rounded-full object-cover size-12 aspect-square max-sm:size-14"
         />
       ) : (

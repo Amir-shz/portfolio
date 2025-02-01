@@ -316,15 +316,12 @@ export async function changePass(state: FormState, formData: FormData) {
 
 export async function changePhoto(url: string) {
   const session = await auth();
-
   await dbConnect();
-
   await User.findOneAndUpdate(
     { email: session?.user?.email },
     {
       photo: url,
     }
   );
-
   revalidatePath("/dashboard");
 }

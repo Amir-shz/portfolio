@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "res.cloudinary.com",
+        hostname: "upbeat-lalande-wgsbtfocx.storage.c2.liara.space",
         port: "",
         pathname: "/**",
         search: "",
