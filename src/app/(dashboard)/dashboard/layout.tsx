@@ -10,7 +10,7 @@ import {
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="grid grid-cols-10 bg-neutral-50 h-dvh overflow-hidden ">
-      <div className="col-span-2 flex flex-col gap-2 px-2 bg-purple-50 h-screen">
+      <div className="col-span-2 flex flex-col gap-2 px-2 bg-purple-50 h-screen max-sm:hidden">
         <div className=" flex justify-center my-10">
           <Logo />
         </div>
@@ -36,10 +36,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <p>زمان بندی</p>
         </Link>
       </div>
-      <div className=" col-span-8">
+      <div className=" col-span-8 max-sm:col-span-full">
         <DashboardHeader />
         <div className=" bg-purple-50">
-          <div className=" bg-neutral-50 p-4 rounded-tr-xl">{children}</div>
+          <div className=" bg-neutral-50 p-4 rounded-tr-xl max-sm:rounded-none max-sm:p-0">
+            {children}
+          </div>
         </div>
       </div>
     </div>

@@ -27,9 +27,9 @@ async function page({ params }: { params: Promise<{ scheduleId: string }> }) {
   const formattedDate = `${day} ${monthName} ${year}`;
 
   return (
-    <div className="max-h-[calc(100vh-5.5rem)] overflow-y-scroll p-4 ">
+    <div className="max-h-[calc(100vh-5.5rem)] overflow-y-scroll p-4 max-sm:max-h-dvh hide-scrollbar ">
       <p className=" text-center text-lg font-medium">{formattedDate}</p>
-      <div className="grid grid-cols-2 gap-4 mt-4">
+      <div className="grid grid-cols-2 gap-4 mt-4 max-sm:grid-cols-1">
         {hours.map(
           (hour: { hour: string; isAvailable: boolean; _id: string }) => (
             <div
@@ -57,7 +57,7 @@ async function page({ params }: { params: Promise<{ scheduleId: string }> }) {
       </div>
       <form
         action={deleteSchedule}
-        className=" w-full flex justify-center mt-10"
+        className=" w-full flex justify-center mt-10 max-sm:mb-16 max-sm:mt-6"
       >
         <input type="hidden" name="id" value={_id} />
         <ScheduleAllDelBtn />

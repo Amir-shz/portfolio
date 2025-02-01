@@ -44,7 +44,7 @@ function ScheduleForm({
   }
 
   return (
-    <div className=" flex flex-col gap-4 mt-4">
+    <div className=" flex flex-col gap-4 mt-4 max-sm:gap-2">
       <label className="flex flex-col gap-1 datePickerStyle">
         <p className=" text-sm font-semibold">تاریخ:</p>
         <DatePicker onChange={(e) => setDate(e.value)} />
@@ -81,7 +81,7 @@ function ScheduleForm({
       </span>
 
       <button
-        className=" text-neutral-50 text-base font-bold leading-[1.125rem] py-3 px-10 mt-8 self-center rounded-xl bg-purple-400 hover:bg-purple-500 duration-300 disabled:bg-neutral-400"
+        className=" text-neutral-50 text-base font-bold leading-[1.125rem] py-3 px-10 mt-8 self-center rounded-xl bg-purple-400 hover:bg-purple-500 duration-300 disabled:bg-neutral-400 max-sm:mt-0"
         onClick={(e) => {
           e.preventDefault();
           handleSubmit();

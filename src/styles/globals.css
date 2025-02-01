@@ -126,6 +126,18 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #6200ee;
 }
+
+@media (max-width: 40rem) {
+  .hide-scrollbar {
+    scrollbar-width: none; /* برای فایرفاکس */
+    -ms-overflow-style: none; /* برای اینترنت اکسپلورر و اج */
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none; /* برای کروم، سافاری و اپرا */
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

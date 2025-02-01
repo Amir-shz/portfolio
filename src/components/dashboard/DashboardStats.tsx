@@ -40,7 +40,7 @@ function DashboardStats({
 
   return (
     <>
-      <div className=" col-span-2 flex items-center p-4 justify-between w-full bg-blue-50 border border-blue-100 shadow-md rounded-lg">
+      <div className=" col-span-2 flex items-center p-4 justify-between w-full bg-blue-50 border border-blue-100 shadow-md rounded-lg max-sm:col-span-full">
         <div>
           <p className=" font-semibold text-neutral-500 mb-2">رزروهای امروز</p>
           <p className=" font-semibold text-xl text-neutral-700">
@@ -52,7 +52,7 @@ function DashboardStats({
           <HiOutlineCalendarDays className=" text-blue-600 size-7 stroke-2" />
         </div>
       </div>
-      <div className=" col-span-2 flex items-center p-4 justify-between w-full bg-green-50 border border-green-100 shadow-md rounded-lg">
+      <div className=" col-span-2 flex items-center p-4 justify-between w-full bg-green-50 border border-green-100 shadow-md rounded-lg max-sm:col-span-full">
         <div>
           <p className=" font-semibold text-neutral-500 mb-2">رزروهای جدید</p>
           <p className=" font-semibold text-xl text-neutral-700">
@@ -64,7 +64,7 @@ function DashboardStats({
           <HiOutlineClock className=" text-green-600 size-7 stroke-2" />
         </div>
       </div>
-      <div className=" col-span-2 flex items-center p-4 justify-between w-full bg-amber-50 border border-amber-100 shadow-md rounded-lg">
+      <div className=" col-span-2 flex items-center p-4 justify-between w-full bg-amber-50 border border-amber-100 shadow-md rounded-lg max-sm:col-span-full">
         <div>
           <p className=" font-semibold text-neutral-500 mb-2">
             درآمد امروز

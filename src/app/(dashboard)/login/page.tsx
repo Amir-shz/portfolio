@@ -15,8 +15,8 @@ async function Page() {
 
   return (
     <div className=" bg-purple-100 h-dvh w-screen">
-      <div className="flex items-center justify-center h-full w-2/5 mx-auto">
-        <div className=" w-full flex flex-col gap-10 justify-center items-center bg-neutral-100/50 p-10 rounded-lg">
+      <div className="flex items-center justify-center h-full w-2/5 mx-auto max-sm:w-4/5">
+        <div className=" w-full flex flex-col gap-10 justify-center items-center bg-neutral-100/50 p-10 rounded-lg max-sm:p-5">
           <Logo />
           <p className="-mb-4  font-semibold text-neutral-700">
             ورود به حساب کاربری

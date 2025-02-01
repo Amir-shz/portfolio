@@ -47,15 +47,15 @@ function UserPhoto({ img, name }: { img: string; name: string }) {
           alt="user photo"
           width={48}
           height={48}
-          className="rounded-full object-cover size-12 aspect-square"
+          className="rounded-full object-cover size-12 aspect-square max-sm:size-14"
         />
       ) : (
-        <div className=" size-11 bg-neutral-500 rounded-full flex justify-center items-center text-neutral-50 text-xl font-medium">
+        <div className=" size-11 bg-neutral-500 rounded-full flex justify-center items-center text-neutral-50 text-xl font-medium max-sm:size-14">
           {name}
         </div>
       )}
-      <label className="absolute bottom-0 -right-1 size-5 cursor-pointer">
-        <span className="relative flex size-5 items-center justify-center rounded-full bg-purple-500 text-neutral-50">
+      <label className="absolute bottom-0 -right-1 size-5 cursor-pointer max-sm:size-6 max-sm:-bottom-1 max-sm:-right-2">
+        <span className="relative flex size-5 items-center justify-center rounded-full bg-purple-500 text-neutral-50 max-sm:size-6">
           {isPending ? (
             <div className="loaderSpinnerMiniWhite size-4"></div>
           ) : (

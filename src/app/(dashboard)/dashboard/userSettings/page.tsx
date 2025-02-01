@@ -29,14 +29,14 @@ async function Page() {
     .then((data) => data.data);
 
   return (
-    <div className=" grid grid-cols-2 gap-4  max-h-[calc(100vh-5.5rem)] overflow-y-scroll p-4 ">
-      <div className=" bg-purple-50 rounded-md shadow-shadow4 border border-purple-100 p-4">
+    <div className=" grid grid-cols-2 gap-4  max-h-[calc(100vh-5.5rem)] overflow-y-scroll p-4 max-sm:noScrollBar max-sm:max-h-dvh  hide-scrollbar">
+      <div className=" bg-purple-50 rounded-md shadow-shadow4 border border-purple-100 p-4 max-sm:col-span-2">
         <p className="mb-6 mt-2 text-center font-semibold text-neutral-700">
           برای ایجاد حساب جدید فرم زیر را پر کنید
         </p>
         <SignupForm />
       </div>
-      <div className=" bg-purple-50 rounded-md shadow-shadow4 border border-purple-100 p-4 flex flex-col   justify-between">
+      <div className=" bg-purple-50 rounded-md shadow-shadow4 border border-purple-100 p-4 flex flex-col   justify-between max-sm:col-span-2 max-sm:gap-2 max-sm:p-0 max-sm:py-4">
         <SessionProvider>
           <ChangeUserDataForm user={currentUser} />
           <ChangePassForm email={currentUser.email} />
@@ -44,52 +44,54 @@ async function Page() {
       </div>
 
       {currentUser.role === "OWNER" && (
-        <div className=" bg-purple-50 rounded-md shadow-shadow4 border border-purple-100 col-span-2 flex flex-col gap-2 py-2">
-          {users.map(
-            (
-              user: {
-                _id: string;
-                name: string;
-                email: string;
-                createdAt: Date;
-                role: "ADMIN" | "OWNER";
-              },
-              index: number
-            ) => (
-              <div
-                key={user._id}
-                className=" grid grid-cols-[44px_repeat(3,1fr)_100px]  items-center gap-2 [&_input]:outline-none [&_input]:py-2 [&_input]:px-4 [&_input]:rounded-md [&_input]:bg-neutral-50 [&_input]:border [&_input]:border-purple-200 [&_input]:w-full"
-              >
-                <p className=" self-center justify-self-center bg-purple-400 text-neutral-50 size-8 flex justify-center items-center rounded-full">
-                  {digitsEnToFa(index + 1)}
-                </p>
+        <div className=" bg-purple-50 rounded-md shadow-shadow4 border border-purple-100 col-span-2  py-2 max-sm:col-span-2 max-sm:overflow-x-scroll max-sm:mb-14 hide-scrollbar">
+          <div className="max-sm:w-max flex flex-col gap-2">
+            {users.map(
+              (
+                user: {
+                  _id: string;
+                  name: string;
+                  email: string;
+                  createdAt: Date;
+                  role: "ADMIN" | "OWNER";
+                },
+                index: number
+              ) => (
+                <div
+                  key={user._id}
+                  className=" grid grid-cols-[44px_repeat(3,1fr)_100px]  items-center gap-2 [&_input]:outline-none [&_input]:py-2 [&_input]:px-4 [&_input]:rounded-md [&_input]:bg-neutral-50 [&_input]:border [&_input]:border-purple-200 [&_input]:w-full "
+                >
+                  <p className=" self-center justify-self-center bg-purple-400 text-neutral-50 size-8 flex justify-center items-center rounded-full">
+                    {digitsEnToFa(index + 1)}
+                  </p>
 
-                <p className="flex gap-2 items-center">
-                  <span>{user.name}</span>
-                  <span className=" text-xs translate-y-px text-neutral-500">
-                    ({user.role})
-                  </span>
-                </p>
+                  <p className="flex gap-2 items-center">
+                    <span>{user.name}</span>
+                    <span className=" text-xs translate-y-px text-neutral-500">
+                      ({user.role})
+                    </span>
+                  </p>
 
-                <p>{user.email}</p>
+                  <p>{user.email}</p>
 
-                <p>
-                  <span className="text-sm font-bold">ساخته شده در: </span>
-                  <span className=" text-sm text-purple-600 font-medium">
-                    {new Date(user.createdAt).toLocaleString("fa-IR", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
-                  </span>
-                </p>
+                  <p>
+                    <span className="text-sm font-bold">ساخته شده در: </span>
+                    <span className=" text-sm text-purple-600 font-medium">
+                      {new Date(user.createdAt).toLocaleString("fa-IR", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </span>
+                  </p>
 
-                <UserDelBtn id={user._id} role={user.role} />
-              </div>
-            )
-          )}
+                  <UserDelBtn id={user._id} role={user.role} />
+                </div>
+              )
+            )}
+          </div>
         </div>
       )}
     </div>

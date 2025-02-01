@@ -62,8 +62,8 @@ function DashboardChart({
     { day: "شنبه", num: firstDay },
   ];
   return (
-    <div className=" col-span-full shadow-md rounded-lg bg-violet-50 border border-violet-100 p-8">
-      <p className=" text-center text-xl font-bold text-neutral-500 mb-2">
+    <div className=" col-span-full shadow-md rounded-lg bg-violet-50 border border-violet-100 p-8 max-sm:p-4 max-sm:mb-14">
+      <p className=" text-center text-xl font-bold text-neutral-500 mb-2 max-sm:text-lg">
         رزروهای این هفته
       </p>
       <ChartContainer config={chartConfig} className="max-h-56 w-full ">

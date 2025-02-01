@@ -17,7 +17,7 @@ async function page() {
     .then((data) => data.data);
 
   return (
-    <div className=" flex gap-2 max-h-[calc(100vh-3.5rem)] overflow-y-scroll p-4 -m-4 ">
+    <div className=" flex gap-2 max-h-[calc(100vh-3.5rem)] overflow-y-scroll p-4 -m-4 max-sm:flex-col max-sm:m-0 max-sm:max-h-dvh max-sm:overflow-scroll hide-scrollbar ">
       <form
         action=""
         className="w-full flex flex-col rounded-md bg-purple-50 shadow-shadow4 border border-purple-100 p-4 "
@@ -27,7 +27,7 @@ async function page() {
         </p>
         <ScheduleForm schedules={schedules} />
       </form>
-      <div className="w-full h-[calc(100vh-5.5rem)] flex flex-col gap-2 rounded-md bg-purple-50 shadow-shadow4 border border-purple-100 overflow-y-scroll p-4 ">
+      <div className="w-full h-[calc(100vh-5.5rem)] flex flex-col gap-2 rounded-md bg-purple-50 shadow-shadow4 border border-purple-100 overflow-y-scroll p-4 max-sm:mb-14 max-sm:overflow-visible max-h-full max-sm:p-2 max-sm:gap-3 ">
         <ScheduleHeader />
         {schedules.map(
           (el: {

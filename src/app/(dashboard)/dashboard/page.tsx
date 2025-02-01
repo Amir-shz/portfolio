@@ -39,7 +39,7 @@ async function page() {
   const finishReservationNum = todayReservations.length - newReservationNum;
 
   return (
-    <div className="grid grid-cols-6 gap-6 max-h-[calc(100vh-5.5rem)] overflow-y-scroll p-2 noScrollBar">
+    <div className="grid grid-cols-6 gap-6 max-h-[calc(100vh-5.5rem)] overflow-y-scroll p-2 noScrollBar max-sm:gap-3 max-sm:max-h-dvh max-sm:p-4">
       <DashboardStats reservations={todayReservations} />
       <DashboardCircleChart
         newNum={newReservationNum}

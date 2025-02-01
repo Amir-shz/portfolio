@@ -14,9 +14,9 @@ function DashboardTable({
   }[];
 }) {
   return (
-    <div className=" col-span-4 shadow-md rounded-lg bg-violet-50 border border-violet-100 p-2 pl-3">
-      <table className="w-full">
-        <thead className=" font-semibold text-neutral-600 border-b">
+    <div className=" col-span-4 shadow-md rounded-lg bg-violet-50 border border-violet-100 p-2 pl-3 max-sm:col-span-full max-sm:overflow-x-scroll noScrollBar">
+      <table className="w-full max-sm:w-max">
+        <thead className=" font-semibold text-neutral-600 border-b max-sm:text-sm">
           <tr className=" grid grid-cols-8 justify-items-center">
             <td className="col-span-2">نام</td>
             <td className="col-span-2">شماره</td>
@@ -30,7 +30,7 @@ function DashboardTable({
           {reservations.map((reservation, index) => (
             <tr
               key={index}
-              className=" first:mt-2 grid grid-cols-8 justify-items-center items-center text-sm text-neutral-500 font-semibold"
+              className=" first:mt-2 grid grid-cols-8 justify-items-center items-center text-sm text-neutral-500 font-semibold max-sm:text-xs"
             >
               <td className=" col-span-2">{reservation.fullName}</td>
               <td className=" col-span-2">{digitsEnToFa(reservation.phone)}</td>
