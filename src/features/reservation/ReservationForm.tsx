@@ -1,26 +1,37 @@
 "use client";
 
+import useHandleReservation from "@/hooks/useHandleReservation";
 import { useReservationStore } from "@/hooks/useReservationStore";
 import { useRef, useTransition } from "react";
 
-function ReservationForm({ onSubmit }: { onSubmit: () => void }) {
+function ReservationForm() {
+  // REF FOR CHAGING FOCUS WITH ENTER
   const secondInputRef = useRef<HTMLInputElement>(null);
   const thirdInputRef = useRef<HTMLTextAreaElement>(null);
+
+  // HANDLE FORM LOGIC (custom hook)
+  const handleReservation = useHandleReservation();
+
+  // TRANSITION FOR LOADING OR PENDING STATE
   const [isPending, startTransition] = useTransition();
 
   const {
+    // FULL NAME INPUT
     fullName,
-    phone,
-    description,
-    errors,
     handleFullNameChange,
+    // PHONE INPUT
+    phone,
     handlePhoneChange,
+    // DESCRIPTION INPUT
+    description,
     handleDescriptionChange,
+    // ERRORS FOR SHOW TO CLIENT
+    errors,
   } = useReservationStore();
 
   const handleForm = () => {
     startTransition(() => {
-      onSubmit();
+      handleReservation();
     });
   };
 
@@ -79,11 +90,17 @@ function ReservationForm({ onSubmit }: { onSubmit: () => void }) {
       <button
         className={` ${
           errors.length > 0 ? "mt-8" : "mt-[4.5rem]"
-        }  text-neutral-50 text-base font-bold leading-[1.125rem] py-3 px-6 w-full rounded-xl bg-purple-400 hover:bg-purple-500 duration-300 disabled:bg-neutral-400`}
+        }  text-neutral-50 text-base font-bold leading-[1.125rem] py-3 px-6 w-full rounded-xl bg-purple-400 hover:bg-purple-500 duration-300  ${
+          isPending ? "flex justify-center" : "disabled:bg-neutral-400 "
+        }`}
         disabled={!fullName || !phone || isPending}
         onClick={handleForm}
       >
-        {isPending ? "در حال رزرو نوبت ..." : "تایید"}
+        {isPending ? (
+          <div className="loaderDotMiniWhite w-full my-1"></div>
+        ) : (
+          "تایید"
+        )}
       </button>
     </div>
   );

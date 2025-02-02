@@ -2,28 +2,24 @@
 
 import DateRadio from "@/components/ui/DateRadio";
 import { useReservationStore } from "@/hooks/useReservationStore";
-import { filteredWeeksType, scheduleDataType } from "@/types/types";
-import { splitIntoWeeks } from "@/utils/utils";
+import useSchedules from "@/hooks/useSchedules";
+import { filteredWeeksType } from "@/types/types";
+import { getFourWeeksFromToday, splitIntoWeeks } from "@/utils/utils";
 import { useState } from "react";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 
-function ReservationDates({
-  weeks,
-  schedulesData,
-  isLoading,
-}: {
-  weeks: {
-    date: string;
-    jalali: { dayName: string; day: string; monthName: string };
-  }[];
-  schedulesData: scheduleDataType[];
-  isLoading: boolean;
-}) {
-  const [page, setPage] = useState<number>(1);
+function ReservationDates() {
   const { resetDateAndTimeStates } = useReservationStore();
+  const [page, setPage] = useState<number>(1);
+  const { isLoading, data: schedules } = useSchedules();
 
+  const weeks = getFourWeeksFromToday();
+
+  // CREATE PAGINATION FOR WEEKS
   const filteredWeeks: filteredWeeksType = splitIntoWeeks(weeks)[page - 1];
-  const reservations = schedulesData?.map((el) => el.date);
+
+  // GET SCHEDULES DATES FOR SHOWING TO CLIENT
+  const schedulesDates = schedules?.map((el: { date: string }) => el.date);
 
   return (
     <div className="mt-2">
@@ -72,10 +68,11 @@ function ReservationDates({
                 key={index}
                 date={el}
                 available={
-                  reservations?.includes(el.date)
+                  schedulesDates?.includes(el.date)
                     ? new Date(el.date).getTime() > new Date().getTime()
-                      ? schedulesData?.filter(
-                          (element) => element.date === el.date
+                      ? schedules?.filter(
+                          (element: { date: string }) =>
+                            element.date === el.date
                         )[0].available
                       : 0
                     : 0

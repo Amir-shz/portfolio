@@ -1,10 +1,23 @@
 import TimeRadio from "@/components/ui/TimeRadio";
+import { useReservationStore } from "@/hooks/useReservationStore";
+import useSchedules from "@/hooks/useSchedules";
+import { scheduleDataType } from "@/types/types";
+import { useEffect, useState } from "react";
 
-function ReservationTimes({
-  hours,
-}: {
-  hours: { hour: string; isAvailable: boolean }[] | undefined;
-}) {
+function ReservationTimes() {
+  const { selectedDate } = useReservationStore();
+  const { data: schedules } = useSchedules();
+  const [availableTimes, setAvailableTimes] = useState<scheduleDataType>();
+
+  useEffect(() => {
+    setAvailableTimes(
+      () =>
+        schedules?.filter((el: { date: string }) => el.date === selectedDate)[0]
+    );
+  }, [schedules, selectedDate]);
+
+  const hours = availableTimes?.hours;
+
   return (
     <div className="mt-4">
       <div className="mb-2">

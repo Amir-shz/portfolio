@@ -1,10 +1,10 @@
 "use client";
 
 import ClockIcon from "../icons/ClockIcon";
-// import DollarIcon from "../icons/DollarIcon";
 import ArrowLeftIcon from "../icons/ArrowLeftIcon";
 import { planCardProps } from "@/types/types";
 import { useReservationStore } from "@/hooks/useReservationStore";
+import { useRouter } from "next/navigation";
 
 function PlanCard({
   title,
@@ -15,6 +15,8 @@ function PlanCard({
   id,
 }: planCardProps): React.ReactNode {
   const { show, setPlan } = useReservationStore();
+  const router = useRouter();
+
   return (
     <div className=" rounded-3xl border border-neutral-300 shadow-shadow3 bg-neutral-100 hover:border-purple-200 transition-all duration-300 flex flex-col justify-between min-h-96 last:bg-purple-300 group last:border-none select-none">
       <div>
@@ -48,8 +50,25 @@ function PlanCard({
         </p>
 
         <div className=" w-full px-6">
+          {/* BUTTON FOR MOBILE SIZE (go to new page) */}
           <button
-            className=" w-full rounded-xl shadow-shadow4 bg-purple-400  group-last:bg-neutral-50 mb-6 hover:bg-purple-500 hover:shadow-shadow4 transition-all duration-300"
+            className=" w-full rounded-xl shadow-shadow4 bg-purple-400  group-last:bg-neutral-50 mb-6 hover:bg-purple-500 hover:shadow-shadow4 transition-all duration-300 sm:hidden"
+            onClick={() => {
+              setPlan(id);
+              router.push("/services/reservation");
+            }}
+          >
+            <div className="flex gap-2 items-center justify-center py-3 px-6">
+              <p className=" group-last:text-purple-400 [&~svg>path]:group-last:stroke-purple-400 text-neutral-50 font-bold text-base leading-[1.125rem]">
+                رزرو کردن
+              </p>
+              <ArrowLeftIcon />
+            </div>
+          </button>
+
+          {/* BUTTON FOR DESKTOP SIZE (open modal) */}
+          <button
+            className=" w-full rounded-xl shadow-shadow4 bg-purple-400  group-last:bg-neutral-50 mb-6 hover:bg-purple-500 hover:shadow-shadow4 transition-all duration-300 max-sm:hidden"
             onClick={() => {
               setPlan(id);
               show();

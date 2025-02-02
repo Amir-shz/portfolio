@@ -10,8 +10,7 @@ export const metadata: Metadata = {
 async function Page() {
   return (
     <div className=" grid grid-cols-4 gap-6 select-none">
-      {/* <PlansBox /> */}
-      <div className=" col-span-4 grid grid-cols-4 gap-3">
+      <div className=" col-span-4 grid grid-cols-4 gap-3 max-sm:grid-cols-1">
         <ReactQueryProvider />
       </div>
       <div className=" col-span-2">

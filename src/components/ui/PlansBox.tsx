@@ -3,16 +3,10 @@
 import PlanCard from "./PlanCard";
 import Reservation from "@/features/reservation/Reservation";
 import { useReservationStore } from "@/hooks/useReservationStore";
-// import PlanBoxLoader from "./PlanBoxLoader";
-// import usePlans from "@/hooks/usePlans";
 import { planData } from "@/data/planData";
 
 function PlansBox() {
   const { showModal } = useReservationStore();
-
-  // const { isLoading, data: planData } = usePlans();
-
-  // if (isLoading) return <PlanBoxLoader />;
 
   return (
     <>

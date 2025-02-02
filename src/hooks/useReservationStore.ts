@@ -2,80 +2,93 @@ import { ChangeEvent } from "react";
 import { create } from "zustand";
 
 type Store = {
-  showModal: boolean;
-  show: () => void;
+  // FOR SELECT A PLAN BY CLIENT
+  plan: number;
   setPlan: (val: number) => void;
 
-  step: 1 | 2 | 3;
-  plan: number;
-  planData: {
-    id: number;
-    title: string;
-    time: string;
-    price: string;
-    plan: string;
-  }[];
-  selectedDate: string;
-  selectedTime: string;
-  fullName: string;
-  phone: string;
-  description: string;
-  errors: string[];
+  // FOR SHOW MODAL IN DESKTOP SIZE (for reservation)
+  showModal: boolean;
+  show: () => void;
   hide: () => void;
-  handleSelectedDateChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleSelectedTimeChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleFullNameChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  handlePhoneChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleDescriptionChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+
+  // FOR RESERVATION STEP (mobile & desktop)
+  // STEP 1 => SELECT DATE AND TIME
+  // STEP 2 => FILL OUT THE INFORMATION FORM
+  // STEP 3 => CONGRATS AND FINISH
+  step: 1 | 2 | 3;
   handleStep: (val: 1 | 2 | 3) => void;
-  handleAddError: (err: string) => void;
-  resetDateAndTimeStates: () => void;
-  resetAll: () => void;
-  resetErrors: () => void;
-  setPlanData: (
-    val: {
-      id: number;
-      title: string;
-      time: string;
-      price: string;
-      plan: string;
-    }[]
-  ) => void;
 
   //
+  // CLIENT AND RESERVATION INFORMATION (controlled inputs)
+  //
 
-  handleSelectedDateInit: (dateVal: string, timeVal: string) => void;
+  // * selected date *
+  selectedDate: string;
+  handleSelectedDateChange: (e: ChangeEvent<HTMLInputElement>) => void;
+
+  // * selected time *
+  selectedTime: string;
+  handleSelectedTimeChange: (e: ChangeEvent<HTMLInputElement>) => void;
+
+  // * fullname *
+  fullName: string;
+  handleFullNameChange: (e: ChangeEvent<HTMLInputElement>) => void;
+
+  // * phone *
+  phone: string;
+  handlePhoneChange: (e: ChangeEvent<HTMLInputElement>) => void;
+
+  // * description *
+  description: string;
+  handleDescriptionChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+
+  // RESET SELECTED DATE AND TIME WHEN change weeks page OR handle submit OR close modal
+  resetDateAndTimeStates: () => void;
+
+  // FORM HANDLING ERRORS
+  errors: string[];
+  handleAddError: (err: string) => void;
+  resetErrors: () => void;
+
+  // RESET ALL STATE WHEN CLOSING THE RESERVATION OR FINSH THE RESERVATION
+  resetAll: () => void;
 };
 
 export const useReservationStore = create<Store>()((set) => ({
-  step: 1,
-  showModal: false,
+  // FOR SELECT A PLAN BY CLIENT
   plan: 1,
-  planData: [],
-  selectedDate: "",
-  selectedTime: "",
-  fullName: "",
-  phone: "",
-  description: "",
-  errors: [],
+  setPlan: (val: number) => set(() => ({ plan: val })),
+
+  // FOR SHOW MODAL IN DESKTOP SIZE (for reservation)
+  showModal: false,
   show: () => set(() => ({ showModal: true })),
   hide: () => set(() => ({ showModal: false })),
-  setPlan: (val: number) => set(() => ({ plan: val })),
+
+  // FOR RESERVATION STEP (mobile & desktop)
+  step: 1,
+  handleStep: (val) => set(() => ({ step: val })),
+
+  //
+  // CLIENT AND RESERVATION INFORMATION (controlled inputs)
+  //
+
+  // * selected date *
+  selectedDate: "",
   handleSelectedDateChange: (e) => {
     set({ selectedTime: "", selectedDate: e.target.value });
   },
 
-  //
-
-  handleSelectedDateInit: (dateVal, timeVal) => {
-    set({ selectedTime: timeVal, selectedDate: dateVal });
-  },
-
-  //
-
+  // * selected time *
+  selectedTime: "",
   handleSelectedTimeChange: (e) =>
     set(() => ({ selectedTime: e.target.value })),
+
+  // * fullname *
+  fullName: "",
   handleFullNameChange: (e) => set(() => ({ fullName: e.target.value })),
+
+  // * phone *
+  phone: "",
   handlePhoneChange: (e) => {
     if (e.target.value.length > 11) return;
     if (e.target.value) {
@@ -83,14 +96,24 @@ export const useReservationStore = create<Store>()((set) => ({
     }
     set(() => ({ phone: e.target.value }));
   },
+
+  // * description *
+  description: "",
   handleDescriptionChange: (e) => set(() => ({ description: e.target.value })),
-  handleStep: (val) => set(() => ({ step: val })),
-  handleAddError: (err) => set((state) => ({ errors: [...state.errors, err] })),
+
+  // RESET SELECTED DATE AND TIME WHEN change weeks page OR handle submit OR close modal
   resetDateAndTimeStates: () =>
     set(() => ({
       selectedDate: "",
       selectedTime: "",
     })),
+
+  // FORM HANDLING ERRORS
+  errors: [],
+  handleAddError: (err) => set((state) => ({ errors: [...state.errors, err] })),
+  resetErrors: () => set(() => ({ errors: [] })),
+
+  // RESET ALL STATE WHEN CLOSING THE RESERVATION OR FINSH THE RESERVATION
   resetAll: () =>
     set(() => ({
       step: 1,
@@ -102,6 +125,4 @@ export const useReservationStore = create<Store>()((set) => ({
       description: "",
       errors: [],
     })),
-  resetErrors: () => set(() => ({ errors: [] })),
-  setPlanData: (val) => set(() => ({ planData: val })),
 }));
