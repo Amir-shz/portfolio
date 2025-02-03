@@ -5,13 +5,14 @@ import { useReservationStore } from "@/hooks/useReservationStore";
 import useSchedules from "@/hooks/useSchedules";
 import { filteredWeeksType } from "@/types/types";
 import { getFourWeeksFromToday, splitIntoWeeks } from "@/utils/utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 
 function ReservationDates() {
-  const { resetDateAndTimeStates } = useReservationStore();
+  const { resetDateAndTimeStates, selectedDate, setSelectedDate } =
+    useReservationStore();
   const [page, setPage] = useState<number>(1);
-  const { isLoading, data: schedules } = useSchedules();
+  const { isLoading, isSuccess, data: schedules } = useSchedules();
 
   const weeks = getFourWeeksFromToday();
 
@@ -20,6 +21,34 @@ function ReservationDates() {
 
   // GET SCHEDULES DATES FOR SHOWING TO CLIENT
   const schedulesDates = schedules?.map((el: { date: string }) => el.date);
+
+  // FOR INIT SELECTION
+  let firstAvailableDate: { date: string };
+  // const firstAvailableDate = useRef<string>("");
+
+  useEffect(() => {
+    // FIND FIRST AVAILABLE DATE
+    firstAvailableDate = schedules?.find(
+      (el: { available: number }) => el.available > 0
+    );
+    // FIND THE FIRST AVAILABLE DATE PAGE IN WEEKS
+    const firsAvailableDateWeek = splitIntoWeeks(weeks).find((week) =>
+      week.dates.some(
+        (weekDates) => weekDates.date === firstAvailableDate?.date
+      )
+    );
+    const pageNumber = firsAvailableDateWeek ? firsAvailableDateWeek.page : 1;
+    // GO TO THE FIRST AVAILABLE DATE PAGE
+    setPage(() => pageNumber);
+    if (
+      isSuccess &&
+      schedulesDates.length > 0 &&
+      !selectedDate &&
+      firstAvailableDate
+    ) {
+      setSelectedDate(firstAvailableDate?.date);
+    }
+  }, [schedules]);
 
   return (
     <div className="mt-2">
@@ -63,9 +92,9 @@ function ReservationDates() {
           </div>
         ) : (
           <div className="grid grid-cols-7 gap-4">
-            {filteredWeeks.dates.map((el, index) => (
+            {filteredWeeks.dates.map((el) => (
               <DateRadio
-                key={index}
+                key={el.date}
                 date={el}
                 available={
                   schedulesDates?.includes(el.date)

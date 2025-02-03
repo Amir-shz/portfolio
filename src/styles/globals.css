@@ -119,7 +119,7 @@
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #8133f1;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 /* Handle on hover */

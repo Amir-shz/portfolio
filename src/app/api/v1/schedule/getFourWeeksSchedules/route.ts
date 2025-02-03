@@ -13,6 +13,12 @@ export async function GET() {
     date: { $in: fourWeek },
   }).sort({ date: 1 });
 
+  schedules.forEach((schedule) => {
+    schedule.hours.sort((a: { hour: string }, b: { hour: string }) =>
+      a.hour.localeCompare(b.hour)
+    );
+  });
+
   const formattedSchedules = schedules.map((obj) => {
     const date = new Date(obj.date);
     const formattedDate = date.toLocaleDateString("en-CA");

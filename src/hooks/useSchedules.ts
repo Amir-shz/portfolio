@@ -9,10 +9,10 @@ async function getSchedules() {
 }
 
 export default function useSchedules() {
-  const { isLoading, data } = useQuery({
+  const { isLoading, isSuccess, data } = useQuery({
     queryKey: ["schedules"],
     queryFn: getSchedules,
   });
 
-  return { isLoading, data };
+  return { isLoading, isSuccess, data };
 }

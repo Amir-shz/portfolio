@@ -25,6 +25,7 @@ type Store = {
   // * selected date *
   selectedDate: string;
   handleSelectedDateChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  setSelectedDate: (val: string) => void;
 
   // * selected time *
   selectedTime: string;
@@ -76,6 +77,9 @@ export const useReservationStore = create<Store>()((set) => ({
   selectedDate: "",
   handleSelectedDateChange: (e) => {
     set({ selectedTime: "", selectedDate: e.target.value });
+  },
+  setSelectedDate: (val: string) => {
+    set({ selectedDate: val });
   },
 
   // * selected time *

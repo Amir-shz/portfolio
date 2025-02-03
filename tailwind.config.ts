@@ -80,7 +80,6 @@ export default {
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
         },
-        //
       },
       fontSize: {
         h1_SB_desktop: ["2.281rem", { fontWeight: "600" }],

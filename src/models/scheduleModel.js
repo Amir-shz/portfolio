@@ -4,7 +4,10 @@ const scheduleSchema = new mongoose.Schema({
   date: Date,
   hours: [
     {
-      hour: String,
+      hour: {
+        type: String,
+        required: true,
+      },
       isAvailable: {
         type: Boolean,
         default: true,
