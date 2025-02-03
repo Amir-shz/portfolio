@@ -21,14 +21,14 @@ export default function Error({
   return (
     <>
       <div className=" w-full h-dvh relative flex flex-col items-center justify-center overflow-hidden">
-        <div className=" absolute bottom-44 text-center w-full z-50  flex flex-col gap-2 max-sm:bottom-52 max-[430px]:bottom-60">
+        <div className=" absolute bottom-32 text-center w-full z-50  flex flex-col gap-2 max-sm:bottom-52 max-[430px]:bottom-60">
           <p className="text-4xl font-semibold text-error-700  max-sm:text-2xl">
             با مشکلی مواجه شدیم
           </p>
           <p className=" text-error-800 mx-2">{error.message}</p>
           <p>{error.digest}</p>
         </div>
-        <div className="absolute  bottom-28  z-50  max-sm:bottom-40 flex flex-row-reverse gap-4 items-center max-[430px]:bottom-40">
+        <div className="absolute  bottom-20  z-50  max-sm:bottom-40 flex flex-row-reverse gap-4 items-center max-[430px]:bottom-40">
           <Link
             href="/"
             className=" bg-purple-400 px-6 py-2 text-neutral-50 font-medium rounded hover:bg-purple-600 duration-300"
