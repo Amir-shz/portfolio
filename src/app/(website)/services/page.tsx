@@ -13,14 +13,14 @@ async function Page() {
       <div className=" col-span-4 grid grid-cols-4 gap-3 max-sm:grid-cols-1">
         <ReactQueryProvider />
       </div>
-      <div className=" col-span-2">
+      <div className=" col-span-2 max-sm:col-span-4">
         <ServicesForCompaniesAndPersons
           title={servicesForCompanyData.title}
           type={servicesForCompanyData.type}
           items={servicesForCompanyData.items}
         />
       </div>
-      <div className=" col-span-2">
+      <div className=" col-span-2 max-sm:col-span-4">
         <ServicesForCompaniesAndPersons
           title={servicesForPersonData.title}
           type={servicesForPersonData.type}

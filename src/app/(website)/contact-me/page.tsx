@@ -11,13 +11,13 @@ export const metadata: Metadata = {
 
 function Page() {
   return (
-    <div className="flex gap-14">
+    <div className="flex gap-14 max-sm:flex-col">
       <div className="basis-1/2 flex flex-col justify-between gap-6">
         <SocialSectionContactUs />
         <ContactWays />
       </div>
-      <div className=" basis-1/2 flex justify-center items-center">
-        <Image src={vector} alt="vector" />
+      <div className=" basis-1/2 flex justify-center items-center max-sm:-mb-8">
+        <Image src={vector} alt="vector" className=" max-sm:scale-[85%]" />
       </div>
     </div>
   );

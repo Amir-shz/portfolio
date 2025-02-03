@@ -17,10 +17,10 @@ function SocialSectionContactUs(): React.ReactNode {
     //   className="rounded-3xl shadow-shadow3 bg-neutral-100"
     // >
     <div className="rounded-3xl shadow-shadow3 bg-neutral-100 border border-neutral-300">
-      <h3 className=" text-neutral-700 text-h6_SB_desktop pr-6 pt-6 pb-11 select-none">
+      <h3 className=" text-neutral-700 text-h6_SB_desktop pr-6 pt-6 pb-11 select-none max-sm:pr-4 max-sm:pt-5 max-sm:pb-[2.38rem]">
         حساب های مجازی
       </h3>
-      <div className=" flex gap-14 justify-center pb-12">
+      <div className=" flex gap-14 justify-center pb-12 max-sm:gap-10 max-sm:pb-6">
         <SocialIconLink
           size="lg"
           href="https://www.instagram.com/fatemeshafiei_/"

@@ -16,26 +16,26 @@ function ContactWays(): React.ReactNode {
     //   transition={{ duration: 0.5 }}
     //   className="rounded-3xl shadow-shadow3 bg-neutral-100 pr-6 pt-6 pb-12"
     // >
-    <div className="rounded-3xl shadow-shadow3 bg-neutral-100 border border-neutral-300 pr-6 pt-6 pb-12">
-      <h3 className=" text-neutral-700 text-h6_SB_desktop pb-11 select-none">
+    <div className="rounded-3xl shadow-shadow3 bg-neutral-100 border border-neutral-300 pr-6 pt-6 pb-12 max-sm:p-0 ">
+      <h3 className=" text-neutral-700 text-h6_SB_desktop pb-11 select-none max-sm:pt-5 max-sm:pr-4 max-sm:pb-6">
         راه های تماس
       </h3>
-      <div className=" flex flex-col gap-8">
-        <div className=" flex items-center gap-6">
+      <div className=" flex flex-col gap-8 max-sm:pr-8 max-sm:pb-5 max-sm:gap-4">
+        <div className=" flex items-center gap-6 ">
           <SocialIconLink size="lg" href="mailto:fateme.shafiei9899@gmail.com">
             <MailIcon />
           </SocialIconLink>
-          <p className=" text-neutral-600 font-bold text-[1.375rem] leading-7">
+          <p className=" text-neutral-600 font-bold text-[1.375rem] leading-7 max-sm:text-lg max-sm:w-0 max-sm:flex-1 max-sm:break-words max-sm:whitespace-normal pl-4 ">
             fateme.shafiei9899@gmail.com
           </p>
         </div>
         <div className=" flex items-center gap-6">
           <SocialIconLink size="lg" href="tel:09930200249">
-            <div className=" size-full flex justify-center items-center [&>svg]:hover:stroke-purple-500 [&>svg]:stroke-[#737373] transition-all duration-200">
+            <div className=" size-full flex justify-center items-center [&>svg]:hover:stroke-purple-500 [&>svg]:stroke-[#737373] transition-all duration-200 max-sm:[&>svg]:size-7 shrink-0 grow-0 ">
               <PhoneIcon />
             </div>
           </SocialIconLink>
-          <p className="text-neutral-600 font-bold text-[1.375rem] leading-7">
+          <p className="text-neutral-600 font-bold text-[1.375rem] leading-7 max-sm:text-lg">
             ۰۹۹۳۰۲۰۰۲۴۹
           </p>
         </div>
