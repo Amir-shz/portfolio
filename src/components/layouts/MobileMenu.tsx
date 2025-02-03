@@ -1,7 +1,7 @@
 "use client";
 
 import { DialogTitle } from "@radix-ui/react-dialog";
-import MenuIcon from "../icons/MenuIcon";
+// import MenuIcon from "../icons/MenuIcon";
 import {
   Drawer,
   DrawerContent,
@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Logo from "../ui/Logo";
 import XIcon from "../icons/XIcon";
+import { HiOutlineBars3BottomLeft } from "react-icons/hi2";
 
 function MobileMenu() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -27,7 +28,8 @@ function MobileMenu() {
     <div className="sm:hidden">
       <Drawer direction="top" open={isOpen} onOpenChange={setIsOpen}>
         <DrawerTrigger>
-          <MenuIcon />
+          {/* <MenuIcon /> */}
+          <HiOutlineBars3BottomLeft className="size-8" />
         </DrawerTrigger>
         <DrawerPortal>
           <DrawerOverlay className="fixed inset-0 bg-neutral-50/15 backdrop-blur-sm">

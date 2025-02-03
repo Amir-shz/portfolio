@@ -18,12 +18,12 @@ function Header(): React.ReactNode {
     <header className="flex justify-between items-center py-4 max-sm:py-3">
       {/* <NameLink /> */}
       {/* for same size in left and right */}
-      <MobileMenu />
+      <Logo />
+      <NavList />
       <div className=" invisible">
         <Logo />
       </div>
-      <NavList />
-      <Logo />
+      <MobileMenu />
       {/* </motion.header> */}
     </header>
   );

@@ -108,7 +108,7 @@
 }
 
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 10px;
 }
 
 /* Track */
@@ -135,6 +135,10 @@
 
   .hide-scrollbar::-webkit-scrollbar {
     display: none; /* برای کروم، سافاری و اپرا */
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
   }
 }
 
