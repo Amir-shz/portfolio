@@ -55,7 +55,7 @@ function PlanCard({
             className=" w-full rounded-xl shadow-shadow4 bg-purple-400  group-last:bg-neutral-50 mb-6 hover:bg-purple-500 hover:shadow-shadow4 transition-all duration-300 sm:hidden"
             onClick={() => {
               setPlan(id);
-              router.push("/services/reservation");
+              router.push("/reservation");
             }}
           >
             <div className="flex gap-2 items-center justify-center py-3 px-6">

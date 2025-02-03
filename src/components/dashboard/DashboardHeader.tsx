@@ -26,7 +26,7 @@ async function DashboardHeader() {
   return (
     <header className=" bg-purple-50 h-14 flex items-center justify-between px-8 max-sm:px-4 max-sm:flex-row-reverse max-sm:h-16">
       <div className=" flex gap-2 items-center max-sm:flex-row-reverse">
-        <UserPhoto img={user.photo} name={user?.name[0]} />
+        <UserPhoto img={user?.photo} name={user?.name[0]} />
         <p className="font-semibold">{user?.name}</p>
       </div>
       <p className=" text-purple-700 font-semibold text-lg max-sm:hidden">
