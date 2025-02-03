@@ -32,7 +32,7 @@ function Footer() {
         All Rights Reserved by Fatemeh Shafiei
         <span>
           {" "}
-          <Link href="/login">&copy;</Link>
+          <Link href="/dashboard">&copy;</Link>
         </span>
       </p>
     </footer>
