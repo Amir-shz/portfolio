@@ -56,7 +56,7 @@ function ReservationRowBtns({ id, status }: { id: string; status: string }) {
       </button>
       <Dialog open={showConfirm} onOpenChange={setShowConfirm}>
         <DialogPortal>
-          <DialogOverlay className="fixed inset-0 bg-neutral-50/15 backdrop-blur-sm flex justify-center items-center">
+          <DialogOverlay className="fixed inset-0 backdrop-blur-sm flex justify-center items-center">
             <DialogContent className="[&>button]:hidden max-sm:w-3/4 max-sm:rounded-md">
               <DialogTitle className=" text-center">
                 از حذف این رزرو مطمئن هستید؟
