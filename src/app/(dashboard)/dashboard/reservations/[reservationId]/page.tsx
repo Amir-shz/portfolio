@@ -4,6 +4,8 @@ import { getJalaliDetails } from "@/utils/utils";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 import { Metadata } from "next";
 import { headers } from "next/headers";
+import Link from "next/link";
+import { HiOutlineChevronLeft } from "react-icons/hi2";
 
 export const metadata: Metadata = {
   title: "رزرو",
@@ -53,6 +55,17 @@ async function page({
   return (
     <div className=" max-h-[calc(100vh-5.5rem)] hide-scrollbar max-sm:max-h-dvh overflow-y-scroll -m-2 max-sm:m-0">
       <div className=" rounded-md bg-purple-50  shadow-shadow4 border border-purple-100 p-4 m-4 max-sm:mb-20 max-sm:m-4 max-sm:p-2 ">
+        <div className=" flex items-center justify-between mb-4">
+          <p className=" font-medium max-sm:text-sm ">
+            رزرو شماره: {reservationId}
+          </p>
+          <Link
+            href="/dashboard/reservations"
+            className=" size-8 bg-purple-400 text-neutral-50 flex justify-center items-center rounded-full hover:bg-purple-500 duration-200 flex-shrink-0"
+          >
+            <HiOutlineChevronLeft size={24} />
+          </Link>
+        </div>
         <div className="grid grid-cols-4 gap-4 [&_P]:text-center  [&>div]:flex [&>div]:flex-col [&>div]:gap-2 max-sm:grid-cols-2">
           <div>
             <p className="bg-purple-400 text-neutral-50 rounded-md leading-10 text-lg font-medium max-sm:text-base max-sm:font-normal max-sm:py-1 ">

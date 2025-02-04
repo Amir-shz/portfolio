@@ -23,6 +23,11 @@
   }
 }
 
+.dialog__overlay + div {
+  background-color: #fafafa;
+  opacity: 20%;
+}
+
 .loaderDot {
   width: 60px;
   aspect-ratio: 4;
