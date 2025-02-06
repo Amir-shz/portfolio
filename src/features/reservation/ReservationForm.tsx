@@ -36,8 +36,8 @@ function ReservationForm() {
   };
 
   return (
-    <div>
-      <div className="reservationForm">
+    <div className=" max-sm:flex max-sm:flex-col max-sm:justify-between max-sm:h-[calc(100dvh-128px)]">
+      <div className="reservationForm max-sm:mt-4 max-sm:gap-6">
         <label className=" relative w-full">
           <input
             type="text"
@@ -88,7 +88,7 @@ function ReservationForm() {
         ))}
       </div>
       <button
-        className={` ${
+        className={`max-sm:py-[0.625rem]  ${
           errors.length > 0 ? "mt-8" : "mt-[4.5rem]"
         }  text-neutral-50 text-base font-bold leading-[1.125rem] py-3 px-6 w-full rounded-xl bg-purple-400 hover:bg-purple-500 duration-300  ${
           isPending ? "flex justify-center" : "disabled:bg-neutral-400 "
@@ -97,7 +97,7 @@ function ReservationForm() {
         onClick={handleForm}
       >
         {isPending ? (
-          <div className="loaderDotMiniWhite w-full my-1"></div>
+          <div className="loaderDotMiniWhite w-full my-1 max-sm:my-[6px]"></div>
         ) : (
           "تایید"
         )}

@@ -51,8 +51,8 @@ function ReservationDates() {
   }, [schedules]);
 
   return (
-    <div className="mt-2">
-      <div className="mb-2 flex justify-between">
+    <div className="mt-2 max-sm:mt-4">
+      <div className="mb-2 flex justify-between max-sm:mb-3">
         <p className="text-neutral-700 text-base font-semibold leading-4">
           تاریخ
         </p>
@@ -81,7 +81,7 @@ function ReservationDates() {
       </div>
       <div>
         {isLoading ? (
-          <div className="grid grid-cols-7 gap-4 [&>div]:size-full [&>div]:rounded-lg w-full h-[4.5rem] [&>div]:bg-neutral-200 [&>div]:animate-pulse">
+          <div className="grid grid-cols-7 gap-4 [&>div]:size-full [&>div]:rounded-lg w-full h-[4.5rem] [&>div]:bg-neutral-200 [&>div]:animate-pulse max-sm:grid-cols-3 max-sm:gap-3 max-sm:h-60">
             <div></div>
             <div></div>
             <div></div>
@@ -91,7 +91,7 @@ function ReservationDates() {
             <div></div>
           </div>
         ) : (
-          <div className="grid grid-cols-7 gap-4">
+          <div className="grid grid-cols-7 gap-4 max-sm:grid-cols-3 max-sm:gap-3">
             {filteredWeeks.dates.map((el) => (
               <DateRadio
                 key={el.date}
