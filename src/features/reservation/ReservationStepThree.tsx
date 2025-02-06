@@ -37,7 +37,7 @@ function ReservationStepThree() {
       </button>
       {/* MOBILE BUTTON */}
       <button
-        className=" text-neutral-50 text-base font-bold leading-[1.125rem] py-3 px-6 mt-8 w-full rounded-xl bg-purple-400 hover:bg-purple-500 duration-300 disabled:bg-neutral-400 sm:hidden"
+        className=" text-neutral-50 text-base font-bold leading-[1.125rem] py-3 px-6 mt-8 w-full rounded-xl bg-purple-400 hover:bg-purple-500 duration-300 disabled:bg-neutral-400 sm:hidden mb-2"
         autoFocus={true}
         onClick={() => {
           router.push("/services");

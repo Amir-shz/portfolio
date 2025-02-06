@@ -59,6 +59,7 @@ function ScheduleForm({
           max="23:59"
           step="600"
           ref={timeInputRef}
+          className="w-full"
           onChange={(e) => setTime(e.target.value)}
           onClick={() => {
             if (timeInputRef.current) {

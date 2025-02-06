@@ -23,7 +23,7 @@ function Page() {
         {step === 1 && <ReservationStepOne />}
         {step === 2 && (
           <>
-            <p className=" text-neutral-700 text-xl font-semibold leading-7 mx-44 max-sm:mx-2 max-sm:mt-6">
+            <p className=" text-neutral-700 text-xl font-semibold leading-7 mx-44 max-sm:mx-2 max-sm:mt-6 max-sm:text-base">
               لطفا اطلاعات مورد نیاز را برای ارتباط بهتر وارد کنید.
             </p>
             <ReservationForm />

@@ -14,7 +14,7 @@ function layout({
             رزرو نوبت
           </h2>
         </header>
-        <div className=" max-h-[calc(100dvh-72px)] h-full overflow-y-scroll col-span-full">
+        <div className=" max-h-[calc(100dvh-72px)] h-full overflow-y-scroll col-span-full hide-scrollbar">
           {children}
         </div>
       </div>

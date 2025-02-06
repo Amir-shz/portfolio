@@ -88,7 +88,7 @@ function ReservationForm() {
         ))}
       </div>
       <button
-        className={`max-sm:py-[0.625rem]  ${
+        className={`max-sm:py-[0.625rem] max-sm:mb-2  ${
           errors.length > 0 ? "mt-8" : "mt-[4.5rem]"
         }  text-neutral-50 text-base font-bold leading-[1.125rem] py-3 px-6 w-full rounded-xl bg-purple-400 hover:bg-purple-500 duration-300  ${
           isPending ? "flex justify-center" : "disabled:bg-neutral-400 "
