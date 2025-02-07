@@ -25,19 +25,26 @@ function useHandleReservation() {
       return;
     }
 
-    await createReservation({
-      plan,
-      fullName,
-      phone,
-      description,
-      selectedDate,
-      selectedTime,
-    });
+    try {
+      await createReservation({
+        plan,
+        fullName,
+        phone,
+        description,
+        selectedDate,
+        selectedTime,
+      });
 
-    resetAll();
-    handleStep(3);
+      resetAll();
+      handleStep(3);
+    } catch (err) {
+      if (err instanceof Error) {
+        return { message: err.message };
+      } else {
+        return { message: "An unknown error occurred" };
+      }
+    }
   }
-
   return handleSubmit;
 }
 

@@ -28,11 +28,18 @@ export async function createReservation(data: {
 }) {
   await dbConnect();
 
-  await Reservation.create(data);
+  const isAvailable = await Reservation.findOne({
+    selectedDate: data.selectedDate,
+    selectedTime: data.selectedTime,
+  });
 
+  if (isAvailable) {
+    throw new Error("این تایم توسط شخص دیگری رزرو شده است");
+  }
+
+  await Reservation.create(data);
   const dateToFind = new Date(data.selectedDate);
   const hourToFind = data.selectedTime;
-
   await Schedule.findOneAndUpdate(
     {
       date: dateToFind,

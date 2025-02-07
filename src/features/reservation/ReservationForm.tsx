@@ -2,9 +2,12 @@
 
 import useHandleReservation from "@/hooks/useHandleReservation";
 import { useReservationStore } from "@/hooks/useReservationStore";
-import { useRef, useTransition } from "react";
+import { useRef, useState, useTransition } from "react";
 
 function ReservationForm() {
+  // const [state, action, pending] = useActionState(login, undefined);
+  const [error, setError] = useState("");
+
   // REF FOR CHAGING FOCUS WITH ENTER
   const secondInputRef = useRef<HTMLInputElement>(null);
   const thirdInputRef = useRef<HTMLTextAreaElement>(null);
@@ -30,8 +33,14 @@ function ReservationForm() {
   } = useReservationStore();
 
   const handleForm = () => {
-    startTransition(() => {
-      handleReservation();
+    startTransition(async () => {
+      const reservationError = await handleReservation();
+      if (reservationError) setError(reservationError?.message);
+      // console.log(reservationError);
+
+      setTimeout(() => {
+        setError("");
+      }, 5000);
     });
   };
 
@@ -81,11 +90,12 @@ function ReservationForm() {
           />
           <p className="reservationParagraph top-6">توضیحات (اختیاری)</p>
         </label>
-      </div>
-      <div className=" text-sm font-semibold text-error-700 leading-6">
-        {errors.map((el, index) => (
-          <p key={index}>{el}</p>
-        ))}
+        <div className=" text-sm font-semibold text-error-700 leading-6 -mt-4">
+          {errors.map((el, index) => (
+            <p key={index}>{el}</p>
+          ))}
+          {error && <p>{error}</p>}
+        </div>
       </div>
       <button
         className={`max-sm:py-[0.625rem] max-sm:mb-2  ${
