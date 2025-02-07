@@ -10,7 +10,7 @@ function layout({
       <div className="grid grid-cols-4 gap-x-3 px-4">
         <header className="col-span-4 h-16 py-4 flex items-center w-full">
           <ReservationBackButton />
-          <h2 className=" text-h6_SB_mobile w-full text-center translate-x-4">
+          <h2 className=" text-h6_SB_mobile w-full text-center translate-x-5">
             رزرو نوبت
           </h2>
         </header>

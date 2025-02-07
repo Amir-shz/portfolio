@@ -9,7 +9,7 @@ function ReservationStepOne() {
   const { selectedDate, selectedTime, handleStep } = useReservationStore();
 
   return (
-    <div className="max-sm:flex max-sm:flex-col max-sm:justify-between max-sm:h-[calc(100dvh-88px)]">
+    <div className="max-sm:flex max-sm:flex-col max-sm:justify-between max-sm:h-[calc(100dvh-80px)]">
       <div>
         <ReservationDetail />
         <ReservationDates />

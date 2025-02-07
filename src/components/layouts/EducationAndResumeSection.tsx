@@ -14,7 +14,7 @@ function EducationAndResumeSection({
         {type === "education" && <p>تحصیلات و مدارک</p>}
         {type === "resume" && <p>تجربه و رزومه</p>}
       </div>
-      <ul className=" list-disc list-inside [&>li]:marker:text-sm [&>li]:marker:text-neutral-500 [&>li]:text-neutral-500 [&>li]:leading-8 [&>li]:font-medium [&>li]:text-lg pr-3 ">
+      <ul className=" list-disc list-inside [&>li]:marker:text-sm [&>li]:marker:text-neutral-500 [&>li]:text-neutral-500 [&>li]:leading-8 [&>li]:font-medium [&>li]:text-lg pr-3 max-sm:flex max-sm:flex-col max-sm:[&>li]:leading-7 max-sm:gap-2 max-sm:[&>li]:text-base max-sm:pr-2">
         {items.map((item) => (
           <li key={item}>{item}</li>
         ))}

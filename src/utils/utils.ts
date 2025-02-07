@@ -71,31 +71,6 @@ export const servicesForPersonData: servicesForCompaniesAndPersonsProp = {
   ],
 };
 
-export const educationItems = [
-  "مورد۱",
-  "مورد۲",
-  "مورد۳",
-  "مورد۴",
-  "مورد۵",
-  "مورد۶",
-  "مورد۷",
-  "مورد۸",
-  "مورد۹",
-  "مورد۱۰",
-];
-export const resumeItems = [
-  "مورد۱",
-  "مورد۲",
-  "مورد۳",
-  "مورد۴",
-  "مورد۵",
-  "مورد۶",
-  "مورد۷",
-  "مورد۸",
-  "مورد۹",
-  "مورد۱۰",
-];
-
 // FUNCTIONS
 
 export const getFourWeeksFromToday = () => {

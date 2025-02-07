@@ -5,6 +5,7 @@ import ReservationStepOne from "@/features/reservation/ReservationStepOne";
 import ReservationStepThree from "@/features/reservation/ReservationStepThree";
 import { useReservationStore } from "@/hooks/useReservationStore";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -16,6 +17,10 @@ const queryClient = new QueryClient({
 
 function Page() {
   const { step } = useReservationStore();
+
+  useEffect(() => {
+    document.title = "رزرو نوبت";
+  }, []);
 
   return (
     <div className=" sm:hidden">
