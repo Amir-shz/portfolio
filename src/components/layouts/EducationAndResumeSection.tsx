@@ -7,14 +7,14 @@ function EducationAndResumeSection({
   items,
 }: educationAndResumeSectionProps) {
   return (
-    <div className="rounded-3xl border border-neutral-300 shadow-shadow3 bg-neutral-100 p-6 flex flex-col gap-4">
+    <div className="rounded-3xl border border-neutral-300 shadow-shadow3 bg-neutral-100 p-6 flex flex-col gap-4 max-sm:p-5">
       <div className=" flex gap-2 [&>svg]:size-8  items-center [&>p]:text-neutral-700 [&>p]:font-semibold [&>p]:leading-7 [&>p]:text-xl">
         {type === "education" && <AcademicIcon />}
         {type === "resume" && <SparklesIcon />}
         {type === "education" && <p>تحصیلات و مدارک</p>}
         {type === "resume" && <p>تجربه و رزومه</p>}
       </div>
-      <ul className=" list-disc list-inside [&>li]:marker:text-sm [&>li]:marker:text-neutral-500 [&>li]:text-neutral-500 [&>li]:leading-8 [&>li]:font-medium [&>li]:text-lg pr-3 max-sm:flex max-sm:flex-col max-sm:[&>li]:leading-7 max-sm:gap-2 max-sm:[&>li]:text-base max-sm:pr-2">
+      <ul className=" list-disc list-inside [&>li]:marker:text-sm [&>li]:marker:text-neutral-500 [&>li]:text-neutral-500 [&>li]:leading-8 [&>li]:font-medium [&>li]:text-lg pr-3 max-sm:flex max-sm:flex-col max-sm:[&>li]:leading-7 max-sm:gap-1 max-sm:[&>li]:text-sm max-sm:pr-1 max-sm:[&>li]:marker:text-xs">
         {items.map((item) => (
           <li key={item}>{item}</li>
         ))}
