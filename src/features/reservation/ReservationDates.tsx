@@ -88,7 +88,7 @@ function ReservationDates() {
             <div></div>
             <div></div>
             <div></div>
-            <div></div>
+            <div className="max-sm:col-start-2"></div>
           </div>
         ) : (
           <div className="grid grid-cols-7 gap-4 max-sm:grid-cols-3 max-sm:gap-3">

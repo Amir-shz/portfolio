@@ -14,7 +14,7 @@ export const planData = [
   },
   {
     id: 2,
-    title: "همراه",
+    title: "همدل",
     description: "رشد فردی",
     points: [
       "طراحی مسیر پیشرفت شخصی",
@@ -28,7 +28,7 @@ export const planData = [
   },
   {
     id: 3,
-    title: "همیار",
+    title: "همراه",
     description: "تیم‌های کوچک و استارت‌آپ‌ها",
     points: [
       "کمک به پیشرفت تیم‌ها",
@@ -42,7 +42,7 @@ export const planData = [
   },
   {
     id: 4,
-    title: "همدل",
+    title: "همیار",
     description: "کمک به تیم‌های بزرگ",
     points: [
       "عارضه یابی سازمان‌ها",
