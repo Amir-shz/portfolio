@@ -23,8 +23,8 @@ function WorkHistory(): React.ReactNode {
       </div>
       <div>
         <p className=" text-p1_M_desktop text-neutral-500 leading-snug max-sm:leading-5 max-sm:text-base">
-          تجربه کار در شرکت‌های به‌نامی مانند ذوب‌آهن، هنزا، فلت ارث، داکو،
-          آداپتیو، کلینیک روانشناسان هوشمند و …
+          تجربه کار در شرکت‌های به‌نامی مانند ذوب‌آهن، هنزا، فلت ارث، مس کرمان،
+          مپنا، داکو، آداپتیو، کلینیک روان پژوهان صنعت و …
         </p>
       </div>
       {/* </motion.div> */}

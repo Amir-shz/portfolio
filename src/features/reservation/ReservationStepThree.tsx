@@ -15,7 +15,7 @@ function ReservationStepThree() {
           size={64}
           className=" text-success-500 mb-4 max-sm:size-44"
         />
-        <p className=" font-semibold text-lg text-neutral-600 max-sm:text-base">
+        <p className=" font-semibold text-lg text-neutral-600 max-sm:text-base max-sm:text-center max-sm:w-full max-sm:mx-auto">
           نوبت شما با موفقیت رزرو شد. با شما تماس گرفته خواهد شد
         </p>
       </div>

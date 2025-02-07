@@ -1,3 +1,4 @@
+import { digitsFaToEn } from "@persian-tools/persian-tools";
 import { ChangeEvent } from "react";
 import { create } from "zustand";
 
@@ -94,11 +95,12 @@ export const useReservationStore = create<Store>()((set) => ({
   // * phone *
   phone: "",
   handlePhoneChange: (e) => {
-    if (e.target.value.length > 11) return;
-    if (e.target.value) {
-      if (!Number(e.target.value) && e.target.value !== "0") return;
+    const inVal = digitsFaToEn(e.target.value);
+    if (inVal.length > 11) return;
+    if (inVal) {
+      if (!Number(inVal) && inVal !== "0") return;
     }
-    set(() => ({ phone: e.target.value }));
+    set(() => ({ phone: inVal }));
   },
 
   // * description *

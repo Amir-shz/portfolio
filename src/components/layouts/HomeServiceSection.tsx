@@ -9,17 +9,17 @@ function HomeServiceSection() {
       <HomeServiceCard
         icon={<FinanceIcon />}
         title="مشاوره سازمانی"
-        description="فرایند جذب، ورکشاپ، توسعه سیستم‌های ارزیابی و..."
+        description="تحلیل عملکرد، بهبود فرهنگ، توسعه تیم"
       />
       <HomeServiceCard
         icon={<UserCertificationIcon />}
-        title="کوچینگ"
-        description="فرایند جذب، ورکشاپ، توسعه سیستم‌های ارزیابی و..."
+        title="توسعه فردی"
+        description="هدف‌ گذاری، خود شناسی، مهارت‌آموزی"
       />
       <HomeServiceCard
         icon={<EducationIcon />}
         title="مشاوره تحصیلی"
-        description="فرایند جذب، ورکشاپ، توسعه سیستم‌های ارزیابی و..."
+        description="ترسیم بهترین مسیر، تقویت یادگیری، مدیریت استرس"
       />
     </div>
   );

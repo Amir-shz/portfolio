@@ -55,7 +55,7 @@ export const servicesForCompanyData: servicesForCompaniesAndPersonsProp = {
 };
 
 export const servicesForPersonData: servicesForCompaniesAndPersonsProp = {
-  title: "خدمات قابل ارائه در قالب مشاوره فردی",
+  title: "خدمات قابل ارائهٔ مشاوره فردی",
   type: "person",
   items: [
     "خودآگاهی و شناخت خود",
