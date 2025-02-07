@@ -19,6 +19,7 @@ function Page() {
           alt=""
           className=" rounded-3xl size-full object-cover object-center"
           quality={100}
+          placeholder="blur"
         />
       </div>
       <div className=" col-span-6 max-sm:col-span-10">

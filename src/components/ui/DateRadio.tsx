@@ -16,7 +16,7 @@ function DateRadio({
   const jalaliDate = date.jalali;
 
   return (
-    <label>
+    <label className=" max-sm:last:col-start-2 ">
       <input
         type="radio"
         name="date"
