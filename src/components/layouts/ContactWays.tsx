@@ -22,11 +22,11 @@ function ContactWays(): React.ReactNode {
       </h3>
       <div className=" flex flex-col gap-8 max-sm:pr-8 max-sm:pb-5 max-sm:gap-4">
         <div className=" flex items-center gap-6 ">
-          <SocialIconLink size="lg" href="mailto:fateme.shafiei9899@gmail.com">
+          <SocialIconLink size="lg" href="mailto:shf.iopsy@gmail.com">
             <MailIcon />
           </SocialIconLink>
           <p className=" text-neutral-600 font-bold text-[1.375rem] leading-7 max-sm:text-lg max-sm:w-0 max-sm:flex-1 max-sm:break-words max-sm:whitespace-normal pl-4 ">
-            fateme.shafiei9899@gmail.com
+            shf.IOpsy@gmail.com
           </p>
         </div>
         <div className=" flex items-center gap-6">
