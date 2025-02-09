@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import logo from "@/app/favicon.ico";
+import logo from "@/../public/promptlogo.jpg";
 import { ToastAction } from "./toast";
 import { useToast } from "@/hooks/use-toast";
 
@@ -61,7 +61,7 @@ function PWAInstallPrompt() {
                   alt="App Logo"
                   className=" size-10 rounded-md"
                 />
-                <span className="text-sm font-medium text-neutral-700">
+                <span className="text-xs font-medium text-neutral-700">
                   برای نصب اپلیکیشن روی install کلیک کنید
                 </span>
               </div>
@@ -70,11 +70,11 @@ function PWAInstallPrompt() {
           action: (
             <ToastAction
               altText="install"
-              className="bg-purple-300  text-white px-3 py-0.5 rounded-sm font-sans flex justify-center items-center leading-6 "
+              className=" text-purple-400 px-3 py-0.5 rounded-sm font-sans flex justify-center items-center leading-6 toastAction "
               onClick={handleInstall}
-              style={{ marginLeft: "-2px", marginRight: "4px" }}
+              style={{ marginLeft: "-2px", marginRight: "4px", border: "none" }}
             >
-              install
+              Install
             </ToastAction>
           ),
           duration: 8000,
@@ -85,7 +85,7 @@ function PWAInstallPrompt() {
             boxShadow: "0px 4px 8px 0px rgba(17,17,17,0.1)",
           },
         });
-      }, 100);
+      }, 50);
     }
   }, [toast, showPrompt, promptEvent]);
 
@@ -93,28 +93,3 @@ function PWAInstallPrompt() {
 }
 
 export default PWAInstallPrompt;
-
-{
-  /* <div
-style={{
-  position: "fixed",
-  top: `${4}px`,
-  left: `${15}px`,
-  right: `${15}px`,
-}}
-className="bg-neutral-50  rounded-lg shadow-shadow2 flex items-center justify-between border py-2 px-2"
->
-<div className="flex items-center gap-3">
-  <Image src={logo} alt="App Logo" className=" size-10 rounded-md" />
-  <span className="text-sm font-medium text-neutral-700">
-    برای نصب اپلیکیشن روی install کلیک کنید
-  </span>
-</div>
-<button
-  onClick={handleInstall}
-  className="bg-purple-300 text-purple-50 px-3 py-0.5 rounded-sm font-sans flex justify-center items-center ml-1"
->
-  install
-</button>
-</div> */
-}

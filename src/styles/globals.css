@@ -28,6 +28,10 @@
   opacity: 20%;
 }
 
+.toastAction + button {
+  display: none;
+}
+
 .loaderDot {
   width: 60px;
   aspect-ratio: 4;
