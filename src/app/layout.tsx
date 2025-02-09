@@ -1,6 +1,7 @@
 import localFont from "next/font/local";
 import "@/styles/globals.css";
 import { Viewport } from "next";
+import PWAInstallPrompt from "@/components/ui/PWAInstallPrompt";
 
 const Vazirmatn = localFont({
   src: [
@@ -68,6 +69,7 @@ export default function RootLayout({
         className={`${Vazirmatn.variable} ${Vazirmatn.className} antialiased bg-background`}
       >
         {children}
+        <PWAInstallPrompt />
       </body>
     </html>
   );
