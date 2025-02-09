@@ -72,7 +72,7 @@ function PWAInstallPrompt() {
               altText="install"
               className="bg-purple-300  text-white px-3 py-0.5 rounded-sm font-sans flex justify-center items-center leading-6 "
               onClick={handleInstall}
-              style={{ marginLeft: "-2px" }}
+              style={{ marginLeft: "-2px", marginRight: "4px" }}
             >
               install
             </ToastAction>
@@ -81,7 +81,7 @@ function PWAInstallPrompt() {
           style: {
             padding: "8px",
             backgroundColor: "#fafafa",
-            borderRadius: "4px",
+            borderRadius: "8px",
             boxShadow: "0px 4px 8px 0px rgba(17,17,17,0.1)",
           },
         });
