@@ -55,6 +55,10 @@ function PWAInstallPrompt() {
         setShowPrompt(false);
       }
     }
+
+    const hasPromptShown = sessionStorage.getItem("pwa-prompt-shown");
+    if (hasPromptShown) return;
+
     if (showPrompt) {
       setTimeout(() => {
         toast({
@@ -92,6 +96,7 @@ function PWAInstallPrompt() {
           },
         });
       }, 50);
+      sessionStorage.setItem("pwa-prompt-shown", "true");
     }
   }, [toast, showPrompt, promptEvent]);
 
