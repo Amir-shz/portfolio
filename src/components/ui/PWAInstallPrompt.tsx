@@ -18,12 +18,18 @@ function PWAInstallPrompt() {
   const { toast } = useToast();
 
   useEffect(() => {
+    const hasPromptShown = sessionStorage.getItem("pwa-prompt-shown");
+    if (hasPromptShown) return;
+
     const handleBeforeInstallPrompt = (event: Event) => {
       event.preventDefault();
       const installEvent = event as BeforeInstallPromptEvent;
       setPromptEvent(installEvent);
-      // نمایش اعلان بعد از 0.5 ثانیه
-      setTimeout(() => setShowPrompt(true), 500);
+      // نمایش اعلان بعد از 0.25 ثانیه
+      setTimeout(() => {
+        setShowPrompt(true);
+        sessionStorage.setItem("pwa-prompt-shown", "true");
+      }, 250);
       // بستن خودکار اعلان بعد از 5 ثانیه
       setTimeout(() => setShowPrompt(false), 5500);
     };

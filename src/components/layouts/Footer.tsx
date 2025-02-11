@@ -1,10 +1,7 @@
-// import { Alfa_Slab_One } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import footerName from "@/../public/footerName.svg";
 import footerNameMobile from "@/../public/footerNameMobile.svg";
-
-// const alfaSlab = Alfa_Slab_One({ subsets: ["latin"], weight: "400" });
 
 function Footer() {
   return (
@@ -18,22 +15,13 @@ function Footer() {
         </nav>
 
         <div className="flex items-center flex-row-reverse gap-2 max-sm:flex-col max-sm:gap-1 mt-2">
-          {/* <Image src={logo} alt="logo" className=" max-sm:size-12" /> */}
           <Image src={footerName} alt="logo" className="max-sm:hidden" />
           <Image src={footerNameMobile} alt="logo" className="sm:hidden" />
-          {/* <p
-            className={`${alfaSlab.className} text-neutral-500 text-base font-normal leading-5 max-sm:text-sm`}
-          >
-            Fatemeh Sadat Shafiei
-          </p> */}
         </div>
       </div>
       <p className="text-center mb-4 text-neutral-500 text-sm leading-[1.125rem] font-medium">
         All Rights Reserved by Fatemeh Shafiei
-        <span>
-          {" "}
-          <Link href="/dashboard">&copy;</Link>
-        </span>
+        <span> &copy;</span>
       </p>
     </footer>
   );
