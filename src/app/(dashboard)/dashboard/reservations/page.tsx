@@ -19,7 +19,7 @@ async function page() {
     headers: header,
   })
     .then((data) => data.json())
-    .then((data) => data.data);
+    .then((data) => data.data.reverse());
 
   return (
     <div className="max-h-dvh overflow-hidden p-2 max-sm:p-3 ">

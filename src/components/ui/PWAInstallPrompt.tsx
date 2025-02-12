@@ -23,6 +23,16 @@ function PWAInstallPrompt() {
     const handleBeforeInstallPrompt = (event: Event) => {
       event.preventDefault();
 
+      const isAppInstalled = () => {
+        return (
+          window.matchMedia("(display-mode: standalone)").matches ||
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (window.navigator as any).standalone
+        );
+      };
+
+      if (isAppInstalled()) return;
+
       if (sessionStorage.getItem("pwa-prompt-shown")) return;
 
       const installEvent = event as BeforeInstallPromptEvent;
