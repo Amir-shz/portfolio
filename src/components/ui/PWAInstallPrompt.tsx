@@ -18,21 +18,26 @@ function PWAInstallPrompt() {
   const { toast } = useToast();
 
   useEffect(() => {
-    const hasPromptShown = sessionStorage.getItem("pwa-prompt-shown");
-    if (hasPromptShown) return;
+    // چک کنیم که آیا قبلاً این اعلان نمایش داده شده است یا نه
 
     const handleBeforeInstallPrompt = (event: Event) => {
       event.preventDefault();
+
+      if (sessionStorage.getItem("pwa-prompt-shown")) return;
+
       const installEvent = event as BeforeInstallPromptEvent;
       setPromptEvent(installEvent);
+
       // نمایش اعلان بعد از 0.25 ثانیه
       setTimeout(() => {
         setShowPrompt(true);
-        sessionStorage.setItem("pwa-prompt-shown", "true");
+        sessionStorage.setItem("pwa-prompt-shown", "true"); // تنظیم فقط در useEffect اول
       }, 250);
+
       // بستن خودکار اعلان بعد از 5 ثانیه
       setTimeout(() => setShowPrompt(false), 5500);
     };
+
     window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
     return () => {
       window.removeEventListener(
@@ -56,9 +61,7 @@ function PWAInstallPrompt() {
       }
     }
 
-    const hasPromptShown = sessionStorage.getItem("pwa-prompt-shown");
-    if (hasPromptShown) return;
-
+    // این بررسی دیگر لازم نیست، چون در useEffect اول مدیریت شده
     if (showPrompt) {
       setTimeout(() => {
         toast({
@@ -96,7 +99,6 @@ function PWAInstallPrompt() {
           },
         });
       }, 50);
-      sessionStorage.setItem("pwa-prompt-shown", "true");
     }
   }, [toast, showPrompt, promptEvent]);
 
