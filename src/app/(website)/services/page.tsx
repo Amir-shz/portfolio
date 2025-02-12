@@ -5,6 +5,8 @@ import ReactQueryProvider from "@/components/ui/ReactQueryProvider";
 
 export const metadata: Metadata = {
   title: "خدمات من",
+  description:
+    "ارائه مشاوره‌های تخصصی در سه حوزه: 1. مشاوره سازمانی: تحلیل عملکرد، بهبود فرهنگ سازمانی و توسعه تیم. 2. توسعه فردی: هدف‌گذاری، خودشناسی و مهارت‌آموزی. 3. مشاوره تحصیلی: ترسیم مسیر تحصیلی، تقویت یادگیری و مدیریت استرس.",
 };
 
 async function Page() {

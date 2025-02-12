@@ -1,4 +1,10 @@
 import ReservationBackButton from "@/features/reservation/ReservationBackButton";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "رزرو نوبت",
+  description: "رزرو نوبت مشاوره با فاطمه سادات شفیعی روانشناس صنعتی و سازمانی",
+};
 
 function layout({
   children,

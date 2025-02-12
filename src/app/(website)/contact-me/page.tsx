@@ -7,6 +7,7 @@ import vector from "../../../../public/vector.svg";
 
 export const metadata: Metadata = {
   title: "ارتباط با من",
+  description: "راه های ارتباطی با فاطمه سادات شفیعی روانشناس صنعتی و سازمانی",
 };
 
 function Page() {

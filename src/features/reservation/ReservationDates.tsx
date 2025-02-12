@@ -58,6 +58,7 @@ function ReservationDates() {
         </p>
         <div className="flex gap-4">
           <button
+            aria-label="previous button"
             className="[&>svg]:size-6 [&>svg]:disabled:text-neutral-300 text-neutral-800"
             disabled={page === 1 ? true : false}
             onClick={() => {
@@ -68,6 +69,7 @@ function ReservationDates() {
             <HiChevronRight />
           </button>
           <button
+            aria-label="next button"
             className="[&>svg]:size-6 [&>svg]:disabled:text-neutral-300 text-neutral-800"
             disabled={page === 4 ? true : false}
             onClick={() => {

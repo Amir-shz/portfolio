@@ -9,6 +9,7 @@ function SocialIconLink({
   return (
     <Link
       href={href}
+      aria-label="social media link"
       target="_blank"
       className={`grow-0 shrink-0 transition-all duration-200 hover:border-purple-200 hover:border hover:bg-purple-50 [&>svg]:hover:fill-purple-500 [&>svg]:fill-[#737373] shadow-shadow3   flex justify-center items-center ${
         size === "sm" &&

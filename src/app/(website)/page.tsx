@@ -3,6 +3,12 @@ import AboutInHome from "@/components/layouts/AboutInHome";
 import WorkHistory from "@/components/layouts/WorkHistory";
 import HomeServiceSection from "@/components/layouts/HomeServiceSection";
 import Faq from "@/components/ui/Faq";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  description:
+    "فاطمه سادات شفیعی، روانشناس صنعتی و سازمانی با سابقه همکاری با شرکت‌های معتبر مانند ذوب‌آهن، هنزا و مپنا. ارائه مشاوره‌های تخصصی در زمینه‌های سازمانی، فردی و تحصیلی برای بهبود عملکرد و توسعه فردی.",
+};
 
 export default function Page(): React.ReactNode {
   return (

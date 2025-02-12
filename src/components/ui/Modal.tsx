@@ -20,6 +20,7 @@ const Modal = ({ children }: { homeHref: string; children: ReactNode }) => {
       >
         <button
           className=" absolute top-6 left-6"
+          aria-label="close button"
           onClick={() => {
             hide();
             resetAll();

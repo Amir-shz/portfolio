@@ -27,9 +27,9 @@ function AboutInHome(): React.ReactNode {
         />
       </div>
       <div>
-        <h2 className=" pb-6 text-neutral-700 text-h4_B_desktop  max-sm:text-h4_B_mobile">
+        <h1 className=" pb-6 text-neutral-700 text-h4_B_desktop  max-sm:text-h4_B_mobile">
           فاطمه سادات شفیعی
-        </h2>
+        </h1>
         <p className=" text-neutral-500 text-h6_SB_desktop max-sm:text-lg max-sm:leading-[1.3125rem]">
           من فاطمه سادات شفیعی هستم، رتبه ۵۲ کنکور کارشناسی و رتبه ۴ کنکور ارشد؛
           فارغ‌التحصیل رشته روانشناسی در دانشگاه شهیدبهشتی تهران و دانشجوی رشته

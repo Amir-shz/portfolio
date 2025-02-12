@@ -27,7 +27,7 @@ function MobileMenu() {
   return (
     <div className="sm:hidden">
       <Drawer direction="top" open={isOpen} onOpenChange={setIsOpen}>
-        <DrawerTrigger>
+        <DrawerTrigger aria-label="menu">
           {/* <MenuIcon /> */}
           <HiOutlineBars3BottomLeft className="size-8" />
         </DrawerTrigger>

@@ -8,6 +8,8 @@ import { educationData } from "@/data/educationData";
 
 export const metadata: Metadata = {
   title: "درباره من",
+  description:
+    "آشنایی با فاطمه سادات شفیعی: فارغ‌التحصیل روانشناسی از دانشگاه شهید بهشتی و دانشجوی روانشناسی صنعتی و سازمانی در دانشگاه اصفهان. با سابقه همکاری با شرکت‌های بزرگ و تجربه در مشاوره‌های سازمانی و فردی.",
 };
 
 function Page() {
