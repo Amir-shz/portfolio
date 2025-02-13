@@ -28,8 +28,13 @@ function ReservationDates() {
 
   useEffect(() => {
     // FIND FIRST AVAILABLE DATE
+
+    const today = new Date().toLocaleDateString("en-CA");
+
+    // eslint-disable-next-line
     firstAvailableDate = schedules?.find(
-      (el: { available: number }) => el.available > 0
+      (el: { available: number; date: string }) =>
+        el.available > 0 && el.date > today
     );
     // FIND THE FIRST AVAILABLE DATE PAGE IN WEEKS
     const firsAvailableDateWeek = splitIntoWeeks(weeks).find((week) =>

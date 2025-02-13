@@ -33,10 +33,10 @@ function SocialSection(): React.ReactNode {
         >
           <LinkedinIcon />
         </SocialIconLink>
-        <SocialIconLink size="sm" href="https://t.me/fateme_shf">
+        <SocialIconLink size="sm" href="https://t.me/io_Psychology1">
           <TelegramIcon />
         </SocialIconLink>
-        <SocialIconLink size="sm" href="mailto:fateme.shafiei9899@gmail.com">
+        <SocialIconLink size="sm" href="mailto:shf.iopsy@gmail.com">
           <MailIcon />
         </SocialIconLink>
       </div>

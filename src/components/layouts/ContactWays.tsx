@@ -30,13 +30,13 @@ function ContactWays(): React.ReactNode {
           </p>
         </div>
         <div className=" flex items-center gap-6">
-          <SocialIconLink size="lg" href="tel:09930200249">
+          <SocialIconLink size="lg" href="tel:09934205405">
             <div className=" size-full flex justify-center items-center [&>svg]:hover:stroke-purple-500 [&>svg]:stroke-[#737373] transition-all duration-200 max-sm:[&>svg]:size-7 shrink-0 grow-0 ">
               <PhoneIcon />
             </div>
           </SocialIconLink>
           <p className="text-neutral-600 font-bold text-[1.375rem] leading-7 max-sm:text-lg">
-            ۰۹۹۳۰۲۰۰۲۴۹
+            ۰۹۹۳۴۲۰۵۴۰۵
           </p>
         </div>
       </div>

@@ -33,7 +33,7 @@ function SocialSectionContactUs(): React.ReactNode {
         >
           <LinkedinIcon />
         </SocialIconLink>
-        <SocialIconLink size="lg" href="https://t.me/fateme_shf">
+        <SocialIconLink size="lg" href="https://t.me/io_Psychology1">
           <TelegramIcon />
         </SocialIconLink>
       </div>
