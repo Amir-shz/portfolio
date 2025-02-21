@@ -7,7 +7,6 @@ import { HiMiniArrowRight } from "react-icons/hi2";
 function ReservationBackButton() {
   const { step, handleStep, resetAll } = useReservationStore();
   const router = useRouter();
-  // const pathName = usePathname();
 
   function handleBack() {
     if (step === 1) {
@@ -15,18 +14,16 @@ function ReservationBackButton() {
       setTimeout(() => {
         resetAll();
       }, 200);
-      // resetAll();
     }
     if (step === 2) {
       handleStep(1);
       resetAll();
     }
     if (step === 3) {
-      router.push("/services");
-      setTimeout(() => {
-        resetAll();
-      }, 200);
-      // resetAll();
+      handleStep(2);
+    }
+    if (step === 4) {
+      handleStep(3);
     }
   }
 

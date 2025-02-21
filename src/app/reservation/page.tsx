@@ -1,6 +1,7 @@
 "use client";
 
 import ReservationForm from "@/features/reservation/ReservationForm";
+import ReservationStepFour from "@/features/reservation/ReservationStepFour";
 import ReservationStepOne from "@/features/reservation/ReservationStepOne";
 import ReservationStepThree from "@/features/reservation/ReservationStepThree";
 import { useReservationStore } from "@/hooks/useReservationStore";
@@ -30,6 +31,7 @@ function Page() {
           </>
         )}
         {step === 3 && <ReservationStepThree />}
+        {step === 4 && <ReservationStepFour />}
       </QueryClientProvider>
     </div>
   );

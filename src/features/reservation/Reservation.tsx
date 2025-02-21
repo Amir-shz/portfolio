@@ -5,6 +5,7 @@ import ReservationForm from "./ReservationForm";
 import ReservationStepOne from "./ReservationStepOne";
 import { useReservationStore } from "@/hooks/useReservationStore";
 import ReservationStepThree from "./ReservationStepThree";
+import ReservationStepFour from "./ReservationStepFour";
 
 function Reservation() {
   const { step } = useReservationStore();
@@ -21,6 +22,7 @@ function Reservation() {
         </>
       )}
       {step === 3 && <ReservationStepThree />}
+      {step === 4 && <ReservationStepFour />}
     </Modal>
   );
 }

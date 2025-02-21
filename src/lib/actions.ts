@@ -34,7 +34,18 @@ export async function createReservation(data: {
   });
 
   if (isAvailable) {
-    throw new Error("این تایم توسط شخص دیگری رزرو شده است");
+    throw new Error(
+      "این تایم در همین لحظه رزرو شد. ساعت دیگری را برای رزرو انتخاب  کنید."
+    );
+  }
+
+  const isReservedFreeBefore = await Reservation.findOne({
+    plan: 1,
+    phone: data.phone,
+  });
+
+  if (isReservedFreeBefore && data.plan === 1) {
+    throw new Error("شما قبلا یک بار پلن رایگان را رزرو کرده اید");
   }
 
   await Reservation.create(data);
@@ -49,6 +60,28 @@ export async function createReservation(data: {
       $set: { "hours.$.isAvailable": false },
     }
   );
+
+  // SEND EMAIL TO ADMIN
+  // const apiKey = process.env.BREVO_API_KEY;
+  // const adminEmail = process.env.ADMIN_EMAIL;
+
+  // if (!apiKey) return;
+
+  // const res = await fetch("https://api.brevo.com/v3/smtp/email", {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //     "api-key": apiKey,
+  //   },
+  //   body: JSON.stringify({
+  //     sender: { email: "admin@fatemeshafieii.ir", name: "admin" },
+  //     to: [{ email: adminEmail, name: "Admin" }],
+  //     subject: "رزرو نوبت",
+  //     htmlContent: `<p>${data.fullName} یک نوبت مشاوره رزرو کرده است</p>`,
+  //   }),
+  // }).then((res) => res.json());
+
+  // console.log(res);
 }
 
 export async function finishReservationStatus(id: string) {

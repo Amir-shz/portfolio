@@ -16,8 +16,8 @@ type Store = {
   // STEP 1 => SELECT DATE AND TIME
   // STEP 2 => FILL OUT THE INFORMATION FORM
   // STEP 3 => CONGRATS AND FINISH
-  step: 1 | 2 | 3;
-  handleStep: (val: 1 | 2 | 3) => void;
+  step: 1 | 2 | 3 | 4;
+  handleStep: (val: 1 | 2 | 3 | 4) => void;
 
   //
   // CLIENT AND RESERVATION INFORMATION (controlled inputs)

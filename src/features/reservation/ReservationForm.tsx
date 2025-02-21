@@ -94,12 +94,7 @@ function ReservationForm() {
           {errors.map((el, index) => (
             <p key={index}>{el}</p>
           ))}
-          {error && (
-            <p>
-              این تایم در همین لحظه رزرو شد. ساعت دیگری را برای رزرو انتخاب
-              کنید.
-            </p>
-          )}
+          {error && <p>{error}</p>}
         </div>
       </div>
       <button
