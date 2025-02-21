@@ -1,5 +1,6 @@
 import ScheduleAllDelBtn from "@/components/dashboard/ScheduleAllDelBtn";
 import ScheduleOneDelBtn from "@/components/dashboard/ScheduleOneDelBtn";
+import ScheduleReserveBtn from "@/components/dashboard/ScheduleReserveBtn";
 import { deleteSchedule } from "@/lib/actions";
 import { getJalaliDetails } from "@/utils/utils";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
@@ -25,8 +26,8 @@ async function page({ params }: { params: Promise<{ scheduleId: string }> }) {
     .then((data) => data.data);
 
   const { _id, date, hours } = schedule;
-  const { day, monthName, year } = getJalaliDetails(new Date(date));
-  const formattedDate = `${day} ${monthName} ${year}`;
+  const { day, monthName, year, dayName } = getJalaliDetails(new Date(date));
+  const formattedDate = `${dayName} ${day} ${monthName} ${year}`;
 
   return (
     <div className="max-h-[calc(100vh-5.5rem)] overflow-y-scroll p-4 max-sm:max-h-dvh hide-scrollbar ">
@@ -58,7 +59,8 @@ async function page({ params }: { params: Promise<{ scheduleId: string }> }) {
                   {hour.isAvailable ? "موجود" : "رزرو شده"}
                 </p>
               </div>
-              <div>
+              <div className=" flex gap-1">
+                <ScheduleReserveBtn id={_id} hour={hour.hour} />
                 <ScheduleOneDelBtn id={_id} hour={hour.hour} />
               </div>
             </div>

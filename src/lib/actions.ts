@@ -168,6 +168,17 @@ export async function deleteHour(id: string, hour: string) {
   revalidatePath("/dashboard/schedules");
 }
 
+export async function reserveHour(id: string, hour: string) {
+  console.log(id, hour);
+
+  await Schedule.updateOne(
+    { _id: id, "hours.hour": hour },
+    { $set: { "hours.$.isAvailable": false } }
+  );
+
+  revalidatePath("/dashboard/schedules");
+}
+
 export async function deleteSchedule(formData: FormData) {
   const id = formData.get("id");
 

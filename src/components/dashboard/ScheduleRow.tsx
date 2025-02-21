@@ -13,7 +13,7 @@ function ScheduleRow({
   };
 }) {
   const { _id, date, hours } = schedule;
-  const { day, monthName, year } = getJalaliDetails(new Date(date));
+  const { day, monthName, year, dayName } = getJalaliDetails(new Date(date));
   const isPast = new Date(date) < new Date();
 
   return (
@@ -23,7 +23,7 @@ function ScheduleRow({
           isPast && "text-neutral-400 font-normal"
         }`}
       >
-        {day} {monthName} {year}
+        {dayName} {day} {monthName} {year}
       </p>
       <div className="col-span-4 font-semibold text-sm border-l border-l-neutral-300 flex flex-wrap">
         {hours.map((hour: { hour: string; isAvailable: boolean }) => (
