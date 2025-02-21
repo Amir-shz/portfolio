@@ -36,7 +36,6 @@ function ReservationForm() {
     startTransition(async () => {
       const reservationError = await handleReservation();
       if (reservationError) setError(reservationError?.message);
-      // console.log(reservationError);
 
       setTimeout(() => {
         setError("");

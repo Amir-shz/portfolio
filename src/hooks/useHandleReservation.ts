@@ -26,7 +26,7 @@ function useHandleReservation() {
     }
 
     try {
-      await createReservation({
+      const result = await createReservation({
         plan,
         fullName,
         phone,
@@ -35,14 +35,14 @@ function useHandleReservation() {
         selectedTime,
       });
 
+      if (result) {
+        return { message: result };
+      }
+
       resetAll();
       handleStep(3);
     } catch (err) {
-      if (err instanceof Error) {
-        return { message: err.message };
-      } else {
-        return { message: "An unknown error occurred" };
-      }
+      console.log(err);
     }
   }
   return handleSubmit;

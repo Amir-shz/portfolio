@@ -34,9 +34,7 @@ export async function createReservation(data: {
   });
 
   if (isAvailable) {
-    throw new Error(
-      "این تایم در همین لحظه رزرو شد. ساعت دیگری را برای رزرو انتخاب  کنید."
-    );
+    return "این تایم در همین لحظه رزرو شد. ساعت دیگری را برای رزرو انتخاب  کنید.";
   }
 
   const isReservedFreeBefore = await Reservation.findOne({
@@ -45,7 +43,7 @@ export async function createReservation(data: {
   });
 
   if (isReservedFreeBefore && data.plan === 1) {
-    throw new Error("شما قبلا یک بار پلن رایگان را رزرو کرده اید");
+    return "شما قبلا یک بار پلن رایگان را رزرو کرده اید";
   }
 
   await Reservation.create(data);
