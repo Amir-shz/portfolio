@@ -19,13 +19,13 @@ function ScheduleRow({
   return (
     <div className=" grid grid-cols-7 items-center">
       <p
-        className={`col-span-2 text-sm  font-semibold border-l border-l-neutral-300 text-center ${
+        className={`col-span-2 max-sm:col-span-3 max-sm:text-xs text-sm  font-semibold border-l border-l-neutral-300 text-center ${
           isPast && "text-neutral-400 font-normal"
         }`}
       >
         {dayName} {day} {monthName} {year}
       </p>
-      <div className="col-span-4 font-semibold text-sm border-l border-l-neutral-300 flex flex-wrap">
+      <div className="col-span-4 max-sm:col-span-3 font-semibold text-sm border-l border-l-neutral-300 flex flex-wrap">
         {hours.map((hour: { hour: string; isAvailable: boolean }) => (
           <span
             key={hour.hour}
