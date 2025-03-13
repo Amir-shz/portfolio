@@ -9,7 +9,8 @@ export const planData = [
       "آشنایی با پلن‌ها و روش‌ها",
     ],
     time: "۱۵ دقیقه",
-    price: "free",
+    // price: "free",
+    price: "۵۰ تومان",
     // plan: "1",
   },
   {
