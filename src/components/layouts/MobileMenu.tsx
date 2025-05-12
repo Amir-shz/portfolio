@@ -47,7 +47,7 @@ function MobileMenu() {
               <nav className=" flex flex-col gap-3 justify-center items-center mb-4">
                 <NavBtn href="/">صفحه اصلی</NavBtn>
                 <NavBtn href="/about-me">درباره من</NavBtn>
-                <NavBtn href="/services">خدمات</NavBtn>
+                <NavBtn href="/services">رزرو نوبت</NavBtn>
                 <NavBtn href="/contact-me">ارتباط با من</NavBtn>
               </nav>
             </DrawerContent>
