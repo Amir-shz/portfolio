@@ -15,14 +15,14 @@ export default function Page(): React.ReactNode {
   return (
     <div className=" flex flex-col gap-6 max-sm:-mt-4">
       {/*  */}
-      <div className=" sm:hidden size-full rounded-3xl border border-neutral-300 px-6 py-4 flex gap-1 items-center max-[380px]:px-3">
+      <div className=" sm:hidden size-full rounded-3xl border border-neutral-300 px-6 py-3 flex gap-1 items-center max-[380px]:px-3">
         <p className="text-p3_SB_mobile basis-[60%] text-neutral-600">
           بهره‌گیری از خدمات و مشاوره
         </p>
         {/* bg-neutral-50  text-neutral-800 */}
         <Link
           href="/services"
-          className=" basis-[40%] block w-full rounded-xl bg-purple-400 text-white  py-2 font-bold text-base leading-[1.125rem] text-center"
+          className=" basis-[40%] block w-full rounded-xl text-purple-500 border border-purple-500  py-3 font-bold text-base leading-[1.125rem] text-center"
         >
           رزرو نوبت
         </Link>
