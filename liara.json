@@ -4,5 +4,8 @@
   "build": {
     "location": "iran"
   },
+  "next": {
+    "mirror": false
+  },
   "disks": []
 }
