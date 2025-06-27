@@ -15,5 +15,5 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ status: "fail", data: null }, { status: 401 });
   }
 
-  return NextResponse.json({ status: "fail", data: user });
+  return NextResponse.json({ status: "success", data: user });
 }
