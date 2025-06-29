@@ -36,7 +36,7 @@ function Slider({
         {data.map((item) => (
           <SwiperSlide key={item.id} className=" h-auto">
             <div className="size-full">
-              <div className=" flex justify-center items-center mt-8 mb-5">
+              <div className=" flex justify-center items-center mt-8 mb-5 max-sm:mt-4 max-sm:mb-2">
                 <Image
                   src={
                     item.gender === "man" ? "/boyVector.png" : "/girlVrctor.png"
@@ -44,14 +44,14 @@ function Slider({
                   alt="vector"
                   width={600}
                   height={600}
-                  className=" size-[150px] shadow-[0px_0px_0px_4px_#8133F1] rounded-full"
+                  className=" size-[150px] max-sm:size-[100px] shadow-[0px_0px_0px_4px_#8133F1] rounded-full"
                 />
               </div>
-              <div className=" flex flex-col gap-6 items-center px-20 pb-12">
-                <p className=" text-2xl font-semibold text-neutral-700">
+              <div className=" flex flex-col gap-6 items-center px-20 pb-12 max-sm:gap-3 max-sm:px-4 max-sm:pb-2">
+                <p className=" text-2xl font-semibold text-neutral-700 max-sm:text-xl">
                   {item.name}
                 </p>
-                <p className=" text-xl font-medium text-neutral-500">
+                <p className=" text-xl font-medium text-neutral-500 max-sm:text-base max-sm:text-center">
                   {item.testimonial}
                 </p>
               </div>

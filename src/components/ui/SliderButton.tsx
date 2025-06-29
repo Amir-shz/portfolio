@@ -16,7 +16,7 @@ function SliderButton({
   return (
     <button
       onClick={onChangeSlide}
-      className={`absolute z-10 flex size-12 items-center justify-center rounded-full bg-white text-neutral-600  max-xs:size-6 ${location}`}
+      className={`absolute z-10 flex size-12 items-center justify-center rounded-full bg-white text-neutral-600  max-xs:size-6 max-sm:hidden ${location}`}
     >
       {children}
     </button>
