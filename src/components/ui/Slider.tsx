@@ -31,7 +31,7 @@ function Slider({
           disableOnInteraction: false,
         }}
         modules={[Autoplay, Navigation]}
-        className=" relative z-50 mx-auto min-h-fit overflow-hidden w-full rounded-3xl border border-neutral-300 shadow-shadow3 bg-neutral-100 "
+        className=" relative z-50 mx-auto min-h-fit overflow-hidden w-full rounded-3xl border border-neutral-300 shadow-shadow3 bg-neutral-100  "
       >
         {data.map((item) => (
           <SwiperSlide key={item.id} className=" h-auto">
