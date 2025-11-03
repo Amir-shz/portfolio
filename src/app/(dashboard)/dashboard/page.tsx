@@ -2,6 +2,8 @@ import DashboardChart from "@/components/dashboard/DashboardChart";
 import DashboardCircleChart from "@/components/dashboard/DashboardCircleChart";
 import DashboardStats from "@/components/dashboard/DashboardStats";
 import DashboardTable from "@/components/dashboard/DashboardTable";
+import dbConnect from "@/lib/mongoose";
+import Reservation from "@/models/reservationModel";
 import { Metadata } from "next";
 // import { headers } from "next/headers";
 
@@ -11,19 +13,22 @@ export const metadata: Metadata = {
   title: "داشبورد",
 };
 
-const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+// const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 async function page() {
   // const header = await headers();
 
   // get today reservations
 
-  const reservations = await fetch(`${baseUrl}/reservation`, {
-    // headers: header,
-    credentials: "include",
-  })
-    .then((data) => data.json())
-    .then((data) => data.data);
+  // const reservations = await fetch(`${baseUrl}/reservation`, {
+  //   // headers: header,
+  //   credentials: "include",
+  // })
+  //   .then((data) => data.json())
+  //   .then((data) => data.data);
+
+  await dbConnect();
+  const reservations = await Reservation.find().sort({ selectedDate: 1 });
 
   const todayReservations = reservations.filter(
     (reservation: { selectedDate: string }) =>
