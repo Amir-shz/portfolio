@@ -3,30 +3,37 @@ import ChangePassForm from "@/components/dashboard/ChangePassForm";
 import ChangeUserDataForm from "@/components/dashboard/ChangeUserDataForm";
 import SignupForm from "@/components/dashboard/SignupForm";
 import UserDelBtn from "@/components/dashboard/UserDelBtn";
+import dbConnect from "@/lib/mongoose";
+import User from "@/models/userModel";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 import { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
-import { headers } from "next/headers";
+// import { headers } from "next/headers";
 
 export const metadata: Metadata = {
   title: "تنظیمات کاربر",
 };
 
-const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+// const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 async function Page() {
   const session = await auth();
-  const header = await headers();
+  // const header = await headers();
 
-  const users = await fetch(`${baseUrl}/user`, { headers: header })
-    .then((data) => data.json())
-    .then((data) => data.data);
+  // const users = await fetch(`${baseUrl}/user`, { headers: header })
+  //   .then((data) => data.json())
+  //   .then((data) => data.data);
 
-  const currentUser = await fetch(`${baseUrl}/user/${session?.user?.email}`, {
-    headers: header,
-  })
-    .then((data) => data.json())
-    .then((data) => data.data);
+  await dbConnect();
+  const users = await User.find();
+
+  const currentUser = await User.findOne({ email: session?.user?.email });
+
+  // const currentUser = await fetch(`${baseUrl}/user/${session?.user?.email}`, {
+  //   headers: header,
+  // })
+  //   .then((data) => data.json())
+  //   .then((data) => data.data);
 
   return (
     <div className=" grid grid-cols-2 gap-4  max-h-[calc(100vh-5.5rem)] overflow-y-scroll p-4 max-sm:noScrollBar max-sm:max-h-dvh  hide-scrollbar max-sm:[&>div:last-child]:mb-14">

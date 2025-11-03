@@ -1,9 +1,11 @@
 import ReservationRowBtns from "@/components/dashboard/ReservationRowBtns";
 import { planData } from "@/data/planData";
+import dbConnect from "@/lib/mongoose";
+import Reservation from "@/models/reservationModel";
 import { getJalaliDetails } from "@/utils/utils";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 import { Metadata } from "next";
-import { headers } from "next/headers";
+// import { headers } from "next/headers";
 import Link from "next/link";
 import { HiOutlineChevronLeft } from "react-icons/hi2";
 
@@ -11,7 +13,7 @@ export const metadata: Metadata = {
   title: "رزرو",
 };
 
-const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+// const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 async function page({
   params,
@@ -20,7 +22,8 @@ async function page({
 }) {
   const reservationId = (await params).reservationId;
 
-  const header = await headers();
+  // const header = await headers();
+  await dbConnect();
 
   const {
     _id,
@@ -32,11 +35,13 @@ async function page({
     description,
     status,
     createdAt,
-  } = await fetch(`${baseUrl}/reservation/${reservationId}`, {
-    headers: header,
-  })
-    .then((data) => data.json())
-    .then((data) => data.data);
+  } = await Reservation.findById(reservationId);
+
+  // } = await fetch(`${baseUrl}/reservation/${reservationId}`, {
+  //   headers: header,
+  // })
+  //   .then((data) => data.json())
+  //   .then((data) => data.data);
 
   const {
     description: planDescription,

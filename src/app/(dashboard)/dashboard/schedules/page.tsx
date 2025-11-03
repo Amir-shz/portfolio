@@ -1,20 +1,42 @@
 import ScheduleForm from "@/components/dashboard/ScheduleForm";
 import ScheduleHeader from "@/components/dashboard/ScheduleHeader";
 import ScheduleRow from "@/components/dashboard/ScheduleRow";
+import dbConnect from "@/lib/mongoose";
+import Schedule from "@/models/scheduleModel";
 import { Metadata } from "next";
-import { headers } from "next/headers";
+// import { headers } from "next/headers";
 
 export const metadata: Metadata = {
   title: "زمان بندی",
 };
 
-const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+// const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 async function page() {
-  const header = await headers();
-  const schedules = await fetch(`${baseUrl}/schedule`, { headers: header })
-    .then((data) => data.json())
-    .then((data) => data.data);
+  // const header = await headers();
+  // const schedules = await fetch(`${baseUrl}/schedule`, { headers: header })
+  //   .then((data) => data.json())
+  //   .then((data) => data.data);
+
+  await dbConnect();
+  const schedules = await Schedule.find({}).sort({ date: 1 });
+
+  schedules.forEach((schedule) => {
+    schedule.hours.sort((a: { hour: string }, b: { hour: string }) =>
+      a.hour.localeCompare(b.hour)
+    );
+  });
+
+  const formattedSchedules = schedules.map((obj) => {
+    const date = new Date(obj.date);
+    const formattedDate = date.toLocaleDateString("en-CA");
+    return {
+      date: formattedDate,
+      available: obj.available,
+      _id: obj._id,
+      hours: obj.hours,
+    };
+  });
 
   return (
     <div className=" flex gap-2 max-h-[calc(100vh-3.5rem)] overflow-y-scroll p-4 -m-4 max-sm:flex-col max-sm:m-0 max-sm:max-h-dvh max-sm:overflow-scroll hide-scrollbar ">
@@ -25,19 +47,21 @@ async function page() {
         <p className=" text-center font-medium">
           جهت ایجاد زمان بندی فرم زیر را پر کنید
         </p>
-        <ScheduleForm schedules={schedules} />
+        <ScheduleForm schedules={formattedSchedules} />
       </form>
       <div className="w-full h-[calc(100vh-5.5rem)] flex flex-col gap-2 rounded-md bg-purple-50 shadow-shadow4 border border-purple-100 overflow-y-scroll p-4 max-sm:mb-14 max-sm:overflow-visible max-h-full max-sm:p-2 max-sm:gap-3 max-sm:h-full ">
         <ScheduleHeader />
-        {schedules.reverse().map(
-          (el: {
-            _id: string;
-            date: string;
-            hours: Array<{ hour: string; isAvailable: boolean }>;
-          }) => (
-            <ScheduleRow key={el._id} schedule={el} />
-          )
-        )}
+        {formattedSchedules
+          .reverse()
+          .map(
+            (el: {
+              _id: string;
+              date: string;
+              hours: Array<{ hour: string; isAvailable: boolean }>;
+            }) => (
+              <ScheduleRow key={el._id} schedule={el} />
+            )
+          )}
       </div>
     </div>
   );

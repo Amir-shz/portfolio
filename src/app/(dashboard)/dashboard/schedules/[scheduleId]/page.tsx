@@ -2,14 +2,16 @@ import ScheduleAllDelBtn from "@/components/dashboard/ScheduleAllDelBtn";
 import ScheduleOneDelBtn from "@/components/dashboard/ScheduleOneDelBtn";
 import ScheduleReserveBtn from "@/components/dashboard/ScheduleReserveBtn";
 import { deleteSchedule } from "@/lib/actions";
+import dbConnect from "@/lib/mongoose";
+import Schedule from "@/models/scheduleModel";
 import { getJalaliDetails } from "@/utils/utils";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 import { Metadata } from "next";
-import { headers } from "next/headers";
+// import { headers } from "next/headers";
 import Link from "next/link";
 import { HiOutlineChevronLeft } from "react-icons/hi2";
 
-const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+// const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export const metadata: Metadata = {
   title: "زمان‌بندی",
@@ -17,13 +19,17 @@ export const metadata: Metadata = {
 
 async function page({ params }: { params: Promise<{ scheduleId: string }> }) {
   const scheduleId = (await params).scheduleId;
-  const header = await headers();
+  // const header = await headers();
 
-  const schedule = await fetch(`${baseUrl}/schedule/${scheduleId}`, {
-    headers: header,
-  })
-    .then((res) => res.json())
-    .then((data) => data.data);
+  // const schedule = await fetch(`${baseUrl}/schedule/${scheduleId}`, {
+  //   headers: header,
+  // })
+  //   .then((res) => res.json())
+  //   .then((data) => data.data);
+
+  await dbConnect();
+
+  const schedule = await Schedule.findById(scheduleId);
 
   const { _id, date, hours } = schedule;
   const { day, monthName, year, dayName } = getJalaliDetails(new Date(date));
