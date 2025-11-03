@@ -7,21 +7,26 @@ import {
   HiOutlineUser,
 } from "react-icons/hi2";
 import UserPhoto from "./UserPhoto";
-import { headers } from "next/headers";
+// import { headers } from "next/headers";
 import MobileDashboardMenu from "./MobileDashboardMenu";
+import dbConnect from "@/lib/mongoose";
+import User from "@/models/userModel";
 
-const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+// const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 async function DashboardHeader() {
   const session = await auth();
 
-  const header = await headers();
+  // const header = await headers();
 
-  const user = await fetch(`${baseUrl}/user/${session?.user?.email}`, {
-    headers: header,
-  })
-    .then((data) => data.json())
-    .then((data) => data.data);
+  await dbConnect();
+  const user = await User.findOne({ email: session?.user?.email });
+
+  // const user = await fetch(`${baseUrl}/user/${session?.user?.email}`, {
+  //   headers: header,
+  // })
+  //   .then((data) => data.json())
+  //   .then((data) => data.data);
 
   return (
     <header className=" bg-purple-50 h-14 flex items-center justify-between px-8 max-sm:px-4 max-sm:flex-row-reverse max-sm:h-16">
