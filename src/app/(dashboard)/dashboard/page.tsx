@@ -3,7 +3,7 @@ import DashboardCircleChart from "@/components/dashboard/DashboardCircleChart";
 import DashboardStats from "@/components/dashboard/DashboardStats";
 import DashboardTable from "@/components/dashboard/DashboardTable";
 import { Metadata } from "next";
-import { headers } from "next/headers";
+// import { headers } from "next/headers";
 
 export const revalidate = 0;
 
@@ -14,12 +14,13 @@ export const metadata: Metadata = {
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 async function page() {
-  const header = await headers();
+  // const header = await headers();
 
   // get today reservations
 
   const reservations = await fetch(`${baseUrl}/reservation`, {
-    headers: header,
+    // headers: header,
+    credentials: "include",
   })
     .then((data) => data.json())
     .then((data) => data.data);
