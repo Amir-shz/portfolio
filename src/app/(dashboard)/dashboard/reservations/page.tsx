@@ -24,7 +24,9 @@ async function page() {
   //   .then((data) => data.data.reverse());
 
   await dbConnect();
-  const reservations = await Reservation.find().sort({ selectedDate: 1 });
+  const reservations = (
+    await Reservation.find().sort({ selectedDate: 1 })
+  ).reverse();
 
   return (
     <div className="max-h-dvh overflow-hidden p-2 max-sm:p-3 ">
