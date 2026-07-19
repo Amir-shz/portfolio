@@ -3,7 +3,7 @@ import { Copy } from "lucide-react";
 import { useState } from "react";
 
 export default function CardNumberBox() {
-  const cardNumber = "5859 8311 9630 5477";
+  const cardNumber = "6393 4610 4455 1410";
   const [copied, setCopied] = useState(false);
 
   const copyToClipboard = () => {
