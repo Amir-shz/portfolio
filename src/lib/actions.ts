@@ -37,14 +37,14 @@ export async function createReservation(data: {
     return "این تایم در همین لحظه رزرو شد. ساعت دیگری را برای رزرو انتخاب  کنید.";
   }
 
-  const isReservedFreeBefore = await Reservation.findOne({
-    plan: 1,
-    phone: data.phone,
-  });
+  // const isReservedFreeBefore = await Reservation.findOne({
+  //   plan: 1,
+  //   phone: data.phone,
+  // });
 
-  if (isReservedFreeBefore && data.plan === 1) {
-    return "شما قبلا یک بار پلن رایگان را رزرو کرده اید";
-  }
+  // if (isReservedFreeBefore && data.plan === 1) {
+  //   return "شما قبلا یک بار پلن رایگان را رزرو کرده اید";
+  // }
 
   await Reservation.create(data);
   const dateToFind = new Date(data.selectedDate);
@@ -56,7 +56,7 @@ export async function createReservation(data: {
     },
     {
       $set: { "hours.$.isAvailable": false },
-    }
+    },
   );
 
   // SEND EMAIL TO ADMIN
@@ -139,7 +139,7 @@ export async function createSchedule(data: {
   if (schedule) {
     await Schedule.findOneAndUpdate(
       { date: data.date },
-      { $push: { hours: { hour: data.time } } }
+      { $push: { hours: { hour: data.time } } },
     );
   }
 
@@ -173,7 +173,7 @@ export async function reserveHour(id: string, hour: string) {
 
   await Schedule.updateOne(
     { _id: id, "hours.hour": hour },
-    { $set: { "hours.$.isAvailable": false } }
+    { $set: { "hours.$.isAvailable": false } },
   );
 
   revalidatePath("/dashboard/schedules");
@@ -308,7 +308,7 @@ export async function changeUserData(state: FormState, formData: FormData) {
     {
       email: email,
       name: name,
-    }
+    },
   );
 
   revalidatePath("/dashboard");
@@ -344,7 +344,7 @@ export async function changePass(state: FormState, formData: FormData) {
       { email },
       {
         password: hashedPassword,
-      }
+      },
     );
 
     if (!user) {
@@ -370,7 +370,7 @@ export async function changePhoto(url: string) {
     { email: session?.user?.email },
     {
       photo: url,
-    }
+    },
   );
   revalidatePath("/dashboard");
 }
