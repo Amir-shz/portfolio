@@ -21,7 +21,7 @@ function page() {
             تو یه‌جایی تهِ دلت میدونی چه میخوای؛ فقط زیر گرد و غبار زبان گُمش
             کردی. بیا داستانت رو از نو بنویسیم.
           </h1>
-          <span className="w-1/3 h-1 bg-purple-700 rounded-full opacity-70 mb-4 max-sm:mt-2"></span>
+          <span className="w-1/3 h-1 bg-purple-700 rounded-full opacity-70 mb-4 max-sm:mt-2 max-sm:self-center"></span>
           <p>
             تو اینجا نیستی که جملات قشنگ بشنوی و من هم اینجا نیستم که برات
             نسخه‌های تکراری بپیچم. تو اینجایی چون میدونی یه جای کار میلنگه؛ چه

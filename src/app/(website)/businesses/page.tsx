@@ -28,7 +28,7 @@ function page() {
           <h1 className="text-3xl font-bold text-purple-600 max-sm:text-center max-sm:text-lg">
             چرا برندت آن‌طور که باید نمیفروشد و تیمت آن‌طور که باید کار نمیکند؟
           </h1>
-          <span className="w-1/3 h-1 bg-purple-700 rounded-full opacity-70 mb-4 max-sm:mt-2"></span>
+          <span className="w-1/3 h-1 bg-purple-700 rounded-full opacity-70 mb-4 max-sm:mt-2 max-sm:self-center"></span>
           <p>
             مدیر عزیز، بیایید تعارف را کنار بگذاریم. شما میتوانید بهترین محصول
             دنیا را داشته باشید، اما اگر دغدغه مشتری را موشکافی نکنید، پیام
