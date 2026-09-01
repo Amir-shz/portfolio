@@ -44,7 +44,7 @@ async function page({
   //   .then((data) => data.data);
 
   const {
-    description: planDescription,
+    // description: planDescription,
     title: planTitle,
     time: planTime,
     price: planPrice,
@@ -135,7 +135,7 @@ async function page({
             </p>
             <div className="flex flex-col gap-1 justify-center items-center">
               <p>نام: {planTitle}</p>
-              <p>توضیح: {planDescription}</p>
+              {/* <p>توضیح: {planDescription}</p> */}
             </div>
           </div>
         </div>
