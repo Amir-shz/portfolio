@@ -15,8 +15,9 @@ function PlansBox() {
           id: number;
           title: string;
           time: string;
-          description: string;
-          points: string[];
+          // description: string;
+          // points: string[];
+          off?: string;
           price: string;
         }) => (
           <PlanCard
@@ -25,10 +26,11 @@ function PlansBox() {
             title={plan.title}
             time={plan.time}
             price={plan.price}
-            description={plan.description}
-            points={plan.points}
+            off={plan.off}
+            // description={plan.description}
+            // points={plan.points}
           />
-        )
+        ),
       )}
       {showModal === true && <Reservation />}
     </>

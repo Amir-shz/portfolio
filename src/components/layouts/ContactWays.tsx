@@ -20,15 +20,15 @@ function ContactWays(): React.ReactNode {
       <h3 className=" text-neutral-700 text-h6_SB_desktop pb-11 select-none max-sm:pt-5 max-sm:pr-4 max-sm:pb-6">
         راه های تماس
       </h3>
-      <div className=" flex flex-col gap-8 max-sm:pr-8 max-sm:pb-5 max-sm:gap-4">
-        <div className=" flex items-center gap-6 ">
+      <div className=" flex flex-col gap-8 max-sm:pr-6 max-sm:pb-5 max-sm:gap-4">
+        {/* <div className=" flex items-center gap-6 ">
           <SocialIconLink size="lg" href="mailto:shf.iopsy@gmail.com">
             <MailIcon />
           </SocialIconLink>
           <p className=" text-neutral-600 font-bold text-[1.375rem] leading-7 max-sm:text-lg max-sm:w-0 max-sm:flex-1 max-sm:break-words max-sm:whitespace-normal pl-4 ">
             shf.IOpsy@gmail.com
           </p>
-        </div>
+        </div> */}
         <div className=" flex items-center gap-6">
           <SocialIconLink size="lg" href="tel:09934205405">
             <div className=" size-full flex justify-center items-center [&>svg]:hover:stroke-purple-500 [&>svg]:stroke-[#737373] transition-all duration-200 max-sm:[&>svg]:size-7 shrink-0 grow-0 ">
@@ -36,7 +36,10 @@ function ContactWays(): React.ReactNode {
             </div>
           </SocialIconLink>
           <p className="text-neutral-600 font-bold text-[1.375rem] leading-7 max-sm:text-lg">
-            ۰۹۹۳۴۲۰۵۴۰۵
+            ۰۹۹۳۴۲۰۵۴۰۵{" "}
+            <span className=" text-sm font-bold text-neutral-400 ">
+              (شماره منشی)
+            </span>
           </p>
         </div>
       </div>

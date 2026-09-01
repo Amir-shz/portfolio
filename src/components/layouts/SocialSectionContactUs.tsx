@@ -20,7 +20,7 @@ function SocialSectionContactUs(): React.ReactNode {
       <h3 className=" text-neutral-700 text-h6_SB_desktop pr-6 pt-6 pb-11 select-none max-sm:pr-4 max-sm:pt-5 max-sm:pb-[2.38rem]">
         حساب های مجازی
       </h3>
-      <div className=" flex gap-14 justify-center pb-12 max-sm:gap-10 max-sm:pb-6">
+      <div className=" flex gap-14 justify-center pb-12 max-sm:gap-10 max-sm:pb-6 max-[320px]:gap-6">
         <SocialIconLink
           size="lg"
           href="https://www.instagram.com/fatemeshafiei_/"

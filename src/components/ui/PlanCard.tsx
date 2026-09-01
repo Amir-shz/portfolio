@@ -10,24 +10,25 @@ function PlanCard({
   title,
   time,
   price,
-  description,
-  points,
+  off,
+  // description,
+  // points,
   id,
 }: planCardProps): React.ReactNode {
   const { show, setPlan } = useReservationStore();
   const router = useRouter();
 
   return (
-    <div className=" rounded-3xl border border-neutral-300 shadow-shadow3 bg-neutral-100 hover:border-purple-200 transition-all duration-300 flex flex-col justify-between min-h-96 last:bg-purple-300 group last:border-none select-none">
+    <div className=" rounded-3xl border border-neutral-300 shadow-shadow3 bg-neutral-100 hover:border-purple-200 transition-all duration-300 flex flex-col justify-between gap-4 last:bg-purple-300 group last:border-none select-none">
       <div>
         <p className=" group-last:text-neutral-50 text-neutral-700 font-bold leading-[1.875rem] text-[1.375rem] pt-6 text-center">
           {title}
         </p>
-        <p className=" group-last:text-purple-100 pt-3 text-neutral-400 font-semibold leading-4 text-sm text-center">
+        {/* <p className=" group-last:text-purple-100 pt-3 text-neutral-400 font-semibold leading-4 text-sm text-center">
           {description}
-        </p>
+        </p> */}
       </div>
-      <ul className=" px-[1.3rem] ">
+      {/* <ul className=" px-[1.3rem] ">
         {points.map((point, index) => (
           <li
             key={index}
@@ -36,7 +37,7 @@ function PlanCard({
             {point}
           </li>
         ))}
-      </ul>
+      </ul> */}
       <div className="flex justify-center items-center flex-col gap-4">
         <div className="flex gap-1 items-center [&>svg>path]:group-last:stroke-neutral-200">
           <ClockIcon />
@@ -46,7 +47,17 @@ function PlanCard({
         </div>
 
         <p className="group-last:text-neutral-50 text-neutral-700 text-[1.375rem] font-bold leading-[1.875rem] text-center">
-          {price === "free" ? "رایگان" : price}
+          {off ? (
+            <>
+              {" "}
+              <span className=" text-sm text-neutral-500 line-through">
+                {price}
+              </span>{" "}
+              <span className=" text-red-600 font-bold text-xl">{off}</span>
+            </>
+          ) : (
+            price
+          )}
         </p>
 
         <div className=" w-full px-6">

@@ -25,6 +25,7 @@ async function ReservationRow({
     title: planName,
     time: planTime,
     price: planPrice,
+    off,
   } = planData.filter((el) => el.id === Number(plan))[0];
 
   const { day, monthName, year } = getJalaliDetails(new Date(selectedDate));
@@ -50,7 +51,7 @@ async function ReservationRow({
         </p>
         <p className="border-r border-r-neutral-300">{planName}</p>
         <div className=" text-xs font-semibold leading-5 border-x border-x-neutral-300 flex flex-col justify-center items-center">
-          <p>{planPrice === "free" ? "رایگان" : `${planPrice}`}</p>
+          <p>{off ? `${off}` : `${planPrice}`}</p>
           <p>{planTime}</p>
         </div>
         <p className=" col-span-2 px-2">{description}</p>

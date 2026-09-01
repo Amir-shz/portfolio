@@ -6,6 +6,7 @@ import Faq from "@/components/ui/Faq";
 import { Metadata } from "next";
 import Link from "next/link";
 import TestimonialSection from "@/components/layouts/TestimonialSection";
+import OurServices from "@/components/layouts/OurServices";
 
 export const metadata: Metadata = {
   description:
@@ -39,6 +40,7 @@ export default function Page(): React.ReactNode {
         </div>
       </div>
       <HomeServiceSection />
+      <OurServices />
       <TestimonialSection />
       <Faq />
     </div>

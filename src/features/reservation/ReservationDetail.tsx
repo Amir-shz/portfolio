@@ -10,10 +10,11 @@ function ReservationDetail() {
     (el: {
       id: number;
       title: string;
-      description: string;
+      // description: string;
       time: string;
       price: string;
-    }) => el.id === plan
+      off?: string;
+    }) => el.id === plan,
   )[0];
 
   return (
@@ -22,14 +23,14 @@ function ReservationDetail() {
         <p className=" text-neutral-700 text-xl font-bold leading-7 flex justify-center max-sm:text-lg">
           {detail.title}
         </p>
-        <p className=" text-neutral-700 text-lg font-semibold leading-5 flex justify-center max-sm:text-base max-sm:leading-3">
+        {/* <p className=" text-neutral-700 text-lg font-semibold leading-5 flex justify-center max-sm:text-base max-sm:leading-3">
           {detail.description}
-        </p>
+        </p> */}
         <div className=" flex gap-4">
           <div className=" flex gap-1 items-center">
             <DollarIcon />
             <p className=" text-neutral-500 text-base font-semibold leading-4 max-sm:text-sm">
-              {detail.price === "free" ? "رایگان" : detail.price}
+              {detail.off ? detail.off : detail.price}
             </p>
           </div>
           <div className=" flex gap-1 items-center">

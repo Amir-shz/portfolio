@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import photo from "../../../public/fateme.jpg";
+import photo from "../../../public/fateme2.jpg";
 
 function AboutInHome(): React.ReactNode {
   return (

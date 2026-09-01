@@ -24,7 +24,8 @@ function WorkHistory(): React.ReactNode {
       <div>
         <p className=" text-p1_M_desktop text-neutral-500 leading-snug max-sm:leading-5 max-sm:text-base">
           تجربه کار در شرکت‌های به‌نامی مانند ذوب‌آهن، هنزا، فلت ارث، مس کرمان،
-          مپنا، داکو، آداپتیو، کلینیک روان پژوهان صنعت و …
+          مپنا، داکو، یاتاقان گلدن، ماهرآکادمی، آداپتیو، کلینیک روان پژوهان صنعت
+          و …
         </p>
       </div>
       {/* </motion.div> */}

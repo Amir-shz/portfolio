@@ -22,8 +22,9 @@ export interface planCardProps {
   title: string;
   time: string;
   price: string;
-  description: string;
-  points: string[];
+  off?: string;
+  // description: string;
+  // points: string[];
   // plan: string;
 }
 
