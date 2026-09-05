@@ -47,9 +47,9 @@ function MobileMenu() {
               <nav className=" flex flex-col gap-3 justify-center items-center mb-4">
                 <NavBtn href="/">صفحه اصلی</NavBtn>
                 <NavBtn href="/services">رزرو نوبت</NavBtn>
-                <NavBtn href="/experiences">سوابق</NavBtn>
                 <NavBtn href="/businesses">کسب و کارها</NavBtn>
                 <NavBtn href="/personalDevelopment">توسعه فردی</NavBtn>
+                <NavBtn href="/experiences">سوابق</NavBtn>
                 {/* 
                 <NavBtn href="/">صفحه اصلی</NavBtn>
                 <NavBtn href="/about-me">درباره من</NavBtn>

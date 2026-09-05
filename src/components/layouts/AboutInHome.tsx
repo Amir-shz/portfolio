@@ -15,7 +15,7 @@ function AboutInHome(): React.ReactNode {
     // >
     <div
       className=" size-full rounded-3xl shadow-shadow3 bg-neutral-100 border border-neutral-300
-      grid grid-cols-2 py-10 pr-10 pl-8 gap-6 max-sm:py-5 max-sm:grid-cols-1 max-sm:px-12 max-sm:pt-8 select-none"
+      grid grid-cols-2 py-10 pr-10 pl-8 gap-6 max-sm:py-5 max-sm:grid-cols-1 max-sm:px-8 max-sm:pt-8 select-none"
     >
       <div className="w-full rounded-3xl overflow-hidden max-h-[19.5rem] self-center">
         <Image
@@ -31,9 +31,16 @@ function AboutInHome(): React.ReactNode {
           فاطمه سادات شفیعی
         </h1>
         <p className=" text-neutral-500 text-h6_SB_desktop max-sm:text-lg max-sm:leading-[1.3125rem]">
-          من فاطمه سادات شفیعی هستم، رتبه ۵۲ کنکور کارشناسی و رتبه ۴ کنکور ارشد؛
-          فارغ‌التحصیل رشته روانشناسی در دانشگاه شهیدبهشتی تهران و دانشجوی رشته
-          روانشناسی صنعتی و سازمانی در دانشگاه اصفهان.
+          رتبه ۵۲ کنکور کارشناسی
+        </p>
+        <p className=" text-neutral-500 text-h6_SB_desktop max-sm:text-lg max-sm:leading-[1.3125rem]">
+          رتبه ۴ کنکور ارشد
+        </p>
+        <p className=" text-neutral-500 text-h6_SB_desktop max-sm:text-lg max-sm:leading-[1.3125rem]">
+          دانش‌آموخته روانشناسی از دانشگاه شهیدبهشتی تهران
+        </p>
+        <p className=" text-neutral-500 text-h6_SB_desktop max-sm:text-lg max-sm:leading-[1.3125rem]">
+          کارشناسی ارشد روانشناسی صنعتی و سازمانی از دانشگاه اصفهان
         </p>
       </div>
       {/* </motion.div> */}
