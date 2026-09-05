@@ -17,9 +17,9 @@ function page() {
           />
         </div>
         <div className="flex flex-col gap-4 max-sm:gap-2 [&>p]:font-medium [&>p]:text-neutral-700 max-sm:[&>p]:text-center max-sm:[&>p]:text-sm ">
-          <h1 className="text-3xl font-bold text-purple-600 max-sm:text-center max-sm:text-lg">
-            تو یه‌جایی تهِ دلت میدونی چی میخوای؛ فقط زیر گرد و غبار زبان گُمش
-            کردی. بیا داستانت رو از نو بنویسیم.
+          <h1 className="text-3xl leading-10 font-bold text-purple-600 max-sm:text-center max-sm:text-lg">
+            تو یه‌جایی تهِ دلت میدونی چی میخوای؛ فقط زیر گرد و غبار طوفان‌های
+            زندگیت گُمش کردی. بیا داستانت رو از نو بنویسیم.
           </h1>
           <span className="w-1/3 h-1 bg-purple-700 rounded-full opacity-70 mb-4 max-sm:mt-2 max-sm:self-center"></span>
           <p>
@@ -37,7 +37,7 @@ function page() {
           </p>
           <Link
             href="/services"
-            className="flex items-center gap-1 text-white bg-purple-600 hover:bg-purple-700 duration-200 font-semibold self-end rounded-lg px-3 py-2 mt-4 max-lg:self-center max-sm:text-sm max-sm:px-2 max-sm:py-1"
+            className="flex items-center gap-1 text-white bg-purple-600 hover:bg-purple-700 duration-200 font-semibold self-end rounded-lg px-3 py-2 mt-4 max-lg:self-center max-sm:text-base max-sm:px-6 max-sm:py-2"
           >
             <span>شروع مسیر</span>
             <ChevronLeftIcon className=" max-sm:size-4" />
