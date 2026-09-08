@@ -30,18 +30,20 @@ function AboutInHome(): React.ReactNode {
         <h1 className=" pb-6 text-neutral-700 text-h4_B_desktop  max-sm:text-h4_B_mobile">
           فاطمه سادات شفیعی
         </h1>
-        <p className=" text-neutral-500 text-h6_SB_desktop max-sm:text-lg max-sm:leading-[1.3125rem]">
-          رتبه ۵۲ کنکور کارشناسی
-        </p>
-        <p className=" text-neutral-500 text-h6_SB_desktop max-sm:text-lg max-sm:leading-[1.3125rem]">
-          رتبه ۴ کنکور ارشد
-        </p>
-        <p className=" text-neutral-500 text-h6_SB_desktop max-sm:text-lg max-sm:leading-[1.3125rem]">
-          دانش‌آموخته روانشناسی از دانشگاه شهیدبهشتی تهران
-        </p>
-        <p className=" text-neutral-500 text-h6_SB_desktop max-sm:text-lg max-sm:leading-[1.3125rem]">
-          کارشناسی ارشد روانشناسی صنعتی و سازمانی از دانشگاه اصفهان
-        </p>
+        <ul className=" list-[square] list-inside">
+          <li className=" text-neutral-500 text-h6_SB_desktop max-sm:text-lg max-sm:leading-[1.3125rem]">
+            رتبه ۵۲ کنکور کارشناسی
+          </li>
+          <li className=" text-neutral-500 text-h6_SB_desktop max-sm:text-lg max-sm:leading-[1.3125rem]">
+            رتبه ۴ کنکور کارشناسی ارشد
+          </li>
+          <li className=" text-neutral-500 text-h6_SB_desktop max-sm:text-lg max-sm:leading-[1.3125rem]">
+            دانش‌آموخته رشته روانشناسی از دانشگاه شهیدبهشتی تهران
+          </li>
+          <li className=" text-neutral-500 text-h6_SB_desktop max-sm:text-lg max-sm:leading-[1.3125rem]">
+            کارشناسی ارشد روانشناسی صنعتی و سازمانی از دانشگاه اصفهان
+          </li>
+        </ul>
       </div>
       {/* </motion.div> */}
     </div>

@@ -14,7 +14,7 @@ function HomeServiceSection() {
       <HomeServiceCard
         icon={<FinanceIcon />}
         title="برندینگ کسب‌وکارها"
-        description="خلق برند منحصربه‌فرد، استراتژی‌های داده‌محور و افزایش فروش"
+        description="خلق برند منحصربه‌فرد و افزایش فروش"
       />
       <HomeServiceCard
         icon={<EducationIcon />}
