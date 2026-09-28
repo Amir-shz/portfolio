@@ -7,6 +7,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import TestimonialSection from "@/components/layouts/TestimonialSection";
 import OurServices from "@/components/layouts/OurServices";
+import PodcastSection from "@/components/layouts/PodcastSection";
 
 export const metadata: Metadata = {
   description:
@@ -41,6 +42,7 @@ export default function Page(): React.ReactNode {
       </div>
       <HomeServiceSection />
       <OurServices />
+      <PodcastSection />
       <TestimonialSection />
       <Faq />
     </div>
