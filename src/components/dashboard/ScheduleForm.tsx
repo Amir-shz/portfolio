@@ -1,6 +1,6 @@
 "use client";
 import { createSchedule } from "@/lib/actions";
-import { useRef, useState } from "react";
+import { useRef, useState, useTransition } from "react";
 import { DatePicker } from "zaman";
 
 function ScheduleForm({
@@ -14,9 +14,11 @@ function ScheduleForm({
 }) {
   const [date, setDate] = useState<Date>();
   const [time, setTime] = useState<string>();
-  const [isError, setIsError] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const [isPending, startTransition] = useTransition();
   const timeInputRef = useRef<HTMLInputElement | null>(null);
+  const isError = errorMessage !== "";
 
   function handleSubmit() {
     const dates = schedules.map((el: { date: string | undefined }) => el.date);
@@ -31,16 +33,28 @@ function ScheduleForm({
       );
 
       if (hoursArr.includes(time)) {
-        setIsError(true);
+        setErrorMessage("زمان انتخاب شده از قبل در جدول زمان بندی موجود است");
         setIsSuccess(false);
         return;
       }
     }
 
-    // add schedule
-    createSchedule({ date: date?.toLocaleDateString("en-Ca"), time });
-    setIsError(false);
-    setIsSuccess(true);
+    // add schedule (the server validates again and returns any error)
+    startTransition(async () => {
+      const result = await createSchedule({
+        date: date?.toLocaleDateString("en-CA"),
+        time,
+      });
+
+      if (result?.error) {
+        setErrorMessage(result.error);
+        setIsSuccess(false);
+        return;
+      }
+
+      setErrorMessage("");
+      setIsSuccess(true);
+    });
   }
 
   return (
@@ -76,13 +90,14 @@ function ScheduleForm({
         ${isSuccess && "text-success-600"}
         `}
       >
-        {isError && "زمان انتخاب شده از قبل در جدول زمان بندی موجود است"}
+        {isError && errorMessage}
         {isSuccess && "زمان بندی با موفقیت اضافه شد"}
         {!isError && !isSuccess && "for first height"}
       </span>
 
       <button
         className=" text-neutral-50 text-base font-bold leading-[1.125rem] py-3 px-10 mt-8 self-center rounded-xl bg-purple-400 hover:bg-purple-500 duration-300 disabled:bg-neutral-400 max-sm:mt-0"
+        disabled={isPending}
         onClick={(e) => {
           e.preventDefault();
           handleSubmit();

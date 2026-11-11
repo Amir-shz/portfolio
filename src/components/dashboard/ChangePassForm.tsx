@@ -3,7 +3,7 @@
 import { changePass } from "@/lib/actions";
 import { useActionState } from "react";
 
-function ChangePassForm({ email }: { email: string }) {
+function ChangePassForm() {
   const [state, action, pending] = useActionState(changePass, undefined);
 
   return (
@@ -11,10 +11,10 @@ function ChangePassForm({ email }: { email: string }) {
       action={action}
       className=" w-full px-4 flex flex-col items-center gap-3 [&_input]:border [&_input]:bg-neutral-50 [&_input]:rounded-lg [&_input]:border-neutral-400 [&_input]:py-2 [&_input]:pr-3 [&_input:focus]:border [&_input:focus]:border-purple-500 [&_input:focus]:outline-none [&_input:focus~p]:top-0 [&_input:focus~p]:text-neutral-800 [&_input:focus~p]:text-xs"
     >
-      <input type="hidden" name="email" defaultValue={email} />
       <label className=" relative w-full">
         <input
-          type="text"
+          type="password"
+          autoComplete="current-password"
           name="password"
           className=" w-full notShownLogin"
           placeholder=""
@@ -31,7 +31,8 @@ function ChangePassForm({ email }: { email: string }) {
       )}
       <label className=" relative w-full">
         <input
-          type="text"
+          type="password"
+          autoComplete="new-password"
           name="newPassword"
           className=" w-full notShownLogin"
           placeholder=""

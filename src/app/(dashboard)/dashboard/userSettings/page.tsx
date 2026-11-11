@@ -1,13 +1,13 @@
-import { auth } from "@/auth";
 import ChangePassForm from "@/components/dashboard/ChangePassForm";
 import ChangeUserDataForm from "@/components/dashboard/ChangeUserDataForm";
 import SignupForm from "@/components/dashboard/SignupForm";
 import UserDelBtn from "@/components/dashboard/UserDelBtn";
-import dbConnect from "@/lib/mongoose";
+import { getCurrentUser } from "@/lib/session";
 import User from "@/models/userModel";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 import { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
+import { redirect } from "next/navigation";
 // import { headers } from "next/headers";
 
 export const metadata: Metadata = {
@@ -17,17 +17,17 @@ export const metadata: Metadata = {
 // const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 async function Page() {
-  const session = await auth();
   // const header = await headers();
 
   // const users = await fetch(`${baseUrl}/user`, { headers: header })
   //   .then((data) => data.json())
   //   .then((data) => data.data);
 
-  await dbConnect();
-  const users = await User.find();
+  const currentUser = await getCurrentUser();
+  if (!currentUser) redirect("/login");
 
-  const currentUser = await User.findOne({ email: session?.user?.email });
+  // the users list is only needed (and only shown) for the OWNER
+  const users = currentUser.role === "OWNER" ? await User.find() : [];
 
   // const currentUser = await fetch(`${baseUrl}/user/${session?.user?.email}`, {
   //   headers: header,
@@ -45,8 +45,8 @@ async function Page() {
       </div>
       <div className=" bg-purple-50 rounded-md shadow-shadow4 border border-purple-100 p-4 flex flex-col   justify-between max-sm:col-span-2 max-sm:gap-2 max-sm:p-0 max-sm:py-4">
         <SessionProvider>
-          <ChangeUserDataForm user={currentUser} />
-          <ChangePassForm email={currentUser.email} />
+          <ChangeUserDataForm />
+          <ChangePassForm />
         </SessionProvider>
       </div>
 
@@ -94,7 +94,7 @@ async function Page() {
                     </span>
                   </p>
 
-                  <UserDelBtn id={user._id} role={user.role} />
+                  <UserDelBtn id={String(user._id)} role={user.role} />
                 </div>
               )
             )}

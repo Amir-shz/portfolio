@@ -1,23 +1,57 @@
 "use server";
+// SECURITY NOTE: every exported function in this file is a Server Action,
+// i.e. a public POST endpoint that can be called from any page. The
+// middleware does NOT protect them, so each dashboard action must check the
+// session itself (requireUser / requireOwner).
+
 import dbConnect from "@/lib/mongoose";
 import Reservation from "@/models/reservationModel";
 import Schedule from "@/models/scheduleModel";
 import User from "@/models/userModel";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { auth, signIn, signOut } from "../auth";
+import { headers } from "next/headers";
+import { isValidObjectId } from "mongoose";
+import { signIn, signOut } from "../auth";
 import bcrypt from "bcryptjs";
 import {
   changePassSchema,
   FormState,
+  reservationSchema,
+  scheduleSchema,
   signInSchema,
   SignupFormSchema,
   userDataFormSchema,
 } from "./zod";
-import { headers } from "next/headers";
+import { requireOwner, requireUser } from "./session";
+import { addHit } from "./rateLimit";
+import { planData } from "@/data/planData";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
+const SLOT_TAKEN_MESSAGE =
+  "این تایم در همین لحظه رزرو شد. ساعت دیگری را برای رزرو انتخاب  کنید.";
+
+// max reservation attempts per IP in one hour
+const RESERVATION_IP_LIMIT = 5;
+const RESERVATION_IP_WINDOW_MS = 60 * 60 * 1000;
+// max open ("new") reservations for one phone number
+const MAX_OPEN_RESERVATIONS_PER_PHONE = 3;
+
+async function getClientIp() {
+  const h = await headers();
+  return (
+    h.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    h.get("x-real-ip") ||
+    "unknown"
+  );
+}
+
+function tehranToday() {
+  return new Date().toLocaleDateString("en-CA", { timeZone: "Asia/Tehran" });
+}
+
+// PUBLIC: used by the reservation form on the website
 export async function createReservation(data: {
   plan: number;
   fullName: string;
@@ -26,38 +60,76 @@ export async function createReservation(data: {
   selectedDate: string;
   selectedTime: string;
 }) {
-  await dbConnect();
-
-  const isAvailable = await Reservation.findOne({
-    selectedDate: data.selectedDate,
-    selectedTime: data.selectedTime,
-  });
-
-  if (isAvailable) {
-    return "این تایم در همین لحظه رزرو شد. ساعت دیگری را برای رزرو انتخاب  کنید.";
+  const parsed = reservationSchema.safeParse(data);
+  if (!parsed.success) {
+    return (
+      parsed.error.issues[0]?.message ?? "اطلاعات وارد شده نامعتبر است."
+    );
   }
 
-  // const isReservedFreeBefore = await Reservation.findOne({
-  //   plan: 1,
-  //   phone: data.phone,
-  // });
+  const { plan, fullName, phone, description, selectedDate, selectedTime } =
+    parsed.data;
 
-  // if (isReservedFreeBefore && data.plan === 1) {
-  //   return "شما قبلا یک بار پلن رایگان را رزرو کرده اید";
-  // }
+  if (!planData.some((el) => el.id === plan)) {
+    return "پلن انتخاب شده نامعتبر است.";
+  }
 
-  await Reservation.create(data);
-  const dateToFind = new Date(data.selectedDate);
-  const hourToFind = data.selectedTime;
-  await Schedule.findOneAndUpdate(
+  if (selectedDate <= tehranToday()) {
+    return "امکان رزرو برای این تاریخ وجود ندارد.";
+  }
+
+  const ip = await getClientIp();
+  if (addHit(`reservation:${ip}`, RESERVATION_IP_WINDOW_MS) > RESERVATION_IP_LIMIT) {
+    return "تعداد درخواست‌های رزرو شما زیاد است. لطفا کمی بعد دوباره تلاش کنید.";
+  }
+
+  await dbConnect();
+
+  const openReservations = await Reservation.countDocuments({
+    phone,
+    status: "new",
+  });
+  if (openReservations >= MAX_OPEN_RESERVATIONS_PER_PHONE) {
+    return "برای این شماره همراه چند رزرو فعال ثبت شده است. لطفا از راه‌های ارتباطی با ما در تماس باشید.";
+  }
+
+  const alreadyReserved = await Reservation.exists({
+    selectedDate,
+    selectedTime,
+  });
+  if (alreadyReserved) return SLOT_TAKEN_MESSAGE;
+
+  // Claim the slot atomically: only succeeds if this hour exists in the
+  // schedule AND is still available. Prevents double booking and booking
+  // of times that were never offered.
+  const slot = await Schedule.findOneAndUpdate(
     {
-      date: dateToFind,
-      "hours.hour": hourToFind,
+      date: new Date(selectedDate),
+      hours: { $elemMatch: { hour: selectedTime, isAvailable: true } },
     },
-    {
-      $set: { "hours.$.isAvailable": false },
-    },
+    { $set: { "hours.$.isAvailable": false } },
   );
+
+  if (!slot) return SLOT_TAKEN_MESSAGE;
+
+  try {
+    await Reservation.create({
+      plan,
+      fullName,
+      phone,
+      description,
+      selectedDate,
+      selectedTime,
+    });
+  } catch (err) {
+    // give the slot back if the reservation could not be saved
+    await Schedule.updateOne(
+      { _id: slot._id, "hours.hour": selectedTime },
+      { $set: { "hours.$.isAvailable": true } },
+    );
+    console.error(err);
+    return "ثبت رزرو با مشکل مواجه شد. لطفا دوباره تلاش کنید.";
+  }
 
   // SEND EMAIL TO ADMIN
   // const apiKey = process.env.BREVO_API_KEY;
@@ -75,7 +147,7 @@ export async function createReservation(data: {
   //     sender: { email: "admin@fatemeshafieii.ir", name: "admin" },
   //     to: [{ email: adminEmail, name: "Admin" }],
   //     subject: "رزرو نوبت",
-  //     htmlContent: `<p>${data.fullName} یک نوبت مشاوره رزرو کرده است</p>`,
+  //     htmlContent: `<p>${fullName} یک نوبت مشاوره رزرو کرده است</p>`,
   //   }),
   // }).then((res) => res.json());
 
@@ -83,34 +155,26 @@ export async function createReservation(data: {
 }
 
 export async function finishReservationStatus(id: string) {
-  const header = await headers();
+  await requireUser();
+  if (!isValidObjectId(id)) return;
 
-  const headersObj = Object.fromEntries(header.entries());
-  delete headersObj["content-length"];
-
-  const body = { status: "finish" };
-
-  await fetch(`${baseUrl}/reservation/${id}`, {
-    method: "PATCH",
-    body: JSON.stringify(body),
-
-    headers: { "Content-Type": "application/json", ...headersObj },
-  });
+  await Reservation.findByIdAndUpdate(id, { status: "finish" });
 
   revalidatePath("/dashboard/reservations");
 }
 
 export async function deleteReservation(id: string) {
-  const header = await headers();
-  await fetch(`${baseUrl}/reservation/${id}`, {
-    method: "DELETE",
-    headers: header,
-  });
+  await requireUser();
+  if (!isValidObjectId(id)) return;
+
+  await Reservation.findByIdAndDelete(id);
 
   revalidatePath("/dashboard/reservations");
 }
 
 export async function changePlanData(formData: FormData) {
+  await requireUser();
+
   const id = formData.get("id");
   const body = {
     title: formData.get("title"),
@@ -131,23 +195,41 @@ export async function changePlanData(formData: FormData) {
 export async function createSchedule(data: {
   date: string | undefined;
   time: string | undefined;
-}) {
+}): Promise<{ error: string } | undefined> {
+  await requireUser();
+
+  const parsed = scheduleSchema.safeParse(data);
+  if (!parsed.success) {
+    return {
+      error: parsed.error.issues[0]?.message ?? "اطلاعات وارد شده نامعتبر است.",
+    };
+  }
+
+  const { date, time } = parsed.data;
+
   // check Date exists
-  const schedule = await Schedule.findOne({ date: data.date });
+  const schedule = await Schedule.findOne({ date });
 
   // if exist => UPDATE
   if (schedule) {
-    await Schedule.findOneAndUpdate(
-      { date: data.date },
-      { $push: { hours: { hour: data.time } } },
+    const hourExists = schedule.hours.some(
+      (el: { hour: string }) => el.hour === time,
+    );
+    if (hourExists) {
+      return { error: "زمان انتخاب شده از قبل در جدول زمان بندی موجود است" };
+    }
+
+    await Schedule.updateOne(
+      { _id: schedule._id },
+      { $push: { hours: { hour: time } } },
     );
   }
 
   // if not exist => CREATE
   else {
     await Schedule.create({
-      date: data.date,
-      hours: { hour: data.time },
+      date,
+      hours: [{ hour: time }],
     });
   }
 
@@ -155,11 +237,14 @@ export async function createSchedule(data: {
 }
 
 export async function deleteHour(id: string, hour: string) {
+  await requireUser();
+  if (!isValidObjectId(id) || typeof hour !== "string") return;
+
   await Schedule.updateOne({ _id: id }, { $pull: { hours: { hour: hour } } });
 
   const schedule = await Schedule.findById(id);
 
-  if (schedule.hours.length === 0) {
+  if (schedule && schedule.hours.length === 0) {
     await Schedule.findByIdAndDelete(id);
     revalidatePath("/dashboard/schedules");
     redirect("/dashboard/schedules");
@@ -169,7 +254,8 @@ export async function deleteHour(id: string, hour: string) {
 }
 
 export async function reserveHour(id: string, hour: string) {
-  console.log(id, hour);
+  await requireUser();
+  if (!isValidObjectId(id) || typeof hour !== "string") return;
 
   await Schedule.updateOne(
     { _id: id, "hours.hour": hour },
@@ -180,7 +266,10 @@ export async function reserveHour(id: string, hour: string) {
 }
 
 export async function deleteSchedule(formData: FormData) {
+  await requireUser();
+
   const id = formData.get("id");
+  if (typeof id !== "string" || !isValidObjectId(id)) return;
 
   await Schedule.findByIdAndDelete(id);
 
@@ -224,6 +313,9 @@ export async function login(state: FormState, formData: FormData) {
 }
 
 export async function signup(state: FormState, formData: FormData) {
+  // only signed-in users can create new accounts
+  await requireUser();
+
   const validatedFields = SignupFormSchema.safeParse({
     name: formData.get("name"),
     email: formData.get("email"),
@@ -238,34 +330,45 @@ export async function signup(state: FormState, formData: FormData) {
 
   const { name, email, password } = validatedFields.data;
 
-  const hashedPassword = await bcrypt.hash(password, 12);
-
   try {
     await dbConnect();
-    const user = await User.create({ name, email, password: hashedPassword });
 
-    if (!user) {
-      return {
-        message: "An error occurred while creating your account.",
-      };
+    const emailTaken = await User.exists({ email: email.toLowerCase() });
+    if (emailTaken) {
+      return { status: "fail", message: "این ایمیل قبلا ثبت شده است." };
     }
 
-    await signIn("credentials", { email, password, redirect: false });
+    const hashedPassword = await bcrypt.hash(password, 12);
+    await User.create({ name, email, password: hashedPassword });
 
-    revalidatePath("/dashboard");
+    // NOTE: we intentionally do NOT sign in as the new user here; the admin
+    // who created the account must stay signed in as themselves.
+
+    revalidatePath("/dashboard/userSettings");
 
     return { status: "success", message: "حساب کاربری با موفقیت ایجاد شد" };
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return {
       status: "fail",
-      message: "An error occurred while creating your account." + `${err}`,
+      message: "ایجاد حساب کاربری با مشکل مواجه شد.",
     };
   }
 }
 
 export async function deleteUser(id: string) {
+  // only the OWNER can delete users
+  await requireOwner();
+
+  if (!isValidObjectId(id)) {
+    return { message: "کاربر نامعتبر است" };
+  }
+
   const user = await User.findById(id);
+
+  if (!user) {
+    return { message: "کاربر پیدا نشد" };
+  }
 
   if (user.role === "OWNER") {
     return {
@@ -278,6 +381,10 @@ export async function deleteUser(id: string) {
 }
 
 export async function changeUserData(state: FormState, formData: FormData) {
+  // the user can only change their OWN data (taken from the session,
+  // never from form fields)
+  const currentUser = await requireUser();
+
   const validatedFields = userDataFormSchema.safeParse({
     name: formData.get("name"),
     email: formData.get("email"),
@@ -291,30 +398,30 @@ export async function changeUserData(state: FormState, formData: FormData) {
 
   const { name, email } = validatedFields.data;
 
-  const oldName = formData.get("oldName");
-  const oldEmail = formData.get("oldEmail");
-
   if (
-    name.toLowerCase() === String(oldName)?.toLowerCase() &&
-    email.toLowerCase() === String(oldEmail)?.toLowerCase()
+    name.toLowerCase() === String(currentUser.name).toLowerCase() &&
+    email.toLowerCase() === String(currentUser.email).toLowerCase()
   ) {
     return { message: "اطلاعات ورودی تغییری نکرده است" };
   }
 
-  await dbConnect();
+  const emailTaken = await User.exists({
+    email: email.toLowerCase(),
+    _id: { $ne: currentUser._id },
+  });
+  if (emailTaken) {
+    return { message: "این ایمیل برای کاربر دیگری ثبت شده است" };
+  }
 
-  await User.findOneAndUpdate(
-    { email: oldEmail },
-    {
-      email: email,
-      name: name,
-    },
-  );
+  await User.updateOne({ _id: currentUser._id }, { email, name });
 
-  revalidatePath("/dashboard");
+  revalidatePath("/dashboard", "layout");
 }
 
 export async function changePass(state: FormState, formData: FormData) {
+  // the user can only change their OWN password
+  const currentUser = await requireUser();
+
   const validatedFields = changePassSchema.safeParse({
     password: formData.get("password"),
     newPassword: formData.get("newPassword"),
@@ -327,11 +434,9 @@ export async function changePass(state: FormState, formData: FormData) {
   }
 
   const { password, newPassword } = validatedFields.data;
-  const email = formData.get("email");
 
   // check old pass
-  await dbConnect();
-  const user = await User.findOne({ email }).select("+password");
+  const user = await User.findById(currentUser._id).select("+password");
 
   if (!user || !(await bcrypt.compare(password, user.password))) {
     return { message: "رمزعبور فعلی اشتباه است" };
@@ -340,37 +445,14 @@ export async function changePass(state: FormState, formData: FormData) {
   const hashedPassword = await bcrypt.hash(newPassword, 12);
 
   try {
-    const user = await User.findOneAndUpdate(
-      { email },
-      {
-        password: hashedPassword,
-      },
-    );
-
-    if (!user) {
-      return {
-        message: "موقع تغییر رمز با مشکل مواجه شدیم",
-      };
-    }
+    await User.updateOne({ _id: user._id }, { password: hashedPassword });
 
     return { status: "success", message: "رمزعبور با موفقیت تغییر کرد." };
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return {
       status: "fail",
-      message: "An error occurred while creating your account." + `${err}`,
+      message: "موقع تغییر رمز با مشکل مواجه شدیم",
     };
   }
-}
-
-export async function changePhoto(url: string) {
-  const session = await auth();
-  await dbConnect();
-  await User.findOneAndUpdate(
-    { email: session?.user?.email },
-    {
-      photo: url,
-    },
-  );
-  revalidatePath("/dashboard");
 }

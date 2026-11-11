@@ -3,14 +3,9 @@
 import { changeUserData } from "@/lib/actions";
 import { useActionState } from "react";
 
-function ChangeUserDataForm({
-  user,
-}: {
-  user: {
-    email: string;
-    name: string;
-  };
-}) {
+// The server action reads the current user from the session, so no
+// user identifiers are sent from the browser.
+function ChangeUserDataForm() {
   const [state, action, pending] = useActionState(changeUserData, undefined);
 
   return (
@@ -18,8 +13,6 @@ function ChangeUserDataForm({
       action={action}
       className=" w-full px-4 flex flex-col items-center gap-3 [&_input]:border [&_input]:bg-neutral-50 [&_input]:rounded-lg [&_input]:border-neutral-400 [&_input]:py-2 [&_input]:pr-3 [&_input:focus]:border [&_input:focus]:border-purple-500 [&_input:focus]:outline-none [&_input:focus~p]:top-0 [&_input:focus~p]:text-neutral-800 [&_input:focus~p]:text-xs"
     >
-      <input type="hidden" name="oldName" defaultValue={user?.name} />
-      <input type="hidden" name="oldEmail" defaultValue={user?.email} />
       <label className=" relative w-full">
         <input
           type="text"

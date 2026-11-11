@@ -1,5 +1,5 @@
-import { auth } from "@/auth";
 import { logOut } from "@/lib/actions";
+import { getCurrentUser } from "@/lib/session";
 import Link from "next/link";
 import {
   HiOutlineArrowLeftStartOnRectangle,
@@ -9,18 +9,13 @@ import {
 import UserPhoto from "./UserPhoto";
 // import { headers } from "next/headers";
 import MobileDashboardMenu from "./MobileDashboardMenu";
-import dbConnect from "@/lib/mongoose";
-import User from "@/models/userModel";
 
 // const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 async function DashboardHeader() {
-  const session = await auth();
-
   // const header = await headers();
 
-  await dbConnect();
-  const user = await User.findOne({ email: session?.user?.email });
+  const user = await getCurrentUser();
 
   // const user = await fetch(`${baseUrl}/user/${session?.user?.email}`, {
   //   headers: header,
@@ -31,7 +26,7 @@ async function DashboardHeader() {
   return (
     <header className=" bg-purple-50 h-14 flex items-center justify-between px-8 max-sm:px-4 max-sm:flex-row-reverse max-sm:h-16">
       <div className=" flex gap-2 items-center max-sm:flex-row-reverse">
-        <UserPhoto img={user?.photo} name={user?.name[0]} />
+        <UserPhoto img={user?.photo} name={user?.name?.[0]} />
         <p className="font-semibold">{user?.name}</p>
       </div>
       <p className=" text-purple-700 font-semibold text-lg max-sm:hidden">

@@ -1,43 +1,46 @@
 "use client";
 
-import { changePhoto } from "@/lib/actions";
-import { S3 } from "aws-sdk";
+import { useToast } from "@/hooks/use-toast";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { ChangeEvent, useTransition } from "react";
 import { HiOutlineCamera } from "react-icons/hi2";
 
-const accessKeyId = process.env.NEXT_PUBLIC_LIARA_ACCESS_KEY as string;
-const secretAccessKey = process.env.NEXT_PUBLIC_LIARA_SECRET_KEY as string;
-const endpoint = process.env.NEXT_PUBLIC_LIARA_ENDPOINT as string;
-const bucket = process.env.NEXT_PUBLIC_LIARA_BUCKET_NAME as string;
-
+// The file is sent to our own API route, which uploads it to object storage
+// on the server. Storage credentials must never be used in the browser.
 function UserPhoto({ img, name }: { img: string; name: string }) {
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
+  const { toast } = useToast();
 
-  async function handleChange(e: ChangeEvent<HTMLInputElement>) {
+  function handleChange(e: ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    // allow choosing the same file again later
+    e.target.value = "";
+    if (!file) return;
+
     startTransition(async () => {
-      const file = e.target.files?.[0] as File;
-
-      const s3 = new S3({
-        accessKeyId,
-        secretAccessKey,
-        endpoint,
-      });
-
-      const params = {
-        Bucket: bucket,
-        Key: file.name,
-        Body: file,
-        ContentType: "image/jpeg",
-        ACL: "public-read",
-      };
-
       try {
-        const response = await s3.upload(params).promise();
+        const formData = new FormData();
+        formData.append("photo", file);
 
-        changePhoto(response.Location);
+        const res = await fetch("/api/v1/user/photo", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (!res.ok) {
+          const data = await res.json().catch(() => null);
+          toast({
+            description: data?.message ?? "آپلود عکس با مشکل مواجه شد",
+          });
+          return;
+        }
+
+        router.refresh();
       } catch (error) {
-        console.error("❌", "Error uploading file:", error);
+        console.error("Error uploading file:", error);
+        toast({ description: "آپلود عکس با مشکل مواجه شد" });
       }
     });
   }
@@ -70,7 +73,7 @@ function UserPhoto({ img, name }: { img: string; name: string }) {
         <input
           type="file"
           className="hidden h-0 w-0"
-          accept="image/*"
+          accept="image/jpeg,image/png,image/webp"
           onChange={handleChange}
         />
       </label>
