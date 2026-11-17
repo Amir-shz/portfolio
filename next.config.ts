@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 import { supabasePublicBucketUrl } from "./src/lib/storage";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  serverExternalPackages: ["libheif-js"],
   images: {
     remotePatterns: [
       ...(supabasePublicBucketUrl ? [new URL(`${supabasePublicBucketUrl}**`)] : []),

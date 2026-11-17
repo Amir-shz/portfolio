@@ -37,7 +37,9 @@ function UserPhoto({ img, name }: { img: string; name: string }) {
           const data = await res.json().catch(() => null);
           toast({
             variant: "destructive",
-            description: data?.message ?? "آپلود عکس با مشکل مواجه شد",
+            description: data?.message ?? (res.status === 413
+              ? "حجم عکس از سقف مجاز آپلود بیشتر است"
+              : "آپلود عکس با مشکل مواجه شد"),
           });
           return;
         }
@@ -83,7 +85,7 @@ function UserPhoto({ img, name }: { img: string; name: string }) {
         <input
           type="file"
           className="sr-only"
-          accept="image/jpeg,image/png,image/webp"
+          accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.heic,.heif"
           onChange={handleChange}
         />
       </label>

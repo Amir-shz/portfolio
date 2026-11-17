@@ -33,6 +33,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "html-react-parser": "6.1.9",
+    "libheif-js": "1.23.5",
     "lucide-react": "^0.474.0",
     "mongoose": "^8.9.5",
     "motion": "^11.14.4",
