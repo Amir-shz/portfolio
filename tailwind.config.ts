@@ -17,6 +17,12 @@ export default {
         shadow2: "0px 4px 8px 0 rgba(17,17,17,0.08)",
         shadow3: "2px 2px 6px 0 rgba(17,17,17,0.16)",
         shadow4: "0px 0px 8px 2px rgba(17,17,17,0.12)",
+        glass: "0 10px 30px -22px rgba(54, 34, 120, 0.38)",
+        "glass-lg": "0 24px 56px -32px rgba(54, 34, 120, 0.45)",
+        iris: "0 8px 18px -10px rgba(91, 43, 217, 0.75)",
+      },
+      fontFamily: {
+        sans: ["var(--font-yekan)", "IRANYekan", "Tahoma", "sans-serif"],
       },
       colors: {
         background: "hsl(var(--background))",
@@ -40,7 +46,27 @@ export default {
         },
         success: colors.green,
         warning: colors.yellow,
-        //
+        // ── Aurora Glass design system ─────────────────────────────────
+        // One palette for the whole app: website, booking flow, dashboard.
+        // Surfaces/buttons/fields are defined once in src/styles/globals.css.
+        ink: { DEFAULT: "#1E1838", soft: "#4A4366", faint: "#6B6487" },
+        mist: "#F3F1F8",
+        iris: {
+          DEFAULT: "#5B2BD9",
+          deep: "#4A1FBA",
+          soft: "#8F70EA",
+          tint: "#E6DEFB",
+          wash: "#F3EFFE",
+        },
+        plum: { DEFAULT: "#24173F", soft: "#3A2A5E" },
+        lilac: "#CDBBF7",
+        sage: { DEFAULT: "#CFE3C3", deep: "#3F6B45", tint: "#E7F1E1" },
+        peach: { DEFAULT: "#F6CDB7", deep: "#9A4A22", tint: "#FCEDE4" },
+        sky: { DEFAULT: "#BFD9EE", deep: "#255D85", tint: "#E4F0F9" },
+        ok: { DEFAULT: "#1F9D61", deep: "#147047", tint: "#DCF3E6" },
+        warn: { DEFAULT: "#C77A00", deep: "#8F5600", tint: "#FBEFD7" },
+        danger: { DEFAULT: "#D63B5A", deep: "#AE2342", tint: "#FBE2E7" },
+        // ───────────────────────────────────────────────────────────────
         foreground: "hsl(var(--foreground))",
         card: {
           DEFAULT: "hsl(var(--card))",

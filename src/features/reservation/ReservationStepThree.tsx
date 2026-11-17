@@ -1,48 +1,34 @@
 import CardNumberBox from "@/components/ui/CardNumberBox";
 import { useReservationStore } from "@/hooks/useReservationStore";
-import { HiOutlineCreditCard } from "react-icons/hi2";
+import { CreditCard } from "lucide-react";
+import StepActions from "./StepActions";
 
 function ReservationStepThree() {
   const { handleStep } = useReservationStore();
 
   return (
-    <div className=" flex flex-col justify-center items-center max-sm:mt-4 max-sm:justify-between max-sm:h-[calc(100dvh-92px)]">
-      <div className=" flex flex-col justify-center items-center">
-        <HiOutlineCreditCard
-          size={64}
-          className=" text-neutral-500 mb-4 max-sm:size-44"
-        />
-
-        <p className=" font-semibold text-lg text-neutral-600 max-sm:text-base max-sm:text-center max-sm:w-full max-sm:mx-auto">
+    <div className="flex flex-1 flex-col">
+      <div className="flex flex-col items-center text-center">
+        <span className="grid size-14 place-items-center rounded-2xl bg-iris-tint text-iris">
+          <CreditCard className="size-7" strokeWidth={1.5} aria-hidden />
+        </span>
+        <h3 className="mt-4 text-base font-bold text-ink">واریز مبلغ جلسه</h3>
+        <p className="mt-1 max-w-md text-sm leading-7 text-ink-soft">
           لطفا برای فیکس کردن نوبتتون، مبلغ پلن رزرو شدتون رو به شماره کارت زیر
           واریز فرمایید
         </p>
         <CardNumberBox />
       </div>
-      <button
-        className=" text-neutral-50 text-base font-bold leading-[1.125rem] py-3 px-6 mt-8 w-full rounded-xl bg-purple-400 hover:bg-purple-500 duration-300 disabled:bg-neutral-400 max-sm:hidden"
-        autoFocus={true}
-        onClick={() => {
-          handleStep(4);
-        }}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            handleStep(4);
-          }
-        }}
-      >
-        بسیار خوب
-      </button>
-      {/* MOBILE BUTTON */}
-      <button
-        className=" text-neutral-50 text-base font-bold leading-[1.125rem] py-3 px-6 mt-8 w-full rounded-xl bg-purple-400 hover:bg-purple-500 duration-300 disabled:bg-neutral-400 sm:hidden mb-2"
-        autoFocus={true}
-        onClick={() => {
-          handleStep(4);
-        }}
-      >
-        بسیار خوب
-      </button>
+      <StepActions>
+        <button
+          type="button"
+          className="btn btn-primary w-full"
+          autoFocus
+          onClick={() => handleStep(4)}
+        >
+          بسیار خوب
+        </button>
+      </StepActions>
     </div>
   );
 }

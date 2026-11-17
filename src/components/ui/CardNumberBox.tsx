@@ -1,33 +1,38 @@
 import { digitsEnToFa } from "@persian-tools/persian-tools";
-import { Copy } from "lucide-react";
+import { Check, Copy } from "lucide-react";
 import { useState } from "react";
 
 export default function CardNumberBox() {
   const cardNumber = "6393 4610 4455 1410";
   const [copied, setCopied] = useState(false);
 
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(cardNumber.replace(/\s/g, ""));
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(cardNumber.replace(/\s/g, ""));
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      setCopied(false);
+    }
   };
 
   return (
-    <div className="flex flex-row-reverse items-center justify-between bg-gray-100 border border-gray-300 rounded-lg p-3 py-1 max-w-80 min-w-72 mt-4">
-      <span className="text-lg font-medium" style={{ direction: "ltr" }}>
+    <div className="mt-5 flex w-full max-w-xs items-center justify-between gap-3 rounded-xl border border-white bg-white/70 p-1.5 ps-4">
+      <span dir="ltr" className="select-all text-[0.9375rem] font-semibold text-ink">
         {digitsEnToFa(cardNumber)}
       </span>
       <button
+        type="button"
         onClick={copyToClipboard}
-        className="p-2 text-gray-600 hover:text-black"
+        className="btn btn-sm shrink-0 bg-iris-wash text-iris-deep hover:bg-iris-tint"
       >
-        <Copy size={20} />
+        {copied ? (
+          <Check className="size-3.5" aria-hidden />
+        ) : (
+          <Copy className="size-3.5" aria-hidden />
+        )}
+        <span aria-live="polite">{copied ? "کپی شد" : "کپی"}</span>
       </button>
-      {copied && (
-        <span className="text-green-600 text-sm ml-2 max-sm:text-xs max-sm:-ml-4">
-          کپی شد!
-        </span>
-      )}
     </div>
   );
 }

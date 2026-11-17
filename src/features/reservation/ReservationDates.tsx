@@ -6,7 +6,8 @@ import useSchedules from "@/hooks/useSchedules";
 import { filteredWeeksType } from "@/types/types";
 import { getFourWeeksFromToday, splitIntoWeeks } from "@/utils/utils";
 import { useEffect, useState } from "react";
-import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { digitsEnToFa } from "@persian-tools/persian-tools";
 
 function ReservationDates() {
   const { resetDateAndTimeStates, selectedDate, setSelectedDate } =
@@ -24,100 +25,93 @@ function ReservationDates() {
 
   // FOR INIT SELECTION
   let firstAvailableDate: { date: string };
-  // const firstAvailableDate = useRef<string>("");
 
   useEffect(() => {
     // FIND FIRST AVAILABLE DATE
-
     const today = new Date().toLocaleDateString("en-CA");
 
     // eslint-disable-next-line
     firstAvailableDate = schedules?.find(
       (el: { available: number; date: string }) =>
-        el.available > 0 && el.date > today
+        el.available > 0 && el.date > today,
     );
     // FIND THE FIRST AVAILABLE DATE PAGE IN WEEKS
     const firsAvailableDateWeek = splitIntoWeeks(weeks).find((week) =>
-      week.dates.some(
-        (weekDates) => weekDates.date === firstAvailableDate?.date
-      )
+      week.dates.some((weekDates) => weekDates.date === firstAvailableDate?.date),
     );
     const pageNumber = firsAvailableDateWeek ? firsAvailableDateWeek.page : 1;
     // GO TO THE FIRST AVAILABLE DATE PAGE
     setPage(() => pageNumber);
-    if (
-      isSuccess &&
-      schedulesDates.length > 0 &&
-      !selectedDate &&
-      firstAvailableDate
-    ) {
+    if (isSuccess && schedulesDates.length > 0 && !selectedDate && firstAvailableDate) {
       setSelectedDate(firstAvailableDate?.date);
     }
   }, [schedules]);
 
   return (
-    <div className="mt-2 max-sm:mt-4">
-      <div className="mb-2 flex justify-between max-sm:mb-3">
-        <p className="text-neutral-700 text-base font-semibold leading-4">
-          تاریخ
+    <div>
+      <div className="mb-2.5 flex items-center justify-between">
+        <p id="reservation-date-label" className="text-sm font-semibold text-ink">
+          انتخاب تاریخ
         </p>
-        <div className="flex gap-4">
+        <div className="flex items-center gap-1.5">
+          <span className="me-1 text-[0.75rem] text-ink-faint">
+            هفته {digitsEnToFa(page)} از ۴
+          </span>
           <button
-            aria-label="previous button"
-            className="[&>svg]:size-6 [&>svg]:disabled:text-neutral-300 text-neutral-800"
-            disabled={page === 1 ? true : false}
+            type="button"
+            aria-label="هفته قبل"
+            className="icon-btn size-8 border border-white bg-white/70 text-ink hover:bg-white"
+            disabled={page === 1}
             onClick={() => {
               setPage(page - 1);
               resetDateAndTimeStates();
             }}
           >
-            <HiChevronRight />
+            <ChevronRight className="size-3.5" aria-hidden />
           </button>
           <button
-            aria-label="next button"
-            className="[&>svg]:size-6 [&>svg]:disabled:text-neutral-300 text-neutral-800"
-            disabled={page === 4 ? true : false}
+            type="button"
+            aria-label="هفته بعد"
+            className="icon-btn size-8 border border-white bg-white/70 text-ink hover:bg-white"
+            disabled={page === 4}
             onClick={() => {
               setPage(page + 1);
               resetDateAndTimeStates();
             }}
           >
-            <HiChevronLeft />
+            <ChevronLeft className="size-3.5" aria-hidden />
           </button>
         </div>
       </div>
-      <div>
-        {isLoading ? (
-          <div className="grid grid-cols-7 gap-4 [&>div]:size-full [&>div]:rounded-lg w-full h-[4.5rem] [&>div]:bg-neutral-200 [&>div]:animate-pulse max-sm:grid-cols-3 max-sm:gap-3 max-sm:h-60">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div className="max-sm:col-start-2"></div>
-          </div>
-        ) : (
-          <div className="grid grid-cols-7 gap-4 max-sm:grid-cols-3 max-sm:gap-3">
-            {filteredWeeks.dates.map((el) => (
-              <DateRadio
-                key={el.date}
-                date={el}
-                available={
-                  schedulesDates?.includes(el.date)
-                    ? new Date(el.date).getTime() > new Date().getTime()
-                      ? schedules?.filter(
-                          (element: { date: string }) =>
-                            element.date === el.date
-                        )[0].available
-                      : 0
+      {isLoading ? (
+        <div aria-hidden className="grid grid-cols-4 gap-1.5 sm:grid-cols-7">
+          {Array.from({ length: 7 }).map((_, i) => (
+            <div key={i} className="h-[4.5rem] animate-pulse rounded-xl bg-white/60" />
+          ))}
+        </div>
+      ) : (
+        <div
+          role="radiogroup"
+          aria-labelledby="reservation-date-label"
+          className="grid grid-cols-4 gap-1.5 sm:grid-cols-7"
+        >
+          {filteredWeeks.dates.map((el) => (
+            <DateRadio
+              key={el.date}
+              date={el}
+              available={
+                schedulesDates?.includes(el.date)
+                  ? new Date(el.date).getTime() > new Date().getTime()
+                    ? schedules?.filter(
+                        (element: { date: string }) => element.date === el.date,
+                      )[0].available
                     : 0
-                }
-              />
-            ))}{" "}
-          </div>
-        )}
-      </div>
+                  : 0
+              }
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

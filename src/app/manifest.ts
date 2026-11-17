@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "فاطمه سادات شفیعی | روانشناس صنعتی و سازمانی",
     start_url: "/",
     display: "standalone",
-    background_color: "#EFE6FD",
-    theme_color: "#EFE6FD",
+    background_color: "#F3F1F8",
+    theme_color: "#F3F1F8",
     icons: [
       {
         src: "/favicon.ico",

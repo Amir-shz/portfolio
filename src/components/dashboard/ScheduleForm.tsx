@@ -2,6 +2,7 @@
 import { createSchedule } from "@/lib/actions";
 import { useRef, useState, useTransition } from "react";
 import { DatePicker } from "zaman";
+import { CircleAlert, CircleCheck } from "lucide-react";
 
 function ScheduleForm({
   schedules,
@@ -25,11 +26,9 @@ function ScheduleForm({
     const convertedDate = date?.toLocaleDateString("en-CA");
 
     if (dates.includes(convertedDate)) {
-      const { hours } = schedules.filter(
-        (el: { date: string }) => el.date === convertedDate
-      )[0];
+      const { hours } = schedules.filter((el: { date: string }) => el.date === convertedDate)[0];
       const hoursArr = hours.map(
-        (el: { hour: string | undefined; isAvailable: boolean }) => el.hour
+        (el: { hour: string | undefined; isAvailable: boolean }) => el.hour,
       );
 
       if (hoursArr.includes(time)) {
@@ -58,13 +57,21 @@ function ScheduleForm({
   }
 
   return (
-    <div className=" flex flex-col gap-4 mt-4 max-sm:gap-2">
-      <label className="flex flex-col gap-1 datePickerStyle">
-        <p className=" text-sm font-semibold">تاریخ:</p>
-        <DatePicker onChange={(e) => setDate(e.value)} />
+    <div className="mt-5 grid gap-4">
+      <label className="datePickerStyle grid gap-1.5">
+        <span className="text-sm font-bold text-ink-soft">تاریخ</span>
+        <DatePicker
+          accentColor="#5B2BD9"
+          round="x2"
+          onChange={(e) => {
+            setDate(e.value);
+            setIsSuccess(false);
+            setErrorMessage("");
+          }}
+        />
       </label>
-      <label className="flex  flex-col gap-1 datePickerStyle">
-        <p className=" text-sm font-semibold">ساعت:</p>
+      <label className="grid gap-1.5">
+        <span className="text-sm font-bold text-ink-soft">ساعت</span>
         <input
           type="time"
           id="time"
@@ -73,37 +80,43 @@ function ScheduleForm({
           max="23:59"
           step="600"
           ref={timeInputRef}
-          className="w-full"
-          onChange={(e) => setTime(e.target.value)}
-          onClick={() => {
-            if (timeInputRef.current) {
-              timeInputRef.current.showPicker();
-            }
+          className="input cursor-pointer"
+          onChange={(e) => {
+            setTime(e.target.value);
+            setIsSuccess(false);
+            setErrorMessage("");
           }}
-        ></input>
+          onClick={() => {
+            timeInputRef.current?.showPicker?.();
+          }}
+        />
       </label>
-      <span
-        className={` ${
-          isError || isSuccess ? "opacity-100" : "opacity-0"
-        } text-sm font-medium 
-        ${isError && "text-error-700"}
-        ${isSuccess && "text-success-600"}
-        `}
-      >
-        {isError && errorMessage}
-        {isSuccess && "زمان بندی با موفقیت اضافه شد"}
-        {!isError && !isSuccess && "for first height"}
-      </span>
+
+      <div aria-live="polite" className="min-h-6">
+        {isError && (
+          <p className="flex items-start gap-2 rounded-xl bg-danger-tint px-3.5 py-2.5 text-sm font-semibold leading-6 text-danger-deep">
+            <CircleAlert className="mt-0.5 size-4 shrink-0" aria-hidden />
+            {errorMessage}
+          </p>
+        )}
+        {isSuccess && (
+          <p className="flex items-center gap-2 rounded-xl bg-ok-tint px-3.5 py-2.5 text-sm font-semibold text-ok-deep">
+            <CircleCheck className="size-4 shrink-0" aria-hidden />
+            زمان بندی با موفقیت اضافه شد
+          </p>
+        )}
+      </div>
 
       <button
-        className=" text-neutral-50 text-base font-bold leading-[1.125rem] py-3 px-10 mt-8 self-center rounded-xl bg-purple-400 hover:bg-purple-500 duration-300 disabled:bg-neutral-400 max-sm:mt-0"
-        disabled={isPending}
+        type="submit"
+        className="btn btn-primary w-full"
+        disabled={isPending || !date || !time}
         onClick={(e) => {
           e.preventDefault();
           handleSubmit();
         }}
       >
-        تایید
+        {isPending ? <span className="loaderDotMiniWhite my-2" /> : "افزودن به زمان‌بندی"}
       </button>
     </div>
   );

@@ -3,8 +3,8 @@
 import { useToast } from "@/hooks/use-toast";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, useTransition } from "react";
-import { HiOutlineCamera } from "react-icons/hi2";
+import { ChangeEvent, useState, useTransition } from "react";
+import { Camera } from "lucide-react";
 
 // The file is sent to our own API route, which uploads it to object storage
 // on the server. Storage credentials must never be used in the browser.
@@ -12,6 +12,10 @@ function UserPhoto({ img, name }: { img: string; name: string }) {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const { toast } = useToast();
+  // a stored photo URL can stop working (deleted file, old bucket); show the
+  // initial instead of a broken-image icon. Reset when a new photo arrives.
+  const [failedSrc, setFailedSrc] = useState<string | null>(null);
+  const showPhoto = Boolean(img) && failedSrc !== img;
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -32,6 +36,7 @@ function UserPhoto({ img, name }: { img: string; name: string }) {
         if (!res.ok) {
           const data = await res.json().catch(() => null);
           toast({
+            variant: "destructive",
             description: data?.message ?? "آپلود عکس با مشکل مواجه شد",
           });
           return;
@@ -40,39 +45,44 @@ function UserPhoto({ img, name }: { img: string; name: string }) {
         router.refresh();
       } catch (error) {
         console.error("Error uploading file:", error);
-        toast({ description: "آپلود عکس با مشکل مواجه شد" });
+        toast({ variant: "destructive", description: "آپلود عکس با مشکل مواجه شد" });
       }
     });
   }
 
   return (
-    <div className=" relative">
-      {img ? (
+    <div className="relative shrink-0">
+      {showPhoto ? (
         <Image
           src={img}
-          alt="user photo"
+          alt=""
           width={256}
           height={256}
-          quality={100}
           unoptimized
-          className="rounded-full object-cover size-12 aspect-square max-sm:size-14"
+          onError={() => setFailedSrc(img)}
+          className="size-9 rounded-full object-cover ring-2 ring-white"
         />
       ) : (
-        <div className=" size-11 bg-neutral-500 rounded-full flex justify-center items-center text-neutral-50 text-xl font-medium max-sm:size-14">
+        <div
+          aria-hidden
+          className="grid size-9 place-items-center rounded-full bg-gradient-to-br from-iris to-iris-soft text-sm font-bold text-white ring-2 ring-white"
+        >
           {name}
         </div>
       )}
-      <label className="absolute bottom-0 -right-1 size-5 cursor-pointer max-sm:size-6 max-sm:-bottom-1 max-sm:-right-2">
-        <span className="relative flex size-5 items-center justify-center rounded-full bg-purple-500 text-neutral-50 max-sm:size-6">
-          {isPending ? (
-            <div className="loaderSpinnerMiniWhite size-4"></div>
-          ) : (
-            <HiOutlineCamera className="size-4  stroke-2" />
-          )}
-        </span>
+      <label
+        className="absolute -bottom-1 -right-1 grid size-5 cursor-pointer place-items-center rounded-full bg-iris text-white ring-2 ring-white transition-colors hover:bg-iris-deep"
+        title="تغییر عکس پروفایل"
+      >
+        {isPending ? (
+          <span className="spinner size-3 border-2" />
+        ) : (
+          <Camera className="size-3" aria-hidden />
+        )}
+        <span className="sr-only">تغییر عکس پروفایل</span>
         <input
           type="file"
-          className="hidden h-0 w-0"
+          className="sr-only"
           accept="image/jpeg,image/png,image/webp"
           onChange={handleChange}
         />

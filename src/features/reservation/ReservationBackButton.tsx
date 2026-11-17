@@ -2,7 +2,7 @@
 
 import { useReservationStore } from "@/hooks/useReservationStore";
 import { useRouter } from "next/navigation";
-import { HiMiniArrowRight } from "react-icons/hi2";
+import { ArrowRight } from "lucide-react";
 
 function ReservationBackButton() {
   const { step, handleStep, resetAll } = useReservationStore();
@@ -29,11 +29,12 @@ function ReservationBackButton() {
 
   return (
     <button
-      aria-label="back button"
-      className="p-2 bg-neutral-50 rounded-full hover:bg-neutral-100 duration-200 z-20 "
+      type="button"
+      aria-label="بازگشت"
+      className="icon-btn size-9 bg-white/80 text-iris hover:bg-white"
       onClick={handleBack}
     >
-      <HiMiniArrowRight size={24} className="text-purple-500" />
+      <ArrowRight className="size-4" aria-hidden />
     </button>
   );
 }

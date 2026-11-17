@@ -1,8 +1,10 @@
 import { auth } from "@/auth";
 import SigninForm from "@/components/dashboard/SigninForm";
-import Logo from "@/components/ui/Logo";
+import BrandLogo from "@/components/system/BrandLogo";
 import { Metadata } from "next";
+import Link from "next/link";
 import { redirect } from "next/navigation";
+import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "ورود به حساب کاربری",
@@ -14,17 +16,27 @@ async function Page() {
   if (session?.user) redirect("/dashboard");
 
   return (
-    <div className=" bg-purple-100 h-dvh w-screen">
-      <div className="flex items-center justify-center h-full w-2/5 mx-auto max-sm:w-4/5">
-        <div className=" w-full flex flex-col gap-10 justify-center items-center bg-neutral-100/50 p-10 rounded-lg max-sm:p-5">
-          <Logo />
-          <p className="-mb-4  font-semibold text-neutral-700">
-            ورود به حساب کاربری
+    <main className="grid min-h-dvh place-items-center px-4 py-10">
+      <div className="w-full max-w-[24rem]">
+        <div className="glass-strong rounded-[1.5rem] p-6 sm:p-8">
+          <Link href="/" aria-label="صفحه اصلی" className="inline-block">
+            <BrandLogo className="h-7" />
+          </Link>
+          <h1 className="mt-6 text-xl font-bold text-ink">ورود به حساب کاربری</h1>
+          <p className="mt-1 text-[0.8125rem] leading-6 text-ink-faint">
+            برای مدیریت نوبت‌ها و زمان‌بندی وارد شوید.
           </p>
           <SigninForm />
         </div>
+        <Link
+          href="/"
+          className="btn btn-ghost btn-sm mx-auto mt-4 flex w-fit"
+        >
+          <ArrowRight className="size-4" aria-hidden />
+          بازگشت به سایت
+        </Link>
       </div>
-    </div>
+    </main>
   );
 }
 

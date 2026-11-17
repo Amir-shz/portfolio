@@ -1,12 +1,15 @@
 import type { NextConfig } from "next";
+import { supabasePublicBucketUrl } from "./src/lib/storage";
 
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
     remotePatterns: [
+      ...(supabasePublicBucketUrl ? [new URL(`${supabasePublicBucketUrl}**`)] : []),
       {
+        // Keep existing Liara image URLs working.
         protocol: "https",
-        hostname: "upbeat-lalande-wgsbtfocx.storage.c2.liara.space",
+        hostname: "*.storage.c2.liara.space",
         port: "",
         pathname: "/**",
         search: "",

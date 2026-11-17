@@ -1,10 +1,6 @@
 "use client";
 
-import ReservationForm from "@/features/reservation/ReservationForm";
-import ReservationStepFour from "@/features/reservation/ReservationStepFour";
-import ReservationStepOne from "@/features/reservation/ReservationStepOne";
-import ReservationStepThree from "@/features/reservation/ReservationStepThree";
-import { useReservationStore } from "@/hooks/useReservationStore";
+import ReservationFlow from "@/features/reservation/ReservationFlow";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient({
@@ -16,24 +12,12 @@ const queryClient = new QueryClient({
 });
 
 function Page() {
-  const { step } = useReservationStore();
-
   return (
-    <div className=" sm:hidden">
-      <QueryClientProvider client={queryClient}>
-        {step === 1 && <ReservationStepOne />}
-        {step === 2 && (
-          <>
-            <p className=" text-neutral-700 text-xl font-semibold leading-7 mx-44 max-sm:mx-2 max-sm:mt-6 max-sm:text-base">
-              لطفا اطلاعات مورد نیاز را برای ارتباط بهتر وارد کنید.
-            </p>
-            <ReservationForm />
-          </>
-        )}
-        {step === 3 && <ReservationStepThree />}
-        {step === 4 && <ReservationStepFour />}
-      </QueryClientProvider>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div className="flex flex-1 flex-col">
+        <ReservationFlow />
+      </div>
+    </QueryClientProvider>
   );
 }
 

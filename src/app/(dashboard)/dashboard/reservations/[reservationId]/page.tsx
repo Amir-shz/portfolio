@@ -1,28 +1,31 @@
+import PageHeader from "@/components/dashboard/PageHeader";
 import ReservationRowBtns from "@/components/dashboard/ReservationRowBtns";
+import StatusPill from "@/components/dashboard/StatusPill";
 import { planData } from "@/data/planData";
 import dbConnect from "@/lib/mongoose";
 import Reservation from "@/models/reservationModel";
 import { getJalaliDetails } from "@/utils/utils";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 import { Metadata } from "next";
-// import { headers } from "next/headers";
-import Link from "next/link";
-import { HiOutlineChevronLeft } from "react-icons/hi2";
+import { requireSession } from "@/lib/session";
 
 export const metadata: Metadata = {
   title: "رزرو",
 };
 
-// const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+function Item({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div className="rounded-xl border border-white bg-white/65 px-4 py-3.5">
+      <dt className="text-xs font-bold text-ink-faint">{label}</dt>
+      <dd className="mt-1 font-bold text-ink">{children}</dd>
+    </div>
+  );
+}
 
-async function page({
-  params,
-}: {
-  params: Promise<{ reservationId: string }>;
-}) {
+async function page({ params }: { params: Promise<{ reservationId: string }> }) {
+  await requireSession();
   const reservationId = (await params).reservationId;
 
-  // const header = await headers();
   await dbConnect();
 
   const {
@@ -37,20 +40,9 @@ async function page({
     createdAt,
   } = await Reservation.findById(reservationId);
 
-  // } = await fetch(`${baseUrl}/reservation/${reservationId}`, {
-  //   headers: header,
-  // })
-  //   .then((data) => data.json())
-  //   .then((data) => data.data);
+  const plan = planData.filter((el) => el.id === Number(planId))[0];
 
-  const {
-    // description: planDescription,
-    title: planTitle,
-    time: planTime,
-    price: planPrice,
-  } = planData.filter((el) => el.id === Number(planId))[0];
-
-  const { day, monthName, year } = getJalaliDetails(new Date(selectedDate));
+  const { day, monthName, year, dayName } = getJalaliDetails(new Date(selectedDate));
   const {
     day: createdDay,
     monthName: createdMonthName,
@@ -58,98 +50,60 @@ async function page({
   } = getJalaliDetails(new Date(createdAt));
 
   return (
-    <div className=" max-h-[calc(100vh-5.5rem)] hide-scrollbar max-sm:max-h-dvh overflow-y-scroll -m-2 max-sm:m-0">
-      <div className=" rounded-md bg-purple-50  shadow-shadow4 border border-purple-100 p-4 m-4 max-sm:mb-20 max-sm:m-4 max-sm:p-2 ">
-        <div className=" flex items-center justify-between mb-4">
-          <p className=" font-medium max-sm:text-sm ">
-            رزرو شماره: {reservationId}
+    <>
+      <PageHeader
+        title={fullName}
+        backHref="/dashboard/reservations"
+        description={
+          <span dir="ltr" className="font-mono text-xs">
+            #{reservationId}
+          </span>
+        }
+      >
+        <StatusPill status={status} />
+      </PageHeader>
+
+      <div className="glass rounded-[1.25rem] p-4 sm:p-6">
+        <dl className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
+          <Item label="شماره همراه">
+            <a dir="ltr" href={`tel:${phone}`} className="hover:text-iris">
+              {digitsEnToFa(phone)}
+            </a>
+          </Item>
+          <Item label="تاریخ جلسه">
+            {dayName} {day} {monthName} {year}
+          </Item>
+          <Item label="ساعت جلسه">{digitsEnToFa(selectedTime)}</Item>
+          <Item label="زمان ثبت رزرو">
+            {createdDay} {createdMonthName} {createdYear}
+          </Item>
+          <Item label="پلن">{plan?.title}</Item>
+          <Item label="مدت جلسه">{plan?.time}</Item>
+          <Item label="مبلغ">
+            {plan?.off ? (
+              <>
+                {plan.off}{" "}
+                <del className="text-xs font-semibold text-ink-faint">{plan.price}</del>
+              </>
+            ) : (
+              plan?.price
+            )}
+          </Item>
+          <Item label="وضعیت">{status === "new" ? "جدید" : "تمام شده"}</Item>
+        </dl>
+
+        <div className="mt-3 rounded-xl border border-white bg-white/65 px-4 py-4">
+          <p className="text-xs font-bold text-ink-faint">توضیحات مراجع</p>
+          <p className="mt-1.5 whitespace-pre-line leading-8 text-ink">
+            {description || "توضیحی ثبت نشده است."}
           </p>
-          <Link
-            href="/dashboard/reservations"
-            className=" size-8 bg-purple-400 text-neutral-50 flex justify-center items-center rounded-full hover:bg-purple-500 duration-200 flex-shrink-0"
-          >
-            <HiOutlineChevronLeft size={24} />
-          </Link>
         </div>
-        <div className="grid grid-cols-4 gap-4 [&_P]:text-center  [&>div]:flex [&>div]:flex-col [&>div]:gap-2 max-sm:grid-cols-2">
-          <div>
-            <p className="bg-purple-400 text-neutral-50 rounded-md leading-10 text-lg font-medium max-sm:text-base max-sm:font-normal max-sm:py-1 ">
-              نام و نام‌خانوادگی
-            </p>
-            <p>{fullName}</p>
-          </div>
-          <div>
-            <p className="bg-purple-400 text-neutral-50 rounded-md leading-10 text-lg font-medium max-sm:text-base max-sm:font-normal max-sm:py-1 ">
-              شماره همراه
-            </p>
-            <p>{digitsEnToFa(phone)}</p>
-          </div>
-          <div>
-            <p className="bg-purple-400 text-neutral-50 rounded-md leading-10 text-lg font-medium max-sm:text-base max-sm:font-normal max-sm:py-1 ">
-              تاریخ رزرو
-            </p>
-            <p>
-              {day} {monthName} {year}
-            </p>
-          </div>
-          <div>
-            <p className="bg-purple-400 text-neutral-50 rounded-md leading-10 text-lg font-medium max-sm:text-base max-sm:font-normal max-sm:py-1 ">
-              ساعت رزرو
-            </p>
-            <p>{digitsEnToFa(selectedTime)}</p>
-          </div>
-        </div>
-        <div className="grid grid-cols-4 gap-4 [&_P]:text-center my-10 items-start [&>div]:flex [&>div]:flex-col [&>div]:gap-2 max-sm:grid-cols-2">
-          <div>
-            <p className="bg-purple-400 text-neutral-50 rounded-md leading-10 text-lg font-medium max-sm:text-base max-sm:font-normal max-sm:py-1">
-              زمان ایجاد رزرو
-            </p>
-            <p>
-              {createdDay} {createdMonthName} {createdYear}
-            </p>
-          </div>
-          <div>
-            <p className="bg-purple-400 text-neutral-50 rounded-md leading-10 text-lg font-medium max-sm:text-base max-sm:font-normal max-sm:py-1">
-              وضعیت
-            </p>
-            <p
-              className={`
-          text-neutral-50 rounded-lg  self-center py-1 px-2 text-sm border-none
-          ${status === "new" ? " bg-success-500  " : " bg-warning-500 "}`}
-            >
-              {status === "new" ? "جدید" : "تمام شده"}
-            </p>
-          </div>
-          <div>
-            <p className="bg-purple-400 text-neutral-50 rounded-md leading-10 text-lg font-medium max-sm:text-base max-sm:font-normal max-sm:py-1">
-              قیمت و طول جلسه
-            </p>
-            <div className=" flex flex-col gap-1 justify-center items-center">
-              <p>{planPrice === "free" ? "رایگان" : `${planPrice} تومان`}</p>
-              <p>{planTime}</p>
-            </div>
-          </div>
-          <div>
-            <p className="bg-purple-400 text-neutral-50 rounded-md leading-10 text-lg font-medium max-sm:text-base max-sm:font-normal max-sm:py-1">
-              نام و توضیح طرح
-            </p>
-            <div className="flex flex-col gap-1 justify-center items-center">
-              <p>نام: {planTitle}</p>
-              {/* <p>توضیح: {planDescription}</p> */}
-            </div>
-          </div>
-        </div>
-        <div className=" flex flex-col items-center gap-2 justify-center ">
-          <p className=" text-center mb-1 bg-purple-400 text-neutral-50 rounded-md leading-10 text-lg font-medium w-2/3 max-sm:w-full max-sm:text-base max-sm:font-normal max-sm:py-1 ">
-            توضیحات
-          </p>
-          <p className="mb-10 w-2/3 px-2 max-sm:w-full">{description}</p>
-        </div>
-        <div className=" flex items-center gap-2 justify-center ">
-          <ReservationRowBtns id={_id} status={status} />
+
+        <div className="mt-5 flex justify-end">
+          <ReservationRowBtns id={String(_id)} status={status} withLabels />
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

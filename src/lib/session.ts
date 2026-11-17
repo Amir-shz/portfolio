@@ -5,6 +5,19 @@ import { auth } from "@/auth";
 import dbConnect from "@/lib/mongoose";
 import User from "@/models/userModel";
 import { isValidObjectId } from "mongoose";
+import { redirect } from "next/navigation";
+
+/**
+ * First line of every dashboard page. The route guard (src/proxy.ts) already
+ * redirects visitors, but data must never depend on that alone: a page can be
+ * rendered on its own during client navigation. Reads only the signed JWT
+ * cookie (no database query), so it is cheap.
+ */
+export async function requireSession() {
+  const session = await auth();
+  if (!session?.user) redirect("/login");
+  return session;
+}
 
 export async function getCurrentUser() {
   const session = await auth();

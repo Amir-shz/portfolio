@@ -1,30 +1,45 @@
 "use client";
 import { deleteUser } from "@/lib/actions";
-import { useTransition } from "react";
-import { HiOutlineTrash } from "react-icons/hi2";
+import { useState, useTransition } from "react";
+import { Trash2 } from "lucide-react";
+import ConfirmDialog from "@/components/system/ConfirmDialog";
 
 function UserDelBtn({ id, role }: { id: string; role: "ADMIN" | "OWNER" }) {
   const [isPendingDel, startTransitionDel] = useTransition();
+  const [confirm, setConfirm] = useState(false);
+  const isOwner = role === "OWNER";
 
   function handleDelete() {
+    setConfirm(false);
     startTransitionDel(async () => {
       await deleteUser(id);
     });
   }
 
   return (
-    <button
-      className={`${
-        role === "OWNER" ? "bg-neutral-500" : "hover:bg-red-700 bg-red-500"
-      } p-2   rounded-full duration-300 justify-self-center`}
-      onClick={handleDelete}
-      disabled={isPendingDel || role === "OWNER"}
-    >
-      {isPendingDel && <div className="loaderSpinner size-6"></div>}
-      {!isPendingDel && (
-        <HiOutlineTrash size={24} className=" stroke-2 text-neutral-50" />
-      )}
-    </button>
+    <>
+      <button
+        type="button"
+        aria-label={isOwner ? "حساب مدیر کل قابل حذف نیست" : "حذف کاربر"}
+        title={isOwner ? "حساب مدیر کل قابل حذف نیست" : "حذف کاربر"}
+        className="icon-btn size-9 bg-danger-tint text-danger-deep hover:bg-danger hover:text-white"
+        onClick={() => setConfirm(true)}
+        disabled={isPendingDel || isOwner}
+      >
+        {isPendingDel ? (
+          <span className="spinner size-4 border-2" />
+        ) : (
+          <Trash2 className="size-4" aria-hidden />
+        )}
+      </button>
+      <ConfirmDialog
+        open={confirm}
+        onOpenChange={setConfirm}
+        title="این کاربر حذف شود؟"
+        confirmLabel="حذف کاربر"
+        onConfirm={handleDelete}
+      />
+    </>
   );
 }
 

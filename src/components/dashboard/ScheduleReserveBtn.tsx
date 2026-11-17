@@ -2,7 +2,7 @@
 
 import { reserveHour } from "@/lib/actions";
 import { useTransition } from "react";
-import { HiOutlineCheckCircle } from "react-icons/hi2";
+import { CircleCheck } from "lucide-react";
 
 function ScheduleReserveBtn({ id, hour }: { id: string; hour: string }) {
   const [isPendingReserve, startTransitionReserve] = useTransition();
@@ -15,13 +15,17 @@ function ScheduleReserveBtn({ id, hour }: { id: string; hour: string }) {
 
   return (
     <button
-      className=" p-2  bg-green-500 rounded-full hover:bg-green-700 duration-300"
+      type="button"
+      aria-label="علامت‌گذاری به‌عنوان رزرو شده"
+      title="علامت‌گذاری به‌عنوان رزرو شده"
+      className="icon-btn size-9 bg-ok-tint text-ok-deep hover:bg-ok hover:text-white"
       onClick={handleReserve}
       disabled={isPendingReserve}
     >
-      {isPendingReserve && <div className="loaderSpinner size-6"></div>}
-      {!isPendingReserve && (
-        <HiOutlineCheckCircle size={24} className=" stroke-2 text-neutral-50" />
+      {isPendingReserve ? (
+        <span className="spinner size-4 border-2" />
+      ) : (
+        <CircleCheck className="size-4" aria-hidden />
       )}
     </button>
   );

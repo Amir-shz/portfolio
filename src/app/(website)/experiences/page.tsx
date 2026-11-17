@@ -1,8 +1,10 @@
 import { Metadata } from "next";
-import Image from "next/image";
-import photo from "../../../../public/fatemeInAbout2.jpg";
-import AboutSection from "@/components/layouts/AboutSection";
-import EducationAndResumeSection from "@/components/layouts/EducationAndResumeSection";
+import Link from "next/link";
+import { ArrowDown, ArrowLeft, BriefcaseBusiness, GraduationCap } from "lucide-react";
+import photo from "../../../../public/fateme3.jpg";
+import GlassPortrait, { GlassChip } from "@/components/website/GlassPortrait";
+import RecordList from "@/components/website/experiences/RecordList";
+import { lead, wrap } from "@/components/website/styles";
 import { resumeData } from "@/data/resumeData";
 import { educationData } from "@/data/educationData";
 
@@ -14,26 +16,66 @@ export const metadata: Metadata = {
 
 function Page() {
   return (
-    <div className=" grid grid-cols-10 gap-6 select-none">
-      {/* <div className=" col-span-4 rounded-3xl border border-neutral-300 shadow-shadow3 bg-neutral-100 h-72 max-sm:col-span-10 ">
-        <Image
-          src={photo}
-          alt=""
-          className=" rounded-3xl size-full object-cover object-center"
-          quality={100}
-          placeholder="blur"
+    <>
+      <section className={`${wrap} pt-10 sm:pt-14`}>
+        <div className="grid items-center gap-x-12 gap-y-12 lg:grid-cols-12">
+          <div className="lg:col-span-7">
+            <span className="eyebrow">درباره من</span>
+            <h1 className="text-gradient mt-3 py-1 text-[clamp(1.75rem,3.2vw,2.5rem)] font-extrabold leading-[1.45]">
+              سوابق
+            </h1>
+            <p className={`mt-2 max-w-[34rem] ${lead}`}>
+              من فاطمه سادات شفیعی هستم؛ دانش‌آموخته کارشناسی روانشناسی از
+              دانشگاه شهید بهشتی و کارشناسی ارشد روانشناسی صنعتی و سازمانی از
+              دانشگاه اصفهان.
+            </p>
+            <div className="mt-7 flex flex-wrap items-center gap-2.5">
+              <a href="#records" className="btn btn-glass max-sm:w-full">
+                <ArrowDown className="size-4 text-iris" aria-hidden />
+                مشاهده سوابق
+              </a>
+              <Link href="/services" className="btn btn-primary max-sm:w-full">
+                رزرو نوبت
+                <ArrowLeft className="size-4" aria-hidden />
+              </Link>
+            </div>
+          </div>
+          <div className="max-lg:-order-1 lg:col-span-5">
+            <GlassPortrait
+              src={photo}
+              alt="فاطمه سادات شفیعی"
+              animate={false}
+              priority
+              className="max-w-[240px] sm:max-w-[280px] lg:max-w-[300px]"
+            >
+              <GlassChip className="float-slow -left-4 bottom-10 sm:-left-9">
+                <b className="block text-[0.9375rem] font-bold text-iris">
+                  {educationData.length.toLocaleString("fa-IR")} مدرک و دوره
+                </b>
+                {resumeData.length.toLocaleString("fa-IR")} سابقه کاری
+              </GlassChip>
+            </GlassPortrait>
+          </div>
+        </div>
+      </section>
+
+      <div
+        id="records"
+        className={`${wrap} mt-16 grid scroll-mt-24 grid-cols-1 items-start gap-3 sm:mt-20 lg:grid-cols-2`}
+      >
+        <RecordList
+          title="تحصیلات و مدارک"
+          icon={<GraduationCap />}
+          items={educationData}
+          splitInstitution
         />
-      </div> */}
-      <div className=" col-span-full max-sm:col-span-10">
-        <AboutSection />
+        <RecordList
+          title="تجربه و رزومه"
+          icon={<BriefcaseBusiness />}
+          items={resumeData}
+        />
       </div>
-      <div className=" col-span-5 max-sm:col-span-10">
-        <EducationAndResumeSection type="education" items={educationData} />
-      </div>
-      <div className=" col-span-5 max-sm:col-span-10">
-        <EducationAndResumeSection type="resume" items={resumeData} />
-      </div>
-    </div>
+    </>
   );
 }
 

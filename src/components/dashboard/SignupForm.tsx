@@ -2,94 +2,65 @@
 
 import { signup } from "@/lib/actions";
 import { useActionState } from "react";
+import { CircleAlert, CircleCheck } from "lucide-react";
+import { Field } from "@/components/system/Field";
+import { cn } from "@/lib/utils";
 
 function SignupForm() {
   const [state, action, pending] = useActionState(signup, undefined);
   return (
-    <form
-      action={action}
-      className=" w-full flex flex-col items-center gap-8 [&_input]:border [&_input]:bg-neutral-50 [&_input]:rounded-lg [&_input]:border-neutral-400 [&_input]:py-3 [&_input]:pr-3 [&_input:focus]:border [&_input:focus]:border-purple-500 [&_input:focus]:outline-none [&_input:focus~p]:top-0 [&_input:focus~p]:text-neutral-800"
-    >
-      <label className=" relative w-full">
-        <input
-          type="text"
-          name="name"
-          className=" w-full notShownLogin"
-          placeholder=""
-          required
-        />
-        <p className="absolute -translate-y-1/2 -translate-x-3 text-neutral-400 text-[0.875rem] font-medium leading-4 transition-all duration-200 bg-transparent backdrop-blur-sm px-2 py-[0.12rem] top-1/2 rounded-2xl">
-          نام و نام خانوادگی
-        </p>
-      </label>
-      {state?.errors?.name && (
-        <p className="text-sm w-full text-left text-error-500 font-medium ">
-          {state.errors.name}
-        </p>
-      )}
-      <label className=" relative w-full">
-        <input
-          type="email"
-          name="email"
-          className=" w-full notShownLogin"
-          placeholder=""
-          required
-        />
-        <p className="absolute -translate-y-1/2 -translate-x-3 text-neutral-400 text-[0.875rem] font-medium leading-4 transition-all duration-200 bg-transparent backdrop-blur-sm px-2 py-[0.12rem] top-1/2 rounded-2xl">
-          ایمیل
-        </p>
-      </label>
-      {state?.errors?.email && (
-        <p className=" text-sm w-full text-left text-error-500 font-medium ">
-          {state.errors.email}
-        </p>
-      )}
-      <label className=" relative w-full">
-        <input
-          type="password"
-          name="password"
-          className=" w-full notShownLogin"
-          placeholder=""
-          required
-        />
-        <p className="absolute -translate-y-1/2 -translate-x-3 text-neutral-400 text-[0.875rem] font-medium leading-4 transition-all duration-200 bg-transparent backdrop-blur-sm px-2 py-[0.12rem] top-1/2 rounded-2xl">
-          رمزعبور
-        </p>
-      </label>
-      {state?.errors?.password && (
-        <>
-          <p className=" text-right text-error-500 font-medium w-full text-sm -mb-4">
-            رمزعبور باید:
-          </p>
-          <div className=" text-sm flex flex-col w-full items-end text-error-500 font-medium ">
-            <ul>
-              {state.errors.password.map((error) => (
-                <li key={error} className=" text-left">
-                  {error}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </>
-      )}
+    <form action={action} className="grid gap-4">
+      <Field label="نام و نام خانوادگی" type="text" name="name" required error={state?.errors?.name} />
+      <Field
+        label="ایمیل"
+        type="email"
+        name="email"
+        dir="ltr"
+        className="text-right"
+        required
+        error={state?.errors?.email}
+      />
+      <Field
+        label="رمزعبور"
+        type="password"
+        name="password"
+        autoComplete="new-password"
+        dir="ltr"
+        className="text-right"
+        required
+        error={
+          state?.errors?.password && (
+            <>
+              <p>رمزعبور باید:</p>
+              <ul className="list-inside list-disc">
+                {state.errors.password.map((error) => (
+                  <li key={error}>{error}</li>
+                ))}
+              </ul>
+            </>
+          )
+        }
+      />
 
       {state?.message && (
         <p
-          className={` text-sm w-full text-right  font-medium ${
-            state.status === "success" && "text-success-500"
-          } ${state.status === "fail" && "text-error-500"} `}
+          role="status"
+          className={cn(
+            "flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold",
+            state.status === "success" ? "bg-ok-tint text-ok-deep" : "bg-danger-tint text-danger-deep",
+          )}
         >
+          {state.status === "success" ? (
+            <CircleCheck className="size-4 shrink-0" aria-hidden />
+          ) : (
+            <CircleAlert className="size-4 shrink-0" aria-hidden />
+          )}
           {state.message}
         </p>
       )}
 
-      <button
-        type="submit"
-        disabled={pending}
-        className="bg-purple-500 hover:bg-purple-600 duration-300 text-neutral-50 rounded-md w-full h-12 flex justify-center items-center text-xl font-bold"
-      >
-        {pending && <div className="loaderDotMiniWhite"></div>}
-        {!pending && "ثبت نام"}
+      <button type="submit" disabled={pending} className="btn btn-primary mt-1 w-full">
+        {pending ? <span className="loaderDotMiniWhite my-2" /> : "ایجاد حساب"}
       </button>
     </form>
   );

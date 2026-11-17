@@ -1,63 +1,41 @@
 import localFont from "next/font/local";
 import "@/styles/globals.css";
-import { Viewport } from "next";
+import { Metadata, Viewport } from "next";
 import PWAInstallPrompt from "@/components/ui/PWAInstallPrompt";
 import { Toaster } from "@/components/ui/toaster";
 import Script from "next/script";
 
-const Vazirmatn = localFont({
+// IRAN Yekan, the app's only typeface (files in src/fonts/iranyekan).
+const iranYekan = localFont({
   src: [
-    {
-      path: "../fonts/Vazirmatn-Thin.woff2",
-      weight: "100",
-      style: "normal",
-    },
-    {
-      path: "../fonts/Vazirmatn-ExtraLight.woff2",
-      weight: "200",
-      style: "normal",
-    },
-    {
-      path: "../fonts/Vazirmatn-Light.woff2",
-      weight: "300",
-      style: "normal",
-    },
-    {
-      path: "../fonts/Vazirmatn-Regular.woff2",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../fonts/Vazirmatn-Medium.woff2",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "../fonts/Vazirmatn-SemiBold.woff2",
-      weight: "600",
-      style: "normal",
-    },
-    {
-      path: "../fonts/Vazirmatn-Bold.woff2",
-      weight: "700",
-      style: "normal",
-    },
-    {
-      path: "../fonts/Vazirmatn-ExtraBold.woff2",
-      weight: "800",
-      style: "normal",
-    },
-    {
-      path: "../fonts/Vazirmatn-Black.woff2",
-      weight: "900",
-      style: "normal",
-    },
+    { path: "../fonts/iranyekan/IRANYekanWebThin.woff2", weight: "100", style: "normal" },
+    { path: "../fonts/iranyekan/IRANYekanWebLight.woff2", weight: "300", style: "normal" },
+    { path: "../fonts/iranyekan/IRANYekanWebRegular.woff2", weight: "400", style: "normal" },
+    { path: "../fonts/iranyekan/IRANYekanWebMedium.woff2", weight: "500", style: "normal" },
+    { path: "../fonts/iranyekan/IRANYekanWebBold.woff2", weight: "700", style: "normal" },
+    { path: "../fonts/iranyekan/IRANYekanWebExtraBold.woff2", weight: "800", style: "normal" },
+    { path: "../fonts/iranyekan/IRANYekanWebBlack.woff2", weight: "900", style: "normal" },
+    { path: "../fonts/iranyekan/IRANYekanWebExtraBlack.woff2", weight: "950", style: "normal" },
   ],
-  variable: "--vazirmatn",
+  variable: "--font-yekan",
+  display: "swap",
 });
 
+function siteUrl() {
+  try {
+    return new URL(process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000");
+  } catch {
+    return new URL("http://localhost:3000");
+  }
+}
+
+// absolute URLs for Open Graph / Twitter images (blog covers etc.)
+export const metadata: Metadata = {
+  metadataBase: siteUrl(),
+};
+
 export const viewport: Viewport = {
-  themeColor: "#B78AF7",
+  themeColor: "#F3F1F8",
 };
 
 export default function RootLayout({
@@ -94,7 +72,7 @@ export default function RootLayout({
         </Script>
       </head>
       <body
-        className={`${Vazirmatn.variable} ${Vazirmatn.className} antialiased bg-background`}
+        className={`${iranYekan.variable} ${iranYekan.className}`}
       >
         {/* GTM NoScript */}
         <noscript>

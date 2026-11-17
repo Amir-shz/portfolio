@@ -1,6 +1,6 @@
 "use client";
 
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
+import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import {
   ChartConfig,
   ChartContainer,
@@ -8,10 +8,12 @@ import {
   ChartTooltipContent,
 } from "../ui/chart";
 import { getFourWeeksFromToday, splitIntoWeeks } from "@/utils/utils";
+import { digitsEnToFa } from "@persian-tools/persian-tools";
 
 const chartConfig = {
   num: {
     label: "تعداد",
+    color: "#5B2BD9",
   },
 } satisfies ChartConfig;
 
@@ -24,69 +26,55 @@ function DashboardChart({
     .at(0)
     ?.dates.map((el) => el.date);
 
-  const firstDay = reservations.filter(
-    (el: { selectedDate: string }) => el.selectedDate === curWeek?.at(0)
-  ).length;
-
-  const secondDay = reservations.filter(
-    (el: { selectedDate: string }) => el.selectedDate === curWeek?.at(1)
-  ).length;
-
-  const thirdDay = reservations.filter(
-    (el: { selectedDate: string }) => el.selectedDate === curWeek?.at(2)
-  ).length;
-
-  const fourthDay = reservations.filter(
-    (el: { selectedDate: string }) => el.selectedDate === curWeek?.at(3)
-  ).length;
-
-  const fifthDay = reservations.filter(
-    (el: { selectedDate: string }) => el.selectedDate === curWeek?.at(4)
-  ).length;
-
-  const sixthtDay = reservations.filter(
-    (el: { selectedDate: string }) => el.selectedDate === curWeek?.at(5)
-  ).length;
-
-  const seventhDay = reservations.filter(
-    (el: { selectedDate: string }) => el.selectedDate === curWeek?.at(6)
-  ).length;
+  const countOn = (i: number) =>
+    reservations.filter((el: { selectedDate: string }) => el.selectedDate === curWeek?.at(i))
+      .length;
 
   const chartData = [
-    { day: "جمعه", num: seventhDay },
-    { day: "پنجشنبه", num: sixthtDay },
-    { day: "چهارشنبه", num: fifthDay },
-    { day: "سه شنبه", num: fourthDay },
-    { day: "دوشنبه", num: thirdDay },
-    { day: "یکشنبه", num: secondDay },
-    { day: "شنبه", num: firstDay },
+    { day: "جمعه", num: countOn(6) },
+    { day: "پنجشنبه", num: countOn(5) },
+    { day: "چهارشنبه", num: countOn(4) },
+    { day: "سه شنبه", num: countOn(3) },
+    { day: "دوشنبه", num: countOn(2) },
+    { day: "یکشنبه", num: countOn(1) },
+    { day: "شنبه", num: countOn(0) },
   ];
+
   return (
-    <div className=" col-span-full shadow-md rounded-lg bg-violet-50 border border-violet-100 p-8 max-sm:p-4 max-sm:mb-14">
-      <p className=" text-center text-xl font-bold text-neutral-500 mb-2 max-sm:text-lg">
-        رزروهای این هفته
-      </p>
-      <ChartContainer config={chartConfig} className="max-h-56 w-full ">
-        <AreaChart
-          accessibilityLayer
-          data={chartData}
-          height={224}
-          margin={{
-            left: 16,
-            right: 16,
-            top: 16,
-          }}
-        >
-          <CartesianGrid />
-          <XAxis dataKey="day" tickMargin={8} />
-          <ChartTooltip
-            cursor={false}
-            content={<ChartTooltipContent indicator="line" />}
+    <section className="glass rounded-[1.25rem] p-4 sm:p-5">
+      <h2 className="text-base font-bold text-ink">رزروهای این هفته</h2>
+      <p className="mt-0.5 text-[0.8125rem] text-ink-faint">تعداد نوبت‌های رزروشده برای هر روز هفته</p>
+      <ChartContainer config={chartConfig} className="mt-3 aspect-auto h-52 w-full">
+        <AreaChart accessibilityLayer data={chartData} margin={{ left: 4, right: 4, top: 12 }}>
+          <defs>
+            <linearGradient id="weekFill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#5B2BD9" stopOpacity={0.35} />
+              <stop offset="100%" stopColor="#5B2BD9" stopOpacity={0.02} />
+            </linearGradient>
+          </defs>
+          <CartesianGrid vertical={false} strokeDasharray="4 6" stroke="rgba(30,24,56,0.1)" />
+          <XAxis dataKey="day" tickLine={false} axisLine={false} tickMargin={10} />
+          <YAxis
+            allowDecimals={false}
+            tickLine={false}
+            axisLine={false}
+            width={28}
+            orientation="right"
+            tickFormatter={(v) => digitsEnToFa(v)}
           />
-          <Area dataKey="num" type="natural" fill="#84cc16" stroke="#4d7c0f" />
+          <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
+          <Area
+            dataKey="num"
+            type="monotone"
+            fill="url(#weekFill)"
+            stroke="#5B2BD9"
+            strokeWidth={2.5}
+            dot={{ r: 3.5, fill: "#5B2BD9", strokeWidth: 0 }}
+            activeDot={{ r: 5 }}
+          />
         </AreaChart>
       </ChartContainer>
-    </div>
+    </section>
   );
 }
 

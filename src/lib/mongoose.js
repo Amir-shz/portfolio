@@ -5,6 +5,7 @@ const DB = process.env.DATABASE.replace(
   process.env.DATABASE_PASSWORD
 );
 
+// One shared connection per server process (survives hot reloads in dev).
 let cached = global.mongoose;
 
 if (!cached) {
@@ -19,13 +20,25 @@ export default async function dbConnect() {
   if (!cached.promise) {
     const options = {
       bufferCommands: false,
+      // fail fast instead of hanging a request for 30s when the DB is down
+      serverSelectionTimeoutMS: 10_000,
+      // close pooled sockets before the host drops them for being idle,
+      // which otherwise shows up as "read ECONNRESET" on the next query
+      maxIdleTimeMS: 60_000,
     };
 
-    cached.promise = mongoose
-      .connect(DB, options)
-      .then(() => console.log("DB connected"));
+    cached.promise = mongoose.connect(DB, options).then((m) => {
+      console.log("DB connected");
+      return m;
+    });
   }
 
-  cached.conn = await cached.promise;
+  try {
+    cached.conn = await cached.promise;
+  } catch (error) {
+    // don't cache a failed attempt, so the next request tries again
+    cached.promise = null;
+    throw error;
+  }
   return cached.conn;
 }

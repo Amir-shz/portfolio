@@ -74,30 +74,19 @@ const PWAInstallPrompt = () => {
       description: (
         <div className="flex items-center justify-between w-full">
           <div className="flex items-center gap-3">
-            <Image src={logo} alt="App Logo" className="size-10 rounded-md" />
-            <span className="text-xs font-medium text-neutral-700">
-              برای نصب اپلیکیشن روی Install کلیک کنید
+            <Image src={logo} alt="" className="size-10 rounded-xl" />
+            <span className="text-sm font-semibold leading-6 text-ink">
+              اپلیکیشن را روی دستگاهتان نصب کنید
             </span>
           </div>
         </div>
       ),
       action: (
-        <ToastAction
-          altText="install"
-          className="text-purple-400 px-3 py-0.5 rounded-sm font-sans flex justify-center items-center leading-6 toastAction"
-          onClick={handleInstall}
-          style={{ marginLeft: "-2px", marginRight: "4px", border: "none" }}
-        >
-          Install
+        <ToastAction altText="نصب اپلیکیشن" onClick={handleInstall}>
+          نصب
         </ToastAction>
       ),
       duration: 8000,
-      style: {
-        padding: "8px",
-        backgroundColor: "#fafafa",
-        borderRadius: "8px",
-        boxShadow: "0px 4px 8px 0px rgba(17,17,17,0.1)",
-      },
     });
   }, [toast, promptEvent]);
 

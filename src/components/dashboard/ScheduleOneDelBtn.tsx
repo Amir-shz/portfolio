@@ -2,7 +2,7 @@
 
 import { deleteHour } from "@/lib/actions";
 import { useTransition } from "react";
-import { HiOutlineTrash } from "react-icons/hi2";
+import { Trash2 } from "lucide-react";
 
 function ScheduleOneDelBtn({ id, hour }: { id: string; hour: string }) {
   const [isPendingDel, startTransitionDel] = useTransition();
@@ -15,13 +15,17 @@ function ScheduleOneDelBtn({ id, hour }: { id: string; hour: string }) {
 
   return (
     <button
-      className=" p-2  bg-red-500 rounded-full hover:bg-red-700 duration-300"
+      type="button"
+      aria-label="حذف این ساعت"
+      title="حذف این ساعت"
+      className="icon-btn size-9 bg-danger-tint text-danger-deep hover:bg-danger hover:text-white"
       onClick={handleDelete}
       disabled={isPendingDel}
     >
-      {isPendingDel && <div className="loaderSpinner size-6"></div>}
-      {!isPendingDel && (
-        <HiOutlineTrash size={24} className=" stroke-2 text-neutral-50" />
+      {isPendingDel ? (
+        <span className="spinner size-4 border-2" />
+      ) : (
+        <Trash2 className="size-4" aria-hidden />
       )}
     </button>
   );

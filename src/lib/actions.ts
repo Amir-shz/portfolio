@@ -1,7 +1,7 @@
 "use server";
 // SECURITY NOTE: every exported function in this file is a Server Action,
 // i.e. a public POST endpoint that can be called from any page. The
-// middleware does NOT protect them, so each dashboard action must check the
+// route guard (src/proxy.ts) does NOT protect them, so each dashboard action must check the
 // session itself (requireUser / requireOwner).
 
 import dbConnect from "@/lib/mongoose";
@@ -19,7 +19,7 @@ import {
   FormState,
   reservationSchema,
   scheduleSchema,
-  signInSchema,
+  loginFormSchema,
   SignupFormSchema,
   userDataFormSchema,
 } from "./zod";
@@ -285,7 +285,7 @@ export async function logOut() {
 
 export async function login(state: FormState, formData: FormData) {
   try {
-    const validatedFields = signInSchema.safeParse({
+    const validatedFields = loginFormSchema.safeParse({
       email: formData.get("email"),
       password: formData.get("password"),
     });
@@ -302,7 +302,19 @@ export async function login(state: FormState, formData: FormData) {
       redirect: false,
     });
   } catch (err) {
-    console.log(err);
+    // CredentialsSignin carries a `code` set in src/auth.ts
+    const code = (err as { code?: string } | null)?.code;
+    if (code === "rate_limited") {
+      return {
+        message: "به دلیل تلاش‌های ناموفق زیاد، ورود برای ۱۵ دقیقه متوقف شد. کمی بعد دوباره تلاش کنید.",
+      };
+    }
+    if (code === "unavailable") {
+      return { message: "ارتباط با سرور برقرار نشد. چند لحظه بعد دوباره تلاش کنید." };
+    }
+    if ((err as { type?: string } | null)?.type !== "CredentialsSignin") {
+      console.error("login failed:", err);
+    }
     return {
       message: "ایمیل یا رمزعبور اشتباه است",
     };

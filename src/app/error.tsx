@@ -1,8 +1,8 @@
 "use client"; // Error boundaries must be Client Components
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
+import { RotateCcw, TriangleAlert } from "lucide-react";
 
 export default function Error({
   error,
@@ -19,36 +19,32 @@ export default function Error({
   }, [error]);
 
   return (
-    <>
-      <div className=" w-full h-dvh relative flex flex-col items-center justify-center overflow-hidden">
-        <div className=" absolute bottom-32 text-center w-full z-50  flex flex-col gap-2 max-sm:bottom-52 max-[430px]:bottom-60">
-          <p className="text-4xl font-semibold text-error-700  max-sm:text-2xl">
-            با مشکلی مواجه شدیم
+    <main className="grid min-h-dvh place-items-center px-4 py-10">
+      <div className="glass-strong w-full max-w-md rounded-[1.5rem] p-7 text-center sm:p-10">
+        <span className="mx-auto grid size-16 place-items-center rounded-2xl bg-danger-tint text-danger">
+          <TriangleAlert className="size-8" strokeWidth={1.5} aria-hidden />
+        </span>
+        <h1 className="mt-5 text-xl font-bold text-ink">با مشکلی مواجه شدیم</h1>
+        {error.message && (
+          <p className="mx-auto mt-1.5 max-w-sm break-words text-sm leading-7 text-ink-soft">
+            {error.message}
           </p>
-          <p className=" text-error-800 mx-2">{error.message}</p>
-          <p>{error.digest}</p>
-        </div>
-        <div className="absolute  bottom-20  z-50  max-sm:bottom-40 flex flex-row-reverse gap-4 items-center max-[430px]:bottom-40">
-          <Link
-            href="/"
-            className=" bg-purple-400 px-6 py-2 text-neutral-50 font-medium rounded hover:bg-purple-600 duration-300"
-          >
-            بازگشت به خانه
-          </Link>
-          <button
-            className=" bg-error-500 px-6 py-2 text-neutral-50 font-medium rounded hover:bg-error-700 duration-300"
-            onClick={() => reset()}
-          >
+        )}
+        {error.digest && (
+          <p dir="ltr" className="mt-2 font-mono text-xs text-ink-faint">
+            {error.digest}
+          </p>
+        )}
+        <div className="mt-7 flex flex-wrap justify-center gap-2.5">
+          <button type="button" className="btn btn-primary max-sm:flex-1" onClick={() => reset()}>
+            <RotateCcw className="size-4" aria-hidden />
             تلاش مجدد
           </button>
+          <Link href="/" className="btn btn-glass max-sm:flex-1">
+            بازگشت به خانه
+          </Link>
         </div>
       </div>
-      <Image
-        src="/error.svg"
-        alt="error"
-        fill
-        className=" scale-[65%] -translate-y-24 max-sm:scale-75 max-sm:-translate-y-24"
-      />
-    </>
+    </main>
   );
 }

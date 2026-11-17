@@ -1,45 +1,31 @@
-import ClockIcon from "@/components/icons/ClockIcon";
-import DollarIcon from "@/components/icons/DollarIcon";
+import { Clock3, Wallet } from "lucide-react";
 import { planData } from "@/data/planData";
 import { useReservationStore } from "@/hooks/useReservationStore";
 
+// Summary of the chosen plan at the top of the booking flow.
 function ReservationDetail() {
   const { plan } = useReservationStore();
 
   const detail = planData?.filter(
-    (el: {
-      id: number;
-      title: string;
-      // description: string;
-      time: string;
-      price: string;
-      off?: string;
-    }) => el.id === plan,
+    (el: { id: number; title: string; time: string; price: string; off?: string }) =>
+      el.id === plan,
   )[0];
 
   return (
-    <div className="flex justify-center items-center max-sm:mt-1 ">
-      <div className=" flex flex-col gap-3 ">
-        <p className=" text-neutral-700 text-xl font-bold leading-7 flex justify-center max-sm:text-lg">
-          {detail.title}
-        </p>
-        {/* <p className=" text-neutral-700 text-lg font-semibold leading-5 flex justify-center max-sm:text-base max-sm:leading-3">
-          {detail.description}
-        </p> */}
-        <div className=" flex gap-4">
-          <div className=" flex gap-1 items-center">
-            <DollarIcon />
-            <p className=" text-neutral-500 text-base font-semibold leading-4 max-sm:text-sm">
-              {detail.off ? detail.off : detail.price}
-            </p>
-          </div>
-          <div className=" flex gap-1 items-center">
-            <ClockIcon />
-            <p className=" text-neutral-500 text-base font-semibold leading-4 max-sm:text-start">
-              {detail.time}
-            </p>
-          </div>
-        </div>
+    <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-white bg-white/65 p-3">
+      <div>
+        <p className="text-[0.6875rem] text-ink-faint">جلسه انتخابی</p>
+        <p className="text-[0.9375rem] font-bold text-ink">{detail.title}</p>
+      </div>
+      <div className="flex flex-wrap gap-1.5">
+        <span className="chip bg-iris-wash text-iris-deep">
+          <Wallet className="size-3.5" aria-hidden />
+          {detail.off ? detail.off : detail.price}
+        </span>
+        <span className="chip bg-iris-wash text-iris-deep">
+          <Clock3 className="size-3.5" aria-hidden />
+          {detail.time}
+        </span>
       </div>
     </div>
   );

@@ -16,6 +16,20 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Image storage
+
+Create a public bucket in Supabase Storage for profile photos, blog covers, and inline blog images. In `.env.local` and on the deployment server, set:
+
+```dotenv
+SUPABASE_URL=https://YOUR_PROJECT_REF.supabase.co
+SUPABASE_STORAGE_BUCKET=images
+SUPABASE_SECRET_KEY=sb_secret_REPLACE_ME
+```
+
+Use the project URL and a **Secret key** from the Supabase dashboard. Keep the key on the server; do not use a `NEXT_PUBLIC_` prefix. The app uploads after checking its own session, so no public upload policy is needed. Set the project URL and bucket before building so Next.js can allow that bucket's image URLs.
+
+Existing images can still be read from Liara using their saved URLs. Keep the old bucket readable while those images are in use. New uploads do not need Liara credentials.
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.

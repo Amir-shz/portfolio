@@ -1,5 +1,20 @@
 import { z } from "zod";
 
+// Login form: only checks that something sensible was entered. Password
+// rules belong to sign-up, never to login (older passwords must still work),
+// and the password is never trimmed or changed.
+export const loginFormSchema = z.object({
+  email: z
+    .string({ required_error: "ایمیل را وارد کنید." })
+    .trim()
+    .min(1, "ایمیل را وارد کنید.")
+    .email("ایمیل معتبر نیست."),
+  password: z
+    .string({ required_error: "رمزعبور را وارد کنید." })
+    .min(1, "رمزعبور را وارد کنید.")
+    .max(128, "رمزعبور بیش از حد طولانی است."),
+});
+
 export const signInSchema = z.object({
   email: z
     .string({ required_error: "Email is required" })

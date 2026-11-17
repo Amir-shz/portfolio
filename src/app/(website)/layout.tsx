@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import Header from "@/components/layouts/Header";
-import Footer from "@/components/layouts/Footer";
+import SiteHeader from "@/components/website/SiteHeader";
+import SiteFooter from "@/components/website/SiteFooter";
+import MotionRoot from "@/components/website/MotionRoot";
 
 export const metadata: Metadata = {
   title: {
@@ -16,14 +17,20 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className=" grid grid-cols-12 mx-auto max-w-[1296px] gap-6 relative max-sm:grid-cols-4 max-sm:gap-4 max-sm:mx-6">
-      <div className="col-start-2 col-end-12 max-sm:col-span-full">
-        <Header />
-        <main className="pt-[4.5rem] max-sm:pt-8">{children}</main>
-        <div className=" overflow-hidden -mx-4 px-4">
-          <Footer />
-        </div>
+    <MotionRoot>
+      <div className="flex min-h-dvh flex-col overflow-x-clip">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:right-4 focus:top-4 focus:z-[60] focus:rounded-2xl focus:bg-iris focus:px-5 focus:py-3 focus:font-bold focus:text-white"
+        >
+          پرش به محتوا
+        </a>
+        <SiteHeader />
+        <main id="main" className="flex-1">
+          {children}
+        </main>
+        <SiteFooter />
       </div>
-    </div>
+    </MotionRoot>
   );
 }

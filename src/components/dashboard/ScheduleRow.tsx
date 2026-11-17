@@ -1,7 +1,8 @@
 import { getJalaliDetails } from "@/utils/utils";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 import Link from "next/link";
-import { HiOutlinePencil } from "react-icons/hi2";
+import { Pencil } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 function ScheduleRow({
   schedule,
@@ -17,33 +18,40 @@ function ScheduleRow({
   const isPast = new Date(date) < new Date();
 
   return (
-    <div className=" grid grid-cols-7 items-center">
-      <p
-        className={`col-span-2 max-sm:col-span-3 max-sm:text-xs text-sm  font-semibold border-l border-l-neutral-300 text-center ${
-          isPast && "text-neutral-400 font-normal"
-        }`}
-      >
-        {dayName} {day} {monthName} {year}
-      </p>
-      <div className="col-span-4 max-sm:col-span-3 font-semibold text-sm border-l border-l-neutral-300 flex flex-wrap">
-        {hours.map((hour: { hour: string; isAvailable: boolean }) => (
-          <span
+    <li
+      className={cn(
+        "flex flex-wrap items-center gap-3 rounded-xl border border-white bg-white/65 p-3 sm:flex-nowrap sm:p-3.5",
+        isPast && "opacity-60",
+      )}
+    >
+      <div className="w-full shrink-0 sm:w-44">
+        <p className="text-xs font-semibold text-ink-faint">{dayName}</p>
+        <p className="font-bold text-ink">
+          {day} {monthName} {year}
+        </p>
+      </div>
+      <ul className="flex min-w-0 flex-1 flex-wrap gap-1.5">
+        {hours.map((hour) => (
+          <li
             key={hour.hour}
-            className={`p-2 ${
-              hour.isAvailable ? "text-green-500" : "text-red-500"
-            }`}
+            className={cn(
+              "chip py-1 text-[0.8125rem]",
+              hour.isAvailable ? "bg-ok-tint text-ok-deep" : "bg-danger-tint text-danger-deep",
+            )}
           >
             {digitsEnToFa(hour.hour)}
-          </span>
+            <span className="sr-only">{hour.isAvailable ? "آزاد" : "رزرو شده"}</span>
+          </li>
         ))}
-      </div>
+      </ul>
       <Link
         href={`/dashboard/schedules/${_id}`}
-        className="flex justify-center bg-warning-500 rounded-full justify-self-center p-2 hover:bg-warning-600 duration-200"
+        aria-label={`ویرایش ساعت‌های ${day} ${monthName}`}
+        className="icon-btn size-9 shrink-0 bg-iris-wash text-iris hover:bg-iris hover:text-white"
       >
-        <HiOutlinePencil size={20} className=" text-neutral-50 stroke-2" />
+        <Pencil className="size-4" aria-hidden />
       </Link>
-    </div>
+    </li>
   );
 }
 

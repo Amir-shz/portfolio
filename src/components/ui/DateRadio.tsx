@@ -1,5 +1,6 @@
 import { useReservationStore } from "@/hooks/useReservationStore";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
+import { cn } from "@/lib/utils";
 
 function DateRadio({
   date,
@@ -14,49 +15,42 @@ function DateRadio({
   const { selectedDate, handleSelectedDateChange } = useReservationStore();
 
   const jalaliDate = date.jalali;
+  const disabled = available === 0;
+  const selected = selectedDate === date.date;
 
   return (
-    <label className=" max-sm:last:col-start-2 ">
+    <label className={cn("block", disabled ? "cursor-not-allowed" : "cursor-pointer")}>
       <input
         type="radio"
         name="date"
-        disabled={available === 0 ? true : false}
+        disabled={disabled}
         value={date.date}
+        checked={selected}
         onChange={handleSelectedDateChange}
-        className={` size-0 absolute invisible opacity-0 ${
-          selectedDate === date.date && "[&~div]:border-purple-500 "
-        }`}
+        className="peer sr-only"
       />
       <div
-        className={` pt-2 pb-3 px-3 rounded-xl border flex flex-col gap-[0.88rem] justify-center items-center select-none ${
-          available === 0
-            ? " border-neutral-200"
-            : "border-neutral-300 cursor-pointer"
-        } `}
+        className={cn(
+          "flex h-full select-none flex-col items-center justify-center gap-0.5 rounded-xl border px-1 py-2.5 text-center transition-[background-color,border-color,box-shadow,color] duration-200 peer-focus-visible:ring-2 peer-focus-visible:ring-iris peer-focus-visible:ring-offset-2",
+          disabled && "border-transparent bg-white/30 text-ink-faint/70",
+          !disabled && !selected && "border-white bg-white/70 text-ink hover:border-iris/40 hover:bg-white",
+          selected && "border-iris bg-iris text-white shadow-iris",
+        )}
       >
-        <div>
-          <p
-            className={`mb-1 text-[0.625rem] font-medium leading-3 flex justify-center items-center gap-1 ${
-              available === 0 ? "text-neutral-300" : "text-neutral-500"
-            }`}
-          >
-            {jalaliDate.dayName}
-          </p>
-          <p
-            className={`text-xs font-medium leading-3 ${
-              available === 0 ? "text-neutral-300" : "text-neutral-800"
-            }`}
-          >
-            {jalaliDate.day} {jalaliDate.monthName}
-          </p>
-        </div>
-        <p
-          className={`${
-            available === 0 ? "text-neutral-300" : "text-success-700"
-          }  text-[0.625rem] font-medium leading-[0.625rem] text-nowrap`}
+        <span className={cn("text-[0.6875rem] font-medium", !disabled && !selected && "text-ink-soft")}>
+          {jalaliDate.dayName}
+        </span>
+        <span className="text-[0.8125rem] font-semibold leading-5">
+          {jalaliDate.day} {jalaliDate.monthName}
+        </span>
+        <span
+          className={cn(
+            "mt-0.5 whitespace-nowrap text-[0.6875rem] font-semibold",
+            disabled ? "" : selected ? "text-white/85" : "text-ok-deep",
+          )}
         >
-          {digitsEnToFa(available)} زمان موجود
-        </p>
+          {disabled ? "بدون نوبت" : `${digitsEnToFa(available)} نوبت خالی`}
+        </span>
       </div>
     </label>
   );

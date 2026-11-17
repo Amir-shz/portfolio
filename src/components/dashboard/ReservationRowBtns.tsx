@@ -1,23 +1,29 @@
 "use client";
 
-import { HiOutlineCheckCircle, HiOutlineTrash } from "react-icons/hi2";
+import { CircleCheck, Trash2 } from "lucide-react";
 import { deleteReservation, finishReservationStatus } from "@/lib/actions";
 import { useState, useTransition } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogOverlay,
-  DialogPortal,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import ConfirmDialog from "@/components/system/ConfirmDialog";
+import { cn } from "@/lib/utils";
 
-function ReservationRowBtns({ id, status }: { id: string; status: string }) {
+// "Finish" and "delete" for one reservation. Icon-only in tables, with
+// labels on the detail page.
+function ReservationRowBtns({
+  id,
+  status,
+  withLabels = false,
+}: {
+  id: string;
+  status: string;
+  withLabels?: boolean;
+}) {
   const [isPendingDel, startTransitionDel] = useTransition();
   const [isPendingFin, startTransitionFin] = useTransition();
   const [showConfirm, setShowConfirm] = useState(false);
+  const finished = status === "finish";
 
   function handleDelete() {
-    setShowConfirm(() => false);
+    setShowConfirm(false);
     startTransitionDel(async () => {
       await deleteReservation(id);
     });
@@ -29,57 +35,47 @@ function ReservationRowBtns({ id, status }: { id: string; status: string }) {
     });
   }
 
+  const base = withLabels ? "btn btn-sm" : "icon-btn size-8";
+
   return (
-    <>
+    <div className="flex items-center gap-1.5">
       <button
-        className=" p-2  bg-red-500 rounded-full hover:bg-red-700 duration-300"
+        type="button"
+        title={finished ? "این جلسه تمام شده است" : "اتمام جلسه"}
+        aria-label={withLabels ? undefined : "اتمام جلسه"}
+        className={cn(base, "bg-ok-tint text-ok-deep hover:bg-ok hover:text-white")}
+        disabled={finished || isPendingFin}
+        onClick={handleChangeStatus}
+      >
+        {isPendingFin ? (
+          <span className="spinner size-4 border-2" />
+        ) : (
+          <CircleCheck className="size-4" aria-hidden />
+        )}
+        {withLabels && (finished ? "تمام شده" : "اتمام جلسه")}
+      </button>
+      <button
+        type="button"
+        title="حذف رزرو"
+        aria-label={withLabels ? undefined : "حذف رزرو"}
+        className={cn(base, "bg-danger-tint text-danger-deep hover:bg-danger hover:text-white")}
         onClick={() => setShowConfirm(true)}
         disabled={isPendingDel}
       >
-        {isPendingDel && <div className="loaderSpinner size-6"></div>}
-        {!isPendingDel && (
-          <HiOutlineTrash size={24} className=" stroke-2 text-neutral-50" />
+        {isPendingDel ? (
+          <span className="spinner size-4 border-2" />
+        ) : (
+          <Trash2 className="size-4" aria-hidden />
         )}
+        {withLabels && "حذف رزرو"}
       </button>
-      <button
-        className=" p-2  bg-success-500 rounded-full hover:bg-success-700 duration-300 disabled:bg-neutral-500"
-        disabled={status === "finish" || isPendingFin}
-        onClick={handleChangeStatus}
-      >
-        {isPendingFin && <div className="loaderSpinner size-6"></div>}
-        {!isPendingFin && (
-          <HiOutlineCheckCircle
-            size={24}
-            className=" stroke-2 text-neutral-50"
-          />
-        )}
-      </button>
-      <Dialog open={showConfirm} onOpenChange={setShowConfirm}>
-        <DialogPortal>
-          <DialogOverlay className="fixed inset-0 bg-neutral-50/[0.01] backdrop-blur-sm dialog__overlay">
-            <DialogContent className="[&>button]:hidden max-sm:w-3/4 max-sm:rounded-md backdrop-blur-sm">
-              <DialogTitle className=" text-center">
-                از حذف این رزرو مطمئن هستید؟
-              </DialogTitle>
-              <div className="flex gap-4 mt-4">
-                <button
-                  className="bg-error-700 text-neutral-50 font-medium py-2 px-4 rounded-lg"
-                  onClick={handleDelete}
-                >
-                  حذف کردن
-                </button>
-                <button
-                  className=" font-medium py-2 px-4"
-                  onClick={() => setShowConfirm(false)}
-                >
-                  بازگشت
-                </button>
-              </div>
-            </DialogContent>
-          </DialogOverlay>
-        </DialogPortal>
-      </Dialog>
-    </>
+      <ConfirmDialog
+        open={showConfirm}
+        onOpenChange={setShowConfirm}
+        title="از حذف این رزرو مطمئن هستید؟"
+        onConfirm={handleDelete}
+      />
+    </div>
   );
 }
 

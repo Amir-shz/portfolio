@@ -1,37 +1,32 @@
 import { useReservationStore } from "@/hooks/useReservationStore";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
+import { cn } from "@/lib/utils";
 
 function TimeRadio({ hour }: { hour: { hour: string; isAvailable: boolean } }) {
   const { selectedTime, handleSelectedTimeChange } = useReservationStore();
+  const selected = selectedTime === hour.hour;
+  const disabled = !hour.isAvailable;
 
   return (
-    <label>
+    <label className={cn("block", disabled ? "cursor-not-allowed" : "cursor-pointer")}>
       <input
         type="radio"
         name="time"
-        disabled={!hour.isAvailable}
+        disabled={disabled}
         value={hour.hour}
-        checked={selectedTime === hour.hour}
+        checked={selected}
         onChange={handleSelectedTimeChange}
-        className="size-0 absolute invisible opacity-0 "
+        className="peer sr-only"
       />
       <div
-        className={`rounded-xl border py-[1.2rem] flex justify-center
-          ${selectedTime === hour.hour && "border-purple-500"}
-          ${
-            hour.isAvailable
-              ? " border-neutral-300 cursor-pointer"
-              : " border-neutral-200"
-          }`}
+        className={cn(
+          "flex select-none justify-center rounded-xl border py-2.5 text-sm font-semibold transition-[background-color,border-color,box-shadow,color] duration-200 peer-focus-visible:ring-2 peer-focus-visible:ring-iris peer-focus-visible:ring-offset-2",
+          disabled && "border-transparent bg-white/30 text-ink-faint/70 line-through decoration-ink-faint/40",
+          !disabled && !selected && "border-white bg-white/70 text-ink hover:border-iris/40 hover:bg-white",
+          selected && "border-iris bg-iris text-white shadow-iris",
+        )}
       >
-        <p
-          className={`
-            text-base font-medium leading-[1.125rem]
-          ${hour.isAvailable ? " text-neutral-800" : " text-neutral-300"}
-          `}
-        >
-          {digitsEnToFa(hour.hour)}
-        </p>
+        {digitsEnToFa(hour.hour)}
       </div>
     </label>
   );

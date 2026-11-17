@@ -1,63 +1,62 @@
 import { logOut } from "@/lib/actions";
 import { getCurrentUser } from "@/lib/session";
 import Link from "next/link";
-import {
-  HiOutlineArrowLeftStartOnRectangle,
-  HiOutlineHome,
-  HiOutlineUser,
-} from "react-icons/hi2";
+import { CalendarDays, Globe, LogOut, Settings } from "lucide-react";
 import UserPhoto from "./UserPhoto";
-// import { headers } from "next/headers";
 import MobileDashboardMenu from "./MobileDashboardMenu";
 
-// const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-
 async function DashboardHeader() {
-  // const header = await headers();
-
   const user = await getCurrentUser();
-
-  // const user = await fetch(`${baseUrl}/user/${session?.user?.email}`, {
-  //   headers: header,
-  // })
-  //   .then((data) => data.json())
-  //   .then((data) => data.data);
+  const today = new Date().toLocaleDateString("fa-IR", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
 
   return (
-    <header className=" bg-purple-50 h-14 flex items-center justify-between px-8 max-sm:px-4 max-sm:flex-row-reverse max-sm:h-16">
-      <div className=" flex gap-2 items-center max-sm:flex-row-reverse">
-        <UserPhoto img={user?.photo} name={user?.name?.[0]} />
-        <p className="font-semibold">{user?.name}</p>
-      </div>
-      <p className=" text-purple-700 font-semibold text-lg max-sm:hidden">
-        {new Date().toLocaleDateString("fa-IR")}
-      </p>
+    <header className="sticky top-0 z-30 px-4 pt-4 sm:px-6 lg:px-8">
+      <div className="glass flex items-center justify-between gap-3 rounded-2xl py-2 pe-2 ps-3">
+        <div className="flex min-w-0 items-center gap-3">
+          <MobileDashboardMenu />
+          <UserPhoto img={user?.photo} name={user?.name?.[0]} />
+          <div className="min-w-0">
+            <p className="truncate text-sm font-semibold leading-6 text-ink">{user?.name}</p>
+            <p className="truncate text-[0.6875rem] text-ink-faint">
+              {user?.role === "OWNER" ? "مدیر کل" : "مدیر"}
+            </p>
+          </div>
+        </div>
 
-      <MobileDashboardMenu />
-
-      <div className=" flex items-center gap-2 max-sm:hidden">
-        <Link
-          href="/"
-          className=" flex justify-center items-center bg-purple-400 hover:bg-purple-500 duration-200 rounded-full p-2"
-        >
-          <HiOutlineHome size={24} className=" text-neutral-50" />
-        </Link>
-
-        <Link
-          href="/dashboard/userSettings"
-          className=" flex justify-center items-center bg-purple-400 hover:bg-purple-500 duration-200 rounded-full p-2"
-        >
-          <HiOutlineUser size={24} className=" text-neutral-50" />
-        </Link>
-
-        <form action={logOut}>
-          <button className=" flex justify-center items-center bg-error-500 hover:bg-error-700 duration-200 rounded-full p-2">
-            <HiOutlineArrowLeftStartOnRectangle
-              size={24}
-              className=" text-neutral-50"
-            />
-          </button>
-        </form>
+        <div className="flex items-center gap-1.5">
+          <span className="chip me-1 hidden bg-iris-wash text-iris-deep md:inline-flex">
+            <CalendarDays className="size-3.5" aria-hidden />
+            {today}
+          </span>
+          <Link
+            href="/"
+            aria-label="مشاهده وب‌سایت"
+            className="icon-btn size-9 bg-white/70 text-ink-soft hover:bg-white hover:text-iris max-lg:hidden"
+          >
+            <Globe className="size-4" aria-hidden />
+          </Link>
+          <Link
+            href="/dashboard/userSettings"
+            aria-label="تنظیمات حساب"
+            className="icon-btn size-9 bg-white/70 text-ink-soft hover:bg-white hover:text-iris"
+          >
+            <Settings className="size-4" aria-hidden />
+          </Link>
+          <form action={logOut} className="max-lg:hidden">
+            <button
+              type="submit"
+              aria-label="خروج از حساب"
+              className="icon-btn size-9 bg-danger-tint text-danger hover:bg-danger hover:text-white"
+            >
+              <LogOut className="size-4" aria-hidden />
+            </button>
+          </form>
+        </div>
       </div>
     </header>
   );
