@@ -127,7 +127,7 @@ function ArticleView({
             </div>
             <div
               id="article-body"
-              className="rounded-[1.5rem] border border-white/80 bg-white/80 px-5 py-7 shadow-glass backdrop-blur-lg sm:px-9 sm:py-10"
+              className="rounded-[1.5rem] border border-white/80 bg-white px-5 py-7 shadow-sm sm:px-9 sm:py-10 xl:bg-white/80 xl:shadow-glass xl:backdrop-blur-lg"
             >
               <ArticleContent html={post.contentHtml} />
 

@@ -29,7 +29,7 @@ function Page() {
           {steps.map((s) => (
             <li
               key={s.n}
-              className="flex items-center gap-3 rounded-xl border border-white/70 bg-white/45 p-3 backdrop-blur-lg"
+              className="flex items-center gap-3 rounded-xl border border-white/70 bg-white p-3 xl:bg-white/45 xl:backdrop-blur-lg"
             >
               <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-iris text-sm font-bold text-white">
                 {s.n}

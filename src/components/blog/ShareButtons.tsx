@@ -29,7 +29,7 @@ function ShareButtons({ url, title }: { url: string; title: string }) {
   }
 
   const btn =
-    "icon-btn size-9 border border-white/70 bg-white/55 text-ink-soft backdrop-blur-lg hover:bg-iris hover:text-white";
+    "icon-btn size-9 border border-white/70 bg-white text-ink-soft hover:bg-iris hover:text-white xl:bg-white/55 xl:backdrop-blur-lg xl:hover:bg-iris";
 
   return (
     <div className="flex items-center gap-1.5">

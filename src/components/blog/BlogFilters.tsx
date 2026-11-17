@@ -43,7 +43,7 @@ function BlogFilters({ categories }: { categories: CategoryWithCount[] }) {
       "chip shrink-0 border transition-colors",
       active
         ? "border-iris bg-iris text-white"
-        : "border-white/70 bg-white/55 text-ink-soft backdrop-blur-lg hover:bg-white hover:text-ink",
+        : "border-white/70 bg-white text-ink-soft hover:bg-white hover:text-ink xl:bg-white/55 xl:backdrop-blur-lg xl:hover:bg-white",
     );
 
   const visible = categories.filter((c) => c.count > 0);

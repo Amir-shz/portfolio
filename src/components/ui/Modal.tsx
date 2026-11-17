@@ -37,7 +37,7 @@ const Modal = ({ children }: { children: ReactNode }) => {
 
   return createPortal(
     <div className="fixed inset-0 z-50 grid place-items-center p-4">
-      <div aria-hidden className="absolute inset-0 bg-plum/25 backdrop-blur-sm" />
+      <div aria-hidden className="absolute inset-0 bg-plum/45 xl:bg-plum/25 xl:backdrop-blur-sm" />
       <div
         ref={panelRef}
         role="dialog"

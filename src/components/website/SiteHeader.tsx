@@ -45,7 +45,7 @@ function HoverPill({ show }: { show: boolean }) {
   return (
     <motion.span
       layoutId="nav-hover-pill"
-      className="absolute inset-0 -z-10 rounded-full bg-white/80 shadow-[0_6px_16px_-10px_rgba(54,34,120,0.5)]"
+      className="absolute inset-0 -z-10 rounded-full bg-white shadow-[0_6px_16px_-10px_rgba(54,34,120,0.5)] xl:bg-white/80"
       transition={spring}
     />
   );
@@ -245,7 +245,7 @@ function SiteHeader() {
             transition={{ duration: 0.2 }}
           >
             <div
-              className="absolute inset-0 bg-plum/25 backdrop-blur-sm"
+              className="absolute inset-0 bg-plum/45"
               onClick={() => setMobileOpen(false)}
               aria-hidden
             />

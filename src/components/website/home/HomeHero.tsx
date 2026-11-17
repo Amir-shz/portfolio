@@ -120,7 +120,7 @@ function HomeHero() {
                     target={s.key === "email" ? undefined : "_blank"}
                     rel="noreferrer"
                     aria-label={s.label}
-                    className="icon-btn size-9 border border-white/70 bg-white/50 text-ink-soft backdrop-blur-lg hover:bg-iris hover:text-white"
+                    className="icon-btn size-9 border border-white/70 bg-white text-ink-soft hover:bg-iris hover:text-white xl:bg-white/50 xl:backdrop-blur-lg xl:hover:bg-iris"
                   >
                     <SocialIcon name={s.key} className="size-4" />
                   </a>
@@ -133,7 +133,7 @@ function HomeHero() {
             {credentials.map(({ icon: Icon, text }, i) => (
               <li
                 key={i}
-                className="flex items-center gap-2.5 rounded-xl border border-white/70 bg-white/45 px-3 py-2.5 text-[0.8125rem] leading-6 text-ink-soft backdrop-blur-lg"
+                className="flex items-center gap-2.5 rounded-xl border border-white/70 bg-white px-3 py-2.5 text-[0.8125rem] leading-6 text-ink-soft xl:bg-white/45 xl:backdrop-blur-lg"
               >
                 <span className="grid size-7 shrink-0 place-items-center rounded-lg bg-iris-tint text-iris">
                   <Icon className="size-3.5" aria-hidden />

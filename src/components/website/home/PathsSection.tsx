@@ -42,7 +42,7 @@ function PathsSection() {
           <Link
             key={p.href}
             href={p.href}
-            className="glass group flex flex-col rounded-[1.5rem] p-2 transition-[background-color,box-shadow] duration-300 hover:bg-white/70 hover:shadow-glass-lg"
+            className="glass group flex flex-col rounded-[1.5rem] p-2 transition-[background-color,box-shadow] duration-300 hover:bg-iris-wash hover:shadow-glass-lg xl:hover:bg-white/70"
           >
             <div className="relative aspect-[16/9] overflow-hidden rounded-[1.125rem] bg-iris-tint">
               <Image
@@ -61,7 +61,7 @@ function PathsSection() {
                 {p.tags.map((tag) => (
                   <li
                     key={tag}
-                    className="chip border border-white/70 bg-white/75 text-[0.75rem] text-ink backdrop-blur-md"
+                    className="chip border border-white/70 bg-white text-[0.75rem] text-ink xl:bg-white/75 xl:backdrop-blur-md"
                   >
                     {tag}
                   </li>

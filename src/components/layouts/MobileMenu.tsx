@@ -32,7 +32,7 @@ function MobileMenu() {
           <HiOutlineBars3BottomLeft className="size-8" />
         </DrawerTrigger>
         <DrawerPortal>
-          <DrawerOverlay className="fixed inset-0 bg-neutral-50/15 backdrop-blur-sm">
+          <DrawerOverlay className="fixed inset-0 bg-neutral-50/35 xl:bg-neutral-50/15">
             <DrawerContent className="top-0 w-full h-min mt-0 rounded-b-3xl rounded-t-none [&>div:first-child]:hidden">
               <DialogTitle></DialogTitle>
               <div className="flex justify-between items-center px-6 py-3 mb-1 ">

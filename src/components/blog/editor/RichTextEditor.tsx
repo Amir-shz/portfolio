@@ -203,7 +203,7 @@ function RichTextEditor({
       />
       <div
         className={cn(
-          "rounded-2xl border bg-white/70 px-3 shadow-glass backdrop-blur-lg transition-colors sm:px-6",
+          "rounded-2xl border bg-white px-3 shadow-sm transition-colors sm:px-6 xl:bg-white/70 xl:shadow-glass xl:backdrop-blur-lg",
           invalid ? "border-danger/50" : "border-white/80 focus-within:border-iris/40",
         )}
       >

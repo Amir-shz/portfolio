@@ -50,7 +50,7 @@ function CoverImageField({
             </span>
           )}
           <div className="absolute inset-x-2 bottom-2 flex justify-end gap-1.5">
-            <button type="button" onClick={choose} disabled={uploading} className="btn btn-glass btn-sm bg-white/85 px-2.5">
+            <button type="button" onClick={choose} disabled={uploading} className="btn btn-glass btn-sm px-2.5 xl:bg-white/85">
               <RefreshCw className="size-3.5" aria-hidden />
               تعویض
             </button>

@@ -5,7 +5,7 @@
 /* ════════════════════════════════════════════════════════════════════════
    Aurora Glass — the one design system for the whole app.
 
-   Ground   : a fixed aurora (lilac · sage · peach · sky) over mist.
+   Ground   : a lilac tint on small screens and a fixed aurora on wide screens.
    Surfaces : .glass (cards, nav), .glass-strong (dialogs, menus, forms),
               .glass-dark (contrast blocks such as the footer).
    Actions  : .btn + .btn-primary | .btn-glass | .btn-light | .btn-danger,
@@ -56,24 +56,25 @@
   }
 
   body {
-    @apply min-h-dvh text-[0.9375rem] leading-[1.85] text-ink antialiased;
+    @apply min-h-dvh bg-gradient-to-b from-iris-wash to-mist bg-no-repeat text-[0.9375rem] leading-[1.85] text-ink antialiased xl:bg-none;
+    background-size: 100% 36rem;
   }
 
-  /* The aurora sits behind every page and stays put while content
-     scrolls over it, so the glass always has colour to blur. */
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background:
-      radial-gradient(42% 46% at 88% 6%, rgb(205 187 247 / 0.95), transparent 70%),
-      radial-gradient(36% 42% at 8% 18%, rgb(207 227 195 / 0.9), transparent 70%),
-      radial-gradient(46% 50% at 72% 96%, rgb(246 205 183 / 0.85), transparent 70%),
-      radial-gradient(36% 42% at 4% 88%, rgb(191 217 238 / 0.9), transparent 70%),
-      radial-gradient(30% 30% at 45% 48%, rgb(230 222 251 / 0.7), transparent 70%),
-      #f3f1f8;
+  @screen xl {
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(42% 46% at 88% 6%, rgb(205 187 247 / 0.95), transparent 70%),
+        radial-gradient(36% 42% at 8% 18%, rgb(207 227 195 / 0.9), transparent 70%),
+        radial-gradient(46% 50% at 72% 96%, rgb(246 205 183 / 0.85), transparent 70%),
+        radial-gradient(36% 42% at 4% 88%, rgb(191 217 238 / 0.9), transparent 70%),
+        radial-gradient(30% 30% at 45% 48%, rgb(230 222 251 / 0.7), transparent 70%),
+        #f3f1f8;
+    }
   }
 
   ::selection {
@@ -95,15 +96,15 @@
 @layer components {
   /* ── Surfaces ─────────────────────────────────────────────────────── */
   .glass {
-    @apply border border-white/70 bg-white/50 shadow-glass backdrop-blur-lg backdrop-saturate-150;
+    @apply border border-white/70 bg-white shadow-sm xl:bg-white/50 xl:shadow-glass xl:backdrop-blur-lg xl:backdrop-saturate-150;
   }
 
   .glass-strong {
-    @apply border border-white/80 bg-white/[0.78] shadow-glass-lg backdrop-blur-xl backdrop-saturate-150;
+    @apply border border-white/80 bg-white shadow-md xl:bg-white/[0.78] xl:shadow-glass-lg xl:backdrop-blur-xl xl:backdrop-saturate-150;
   }
 
   .glass-dark {
-    @apply relative isolate overflow-hidden border border-white/10 bg-plum text-white shadow-glass-lg;
+    @apply relative isolate overflow-hidden border border-white/10 bg-plum text-white shadow-md xl:shadow-glass-lg;
   }
 
   /* Soft colour glows inside dark blocks */
@@ -133,7 +134,7 @@
   }
 
   .btn-glass {
-    @apply border border-white/70 bg-white/55 text-ink backdrop-blur-lg hover:bg-white/85;
+    @apply border border-white/70 bg-white text-ink hover:bg-iris-wash xl:bg-white/55 xl:backdrop-blur-lg xl:hover:bg-white/85;
   }
 
   .btn-light {
@@ -182,7 +183,7 @@
   }
 
   .eyebrow {
-    @apply chip border border-white/70 bg-white/55 text-[0.75rem] text-iris-deep backdrop-blur-lg;
+    @apply chip border border-white/70 bg-white text-[0.75rem] text-iris-deep xl:bg-white/55 xl:backdrop-blur-lg;
   }
 
   .text-gradient {
@@ -590,9 +591,11 @@
   }
 }
 
-.w-player:hover .w-bar,
-.w-player:focus-visible .w-bar {
-  animation: w-eq 1.1s ease-in-out infinite;
+@screen xl {
+  .w-player:hover .w-bar,
+  .w-player:focus-visible .w-bar {
+    animation: w-eq 1.1s ease-in-out infinite;
+  }
 }
 
 /* ── Testimonials: the active segment fills, then the next quote shows ── */
@@ -625,13 +628,15 @@
   }
 }
 
-.float-slow {
-  animation: float-y 6s ease-in-out infinite;
-}
+@screen xl {
+  .float-slow {
+    animation: float-y 6s ease-in-out infinite;
+  }
 
-.float-slower {
-  animation: float-y 8s ease-in-out infinite;
-  animation-delay: -3s;
+  .float-slower {
+    animation: float-y 8s ease-in-out infinite;
+    animation-delay: -3s;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

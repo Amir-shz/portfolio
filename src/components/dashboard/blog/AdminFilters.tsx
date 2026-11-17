@@ -58,7 +58,7 @@ function AdminFilters({
 
   return (
     <div className="mb-4 flex flex-wrap items-center gap-2.5">
-      <div className="flex gap-1 rounded-xl border border-white/70 bg-white/50 p-1 backdrop-blur-lg">
+      <div className="flex gap-1 rounded-xl border border-white/70 bg-white p-1 xl:bg-white/50 xl:backdrop-blur-lg">
         {STATUSES.map((s) => (
           <Link
             key={s.key || "all"}

@@ -12,7 +12,7 @@ const tabs = [
 function BlogTabs() {
   const pathname = usePathname();
   return (
-    <nav aria-label="بخش‌های بلاگ" className="mb-5 inline-flex gap-1 rounded-xl border border-white/70 bg-white/50 p-1 backdrop-blur-lg">
+    <nav aria-label="بخش‌های بلاگ" className="mb-5 inline-flex gap-1 rounded-xl border border-white/70 bg-white p-1 xl:bg-white/50 xl:backdrop-blur-lg">
       {tabs.map((t) => {
         const active = t.href === "/dashboard/blog" ? pathname === t.href : pathname.startsWith(t.href);
         return (

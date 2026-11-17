@@ -39,7 +39,7 @@ function Testimonials() {
             type="button"
             onClick={() => go(index - 1)}
             aria-label="نظر قبلی"
-            className="icon-btn size-9 border border-white/70 bg-white/55 text-ink backdrop-blur-lg hover:bg-iris hover:text-white"
+            className="icon-btn size-9 border border-white/70 bg-white text-ink hover:bg-iris hover:text-white xl:bg-white/55 xl:backdrop-blur-lg xl:hover:bg-iris"
           >
             <ChevronRight className="size-4" aria-hidden />
           </button>
@@ -47,7 +47,7 @@ function Testimonials() {
             type="button"
             onClick={() => go(index + 1)}
             aria-label="نظر بعدی"
-            className="icon-btn size-9 border border-white/70 bg-white/55 text-ink backdrop-blur-lg hover:bg-iris hover:text-white"
+            className="icon-btn size-9 border border-white/70 bg-white text-ink hover:bg-iris hover:text-white xl:bg-white/55 xl:backdrop-blur-lg xl:hover:bg-iris"
           >
             <ChevronLeft className="size-4" aria-hidden />
           </button>

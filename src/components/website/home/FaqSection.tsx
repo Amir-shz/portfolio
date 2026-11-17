@@ -23,7 +23,7 @@ function FaqSection() {
         <h2 id={`${baseId}-heading`} className={`${h2} mt-3`}>
           سوالات متداول
         </h2>
-        <div className="glass mt-5 rounded-[1.25rem] p-4">
+        <div className="glass mt-5 rounded-[1.25rem] p-4 max-xl:bg-white/70">
           <p className="text-[0.8125rem] text-ink-faint">سوال دیگری دارید؟</p>
           <a
             href={phone.href}
@@ -50,7 +50,7 @@ function FaqSection() {
               key={faq.title}
               className={cn(
                 "glass rounded-[1.125rem] transition-colors duration-300",
-                isOpen ? "bg-white/75" : "shadow-none hover:bg-white/70",
+                isOpen ? "bg-white xl:bg-white/75" : "shadow-none hover:bg-iris-wash xl:hover:bg-white/70",
               )}
             >
               <h3>
